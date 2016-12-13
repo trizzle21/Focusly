@@ -3,6 +3,9 @@
 {% block content %}
 	
 
+
+
+
     <h1 style="display: inline-block; padding-left: 12%; color: white">PLAYER</h1>
     <h1 style="display: inline-block; padding-left: 16%; color: white">PLAYLISTS</h1>
     <h1 style="display: inline-block; padding-left: 16%; color: white">EVENTS</h1>
@@ -27,39 +30,10 @@
 			</ul>
        </div>
 
-        <div style="align: center; width: 300px; height: 380px; display: inline-block; background-color: #181818; overflow-y: scroll">
-			<ul style="height: 380px; padding: 0;">
-				{% for event in events %}
-				<li style="border-bottom: 1px solid #282828; padding: 5px;" id = "{{ forloop.counter }}">
-					<p style="color: white"> {{ event.summary }} </p>
-					<p style="color: #a0a0a0">Start: {{ event.start.dateTime }} </p>
-					<p style="color: #a0a0a0">End: {{ event.end.dateTime }} </p>
-				</li>
-				{% endfor %}
-			
-			</ul>
-        </div>
 
     </div>
 
 
-
-	<iframe src=""
-        mode=DAY&amp;
-        showNav=0&amp;
-        showPrint=0&amp;
-        showDate=0&amp;
-        showTabs=0&amp;
-        showCalendars=0&amp;
-        showTz=0&amp;
-        dates=20100108/20100108&amp;
-        height=1000&amp;
-        bgcolor=%23FFFFFF&amp;
-        src= ;
-        color=%23AB8B00&amp;
-        ctz=America%2FLos_Angeles" style=" border-width:0 " width="500" height="500" frameborder="0" scrolling="no">
-            
-        </iframe>
 
 
 	<script type="text/javascript">

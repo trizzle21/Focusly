@@ -33,10 +33,6 @@ def get_cred(userName, clientName):
 		clientCred = json.loads( ce.decrypt_cred(curr_user.spotify_cred) )
 		# print type(clientCred) 	# DEBUG
 		return clientCred['access_token']
-	elif clientName == 'calendar_cred':
-		clientCred = str( ce.decrypt_cred(curr_user.calendar_cred) )
-		# print type(clientCred) 	# DEBUG
-		return clientCred
 
 # Create your views here.
 def homeview(request):
@@ -46,36 +42,17 @@ def spotify_login(request):
 	# client = {"client_id": 'spotify'}
 	return render(request, "spotify_login.html")
 
-def calendar_login(request):
-	# client = {"client_id": 'calendar'}
-	return render(request, "calendar_login.html")
+
+
+
 
 def dashboard(request):
-
-	# Query Params
-	now = datetime.datetime.utcnow().isoformat() + '-07:00'	#California tz offset
-
 	# Spotify Requests #
-	spotifyCred = get_cred('Jorge Rojas', 'spotify_cred')
+	spotifyCred = get_cred('Tyler Ross', 'spotify_cred')
 	# print spotifyCred 	# DEBUG
 	spotifyClient = client.Spotify( auth = spotifyCred )
 	playlists = spotifyClient.user_playlists( user = '1248308979')	# spotify:user:122632253
 	# print playlists 	# DEBUG
-
-	# Calendar Requests #
-	calendarCredJson = get_cred('Jorge Rojas', 'calendar_cred')
-	calendarCred = OAuth2Credentials.from_json(calendarCredJson)
-
-	http = httplib2.Http()
-	http = calendarCred.authorize(http)
-	service = build('calendar', 'v3', http = http)
-	events = service.events().list(
-		calendarId = 'jrojas2016@gmail.com', 
-		orderBy = "startTime",
-		singleEvents = True, 
-		maxResults = 10,
-		timeMin = now
-	).execute()
 	# print events 	# DEBUG
 	currenttime = datetime.datetime.now()
 	print currenttime

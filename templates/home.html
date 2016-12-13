@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 
+
+
+{% block navbar %}
+{% include 'navbar.html' %}
+
+{% endblock %}
+
+
 {% block content %}
 	<div class = "genbox">
-		<h2 style="text-align:center;">Wake N Shake!!!!</h2>
-		<a style="margin: 0 auto; position: relative;top:50%; left:35%;" href="{% url 'calendar_login' %}" class="btn btn-default">Get started!</a>
+		<h2 style="text-align:center;">Work N Shake!!!</h2>
+		<
+
+
+		<a href="{% url 'spotify_login' %}" class="btn btn-default">Next</a>
 		<br><br><br>
-		<h6 style="text-align:center;">Already have an account?	<a href="" class="btn btn-default">Log in here! </a> </h6>
 	</div>
 {% endblock %}
 

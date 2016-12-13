@@ -6,3 +6,7 @@
 
 
 *.json
+
+/node_modules
+
+static/.sass-cache

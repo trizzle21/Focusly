@@ -1,1 +1,19 @@
 $boxcolor: #eee;
+
+//Primary
+$indigo: #3F51B5;
+
+//Accent
+$pink: #FF4081;
+
+//Text
+$black: #000000;
+$primary: opacify($black, .87);
+$secondary : opacify($black, .54);
+$hint : opacify($black, .38);
+
+//Lighter part of the theme
+$grey: #F5F5F5;
+$lighter_grey: #FAFAFA;
+$white: #FFFFFF;
+
