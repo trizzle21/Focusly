@@ -48,13 +48,18 @@ def spotify_login(request):
 
 def dashboard(request):
 	# Spotify Requests #
-	spotifyCred = get_cred('Tyler Ross', 'spotify_cred')
-	# print spotifyCred 	# DEBUG
-	spotifyClient = client.Spotify( auth = spotifyCred )
-	playlists = spotifyClient.user_playlists( user = '1248308979')	# spotify:user:122632253
+	try:
+		spotifyCred = get_cred('Tyler Ross', 'spotify_cred')
+		# print spotifyCred 	# DEBUG
+		spotifyClient = client.Spotify( auth = spotifyCred )
+		playlists = spotifyClient.user_playlists( user = '1248308979')	# spotify:user:122632253
+		credentialed = True
+		currenttime = datetime.datetime.now()
+		context = {'playlists': playlists['items'], 'now':currenttime, 'crendentialed':credentialed}
+	except:
+		credentialed = False
+		currenttime = datetime.datetime.now()
+		context = {'now':currenttime, 'crendentialed':credentialed}
+
 	# print playlists 	# DEBUG
-	# print events 	# DEBUG
-	currenttime = datetime.datetime.now()
-	print currenttime
-	context = {'playlists': playlists['items'], 'events':events['items'], 'now':currenttime}
 	return render(request, "dashboard.html", context)

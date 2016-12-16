@@ -37,7 +37,6 @@ urlpatterns = [
 
     # Login URLs
     url(r'^login/spotify', MusicAlarmViews.spotify_login, name='spotify_login'),
-    url(r'^login/calendar', MusicAlarmViews.calendar_login, name='calendar_login'),
 
     # Dashboard URLs
     url(r'^dashboard', MusicAlarmViews.dashboard, name='dashboard'),

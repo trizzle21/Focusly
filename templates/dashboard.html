@@ -4,7 +4,7 @@
 	
 
 
-
+{% if credentialed %}
 
     <h1 style="display: inline-block; padding-left: 12%; color: white">PLAYER</h1>
     <h1 style="display: inline-block; padding-left: 16%; color: white">PLAYLISTS</h1>
@@ -44,6 +44,11 @@
 
 
 	</script>
+
+{% else %}
+
+
+{% endif %}
 
 
 {% endblock %}
