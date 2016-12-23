@@ -47,4 +47,3 @@ To run development server and migrate models to sqlite3 db
 	python manage.py runserver
 	```
 
-#### Adding 12
