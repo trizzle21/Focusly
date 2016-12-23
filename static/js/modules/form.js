@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import SelectField from material-ui;
 
 
 class EntryForm extends React.Component {
@@ -10,6 +10,23 @@ class EntryForm extends React.Component {
 			RestMusicType: '',
 
 		};
+
+	
+   	handleSubmit(event) {
+	 
+	}
+
+  	}
+
+  	render() {
+  		//render form here
+  		return (
+
+
+
+  		)
+  	}
+
 
 	}
 }
