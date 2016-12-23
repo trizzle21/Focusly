@@ -27,7 +27,7 @@ class EntryForm extends React.Component {
 
     
 
-    	<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={false} />
+    	<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} />
 
 
   		)
