@@ -42,7 +42,17 @@ class EntryForm extends React.Component {
 
         </SelectField>
 
+      <SelectField
+          floatingLabelText="Resting Music"
+          value={this.state.RestMusicType}
+          onChange={this.RestMusicChange}
+        >
+        	<MenuItem value={1} primaryText="Rock" />
+        	<MenuItem value={2} primaryText="Punk" />
+    	    <MenuItem value={3} primaryText="Top 40" />
+	        <MenuItem value={4} primaryText="Surprise Me" />
 
+        </SelectField>
 
 
 
