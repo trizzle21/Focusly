@@ -17,15 +17,22 @@ class EntryForm extends React.Component {
 	}
 	
    	handleSubmit(event) {
-	 	
+	  event.preventDefault();	
 	}
 
+  	
+
+	// Controls each state change
   	handleSliderChange (event, value) {
   		this.setState({SessionSlider:value})
   	}
 	
 	RestMusicTypeChange (event, value) {
   		this.setState({RestMusicType:value})
+  	}
+
+	WorkMusicTypeChange (event, value) {
+  		this.setState({WorkMusicType:value})
   	}
 
 
@@ -63,7 +70,7 @@ class EntryForm extends React.Component {
 
 
 
-    		<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} />
+    		<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} type="submit" value="Post"  />
     	</form>
 
   		)
