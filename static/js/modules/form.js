@@ -23,42 +23,48 @@ class EntryForm extends React.Component {
   	handleSliderChange (event, value) {
   		this.setState({SessionSlider:value})
   	}
+	
+	RestMusicTypeChange (event, value) {
+  		this.setState({RestMusicType:value})
+  	}
+
 
   	render() {
   		//render form here
   		return (
+ 		
+ 		<form className="spotify_login" onSubmit={this.handleSubmit}>
+  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange} min={0} max={10}/>
+  			<h4>{this.state.SessionSlider}</h4>
+        	<SelectField
+          		floatingLabelText="Working Music"
+          		value={this.state.WorkMusicType}
+          		onChange={this.WorkMusicChange}
+        	>
+        		<MenuItem value={1} primaryText="Movie Soundtrack" />
+        		<MenuItem value={2} primaryText="Relaxing" />
+    	    	<MenuItem value={3} primaryText="Classical" />
+	        	<MenuItem value={4} primaryText="Surprise Me" />
 
-  		<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange} min={0} max={10}/>
-  		<h4>{this.state.SessionSlider}</h4>
-        <SelectField
-          floatingLabelText="Working Music"
-          value={this.state.WorkMusicType}
-          onChange={this.WorkMusicChange}
-        >
-        	<MenuItem value={1} primaryText="Movie Soundtrack" />
-        	<MenuItem value={2} primaryText="Relaxing" />
-    	    <MenuItem value={3} primaryText="Classical" />
-	        <MenuItem value={4} primaryText="Surprise Me" />
+       	 	</SelectField>
 
-        </SelectField>
+      		<SelectField
+          		floatingLabelText="Resting Music"
+          		value={this.state.RestMusicType}
+          		onChange={this.RestMusicChange}
+        	>
+        		<MenuItem value={1} primaryText="Rock" />
+        		<MenuItem value={2} primaryText="Punk" />
+    	    	<MenuItem value={3} primaryText="Top 40" />
+	        	<MenuItem value={4} primaryText="Surprise Me" />
 
-      <SelectField
-          floatingLabelText="Resting Music"
-          value={this.state.RestMusicType}
-          onChange={this.RestMusicChange}
-        >
-        	<MenuItem value={1} primaryText="Rock" />
-        	<MenuItem value={2} primaryText="Punk" />
-    	    <MenuItem value={3} primaryText="Top 40" />
-	        <MenuItem value={4} primaryText="Surprise Me" />
-
-        </SelectField>
+        	</SelectField>
 
 
 
 
-    	<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} />
-
+    		<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} />
+    	</form>
 
   		)
   	}
@@ -66,3 +72,5 @@ class EntryForm extends React.Component {
 
 	}
 }
+
+export default EntryForm
