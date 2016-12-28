@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+from "./modules/formcard.js" import FormCard
 
 
 
-
-/*ReactDOM.render(
-  <Game />,
-  document.getElementById('container')
-);*/
+ReactDOM.render(
+  <FormCard />,
+  document.getElementById('MainForm')
+);
