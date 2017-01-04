@@ -17,7 +17,8 @@ class EntryForm extends React.Component {
 	}
 	
    	handleSubmit(event) {
-	  event.preventDefault();	
+	  	event.preventDefault();	
+		//ajax call?
 	}
 
   	
