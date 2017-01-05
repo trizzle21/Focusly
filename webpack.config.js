@@ -13,13 +13,15 @@ module.exports = {
 
     plugins: [
       new BundleTracker({path: __dirname, filename: './assets/webpack-stats.json'})
-    ]
+    ],
+    
     module: {
-		loaders: [
-			{ test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel-loader', query: {presets: ['es2015', 'react'] }}
+        loaders: [
+            { test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel-loader', query: {presets: ['es2015', 'react'] }}
 
-		]
-	},
+        ]
+    },
+
 
 	resolve: {
 		modulesDirectories: ['node_modules', 'bower_component'],

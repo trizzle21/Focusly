@@ -6,8 +6,10 @@ import Slider from 'material-ui/Slider';
 
 
 class EntryForm extends React.Component {
-	constructor() {
+	constructor(props) {
+		super(props);
 		this.state = {
+			
 			numOfSessions: 0,
 			WorkMusicType: 1,
 			RestMusicType: 1,
@@ -78,7 +80,7 @@ class EntryForm extends React.Component {
   	}
 
 
-	}
+	
 }
 
 export default EntryForm

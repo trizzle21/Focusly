@@ -13,6 +13,7 @@ render() {
   		//render form here
   	return (
 		<Card>
+			<h4>Hello</h4>
 			<CardTitle title="Card title" subtitle="Card subtitle" />
 			<EntryForm />
     	</Card>
