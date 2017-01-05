@@ -1,26 +1,22 @@
 import React from 'react';
-import {Card} from 'material-ui/Card';
+import {Card, CardTitle} from 'material-ui/Card';
 import EntryForm from './form.js'; 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 
+const FormCard = () => (
+  		<MuiThemeProvider>
+			<div>
+				<h4>Hello</h4>
+				<Card>
+					<CardTitle title="Card title" subtitle="Card subtitle" />
+					<EntryForm />
+    			</Card>
+    		</div>
+		</MuiThemeProvider>
+);
 
-class FormCard extends React.Component {
-  
 
 
-render() {
-  		//render form here
-  	return (
-		<Card>
-			<h4>Hello</h4>
-			<CardTitle title="Card title" subtitle="Card subtitle" />
-			<EntryForm />
-    	</Card>
-
-	)
-  	}
-
-}
-
-export default FormCard
+export default FormCard;

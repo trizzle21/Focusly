@@ -1,15 +1,14 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
 
 
 class EntryForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			
+		this.state = {	
 			numOfSessions: 0,
 			WorkMusicType: 1,
 			RestMusicType: 1,
@@ -27,15 +26,15 @@ class EntryForm extends React.Component {
 
 	// Controls each state change
   	handleSliderChange (event, value) {
-  		this.setState({SessionSlider:value})
+  		this.setState({SessionSlider:value});
   	}
 	
 	RestMusicTypeChange (event, value) {
-  		this.setState({RestMusicType:value})
+  		this.setState({RestMusicType:value});
   	}
 
 	WorkMusicTypeChange (event, value) {
-  		this.setState({WorkMusicType:value})
+  		this.setState({WorkMusicType:value});
   	}
 
 
@@ -44,12 +43,12 @@ class EntryForm extends React.Component {
   		return (
  		
  		<form className="spotify_login" onSubmit={this.handleSubmit}>
-  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange} min={0} max={10}/>
+  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={0} max={10}/>
   			<h4>{this.state.SessionSlider}</h4>
         	<SelectField
           		floatingLabelText="Working Music"
           		value={this.state.WorkMusicType}
-          		onChange={this.WorkMusicChange}
+          		onChange={this.WorkMusicTypeChange.bind(this)}
         	>
         		<MenuItem value={1} primaryText="Movie Soundtrack" />
         		<MenuItem value={2} primaryText="Relaxing" />
@@ -61,7 +60,7 @@ class EntryForm extends React.Component {
       		<SelectField
           		floatingLabelText="Resting Music"
           		value={this.state.RestMusicType}
-          		onChange={this.RestMusicChange}
+          		onChange={this.RestMusicTypeChange.bind(this)}
         	>
         		<MenuItem value={1} primaryText="Rock" />
         		<MenuItem value={2} primaryText="Punk" />
@@ -71,9 +70,9 @@ class EntryForm extends React.Component {
         	</SelectField>
 
 
+    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" />
 
 
-    		<IconButton iconClassName="muidocs-icon-custom-spotify" disabled={true} type="submit" value="Post"  />
     	</form>
 
   		)

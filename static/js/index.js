@@ -1,10 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+'use strict'
+import ReactDOM from 'react-dom'
+import React from 'react'
 import FormCard from "./modules/formcard.js"
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 
 
 ReactDOM.render(
   <FormCard />,
-  document.getElementById('MainForm'),
+  document.getElementById('MainForm')
 );
