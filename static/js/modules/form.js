@@ -20,6 +20,7 @@ class EntryForm extends React.Component {
    	handleSubmit(event) {
 	  	event.preventDefault();	
 		//ajax call?
+		console.log("submitted");
 	}
 
   	

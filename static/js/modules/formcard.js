@@ -8,7 +8,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 const FormCard = () => (
   		<MuiThemeProvider>
 			<div>
-				<h4>Hello</h4>
 				<Card>
 					<CardTitle title="Card title" subtitle="Card subtitle" />
 					<EntryForm />
