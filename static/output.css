@@ -103,21 +103,39 @@ html {
 
 @media all and (max-width: 800px) {
   .col-1 {
-    width: 33.33%; }
+    width: 12.5%; }
 
   .col-2 {
-    width: 50%; }
+    width: 25%; }
 
   .col-3 {
-    width: 83.33%; }
+    width: 37.5%; }
 
   .col-4 {
-    width: 100%; }
+    width: 50%; }
 
   .col-5 {
-    width: 100%; }
+    width: 62.5%; }
 
   .col-6 {
+    width: 75%; }
+
+  .col-7 {
+    width: 87.5%; }
+
+  .col-8 {
+    width: 100%; }
+
+  .col-9 {
+    width: 100%; }
+
+  .col-10 {
+    width: 100%; }
+
+  .col-11 {
+    width: 100%; }
+
+  .col-12 {
     width: 100%; }
 
   .row .col-2:last-of-type {
@@ -130,13 +148,13 @@ html {
     margin: 0 0 0 10px; }
 
   .col-1 {
-    width: 50%; }
+    width: 25%; }
 
   .col-2 {
-    width: 100%; }
+    width: 50%; }
 
   .col-3 {
-    width: 100%; }
+    width: 75%; }
 
   .col-4 {
     width: 100%; }
@@ -145,6 +163,24 @@ html {
     width: 100%; }
 
   .col-6 {
+    width: 100%; }
+
+  .col-7 {
+    width: 100%; }
+
+  .col-8 {
+    width: 100%; }
+
+  .col-9 {
+    width: 100%; }
+
+  .col-10 {
+    width: 100%; }
+
+  .col-11 {
+    width: 100%; }
+
+  .col-12 {
     width: 100%; } }
 
 /*# sourceMappingURL=output.css.map */
