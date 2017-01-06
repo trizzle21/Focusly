@@ -70,8 +70,6 @@
 
 	(0, _reactTapEventPlugin2.default)();
 
-	_reactDom2.default.render(_react2.default.createElement(_navbar2.default, null), document.getElementById('mainnav'));
-
 	_reactDom2.default.render(_react2.default.createElement(_formcard2.default, null), document.getElementById('MainForm'));
 
 /***/ },
@@ -29843,6 +29841,10 @@
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29859,6 +29861,7 @@
 	  counter: {
 	    marginLeft: 15
 	  }
+
 	};
 
 	var EntryForm = function (_React$Component) {
@@ -29896,12 +29899,12 @@
 	    }
 	  }, {
 	    key: 'RestMusicTypeChange',
-	    value: function RestMusicTypeChange(event, value) {
+	    value: function RestMusicTypeChange(event, index, value) {
 	      this.setState({ RestMusicType: value });
 	    }
 	  }, {
 	    key: 'WorkMusicTypeChange',
-	    value: function WorkMusicTypeChange(event, value) {
+	    value: function WorkMusicTypeChange(event, index, value) {
 	      this.setState({ WorkMusicType: value });
 	    }
 	  }, {
@@ -29910,40 +29913,44 @@
 
 	      //render form here
 	      return _react2.default.createElement(
-	        'form',
-	        { className: 'spotify_login', onSubmit: this.handleSubmit },
-	        _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.state.SessionSlider, onChange: this.handleSliderChange.bind(this), min: 1, max: 10, style: styles.slider }),
+	        _MuiThemeProvider2.default,
+	        null,
 	        _react2.default.createElement(
-	          'h4',
-	          { style: styles.counter },
-	          this.state.SessionSlider,
-	          ' sessions'
-	        ),
-	        _react2.default.createElement(
-	          _SelectField2.default,
-	          {
-	            floatingLabelText: 'Working Music',
-	            value: this.state.WorkMusicType,
-	            onChange: this.WorkMusicTypeChange.bind(this)
-	          },
-	          _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Movie Soundtrack' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Relaxing' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Classical' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Surprise Me' })
-	        ),
-	        _react2.default.createElement(
-	          _SelectField2.default,
-	          {
-	            floatingLabelText: 'Resting Music',
-	            value: this.state.RestMusicType,
-	            onChange: this.RestMusicTypeChange.bind(this)
-	          },
-	          _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Rock' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Punk' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Top 40' }),
-	          _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Surprise Me' })
-	        ),
-	        _react2.default.createElement(_RaisedButton2.default, { label: 'Submit', primary: true, type: 'submit', value: 'Post', ontap: true })
+	          'form',
+	          { className: 'spotify_login', onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.state.SessionSlider, onChange: this.handleSliderChange.bind(this), min: 1, max: 10, style: styles.slider }),
+	          _react2.default.createElement(
+	            'h4',
+	            { style: styles.counter },
+	            this.state.SessionSlider,
+	            ' sessions'
+	          ),
+	          _react2.default.createElement(
+	            _SelectField2.default,
+	            {
+	              floatingLabelText: 'Working Music',
+	              value: this.state.WorkMusicType,
+	              onChange: this.WorkMusicTypeChange.bind(this)
+	            },
+	            _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Movie Soundtrack' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Relaxing' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Classical' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Surprise Me' })
+	          ),
+	          _react2.default.createElement(
+	            _SelectField2.default,
+	            {
+	              floatingLabelText: 'Resting Music',
+	              value: this.state.RestMusicType,
+	              onChange: this.RestMusicTypeChange.bind(this)
+	            },
+	            _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Rock' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Punk' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Top 40' }),
+	            _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Surprise Me' })
+	          ),
+	          _react2.default.createElement(_RaisedButton2.default, { label: 'Submit', primary: true, type: 'submit', value: 'Post', ontap: true })
+	        )
 	      );
 	    }
 	  }]);

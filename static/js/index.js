@@ -8,10 +8,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 
-ReactDOM.render(
-	<MainAppBar />,
-	document.getElementById('mainnav')
-);
 
 
 
