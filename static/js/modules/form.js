@@ -4,6 +4,13 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
 
+const styles = {
+	slider: {
+		marginLeft: 12,
+		marginRight: 12,
+	},
+};
+
 
 class EntryForm extends React.Component {
 	constructor(props) {
@@ -12,11 +19,15 @@ class EntryForm extends React.Component {
 			numOfSessions: 0,
 			WorkMusicType: 1,
 			RestMusicType: 1,
-			SessionSlider: 0.0,
+			SessionSlider: 1.0,
 
 		};
 	}
 	
+
+
+
+
    	handleSubmit(event) {
 	  	event.preventDefault();	
 		//ajax call?
@@ -40,11 +51,19 @@ class EntryForm extends React.Component {
 
 
   	render() {
+  		const styles = {
+			slider: {
+				display: 'flex',
+				marginLeft: 50,
+				marginRight: 12,
+			},
+		};
+
   		//render form here
   		return (
  		
  		<form className="spotify_login" onSubmit={this.handleSubmit}>
-  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={0} max={10}/>
+  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
   			<h4>{this.state.SessionSlider}</h4>
         	<SelectField
           		floatingLabelText="Working Music"
@@ -71,7 +90,7 @@ class EntryForm extends React.Component {
         	</SelectField>
 
 
-    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" />
+    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" ontap/>
 
 
     	</form>

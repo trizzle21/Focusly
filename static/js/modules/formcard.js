@@ -9,8 +9,8 @@ const FormCard = () => (
   		<MuiThemeProvider>
 			<div>
 				<Card>
-					<CardTitle title="Card title" subtitle="Card subtitle" />
-					<EntryForm />
+					<CardTitle title="Set Up Tabata Session" subtitle="To get started, choose Tabata length and number of sessions" />
+					<EntryForm className=""/>
     			</Card>
     		</div>
 		</MuiThemeProvider>
