@@ -6,9 +6,12 @@ import Slider from 'material-ui/Slider';
 
 const styles = {
 	slider: {
-		marginLeft: 12,
-		marginRight: 12,
+		marginLeft: 15,
+		marginRight: 15,
 	},
+  counter: {
+    marginLeft:15
+  }
 };
 
 
@@ -51,20 +54,13 @@ class EntryForm extends React.Component {
 
 
   	render() {
-  		const styles = {
-			slider: {
-				display: 'flex',
-				marginLeft: 50,
-				marginRight: 12,
-			},
-		};
 
   		//render form here
   		return (
  		
  		<form className="spotify_login" onSubmit={this.handleSubmit}>
   			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
-  			<h4>{this.state.SessionSlider}</h4>
+  			<h4 style={styles.counter}>{this.state.SessionSlider} sessions</h4>
         	<SelectField
           		floatingLabelText="Working Music"
           		value={this.state.WorkMusicType}

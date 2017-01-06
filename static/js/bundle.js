@@ -21518,7 +21518,7 @@
 					_Card.Card,
 					null,
 					_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
-					_react2.default.createElement(_form2.default, { className: '' })
+					_react2.default.createElement(_form2.default, null)
 				)
 			)
 		);
@@ -29853,8 +29853,11 @@
 
 	var styles = {
 	  slider: {
-	    marginLeft: 12,
-	    marginRight: 12
+	    marginLeft: 15,
+	    marginRight: 15
+	  },
+	  counter: {
+	    marginLeft: 15
 	  }
 	};
 
@@ -29904,13 +29907,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var styles = {
-	        slider: {
-	          display: 'flex',
-	          marginLeft: 50,
-	          marginRight: 12
-	        }
-	      };
 
 	      //render form here
 	      return _react2.default.createElement(
@@ -29919,8 +29915,9 @@
 	        _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.state.SessionSlider, onChange: this.handleSliderChange.bind(this), min: 1, max: 10, style: styles.slider }),
 	        _react2.default.createElement(
 	          'h4',
-	          null,
-	          this.state.SessionSlider
+	          { style: styles.counter },
+	          this.state.SessionSlider,
+	          ' sessions'
 	        ),
 	        _react2.default.createElement(
 	          _SelectField2.default,

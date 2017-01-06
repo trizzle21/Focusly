@@ -10,7 +10,7 @@ const FormCard = () => (
 			<div>
 				<Card>
 					<CardTitle title="Set Up Tabata Session" subtitle="To get started, choose Tabata length and number of sessions" />
-					<EntryForm className=""/>
+					<EntryForm />
     			</Card>
     		</div>
 		</MuiThemeProvider>
