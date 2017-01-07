@@ -43473,6 +43473,10 @@
 
 	var _AppBar2 = _interopRequireDefault(_AppBar);
 
+	var _FontIcon = __webpack_require__(328);
+
+	var _FontIcon2 = _interopRequireDefault(_FontIcon);
+
 	var _MuiThemeProvider = __webpack_require__(383);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
@@ -43484,7 +43488,11 @@
 	    _MuiThemeProvider2.default,
 	    null,
 	    _react2.default.createElement(_AppBar2.default, {
-	      title: 'WorkNShake'
+	      title: 'WorkNShake',
+	      iconElementLeft: _react2.default.createElement(_FontIcon2.default, {
+	        className: 'muidocs-icon-action-library-music'
+	      })
+
 	    })
 	  );
 	};
