@@ -29860,8 +29860,15 @@
 	  },
 	  counter: {
 	    marginLeft: 15
+	  },
+	  select: {
+	    marginLeft: 30
+	  },
+	  submit: {
+	    marginLeft: 30,
+	    marginTop: 20,
+	    marginBottom: 15
 	  }
-
 	};
 
 	var EntryForm = function (_React$Component) {
@@ -29930,7 +29937,8 @@
 	            {
 	              floatingLabelText: 'Working Music',
 	              value: this.state.WorkMusicType,
-	              onChange: this.WorkMusicTypeChange.bind(this)
+	              onChange: this.WorkMusicTypeChange.bind(this),
+	              style: styles.select
 	            },
 	            _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Movie Soundtrack' }),
 	            _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Relaxing' }),
@@ -29942,14 +29950,16 @@
 	            {
 	              floatingLabelText: 'Resting Music',
 	              value: this.state.RestMusicType,
-	              onChange: this.RestMusicTypeChange.bind(this)
+	              onChange: this.RestMusicTypeChange.bind(this),
+	              style: styles.select
 	            },
 	            _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Rock' }),
 	            _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Punk' }),
 	            _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Top 40' }),
 	            _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Surprise Me' })
 	          ),
-	          _react2.default.createElement(_RaisedButton2.default, { label: 'Submit', primary: true, type: 'submit', value: 'Post', ontap: true })
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(_RaisedButton2.default, { label: 'Submit', primary: true, type: 'submit', value: 'Post', style: styles.submit, ontap: true })
 	        )
 	      );
 	    }

@@ -11,9 +11,16 @@ const styles = {
     marginRight: 15,
   },
   counter: {
-    marginLeft:15
+    marginLeft:15,
   },
-
+  select: {
+    marginLeft:30,
+  },
+  submit: {
+    marginLeft:30,
+    marginTop:20,
+    marginBottom:15
+  }
 };
 
 
@@ -35,9 +42,9 @@ class EntryForm extends React.Component {
 
    	handleSubmit(event) {
 	  	event.preventDefault();	
-		//ajax call?
-		console.log("submitted");
-	}
+		  //ajax call?
+		  console.log("submitted");
+	  }
 
   	
 
@@ -68,6 +75,7 @@ class EntryForm extends React.Component {
           		floatingLabelText="Working Music"
           		value={this.state.WorkMusicType}
           		onChange={this.WorkMusicTypeChange.bind(this)}
+              style={styles.select}
         	>
         		<MenuItem value={1} primaryText="Movie Soundtrack" />
         		<MenuItem value={2} primaryText="Relaxing" />
@@ -80,6 +88,7 @@ class EntryForm extends React.Component {
           		floatingLabelText="Resting Music"
           		value={this.state.RestMusicType}
           		onChange={this.RestMusicTypeChange.bind(this)}
+              style={styles.select}
         	>
         		<MenuItem value={1} primaryText="Rock" />
         		<MenuItem value={2} primaryText="Punk" />
@@ -88,8 +97,8 @@ class EntryForm extends React.Component {
 
         	</SelectField>
 
-
-    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" ontap/>
+          <br />
+    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" style={styles.submit} ontap/>
 
 
     	</form>
