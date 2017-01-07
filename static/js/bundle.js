@@ -70,6 +70,8 @@
 
 	(0, _reactTapEventPlugin2.default)();
 
+	_reactDom2.default.render(_react2.default.createElement(_navbar2.default, null), document.getElementById('mainnav'));
+
 	_reactDom2.default.render(_react2.default.createElement(_formcard2.default, null), document.getElementById('MainForm'));
 
 /***/ },
@@ -29862,10 +29864,10 @@
 	    marginLeft: 15
 	  },
 	  select: {
-	    marginLeft: 30
+	    marginLeft: 15
 	  },
 	  submit: {
-	    marginLeft: 30,
+	    marginLeft: 15,
 	    marginTop: 20,
 	    marginBottom: 15
 	  }
@@ -29880,7 +29882,7 @@
 	    var _this = _possibleConstructorReturn(this, (EntryForm.__proto__ || Object.getPrototypeOf(EntryForm)).call(this, props));
 
 	    _this.state = {
-	      numOfSessions: 0,
+	      numOfSessions: 1,
 	      WorkMusicType: 1,
 	      RestMusicType: 1,
 	      SessionSlider: 1.0

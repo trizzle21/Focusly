@@ -14,10 +14,10 @@ const styles = {
     marginLeft:15,
   },
   select: {
-    marginLeft:30,
+    marginLeft:15,
   },
   submit: {
-    marginLeft:30,
+    marginLeft:15,
     marginTop:20,
     marginBottom:15
   }
@@ -28,7 +28,7 @@ class EntryForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {	
-			numOfSessions: 0,
+			numOfSessions: 1,
 			WorkMusicType: 1,
 			RestMusicType: 1,
 			SessionSlider: 1.0,
