@@ -43473,6 +43473,10 @@
 
 	var _AppBar2 = _interopRequireDefault(_AppBar);
 
+	var _IconButton = __webpack_require__(293);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
 	var _FontIcon = __webpack_require__(328);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
@@ -43483,16 +43487,18 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var iconStyles = {
+	  marginRight: 24
+	};
+
 	var MainAppBar = function MainAppBar() {
 	  return _react2.default.createElement(
 	    _MuiThemeProvider2.default,
 	    null,
 	    _react2.default.createElement(_AppBar2.default, {
-	      title: 'WorkNShake',
-	      iconElementLeft: _react2.default.createElement(_FontIcon2.default, {
-	        className: 'muidocs-icon-action-library-music'
-	      })
-
+	      title: 'WorkNShake'
+	      //Todo: look into why this is broken
+	      , iconElementLeft: _react2.default.createElement(_FontIcon2.default, { className: 'muidocs-icon-action-home', style: iconStyles })
 	    })
 	  );
 	};

@@ -81,6 +81,7 @@ class EntryForm extends React.Component {
         		<MenuItem value={2} primaryText="Relaxing" />
     	    	<MenuItem value={3} primaryText="Classical" />
 	        	<MenuItem value={4} primaryText="Surprise Me" />
+            
 
        	 	</SelectField>
 
