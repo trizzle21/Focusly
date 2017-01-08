@@ -22,7 +22,7 @@ class Timer extends React.Component {
 
 
 	tick(){
-
+		this.setState({totalElapsed: new Date() - this.props.start});
 	}
 
 	clearInterval(){}
