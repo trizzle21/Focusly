@@ -13,7 +13,6 @@ class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {	
-			minutesRemaining: 25,
 			secondsRemaining:0,
 			completed: 100,
 			totalElapsed: 0,//this.props.time
@@ -22,19 +21,28 @@ class Timer extends React.Component {
 
 
 	tick(){
-		this.setState({totalElapsed: new Date() - this.props.start});
+		this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+
 	}
 
-	clearInterval(){}
+	componentDidMount(){
+		this.setState({secondsRemaining: this.props.second_count - 1});
+		this.interval = setInterval(this.tick(), 1000);
+	}
+	
+	componentWillUnmount() {
+    	clearInterval(this.interval);
+  	}
 
 	render() {
-
+		var minutes = this.secondsRemaining/60;
+		var seconds = this.secondsRemaining % 60;
 
 		return (
 			<div>
 				<div className="circleProgress">
 					<CircularProgress />
-					<div className="time_count"> </div>
+					<div className="time_count">{this.minutes}:{this.seconds} </div>
 				</div>
 
 				<div className="row">
