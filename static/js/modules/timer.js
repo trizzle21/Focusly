@@ -3,11 +3,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
-const style = {
-  margin: 12,
+
+
+const styles = {
+  circProgress: {
+    position: "absolute",
+  },
+  buttons: {
+  	margin: 12,
+  }
 };
-
-
 
 class Timer extends React.Component {
 	constructor(props) {
@@ -41,13 +46,20 @@ class Timer extends React.Component {
 		return (
 			<div>
 				<div className="circleProgress">
-					<CircularProgress />
+					<CircularProgress
+          				mode="determinate"
+          				value={this.state.completed}
+		 		 		style={styles.circProgress}
+          				size={400}
+          				thickness={7}
+        	
+       			 	/>
 					<div className="time_count">{this.minutes}:{this.seconds} </div>
 				</div>
 
 				<div className="row">
-					<RaisedButton label="Start" primary={true} style={style} />
-    				<RaisedButton label="Stop" secondary={true} style={style} />
+					<RaisedButton label="Start" primary={true} style={styles.buttons} />
+    				<RaisedButton label="Stop" secondary={true} style={styles.buttons} />
 				</div>
 			</div>
 
