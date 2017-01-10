@@ -4,9 +4,9 @@ var BundleTracker = require('webpack-bundle-tracker')
 
 
 module.exports = {
-    entry:  './static/js/index.js',
+    entry:  'index.js',
     output: {
-        path:     'static/js',
+        path:     '',
         filename: 'bundle.js',
     },
 
@@ -23,9 +23,9 @@ module.exports = {
     },
 
 
-	resolve: {
-		modulesDirectories: ['node_modules', 'bower_component'],
-		extension: ['', '.js', 'jsx']
-	},
+    resolve: {
+        modulesDirectories: ['node_modules', 'bower_component'],
+        extension: ['', '.js', 'jsx']
+    },
 
 };
