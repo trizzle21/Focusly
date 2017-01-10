@@ -1,9 +1,11 @@
 var express = require('express')
 var app = express()
 
+app.set('view engine', 'pug')
+
 
 app.get('/', function (req, res) {
-  res.send('Hello Dee!')
+  res.render('home.html')
 })
 
 app.listen(3000, function () {
