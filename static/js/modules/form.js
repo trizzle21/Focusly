@@ -81,7 +81,7 @@ class EntryForm extends React.Component {
         		<MenuItem value={2} primaryText="Relaxing" />
     	    	<MenuItem value={3} primaryText="Classical" />
 	        	<MenuItem value={4} primaryText="Surprise Me" />
-            
+
 
        	 	</SelectField>
 
@@ -99,7 +99,7 @@ class EntryForm extends React.Component {
         	</SelectField>
 
           <br />
-    		<RaisedButton label="Submit" primary={true} type="submit" value="Post" style={styles.submit} ontap/>
+    	<RaisedButton label="Submit" primary={true} type="submit" value="Post" style={styles.submit} ontap/> 
 
 
     	</form>
