@@ -27,22 +27,12 @@ urlpatterns = [
     # Admin URL
     url(r'^admin/', admin.site.urls),
 
-    # OAuth URLs
-    #url(r'^', include('django.contrib.auth.urls')),
-    url(r'^oauth2callback/spotify', OauthViews.oauth2callback_spotify, name = 'oauth2callback_spotify'),
-
     # MusicAlarm URLs
     url(r'^$', MusicAlarmViews.homeview, name = 'homeview'),
-
-    # Login URLs
-    url(r'^login/spotify', MusicAlarmViews.spotify_login, name='spotify_login'),
 
     # Dashboard URLs
     url(r'^dashboard', MusicAlarmViews.dashboard, name='dashboard'),
     
-    #built in login_tool
-    # url(r'^user_login', auth_views.login, {'template_name': 'user_login.html'}, name='user_login'),
-    # url(r'^adduser', OauthViews.adduser, name='adduser')
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
