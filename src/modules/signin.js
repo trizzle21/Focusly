@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardTitle} from 'material-ui/Card';
-import EntryForm from './form.js'; 
+import EntryForm from './components/form.js'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 
