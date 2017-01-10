@@ -21488,7 +21488,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _react = __webpack_require__(177);
@@ -21511,27 +21511,21 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var styles = {
-	  circProgress: {
-	    position: "absolute"
-	  }
-	};
-
 	var FormCard = function FormCard() {
-	  return _react2.default.createElement(
-	    _MuiThemeProvider2.default,
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _Card.Card,
-	        null,
-	        _react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
-	        _react2.default.createElement(_form2.default, null)
-	      )
-	    )
-	  );
+		return _react2.default.createElement(
+			_MuiThemeProvider2.default,
+			null,
+			_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					_Card.Card,
+					null,
+					_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
+					_react2.default.createElement(_form2.default, null)
+				)
+			)
+		);
 	};
 
 	exports.default = FormCard;

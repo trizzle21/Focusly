@@ -4,11 +4,7 @@ import EntryForm from './form.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 
-const styles = {
-  circProgress: {
-    position: "absolute",
-  },
-};
+
 
 
 const FormCard = () => (
