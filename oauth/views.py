@@ -48,34 +48,6 @@ def save_cred_to_db(userName, client, credentials):
 
 	return encryptedCreds	# Solution for now, while DB is up and running
 
-# Create your views here.
-@csrf_protect
-def oauth2callback_calendar(request):
-	calendarSecrets = json.load( open(CALENDAR_SECRETS) )
-
-	try:
-		flow = oauthClient.flow_from_clientsecrets(
-			CALENDAR_SECRETS,
-			scope = calendarSecrets['web']['scope'],
-			redirect_uri = 'http://localhost:8000/oauth2callback/calendar'
-		)
-		flow.params['access_type'] = 'offline'
-	except:
-		msg = 'There is an error with your calendar API tokens! Please review the credentials.'
-		print msg	#DEBUG
-
-	print request.GET.get('code', '')
-	if request.GET.get('code', '') is '':
-		authUri = flow.step1_get_authorize_url()
-		return redirect(authUri)
-	else:
-		authCode = request.GET.get('code', '')
-		# print authCode 	# DEBUG
-		credentials = flow.step2_exchange(authCode)
-		# update user entry in db
-		encryptedCreds = save_cred_to_db('Jorge Rojas', 'calendar_cred', credentials.to_json())
-	
-	return redirect('calendar_login')
 
 @csrf_protect
 def oauth2callback_spotify(request):
@@ -106,29 +78,4 @@ def oauth2callback_spotify(request):
 
 
 
-# def adduser(request):
-# 	print 'rendered'
-# 	form = UserForm(request.POST)
-# 	if form.is_valid():
-# 		new_user = User.objects.create_user(**form.cleaned_data)
-# 		new_user.save()
-# 		# redirect, or however you want to get to the main view
-# 		user = new_user
-# 		user.save()
-# 		print "User is valid"
-# 		client = {}
-# 		print user.username
-# 		auth_user = authenticate( username = user.username, password = user.password)
-# 		print auth_user
-# 		if auth_user is not None:
-# 			login(request, user)
-# 		else:
-# 			pass
-# 		return render(request, 'calendar_login.html', {'user': user} )
-# 	else:
-# 		form = UserForm() 
-# 		print "User is not valid"
-
-
-# 	return render(request, 'adduser.html', {'form': form}) 
 
