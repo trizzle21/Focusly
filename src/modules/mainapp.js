@@ -1,6 +1,6 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import Timer from './timer.js';
+import Timer from './components/timer.js';
 
 
 
