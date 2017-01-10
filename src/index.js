@@ -1,21 +1,22 @@
 'use strict'
 import ReactDOM from 'react-dom';
 import React from 'react';
-import FormCard from "./modules/formcard.js";
+import FormCard from "./modules/signin.js";
 import MainAppBar from "./modules/navbar.js";
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { Router, Route, hashHistory } from 'react-router'
+
+
 
 injectTapEventPlugin();
 
 
-ReactDOM.render(
-  <MainAppBar />,
-  document.getElementById('mainnav')
-);
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={FormCard}/>
+  </Router>
+), document.getElementById('app'))
 
 
 
-ReactDOM.render(
-  <FormCard />,
-  document.getElementById('MainForm')
-);
+export default Routes;
