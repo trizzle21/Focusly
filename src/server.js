@@ -54,5 +54,5 @@ app.get('/login', function (req, res) {
 
 
 app.listen(3000, function () {
-  console.log('Other app listening on port 3000!')
+  console.log('Focusly app listening on port 3000!')
 })
