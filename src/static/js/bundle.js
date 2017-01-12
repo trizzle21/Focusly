@@ -52,9 +52,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _signin = __webpack_require__(178);
+	var _tabata_form = __webpack_require__(499);
 
-	var _signin2 = _interopRequireDefault(_signin);
+	var _tabata_form2 = _interopRequireDefault(_tabata_form);
 
 	var _navbar = __webpack_require__(436);
 
@@ -66,6 +66,10 @@
 
 	var _reactRouter = __webpack_require__(445);
 
+	var _Signin = __webpack_require__(500);
+
+	var _Signin2 = _interopRequireDefault(_Signin);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactTapEventPlugin2.default)();
@@ -73,7 +77,8 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _signin2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata', component: _tabata_form2.default })
 	), document.getElementById('app'));
 
 /***/ },
@@ -21484,61 +21489,7 @@
 
 
 /***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(177);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Card = __webpack_require__(179);
-
-	var _form = __webpack_require__(338);
-
-	var _form2 = _interopRequireDefault(_form);
-
-	var _MuiThemeProvider = __webpack_require__(383);
-
-	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
-
-	var _CircularProgress = __webpack_require__(434);
-
-	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FormCard = function FormCard() {
-		return _react2.default.createElement(
-			_MuiThemeProvider2.default,
-			null,
-			_react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement('div', { className: 'col-3' }),
-				_react2.default.createElement(
-					'div',
-					{ className: 'col-6' },
-					_react2.default.createElement(
-						_Card.Card,
-						null,
-						_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
-						_react2.default.createElement(_form2.default, null)
-					)
-				),
-				_react2.default.createElement('div', { className: 'col-3' })
-			)
-		);
-	};
-
-	exports.default = FormCard;
-
-/***/ },
+/* 178 */,
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -49396,6 +49347,209 @@
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 499 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Card = __webpack_require__(179);
+
+	var _form = __webpack_require__(338);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _CircularProgress = __webpack_require__(434);
+
+	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FormCard = function FormCard() {
+		return _react2.default.createElement(
+			_MuiThemeProvider2.default,
+			null,
+			_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement('div', { className: 'col-3' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-6' },
+					_react2.default.createElement(
+						_Card.Card,
+						null,
+						_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
+						_react2.default.createElement(_form2.default, null)
+					)
+				),
+				_react2.default.createElement('div', { className: 'col-3' })
+			)
+		);
+	};
+
+	exports.default = FormCard;
+
+/***/ },
+/* 500 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _android = __webpack_require__(502);
+
+	var _android2 = _interopRequireDefault(_android);
+
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _RaisedButton = __webpack_require__(377);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _Card = __webpack_require__(179);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var styles = {
+	  button: {
+	    margin: 12,
+	    marginLeft: 150
+	  },
+	  iconStyles: {
+	    fill: "#323030"
+	  },
+	  main: {
+	    margin: 12
+	  },
+	  header: {
+	    display: "inline-block",
+	    marginLeft: 50,
+	    textAlign: "center"
+
+	  },
+	  header_image: {
+	    display: "inline-block",
+	    height: 80,
+	    width: 80,
+	    marginTop: 30
+	  }
+	};
+
+	var SignIn = function SignIn() {
+	  return _react2.default.createElement(
+	    _MuiThemeProvider2.default,
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'SignInBody' },
+	      _react2.default.createElement('div', { className: 'col-3' }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-6' },
+	        _react2.default.createElement(
+	          _Card.Card,
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { style: styles.main },
+	            _react2.default.createElement('img', {
+	              style: styles.header_image,
+	              src: 'static/images/clock_logo.svg'
+	            }),
+	            _react2.default.createElement(
+	              'h1',
+	              { style: styles.header },
+	              'Welcome to Focusly'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting, and converts it into a playlist that changes when each session changes.'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'It requires a Spotify Premium account.'
+	            ),
+	            _react2.default.createElement(_RaisedButton2.default, {
+	              label: 'Sign In to Spotify Premium',
+	              labelPosition: 'after',
+	              primary: true,
+	              style: styles.button,
+	              containerElement: 'label',
+	              icon: _react2.default.createElement(_android2.default, null)
+
+	            })
+	          )
+	        )
+	      ),
+	      _react2.default.createElement('div', { className: 'col-3' })
+	    )
+	  );
+	};
+
+	exports.default = SignIn;
+
+/***/ },
+/* 501 */,
+/* 502 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(280);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(290);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionAndroid = function ActionAndroid(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z' })
+	  );
+	};
+	ActionAndroid = (0, _pure2.default)(ActionAndroid);
+	ActionAndroid.displayName = 'ActionAndroid';
+	ActionAndroid.muiName = 'SvgIcon';
+
+	exports.default = ActionAndroid;
 
 /***/ }
 /******/ ]);

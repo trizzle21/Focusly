@@ -1,6 +1,6 @@
 body {
   font-family: 'Noto Sans';
-  background-color: $white;
+  background-image: url('/static/images/background_landing.jpg');
   background-size: cover;
   overflow:auto;
   
@@ -9,4 +9,9 @@ body {
 html {
   position: relative;
   min-height: 100%;
+}
+
+.SignInBody {
+	background-image: url('/static/images/background_landing.jpg');
+
 }

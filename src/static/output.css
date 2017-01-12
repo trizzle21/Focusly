@@ -1,13 +1,16 @@
 @import url(//fonts.googleapis.com/css?family=Noto+Sans);
 body {
   font-family: 'Noto Sans';
-  background-color: #FFFFFF;
+  background-image: url("/static/images/background_landing.jpg");
   background-size: cover;
   overflow: auto; }
 
 html {
   position: relative;
   min-height: 100%; }
+
+.SignInBody {
+  background-image: url("/static/images/background_landing.jpg"); }
 
 .grid-container {
   max-width: 1600px;
