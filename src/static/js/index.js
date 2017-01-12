@@ -1,5 +1,5 @@
 'use strict'
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom'
 import React from 'react';
 import FormCard from "./modules/signin.js";
 import MainAppBar from "./modules/navbar.js";
@@ -19,4 +19,3 @@ render((
 
 
 
-export default Routes;

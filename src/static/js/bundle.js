@@ -46,13 +46,7 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _reactDom = __webpack_require__(1);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _react = __webpack_require__(177);
 
@@ -76,13 +70,11 @@
 
 	(0, _reactTapEventPlugin2.default)();
 
-	render(_react2.default.createElement(
+	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _signin2.default })
 	), document.getElementById('app'));
-
-	exports.default = Routes;
 
 /***/ },
 /* 1 */
