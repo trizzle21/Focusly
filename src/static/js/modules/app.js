@@ -4,4 +4,16 @@ import Timer from './components/timer.js';
 
 
 
-class MainApp extends React.Component {} 
+class MainApp extends React.Component {
+
+
+
+  	render() {
+
+  		//render form here
+  		return (
+ 			<MuiThemeProvider>
+
+
+ 			</MuiThemeProvider>
+} 
