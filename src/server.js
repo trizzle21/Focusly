@@ -6,7 +6,7 @@ app.set('view engine', 'pug')
 
 
 app.get('/', function (req, res) {
-  res.render('index', { message: 'Sup there!' })
+  res.render('index', { })
 })
 
 
