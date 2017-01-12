@@ -49435,8 +49435,8 @@
 
 	var styles = {
 	  button: {
-	    margin: 12,
-	    marginLeft: 150
+	    margin: 12
+
 	  },
 	  iconStyles: {
 	    fill: "#323030"
@@ -49446,7 +49446,8 @@
 	  },
 	  header: {
 	    display: "inline-block",
-	    marginLeft: 50,
+	    marginTop: 50,
+
 	    textAlign: "center"
 
 	  },
@@ -49475,14 +49476,26 @@
 	          _react2.default.createElement(
 	            'div',
 	            { style: styles.main },
-	            _react2.default.createElement('img', {
-	              style: styles.header_image,
-	              src: 'static/images/clock_logo.svg'
-	            }),
 	            _react2.default.createElement(
-	              'h1',
-	              { style: styles.header },
-	              'Welcome to Focusly'
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-3' },
+	                _react2.default.createElement('img', {
+	                  style: styles.header_image,
+	                  src: 'static/images/clock_logo.svg'
+	                })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-8' },
+	                _react2.default.createElement(
+	                  'h1',
+	                  { style: styles.header },
+	                  'Welcome to Focusly'
+	                )
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'p',
