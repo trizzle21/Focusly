@@ -21520,12 +21520,18 @@
 			_react2.default.createElement(
 				'div',
 				null,
+				_react2.default.createElement('div', { className: 'col-3' }),
 				_react2.default.createElement(
-					_Card.Card,
-					null,
-					_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
-					_react2.default.createElement(_form2.default, null)
-				)
+					'div',
+					{ className: 'col-6' },
+					_react2.default.createElement(
+						_Card.Card,
+						null,
+						_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
+						_react2.default.createElement(_form2.default, null)
+					)
+				),
+				_react2.default.createElement('div', { className: 'col-3' })
 			)
 		);
 	};

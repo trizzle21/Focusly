@@ -9,42 +9,6 @@ html {
   position: relative;
   min-height: 100%; }
 
-.genbox {
-  background: #eee;
-  width: 1000px;
-  height: 240px;
-  margin: -50px auto 0 auto;
-  padding: 25px;
-  border-radius: 0px;
-  z-index: 26; }
-
-.row:before, .row:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-[class*='col-'] {
-  float: left;
-  min-height: 1px; }
-
-.col-1 {
-  width: 16.66%; }
-
-.col-2 {
-  width: 33.33%; }
-
-.col-3 {
-  width: 50%; }
-
-.col-4 {
-  width: 66.664%; }
-
-.col-5 {
-  width: 83.33%; }
-
-.col-6 {
-  width: 100%; }
-
 .grid-container {
   max-width: 1600px;
   width: calc(100% - 16px);

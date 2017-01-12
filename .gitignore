@@ -10,3 +10,5 @@
 /node_modules
 
 static/.sass-cache
+
+src/static/.sass-cache
