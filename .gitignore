@@ -7,6 +7,6 @@
 
 *.json
 
-src/node_modules
+/node_modules
 
 static/.sass-cache
