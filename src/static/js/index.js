@@ -16,7 +16,6 @@ render((
     <Route path='/' component={signin}/>
     <Route path='/login' />
     <Route path="/tabata_form" component={FormCard}/>
-
   </Router>
 ), document.getElementById('app'))
 
