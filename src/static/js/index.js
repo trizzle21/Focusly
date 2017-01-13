@@ -14,7 +14,8 @@ injectTapEventPlugin();
 render((
   <Router history={hashHistory}>
     <Route path='/' component={signin}/>
-    <Route path="/tabata" component={FormCard}/>
+    <Route path='/login' />
+    <Route path="/tabata_form" component={FormCard}/>
 
   </Router>
 ), document.getElementById('app'))

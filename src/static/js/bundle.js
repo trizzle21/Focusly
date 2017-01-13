@@ -78,7 +78,8 @@
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata', component: _tabata_form2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/login' }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata_form', component: _tabata_form2.default })
 	), document.getElementById('app'));
 
 /***/ },
@@ -49431,6 +49432,8 @@
 
 	var _Card = __webpack_require__(179);
 
+	var _reactRouter = __webpack_require__(445);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var styles = {
@@ -49507,15 +49510,19 @@
 	              null,
 	              'It requires a Spotify Premium account.'
 	            ),
-	            _react2.default.createElement(_RaisedButton2.default, {
-	              label: 'Sign In to Spotify Premium',
-	              labelPosition: 'after',
-	              primary: true,
-	              style: styles.button,
-	              containerElement: 'label',
-	              icon: _react2.default.createElement(_android2.default, null)
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/login' },
+	              _react2.default.createElement(_RaisedButton2.default, {
+	                label: 'Sign In to Spotify Premium',
+	                labelPosition: 'after',
+	                primary: true,
+	                style: styles.button,
+	                containerElement: 'label',
+	                icon: _react2.default.createElement(_android2.default, null)
 
-	            })
+	              })
+	            )
 	          )
 	        )
 	      ),

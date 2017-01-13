@@ -3,6 +3,7 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardTitle} from 'material-ui/Card';
+import { Link } from 'react-router'
 
 
 const styles = {
@@ -54,6 +55,7 @@ const SignIn = () => (
 						playlist that changes when each session changes.</p>
 						<p>It requires a Spotify Premium account.</p>
 						
+						<a href="/login">
 						<RaisedButton
       						label="Sign In to Spotify Premium"
       						labelPosition="after"
@@ -63,6 +65,7 @@ const SignIn = () => (
       						icon={<ActionAndroid />}
 
     					/>
+    					</a>
     					</div>
 					</Card>
 
