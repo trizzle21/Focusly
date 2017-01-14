@@ -5,7 +5,7 @@ var querystring = require('querystring');
 
 var client_id = 'dd3b496ac42541ffabfb3ebb08ad58e6'; // client id
 var client_secret = 'de59360fdd5746648baaa44f3c342832'; //  secret
-var redirect_uri = 'http://localhost:3000/#/tabata_form'; // redirect uri
+var redirect_uri = 'http://localhost:3000/tabata_form'; // redirect uri
 
 
 var app = express()
@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('login', function (req, res) {
+app.get('/login', function (req, res) {
 	
 	var state = generate_random(16);
 	res.cookie(stateKey, state);
@@ -56,7 +56,7 @@ app.get('login', function (req, res) {
 })
 
 
-app.get('#/tabata_form', function(req, res) {
+app.get('tabata_form', function(req, res) {
 	var code = req.query.code || null;
   	var state = req.query.state || null;
   	var storedState = req.cookies ? req.cookies[stateKey] : null;
