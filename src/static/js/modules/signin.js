@@ -51,8 +51,8 @@ const SignIn = () => (
 									<h1 style={styles.header}>Welcome to Focusly</h1>
 								</div>
 							</div>
-						<p>What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting, and converts it into a 
-						playlist that changes when each session changes.</p>
+						<p>What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working 
+						and resting time, and converts it into a playlist that changes when each session changes.</p>
 						<p>It requires a Spotify Premium account.</p>
 						
 						<a href="/login">
