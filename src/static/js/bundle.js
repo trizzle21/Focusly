@@ -52,7 +52,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _tabata_form = __webpack_require__(499);
+	var _tabata_form = __webpack_require__(178);
 
 	var _tabata_form2 = _interopRequireDefault(_tabata_form);
 
@@ -66,7 +66,7 @@
 
 	var _reactRouter = __webpack_require__(445);
 
-	var _Signin = __webpack_require__(500);
+	var _Signin = __webpack_require__(499);
 
 	var _Signin2 = _interopRequireDefault(_Signin);
 
@@ -21490,7 +21490,61 @@
 
 
 /***/ },
-/* 178 */,
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Card = __webpack_require__(179);
+
+	var _form = __webpack_require__(338);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _CircularProgress = __webpack_require__(434);
+
+	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FormCard = function FormCard() {
+		return _react2.default.createElement(
+			_MuiThemeProvider2.default,
+			null,
+			_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement('div', { className: 'col-3' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-6' },
+					_react2.default.createElement(
+						_Card.Card,
+						null,
+						_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
+						_react2.default.createElement(_form2.default, null)
+					)
+				),
+				_react2.default.createElement('div', { className: 'col-3' })
+			)
+		);
+	};
+
+	exports.default = FormCard;
+
+/***/ },
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -49363,62 +49417,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Card = __webpack_require__(179);
-
-	var _form = __webpack_require__(338);
-
-	var _form2 = _interopRequireDefault(_form);
-
-	var _MuiThemeProvider = __webpack_require__(383);
-
-	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
-
-	var _CircularProgress = __webpack_require__(434);
-
-	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FormCard = function FormCard() {
-		return _react2.default.createElement(
-			_MuiThemeProvider2.default,
-			null,
-			_react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement('div', { className: 'col-3' }),
-				_react2.default.createElement(
-					'div',
-					{ className: 'col-6' },
-					_react2.default.createElement(
-						_Card.Card,
-						null,
-						_react2.default.createElement(_Card.CardTitle, { title: 'Set Up Tabata Session', subtitle: 'To get started, choose Tabata length and number of sessions' }),
-						_react2.default.createElement(_form2.default, null)
-					)
-				),
-				_react2.default.createElement('div', { className: 'col-3' })
-			)
-		);
-	};
-
-	exports.default = FormCard;
-
-/***/ },
-/* 500 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(177);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _android = __webpack_require__(502);
+	var _android = __webpack_require__(500);
 
 	var _android2 = _interopRequireDefault(_android);
 
@@ -49434,108 +49433,123 @@
 
 	var _reactRouter = __webpack_require__(445);
 
+	var _Paper = __webpack_require__(274);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var styles = {
-	  button: {
-	    margin: 12
-
-	  },
-	  iconStyles: {
-	    fill: "#323030"
-	  },
-	  main: {
-	    margin: 12
-	  },
-	  header: {
-	    display: "inline-block",
-	    marginTop: 50,
-
-	    textAlign: "center"
-
-	  },
-	  header_image: {
-	    display: "inline-block",
-	    height: 80,
-	    width: 80,
-	    marginTop: 30
-	  }
+	var style = {
+		height: 100,
+		width: 100,
+		margin: 20,
+		textAlign: 'center',
+		display: 'inline-block'
 	};
 
-	var SignIn = function SignIn() {
-	  return _react2.default.createElement(
-	    _MuiThemeProvider2.default,
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'SignInBody' },
-	      _react2.default.createElement('div', { className: 'col-3' }),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-6' },
-	        _react2.default.createElement(
-	          _Card.Card,
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { style: styles.main },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-3' },
-	                _react2.default.createElement('img', {
-	                  style: styles.header_image,
-	                  src: 'static/images/clock_logo.svg'
-	                })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-8' },
-	                _react2.default.createElement(
-	                  'h1',
-	                  { style: styles.header },
-	                  'Welcome to Focusly'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting, and converts it into a playlist that changes when each session changes.'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'It requires a Spotify Premium account.'
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '/login' },
-	              _react2.default.createElement(_RaisedButton2.default, {
-	                label: 'Sign In to Spotify Premium',
-	                labelPosition: 'after',
-	                primary: true,
-	                style: styles.button,
-	                containerElement: 'label',
-	                icon: _react2.default.createElement(_android2.default, null)
+	var styles = {
+		button: {
+			margin: 12
 
-	              })
-	            )
-	          )
-	        )
-	      ),
-	      _react2.default.createElement('div', { className: 'col-3' })
-	    )
-	  );
+		},
+		iconStyles: {
+			fill: "#323030"
+		},
+		main: {
+			margin: 12
+		},
+		header: {
+			display: "inline-block",
+			marginTop: 50,
+
+			textAlign: "center"
+
+		},
+		header_image: {
+			display: "inline-block",
+			height: 80,
+			width: 80,
+			marginTop: 30
+		},
+		paper: {
+			height: 332,
+			width: 667,
+			margin: 20,
+			display: 'inline-block'
+		}
+	};
+
+	var sheet = _react2.default.createElement(
+		'div',
+		{ style: styles.main },
+		_react2.default.createElement(
+			'div',
+			{ className: 'row' },
+			_react2.default.createElement(
+				'div',
+				{ className: 'col-3' },
+				_react2.default.createElement('img', {
+					style: styles.header_image,
+					src: 'static/images/clock_logo.svg'
+				})
+			),
+			_react2.default.createElement(
+				'div',
+				{ className: 'col-8' },
+				_react2.default.createElement(
+					'h1',
+					{ style: styles.header },
+					'Welcome to Focusly'
+				)
+			)
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting time, and converts it into a playlist that changes when each session changes.'
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			'It requires a Spotify Premium account.'
+		),
+		_react2.default.createElement(
+			'a',
+			{ href: '/login' },
+			_react2.default.createElement(_RaisedButton2.default, {
+				label: 'Sign In to Spotify Premium',
+				labelPosition: 'after',
+				primary: true,
+				style: styles.button,
+				containerElement: 'label',
+				icon: _react2.default.createElement(_android2.default, null)
+
+			})
+		)
+	);
+
+	var SignIn = function SignIn() {
+		return _react2.default.createElement(
+			_MuiThemeProvider2.default,
+			null,
+			_react2.default.createElement(
+				'div',
+				{ className: 'SignInBody' },
+				_react2.default.createElement('div', { className: 'col-3' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-6' },
+					_react2.default.createElement(_Paper2.default, { children: sheet, style: style.paper, zDepth: 3 })
+				),
+				_react2.default.createElement('div', { className: 'col-3' })
+			)
+		);
 	};
 
 	exports.default = SignIn;
 
 /***/ },
-/* 501 */,
-/* 502 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
