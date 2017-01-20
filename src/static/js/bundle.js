@@ -49437,38 +49437,35 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
+	var _customtheme = __webpack_require__(501);
+
+	var _customtheme2 = _interopRequireDefault(_customtheme);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var style = {
-		height: 100,
-		width: 100,
-		margin: 20,
-		textAlign: 'center',
-		display: 'inline-block'
-	};
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var styles = {
 		button: {
-			margin: 12
+			marginLeft: 40,
+			marginBottom: 0
 
 		},
 		iconStyles: {
 			fill: "#323030"
 		},
 		main: {
-			margin: 12
+			marginRight: 40,
+			marginLeft: 40
 		},
-		header: {
-			display: "inline-block",
-			marginTop: 50,
-
-			textAlign: "center"
-
+		header_title: {
+			marginLeft: 20,
+			paddingTop: 20
 		},
 		header_image: {
 			display: "inline-block",
-			height: 80,
-			width: 80,
+			height: 60,
+			width: 65,
 			marginTop: 30
 		},
 		paper: {
@@ -49487,30 +49484,34 @@
 			{ className: 'row' },
 			_react2.default.createElement(
 				'div',
-				{ className: 'col-3' },
-				_react2.default.createElement('img', {
-					style: styles.header_image,
-					src: 'static/images/clock_logo.svg'
-				})
-			),
-			_react2.default.createElement(
-				'div',
-				{ className: 'col-8' },
+				_defineProperty({ className: 'col-9' }, 'className', 'header'),
 				_react2.default.createElement(
-					'h1',
-					{ style: styles.header },
-					'Welcome to Focusly'
+					'div',
+					{ className: 'header_image' },
+					_react2.default.createElement('img', {
+						style: styles.header_image,
+						src: 'static/images/clock_logo.png'
+					})
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'header_title' },
+					_react2.default.createElement(
+						'h1',
+						{ style: styles.header_title },
+						'Focusly'
+					)
 				)
 			)
 		),
 		_react2.default.createElement(
 			'p',
-			null,
+			{ className: 'secondaryText' },
 			'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting time, and converts it into a playlist that changes when each session changes.'
 		),
 		_react2.default.createElement(
 			'p',
-			null,
+			{ className: 'secondaryText' },
 			'It requires a Spotify Premium account.'
 		),
 		_react2.default.createElement(
@@ -49539,7 +49540,7 @@
 				_react2.default.createElement(
 					'div',
 					{ className: 'col-6' },
-					_react2.default.createElement(_Paper2.default, { children: sheet, style: style.paper, zDepth: 3 })
+					_react2.default.createElement(_Paper2.default, { children: sheet, style: styles.paper, zDepth: 3 })
 				),
 				_react2.default.createElement('div', { className: 'col-3' })
 			)
@@ -49584,6 +49585,45 @@
 	ActionAndroid.muiName = 'SvgIcon';
 
 	exports.default = ActionAndroid;
+
+/***/ },
+/* 501 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _colors = __webpack_require__(388);
+
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _getMuiTheme = __webpack_require__(384);
+
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+
+	var _RaisedButton = __webpack_require__(377);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var muiTheme = (0, _getMuiTheme2.default)({
+	  raisedButton: {
+	    color: _colors.teal500
+	  }
+
+	});
+
+	exports.default = muiTheme;
 
 /***/ }
 /******/ ]);

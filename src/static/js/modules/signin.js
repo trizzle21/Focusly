@@ -6,37 +6,30 @@ import {Card, CardTitle} from 'material-ui/Card';
 import { Link } from 'react-router'
 import Paper from 'material-ui/Paper';
 
-const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-};
+import theme from './components/customtheme';
 
 
 const styles = {
   button: {
-    margin: 12,
+    marginLeft:40,
+    marginBottom:0,
     
   },
   iconStyles: {
   	fill: "#323030",
   },
   main:{
-  	margin: 12,
+  	marginRight: 40,
+  	marginLeft:40,
   },
-  header: {
-  	display:"inline-block",
-  	marginTop: 50,
-
-    textAlign:"center",
-
+  header_title: {
+	marginLeft:20,
+	paddingTop:20,
   },
   header_image:{
   	display:"inline-block",
-  	height:80,
-  	width:80,
+  	height:60,
+  	width:65,
   	marginTop:30,
   },
   paper: {
@@ -50,19 +43,21 @@ const styles = {
 const sheet = 
 		<div style={styles.main}>
 		<div className="row">
-			<div className="col-3">
+			<div className="col-9" className="header">
+				<div className="header_image">
 				<img 
 				style={styles.header_image}
-				src='static/images/clock_logo.svg' 
+				src='static/images/clock_logo.png' 
 				/>
-			</div>
-			<div className="col-8">
-				<h1 style={styles.header}>Welcome to Focusly</h1>
+				</div>
+				<div className="header_title">
+				<h1 style={styles.header_title}>Focusly</h1>
+				</div>
 			</div>
 		</div>
-			<p>What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working 
+			<p className="secondaryText">What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working 
 			and resting time, and converts it into a playlist that changes when each session changes.</p>
-			<p>It requires a Spotify Premium account.</p>
+			<p className="secondaryText">It requires a Spotify Premium account.</p>
 	
 	<a href="/login">
 	<RaisedButton
@@ -84,7 +79,7 @@ const SignIn = () => (
 					
 				</div>
 				<div className="col-6">
-					<Paper children={sheet} style={style.paper} zDepth={3}/>
+					<Paper children={sheet} style={styles.paper} zDepth={3}/>
     			</div>
 				<div className="col-3"></div>
 
