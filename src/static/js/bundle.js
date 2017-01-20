@@ -50561,6 +50561,14 @@
 
 	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _customtheme = __webpack_require__(501);
+
+	var _customtheme2 = _interopRequireDefault(_customtheme);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50612,24 +50620,28 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var minutes = this.state.secondsRemaining / 60;
+				var minutes = Math.floor(this.state.secondsRemaining / 60);
 				var seconds = this.state.secondsRemaining % 60;
 
 				return _react2.default.createElement(
-					'div',
-					null,
+					_MuiThemeProvider2.default,
+					{ muiTheme: _customtheme2.default },
 					_react2.default.createElement(
 						'div',
-						{ className: 'time_count' },
-						this.minutes,
-						':',
-						this.seconds,
-						' '
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'row' },
-						_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons })
+						null,
+						_react2.default.createElement(
+							'div',
+							{ className: 'time_count' },
+							minutes,
+							':',
+							seconds,
+							' '
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons })
+						)
 					)
 				);
 			}

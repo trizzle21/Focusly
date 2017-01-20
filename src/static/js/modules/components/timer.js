@@ -2,6 +2,8 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import CircularProgress from 'material-ui/CircularProgress';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from './customtheme.js';
 
 
 
@@ -40,18 +42,20 @@ class Timer extends React.Component {
   	}
 
 	render() {
-		var minutes = this.state.secondsRemaining/60;
+		var minutes = Math.floor(this.state.secondsRemaining/60);
 		var seconds = this.state.secondsRemaining % 60;
 
 		return (
+			<MuiThemeProvider muiTheme={theme}>
+
 			<div>
-				<div className="time_count">{this.minutes}:{this.seconds} </div>
+				<div className="time_count">{minutes}:{seconds} </div>
 
 				<div className="row">
 					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} />
 				</div>
 			</div>
-
+			</MuiThemeProvider>
 		)
 	}
 }
