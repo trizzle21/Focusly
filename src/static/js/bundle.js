@@ -50598,13 +50598,15 @@
 				isCounting: true,
 				secondsRemaining: 1500,
 				completed: 100,
-				totalElapsed: 0 };
+				interval: 0
+			};
 			return _this;
 		}
 
 		_createClass(Timer, [{
 			key: 'tick',
 			value: function tick() {
+
 				this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
 			}
 		}, {
@@ -50612,21 +50614,23 @@
 			value: function pause() {
 				if (this.state.isCounting == true) {
 					this.state.isCounting = false;
-					clearInterval(this.interval);
+					clearInterval(this.state.interval);
 				} else {
-					this.interval = setInterval(this.tick(), this.state.secondsRemaining);
+					this.interval = setInterval(this.tick(), 1000);
 				}
 			}
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+
 				this.setState({ secondsRemaining: this.props.second_count - 1 });
-				this.interval = setInterval(this.tick(), this.state.secondsRemaining);
+				var intervalId = setInterval(this.tick(), this.secondsRemaining);
+				this.setState({ interval: intervalId });
 			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
-				clearInterval(this.interval);
+				clearInterval(this.state.interval);
 			}
 		}, {
 			key: 'render',
@@ -50651,7 +50655,7 @@
 						_react2.default.createElement(
 							'div',
 							{ className: 'row' },
-							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: pause })
+							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.pause.bind(this) })
 						)
 					)
 				);
