@@ -5,7 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import theme from './customtheme';
+
+
 const styles = {
+  main:{
+    marginLeft: 43,
+    marginRight: 43,
+  },
   slider: {
     marginLeft: 15,
     marginRight: 15,
@@ -17,9 +24,6 @@ const styles = {
     marginLeft:15,
   },
   submit: {
-    marginLeft:15,
-    marginTop:20,
-    marginBottom:15
   }
 };
 
@@ -66,9 +70,8 @@ class EntryForm extends React.Component {
 
   		//render form here
   		return (
- <MuiThemeProvider>
-
- 		<form className="spotify_login" onSubmit={this.handleSubmit}>
+  <MuiThemeProvider muiTheme={theme}>
+ 		<form style={styles.main} className="spotify_login" onSubmit={this.handleSubmit}>
   			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
   			<h4 style={styles.counter}>{this.state.SessionSlider} sessions</h4>
         	<SelectField
@@ -99,8 +102,21 @@ class EntryForm extends React.Component {
         	</SelectField>
 
           <br />
-    	<RaisedButton label="Submit" primary={true} type="submit" value="Post" style={styles.submit} ontap/> 
 
+      <div className="mainButton">
+  <a href="/login">
+  <RaisedButton
+      label="Submit"
+      labelPosition="after"
+      primary={true}
+      style={styles.button}
+      containerElement="label"
+      type="submit" value="Post"
+      ontap
+  />
+  </a>
+  </div>
+     
 
     	</form>
       </MuiThemeProvider>

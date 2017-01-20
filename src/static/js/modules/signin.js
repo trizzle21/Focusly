@@ -14,28 +14,30 @@ const styles = {
   	fill: "#323030",
   },
   main:{
-  	marginRight: 40,
-  	marginLeft:40,
+  	marginRight: 80,
+  	marginLeft:80,
   },
   header_title: {
 	marginLeft:20,
-	paddingTop:20,
+	
   },
   header_image:{
   	display:"inline-block",
   	height:60,
   	width:65,
-  	marginTop:30,
+  	marginTop:10,
   },
   paper: {
-  	  height: 332,
-  	  width: 667,
-  	  margin: 20,
-  	  display: 'inline-block',
+	height: 332,
+	width: 667,
+	margin: 20,
+	display: 'inline-block',
   }
 }
 
 const sheet = 
+	<MuiThemeProvider muiTheme={theme}>
+
 		<div style={styles.main}>
 		<div className="row">
 			<div className="col-9" className="header">
@@ -50,11 +52,12 @@ const sheet =
 				</div>
 			</div>
 		</div>
+		<div className="description">
 			<p className="secondaryText">What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working 
 			and resting time, and converts it into a playlist that changes when each session changes.</p>
 			<p className="secondaryText">It requires a Spotify Premium account.</p>
-	
-	<div className="signinButton">
+		</div>
+	<div className="mainButton">
 	<a href="/login">
 	<RaisedButton
 			label="Sign In to Spotify Premium"
@@ -67,18 +70,16 @@ const sheet =
 	/>
 	</a>
 	</div>
-	</div>;
+	</div></MuiThemeProvider>;
 
 const SignIn = () => (
-  		<MuiThemeProvider>
+  		<MuiThemeProvider muiTheme={theme}>
 			<div className="SignInBody">
-				<div className="col-3">
-					
-				</div>
-				<div className="col-6">
+				<div className="col-2"></div>
+				<div className="col-8">
 					<Paper className="card" children={sheet} style={styles.paper} zDepth={3}/>
     			</div>
-				<div className="col-3"></div>
+				<div className="col-2"></div>
 
 
 			</div>

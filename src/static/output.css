@@ -163,7 +163,6 @@ html {
 
 .header {
   display: block;
-  margin-top: 20;
   text-align: center;
   font-size: 36; }
 
@@ -173,14 +172,17 @@ html {
 
 .header_image {
   display: inline-block;
-  margin-top: 20; }
+  margin-top: 10px; }
 
-.signinButton {
+.mainButton {
   margin-top: 20px;
   text-align: center; }
 
+.description {
+  margin-top: -10px; }
+
 .card {
   position: absolute;
-  top: 25%; }
+  top: 20%; }
 
 /*# sourceMappingURL=output.css.map */

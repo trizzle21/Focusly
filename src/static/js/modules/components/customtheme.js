@@ -10,7 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const muiTheme = getMuiTheme({
   raisedButton: {
-    color: teal500,
+    primaryColor: teal500,
+
   },
 
 });
