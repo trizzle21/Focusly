@@ -49446,11 +49446,6 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var styles = {
-		button: {
-			marginLeft: 40,
-			marginBottom: 0
-
-		},
 		iconStyles: {
 			fill: "#323030"
 		},
@@ -49515,17 +49510,21 @@
 			'It requires a Spotify Premium account.'
 		),
 		_react2.default.createElement(
-			'a',
-			{ href: '/login' },
-			_react2.default.createElement(_RaisedButton2.default, {
-				label: 'Sign In to Spotify Premium',
-				labelPosition: 'after',
-				primary: true,
-				style: styles.button,
-				containerElement: 'label',
-				icon: _react2.default.createElement(_android2.default, null)
+			'div',
+			{ className: 'signinButton' },
+			_react2.default.createElement(
+				'a',
+				{ href: '/login' },
+				_react2.default.createElement(_RaisedButton2.default, {
+					label: 'Sign In to Spotify Premium',
+					labelPosition: 'after',
+					primary: true,
+					style: styles.button,
+					containerElement: 'label',
+					icon: _react2.default.createElement(_android2.default, null)
 
-			})
+				})
+			)
 		)
 	);
 
@@ -49540,7 +49539,7 @@
 				_react2.default.createElement(
 					'div',
 					{ className: 'col-6' },
-					_react2.default.createElement(_Paper2.default, { children: sheet, style: styles.paper, zDepth: 3 })
+					_react2.default.createElement(_Paper2.default, { className: 'card', children: sheet, style: styles.paper, zDepth: 3 })
 				),
 				_react2.default.createElement('div', { className: 'col-3' })
 			)

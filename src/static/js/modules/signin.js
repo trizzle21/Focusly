@@ -10,11 +10,6 @@ import theme from './components/customtheme';
 
 
 const styles = {
-  button: {
-    marginLeft:40,
-    marginBottom:0,
-    
-  },
   iconStyles: {
   	fill: "#323030",
   },
@@ -59,6 +54,7 @@ const sheet =
 			and resting time, and converts it into a playlist that changes when each session changes.</p>
 			<p className="secondaryText">It requires a Spotify Premium account.</p>
 	
+	<div className="signinButton">
 	<a href="/login">
 	<RaisedButton
 			label="Sign In to Spotify Premium"
@@ -70,6 +66,7 @@ const sheet =
 
 	/>
 	</a>
+	</div>
 	</div>;
 
 const SignIn = () => (
@@ -79,7 +76,7 @@ const SignIn = () => (
 					
 				</div>
 				<div className="col-6">
-					<Paper children={sheet} style={styles.paper} zDepth={3}/>
+					<Paper className="card" children={sheet} style={styles.paper} zDepth={3}/>
     			</div>
 				<div className="col-3"></div>
 
