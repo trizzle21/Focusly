@@ -1,8 +1,20 @@
 import React from 'react';
-import Drawer from 'material-ui/Drawer';
+import { Link } from 'react-router'
+ 
+
+
+//Custom imports
 import Timer from './components/timer.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './components/customtheme.js';
+
+//Material UI imports
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+
+
 
 
 
@@ -25,21 +37,37 @@ class MainApp extends React.Component {
   		//render form here
   		return (
   			<MuiThemeProvider muiTheme={theme}>
-				
-				<div className="container">
+				  <div>
+				  	<AppBar
+    					title="Focusly"
+    					iconElementLeft={<Link to="/tabata"><IconButton><ArrowBack /></IconButton></Link>}
+ 				 	/>
+			
 
+				<div className="grid-container">
+					<div className="col-4">
+
+
+					</div>
  				
+ 				<div className="col-8">
+ 					<div className="col-3"></div>
+					
+					<div className="col-6">
 
- 				<div className="count_down_clock">
+ 						<div className="count_down_clock">
+ 							<Timer />
+						</div>
 
- 					<Timer />
+					</div>
+					<div className="col-3"></div>
+
+				</div>
 
 
  				</div>
-
-
-
  				</div>
+
  			</MuiThemeProvider>
  		)
 	}

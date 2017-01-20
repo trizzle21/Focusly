@@ -23,32 +23,33 @@ class Timer extends React.Component {
 			isCounting:true,
 			secondsRemaining:1500,
 			completed: 100,
-			interval:0,
+			interval:setInterval(this.tick.bind(this), 1000),
 		};
 	}
 
 
 	tick(){
-		
-		this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+		if(this.state.secondsRemaining >= 0) { 
+			this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+		} else {
+       		clearInterval(this.state.interval);
+   		}
 
 	}
 
 	pause(){
 		if(this.state.isCounting == true){
-			this.state.isCounting = false;
 			clearInterval(this.state.interval);
+			this.state.isCounting = false;
 		} else {
-			this.interval = setInterval(this.tick(), 1000);
+			var intervalID = setInterval(this.tick.bind(this), 1000);
+			this.setState({interval:intervalID});
+			this.state.isCounting = true;
 		}
+
 	}
 
-	componentDidMount(){
-		
-		this.setState({secondsRemaining: this.props.second_count - 1});
-		var intervalId = setInterval(this.tick(), this.secondsRemaining);
-		this.setState({interval: intervalId});
-	}
+	
 	
 	componentWillUnmount() {
     	clearInterval(this.state.interval);
@@ -57,14 +58,16 @@ class Timer extends React.Component {
 	render() {
 		var minutes = Math.floor(this.state.secondsRemaining/60);
 		var seconds = this.state.secondsRemaining % 60;
-
+		if(seconds < 10) {
+			seconds = '0' + seconds;
+		}
 		return (
 			<MuiThemeProvider muiTheme={theme}>
 
 			<div>
 				<div className="time_count">{minutes}:{seconds} </div>
 
-				<div className="row">
+				<div className="pause_button">
 					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.pause.bind(this)}/>
 				</div>
 			</div>

@@ -90,7 +90,7 @@
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata_form', component: _tabata_form2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata', component: _tabata_form2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { name: '/timer/:name', path: '/timer', component: _app2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: NotFound })
 	), document.getElementById('app'));
@@ -49711,21 +49711,35 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Drawer = __webpack_require__(503);
-
-	var _Drawer2 = _interopRequireDefault(_Drawer);
+	var _reactRouter = __webpack_require__(445);
 
 	var _timer = __webpack_require__(507);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
+	var _customtheme = __webpack_require__(501);
+
+	var _customtheme2 = _interopRequireDefault(_customtheme);
+
 	var _MuiThemeProvider = __webpack_require__(383);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
-	var _customtheme = __webpack_require__(501);
+	var _Drawer = __webpack_require__(503);
 
-	var _customtheme2 = _interopRequireDefault(_customtheme);
+	var _Drawer2 = _interopRequireDefault(_Drawer);
+
+	var _AppBar = __webpack_require__(437);
+
+	var _AppBar2 = _interopRequireDefault(_AppBar);
+
+	var _IconButton = __webpack_require__(293);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
+	var _arrowBack = __webpack_require__(508);
+
+	var _arrowBack2 = _interopRequireDefault(_arrowBack);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49734,6 +49748,12 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//Custom imports
+
+
+	//Material UI imports
+
 
 	var MainApp = function (_React$Component) {
 		_inherits(MainApp, _React$Component);
@@ -49764,11 +49784,38 @@
 					{ muiTheme: _customtheme2.default },
 					_react2.default.createElement(
 						'div',
-						{ className: 'container' },
+						null,
+						_react2.default.createElement(_AppBar2.default, {
+							title: 'Focusly',
+							iconElementLeft: _react2.default.createElement(
+								_reactRouter.Link,
+								{ to: '/tabata' },
+								_react2.default.createElement(
+									_IconButton2.default,
+									null,
+									_react2.default.createElement(_arrowBack2.default, null)
+								)
+							)
+						}),
 						_react2.default.createElement(
 							'div',
-							{ className: 'count_down_clock' },
-							_react2.default.createElement(_timer2.default, null)
+							{ className: 'grid-container' },
+							_react2.default.createElement('div', { className: 'col-4' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-8' },
+								_react2.default.createElement('div', { className: 'col-3' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'col-6' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'count_down_clock' },
+										_react2.default.createElement(_timer2.default, null)
+									)
+								),
+								_react2.default.createElement('div', { className: 'col-3' })
+							)
 						)
 					)
 				);
@@ -50598,7 +50645,7 @@
 				isCounting: true,
 				secondsRemaining: 1500,
 				completed: 100,
-				interval: 0
+				interval: setInterval(_this.tick.bind(_this), 1000)
 			};
 			return _this;
 		}
@@ -50606,26 +50653,23 @@
 		_createClass(Timer, [{
 			key: 'tick',
 			value: function tick() {
-
-				this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+				if (this.state.secondsRemaining >= 0) {
+					this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+				} else {
+					clearInterval(this.state.interval);
+				}
 			}
 		}, {
 			key: 'pause',
 			value: function pause() {
 				if (this.state.isCounting == true) {
-					this.state.isCounting = false;
 					clearInterval(this.state.interval);
+					this.state.isCounting = false;
 				} else {
-					this.interval = setInterval(this.tick(), 1000);
+					var intervalID = setInterval(this.tick.bind(this), 1000);
+					this.setState({ interval: intervalID });
+					this.state.isCounting = true;
 				}
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-
-				this.setState({ secondsRemaining: this.props.second_count - 1 });
-				var intervalId = setInterval(this.tick(), this.secondsRemaining);
-				this.setState({ interval: intervalId });
 			}
 		}, {
 			key: 'componentWillUnmount',
@@ -50637,7 +50681,9 @@
 			value: function render() {
 				var minutes = Math.floor(this.state.secondsRemaining / 60);
 				var seconds = this.state.secondsRemaining % 60;
-
+				if (seconds < 10) {
+					seconds = '0' + seconds;
+				}
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _customtheme2.default },
@@ -50654,7 +50700,7 @@
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'row' },
+							{ className: 'pause_button' },
 							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.pause.bind(this) })
 						)
 					)
@@ -50666,6 +50712,43 @@
 	}(_react2.default.Component);
 
 	exports.default = Timer;
+
+/***/ },
+/* 508 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(280);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(290);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavigationArrowBack = function NavigationArrowBack(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z' })
+	  );
+	};
+	NavigationArrowBack = (0, _pure2.default)(NavigationArrowBack);
+	NavigationArrowBack.displayName = 'NavigationArrowBack';
+	NavigationArrowBack.muiName = 'SvgIcon';
+
+	exports.default = NavigationArrowBack;
 
 /***/ }
 /******/ ]);

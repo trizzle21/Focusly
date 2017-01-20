@@ -18,7 +18,7 @@ const NotFound = () => (
 render((
   <Router history={hashHistory}>
     <Route path='/' component={signin}/>
-    <Route path="/tabata_form" component={FormCard}/>
+    <Route path="/tabata" component={FormCard}/>
     <Route name='/timer/:name' path='/timer' component={app}/>
     <Route path='*' component={NotFound} />
   </Router>
