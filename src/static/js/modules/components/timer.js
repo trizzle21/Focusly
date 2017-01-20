@@ -20,6 +20,7 @@ class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {	
+			isCounting:true,
 			secondsRemaining:1500,
 			completed: 100,
 			totalElapsed: 0,//this.props.time
@@ -32,9 +33,18 @@ class Timer extends React.Component {
 
 	}
 
+	pause(){
+		if(this.state.isCounting == true){
+			this.state.isCounting = false;
+			clearInterval(this.interval);
+		} else {
+			this.interval = setInterval(this.tick(), this.state.secondsRemaining);
+		}
+	}
+
 	componentDidMount(){
 		this.setState({secondsRemaining: this.props.second_count - 1});
-		this.interval = setInterval(this.tick(), 1000);
+		this.interval = setInterval(this.tick(), this.state.secondsRemaining);
 	}
 	
 	componentWillUnmount() {
@@ -52,7 +62,7 @@ class Timer extends React.Component {
 				<div className="time_count">{minutes}:{seconds} </div>
 
 				<div className="row">
-					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} />
+					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={pause}/>
 				</div>
 			</div>
 			</MuiThemeProvider>

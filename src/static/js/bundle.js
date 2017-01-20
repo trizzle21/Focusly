@@ -50595,6 +50595,7 @@
 			var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
 			_this.state = {
+				isCounting: true,
 				secondsRemaining: 1500,
 				completed: 100,
 				totalElapsed: 0 };
@@ -50607,10 +50608,20 @@
 				this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
 			}
 		}, {
+			key: 'pause',
+			value: function pause() {
+				if (this.state.isCounting == true) {
+					this.state.isCounting = false;
+					clearInterval(this.interval);
+				} else {
+					this.interval = setInterval(this.tick(), this.state.secondsRemaining);
+				}
+			}
+		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				this.setState({ secondsRemaining: this.props.second_count - 1 });
-				this.interval = setInterval(this.tick(), 1000);
+				this.interval = setInterval(this.tick(), this.state.secondsRemaining);
 			}
 		}, {
 			key: 'componentWillUnmount',
@@ -50640,7 +50651,7 @@
 						_react2.default.createElement(
 							'div',
 							{ className: 'row' },
-							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons })
+							_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: pause })
 						)
 					)
 				);
