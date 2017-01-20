@@ -70,16 +70,29 @@
 
 	var _Signin2 = _interopRequireDefault(_Signin);
 
+	var _app = __webpack_require__(502);
+
+	var _app2 = _interopRequireDefault(_app);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactTapEventPlugin2.default)();
+
+	var NotFound = function NotFound() {
+	  return _react2.default.createElement(
+	    'h1',
+	    null,
+	    '404.. This page is not found!'
+	  );
+	};
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/login' }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata_form', component: _tabata_form2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/tabata_form', component: _tabata_form2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { name: '/timer/:name', path: '/timer', component: _app2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: NotFound })
 	), document.getElementById('app'));
 
 /***/ },
@@ -29890,6 +29903,8 @@
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
+	var _reactRouter = __webpack_require__(445);
+
 	var _customtheme = __webpack_require__(501);
 
 	var _customtheme2 = _interopRequireDefault(_customtheme);
@@ -29912,7 +29927,8 @@
 	    marginRight: 15
 	  },
 	  counter: {
-	    marginLeft: 15
+	    marginLeft: 15,
+	    fontSize: 16
 	  },
 	  select: {
 	    marginLeft: 15
@@ -29976,8 +29992,8 @@
 	          { style: styles.main, className: 'spotify_login', onSubmit: this.handleSubmit },
 	          _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.state.SessionSlider, onChange: this.handleSliderChange.bind(this), min: 1, max: 10, style: styles.slider }),
 	          _react2.default.createElement(
-	            'h4',
-	            { style: styles.counter },
+	            'p',
+	            { className: 'secondaryText', style: styles.counter },
 	            this.state.SessionSlider,
 	            ' sessions'
 	          ),
@@ -30012,16 +30028,14 @@
 	            'div',
 	            { className: 'mainButton' },
 	            _react2.default.createElement(
-	              'a',
-	              { href: '/login' },
+	              _reactRouter.Link,
+	              { to: { pathname: '/timer', query: { name: 'ryan' } } },
 	              _react2.default.createElement(_RaisedButton2.default, {
 	                label: 'Submit',
 	                labelPosition: 'after',
 	                primary: true,
 	                style: styles.button,
-	                containerElement: 'label',
-	                type: 'submit', value: 'Post',
-	                ontap: true
+	                containerElement: 'label'
 	              })
 	            )
 	          )
@@ -49672,11 +49686,959 @@
 	  raisedButton: {
 	    primaryColor: _colors.teal500
 
-	  }
+	  },
+	  slider: {
+	    selectionColor: _colors.teal500
 
+	  }
 	});
 
 	exports.default = muiTheme;
+
+/***/ },
+/* 502 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Drawer = __webpack_require__(503);
+
+	var _Drawer2 = _interopRequireDefault(_Drawer);
+
+	var _timer = __webpack_require__(507);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
+	var _MuiThemeProvider = __webpack_require__(383);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+	var _customtheme = __webpack_require__(501);
+
+	var _customtheme2 = _interopRequireDefault(_customtheme);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MainApp = function (_React$Component) {
+		_inherits(MainApp, _React$Component);
+
+		function MainApp(props) {
+			_classCallCheck(this, MainApp);
+
+			var _this = _possibleConstructorReturn(this, (MainApp.__proto__ || Object.getPrototypeOf(MainApp)).call(this, props));
+
+			_this.states = {
+
+				// sessions: this.props.sessions,
+				// work_music: this.props.WorkMusicType,
+				// rest_music: this.props.RestMusicType,
+
+			};
+
+			return _this;
+		}
+
+		_createClass(MainApp, [{
+			key: 'render',
+			value: function render() {
+
+				//render form here
+				return _react2.default.createElement(
+					_MuiThemeProvider2.default,
+					{ muiTheme: _customtheme2.default },
+					_react2.default.createElement(
+						'div',
+						{ className: 'container' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'count_down_clock' },
+							_react2.default.createElement(_timer2.default, null)
+						)
+					)
+				);
+			}
+		}]);
+
+		return MainApp;
+	}(_react2.default.Component);
+
+	exports.default = MainApp;
+
+/***/ },
+/* 503 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Drawer = __webpack_require__(504);
+
+	var _Drawer2 = _interopRequireDefault(_Drawer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Drawer2.default;
+
+/***/ },
+/* 504 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(220);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(225);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(226);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(230);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(265);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(273);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(1);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactEventListener = __webpack_require__(344);
+
+	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
+
+	var _keycode = __webpack_require__(300);
+
+	var _keycode2 = _interopRequireDefault(_keycode);
+
+	var _autoPrefix = __webpack_require__(302);
+
+	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
+
+	var _transitions = __webpack_require__(277);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _Overlay = __webpack_require__(505);
+
+	var _Overlay2 = _interopRequireDefault(_Overlay);
+
+	var _Paper = __webpack_require__(274);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _propTypes = __webpack_require__(276);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var openNavEventHandler = null;
+
+	var Drawer = function (_Component) {
+	  (0, _inherits3.default)(Drawer, _Component);
+
+	  function Drawer() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, Drawer);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Drawer.__proto__ || (0, _getPrototypeOf2.default)(Drawer)).call.apply(_ref, [this].concat(args))), _this), _this.handleTouchTapOverlay = function (event) {
+	      event.preventDefault();
+	      _this.close('clickaway');
+	    }, _this.handleKeyUp = function (event) {
+	      if (_this.state.open && !_this.props.docked && (0, _keycode2.default)(event) === 'esc') {
+	        _this.close('escape');
+	      }
+	    }, _this.onBodyTouchStart = function (event) {
+	      var swipeAreaWidth = _this.props.swipeAreaWidth;
+
+	      var touchStartX = event.touches[0].pageX;
+	      var touchStartY = event.touches[0].pageY;
+
+	      // Open only if swiping from far left (or right) while closed
+	      if (swipeAreaWidth !== null && !_this.state.open) {
+	        if (_this.props.openSecondary) {
+	          // If openSecondary is true calculate from the far right
+	          if (touchStartX < document.body.offsetWidth - swipeAreaWidth) return;
+	        } else {
+	          // If openSecondary is false calculate from the far left
+	          if (touchStartX > swipeAreaWidth) return;
+	        }
+	      }
+
+	      if (!_this.state.open && (openNavEventHandler !== _this.onBodyTouchStart || _this.props.disableSwipeToOpen)) {
+	        return;
+	      }
+
+	      _this.maybeSwiping = true;
+	      _this.touchStartX = touchStartX;
+	      _this.touchStartY = touchStartY;
+
+	      document.body.addEventListener('touchmove', _this.onBodyTouchMove);
+	      document.body.addEventListener('touchend', _this.onBodyTouchEnd);
+	      document.body.addEventListener('touchcancel', _this.onBodyTouchEnd);
+	    }, _this.onBodyTouchMove = function (event) {
+	      var currentX = event.touches[0].pageX;
+	      var currentY = event.touches[0].pageY;
+
+	      if (_this.state.swiping) {
+	        event.preventDefault();
+	        _this.setPosition(_this.getTranslateX(currentX));
+	      } else if (_this.maybeSwiping) {
+	        var dXAbs = Math.abs(currentX - _this.touchStartX);
+	        var dYAbs = Math.abs(currentY - _this.touchStartY);
+	        // If the user has moved his thumb ten pixels in either direction,
+	        // we can safely make an assumption about whether he was intending
+	        // to swipe or scroll.
+	        var threshold = 10;
+
+	        if (dXAbs > threshold && dYAbs <= threshold) {
+	          _this.swipeStartX = currentX;
+	          _this.setState({
+	            swiping: _this.state.open ? 'closing' : 'opening'
+	          });
+	          _this.setPosition(_this.getTranslateX(currentX));
+	        } else if (dXAbs <= threshold && dYAbs > threshold) {
+	          _this.onBodyTouchEnd();
+	        }
+	      }
+	    }, _this.onBodyTouchEnd = function (event) {
+	      if (_this.state.swiping) {
+	        var currentX = event.changedTouches[0].pageX;
+	        var translateRatio = _this.getTranslateX(currentX) / _this.getMaxTranslateX();
+
+	        _this.maybeSwiping = false;
+	        var swiping = _this.state.swiping;
+	        _this.setState({
+	          swiping: null
+	        });
+
+	        // We have to open or close after setting swiping to null,
+	        // because only then CSS transition is enabled.
+	        if (translateRatio > 0.5) {
+	          if (swiping === 'opening') {
+	            _this.setPosition(_this.getMaxTranslateX());
+	          } else {
+	            _this.close('swipe');
+	          }
+	        } else {
+	          if (swiping === 'opening') {
+	            _this.open('swipe');
+	          } else {
+	            _this.setPosition(0);
+	          }
+	        }
+	      } else {
+	        _this.maybeSwiping = false;
+	      }
+
+	      document.body.removeEventListener('touchmove', _this.onBodyTouchMove);
+	      document.body.removeEventListener('touchend', _this.onBodyTouchEnd);
+	      document.body.removeEventListener('touchcancel', _this.onBodyTouchEnd);
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(Drawer, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.maybeSwiping = false;
+	      this.touchStartX = null;
+	      this.touchStartY = null;
+	      this.swipeStartX = null;
+
+	      this.setState({
+	        open: this.props.open !== null ? this.props.open : this.props.docked,
+	        swiping: null
+	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.enableSwipeHandling();
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      // If controlled then the open prop takes precedence.
+	      if (nextProps.open !== null) {
+	        this.setState({
+	          open: nextProps.open
+	        });
+	        // Otherwise, if docked is changed, change the open state for when uncontrolled.
+	      } else if (this.props.docked !== nextProps.docked) {
+	        this.setState({
+	          open: nextProps.docked
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      this.enableSwipeHandling();
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.disableSwipeHandling();
+	    }
+	  }, {
+	    key: 'getStyles',
+	    value: function getStyles() {
+	      var muiTheme = this.context.muiTheme;
+	      var theme = muiTheme.drawer;
+
+	      var x = this.getTranslateMultiplier() * (this.state.open ? 0 : this.getMaxTranslateX());
+
+	      var styles = {
+	        root: {
+	          height: '100%',
+	          width: this.props.width || theme.width,
+	          position: 'fixed',
+	          zIndex: muiTheme.zIndex.drawer,
+	          left: 0,
+	          top: 0,
+	          transform: 'translate(' + x + 'px, 0)',
+	          transition: !this.state.swiping && _transitions2.default.easeOut(null, 'transform', null),
+	          backgroundColor: theme.color,
+	          overflow: 'auto',
+	          WebkitOverflowScrolling: 'touch' },
+	        overlay: {
+	          zIndex: muiTheme.zIndex.drawerOverlay,
+	          pointerEvents: this.state.open ? 'auto' : 'none' },
+	        rootWhenOpenRight: {
+	          left: 'auto',
+	          right: 0
+	        }
+	      };
+
+	      return styles;
+	    }
+	  }, {
+	    key: 'shouldShow',
+	    value: function shouldShow() {
+	      return this.state.open || !!this.state.swiping; // component is swiping
+	    }
+	  }, {
+	    key: 'close',
+	    value: function close(reason) {
+	      if (this.props.open === null) this.setState({ open: false });
+	      if (this.props.onRequestChange) this.props.onRequestChange(false, reason);
+	      return this;
+	    }
+	  }, {
+	    key: 'open',
+	    value: function open(reason) {
+	      if (this.props.open === null) this.setState({ open: true });
+	      if (this.props.onRequestChange) this.props.onRequestChange(true, reason);
+	      return this;
+	    }
+	  }, {
+	    key: 'getMaxTranslateX',
+	    value: function getMaxTranslateX() {
+	      var width = this.props.width || this.context.muiTheme.drawer.width;
+	      return width + 10;
+	    }
+	  }, {
+	    key: 'getTranslateMultiplier',
+	    value: function getTranslateMultiplier() {
+	      return this.props.openSecondary ? 1 : -1;
+	    }
+	  }, {
+	    key: 'enableSwipeHandling',
+	    value: function enableSwipeHandling() {
+	      if (!this.props.docked) {
+	        document.body.addEventListener('touchstart', this.onBodyTouchStart);
+	        if (!openNavEventHandler) {
+	          openNavEventHandler = this.onBodyTouchStart;
+	        }
+	      } else {
+	        this.disableSwipeHandling();
+	      }
+	    }
+	  }, {
+	    key: 'disableSwipeHandling',
+	    value: function disableSwipeHandling() {
+	      document.body.removeEventListener('touchstart', this.onBodyTouchStart);
+	      if (openNavEventHandler === this.onBodyTouchStart) {
+	        openNavEventHandler = null;
+	      }
+	    }
+	  }, {
+	    key: 'setPosition',
+	    value: function setPosition(translateX) {
+	      var drawer = _reactDom2.default.findDOMNode(this.refs.clickAwayableElement);
+	      var transformCSS = 'translate(' + this.getTranslateMultiplier() * translateX + 'px, 0)';
+	      this.refs.overlay.setOpacity(1 - translateX / this.getMaxTranslateX());
+	      _autoPrefix2.default.set(drawer.style, 'transform', transformCSS);
+	    }
+	  }, {
+	    key: 'getTranslateX',
+	    value: function getTranslateX(currentX) {
+	      return Math.min(Math.max(this.state.swiping === 'closing' ? this.getTranslateMultiplier() * (currentX - this.swipeStartX) : this.getMaxTranslateX() - this.getTranslateMultiplier() * (this.swipeStartX - currentX), 0), this.getMaxTranslateX());
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          children = _props.children,
+	          className = _props.className,
+	          containerClassName = _props.containerClassName,
+	          containerStyle = _props.containerStyle,
+	          docked = _props.docked,
+	          openSecondary = _props.openSecondary,
+	          overlayClassName = _props.overlayClassName,
+	          overlayStyle = _props.overlayStyle,
+	          style = _props.style,
+	          zDepth = _props.zDepth;
+
+
+	      var styles = this.getStyles();
+
+	      var overlay = void 0;
+	      if (!docked) {
+	        overlay = _react2.default.createElement(_Overlay2.default, {
+	          ref: 'overlay',
+	          show: this.shouldShow(),
+	          className: overlayClassName,
+	          style: (0, _simpleAssign2.default)(styles.overlay, overlayStyle),
+	          transitionEnabled: !this.state.swiping,
+	          onTouchTap: this.handleTouchTapOverlay
+	        });
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        {
+	          className: className,
+	          style: style
+	        },
+	        _react2.default.createElement(_reactEventListener2.default, { target: 'window', onKeyUp: this.handleKeyUp }),
+	        overlay,
+	        _react2.default.createElement(
+	          _Paper2.default,
+	          {
+	            ref: 'clickAwayableElement',
+	            zDepth: zDepth,
+	            rounded: false,
+	            transitionEnabled: !this.state.swiping,
+	            className: containerClassName,
+	            style: (0, _simpleAssign2.default)(styles.root, openSecondary && styles.rootWhenOpenRight, containerStyle)
+	          },
+	          children
+	        )
+	      );
+	    }
+	  }]);
+	  return Drawer;
+	}(_react.Component);
+
+	Drawer.defaultProps = {
+	  disableSwipeToOpen: false,
+	  docked: true,
+	  open: null,
+	  openSecondary: false,
+	  swipeAreaWidth: 30,
+	  width: null,
+	  zDepth: 2
+	};
+	Drawer.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? Drawer.propTypes = {
+	  /**
+	   * The contents of the `Drawer`
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * The CSS class name of the root element.
+	   */
+	  className: _react.PropTypes.string,
+	  /**
+	   * The CSS class name of the container element.
+	   */
+	  containerClassName: _react.PropTypes.string,
+	  /**
+	   * Override the inline-styles of the container element.
+	   */
+	  containerStyle: _react.PropTypes.object,
+	  /**
+	   * If true, swiping sideways when the `Drawer` is closed will not open it.
+	   */
+	  disableSwipeToOpen: _react.PropTypes.bool,
+	  /**
+	   * If true, the `Drawer` will be docked. In this state, the overlay won't show and
+	   * clicking on a menu item will not close the `Drawer`.
+	   */
+	  docked: _react.PropTypes.bool,
+	  /**
+	   * Callback function fired when the `open` state of the `Drawer` is requested to be changed.
+	   *
+	   * @param {boolean} open If true, the `Drawer` was requested to be opened.
+	   * @param {string} reason The reason for the open or close request. Possible values are
+	   * 'swipe' for open requests; 'clickaway' (on overlay clicks),
+	   * 'escape' (on escape key press), and 'swipe' for close requests.
+	   */
+	  onRequestChange: _react.PropTypes.func,
+	  /**
+	   * If true, the `Drawer` is opened.  Providing a value will turn the `Drawer`
+	   * into a controlled component.
+	   */
+	  open: _react.PropTypes.bool,
+	  /**
+	   * If true, the `Drawer` is positioned to open from the opposite side.
+	   */
+	  openSecondary: _react.PropTypes.bool,
+	  /**
+	   * The CSS class name to add to the `Overlay` component that is rendered behind the `Drawer`.
+	   */
+	  overlayClassName: _react.PropTypes.string,
+	  /**
+	   * Override the inline-styles of the `Overlay` component that is rendered behind the `Drawer`.
+	   */
+	  overlayStyle: _react.PropTypes.object,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * The width of the left most (or right most) area in pixels where the `Drawer` can be
+	   * swiped open from. Setting this to `null` spans that area to the entire page
+	   * (**CAUTION!** Setting this property to `null` might cause issues with sliders and
+	   * swipeable `Tabs`: use at your own risk).
+	   */
+	  swipeAreaWidth: _react.PropTypes.number,
+	  /**
+	   * The width of the `Drawer` in pixels. Defaults to using the values from theme.
+	   */
+	  width: _react.PropTypes.number,
+	  /**
+	   * The zDepth of the `Drawer`.
+	   */
+	  zDepth: _propTypes2.default.zDepth
+
+	} : void 0;
+	exports.default = Drawer;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 505 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(181);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(219);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(220);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(225);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(226);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(230);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(265);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(273);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _transitions = __webpack_require__(277);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _AutoLockScrolling = __webpack_require__(506);
+
+	var _AutoLockScrolling2 = _interopRequireDefault(_AutoLockScrolling);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props, context) {
+	  var overlay = context.muiTheme.overlay;
+
+
+	  var style = {
+	    root: {
+	      position: 'fixed',
+	      height: '100%',
+	      width: '100%',
+	      top: 0,
+	      left: '-100%',
+	      opacity: 0,
+	      backgroundColor: overlay.backgroundColor,
+	      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
+
+	      // Two ways to promote overlay to its own render layer
+	      willChange: 'opacity',
+	      transform: 'translateZ(0)',
+
+	      transition: props.transitionEnabled && _transitions2.default.easeOut('0ms', 'left', '400ms') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+	    }
+	  };
+
+	  if (props.show) {
+	    (0, _simpleAssign2.default)(style.root, {
+	      left: 0,
+	      opacity: 1,
+	      transition: _transitions2.default.easeOut('0ms', 'left') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+	    });
+	  }
+
+	  return style;
+	}
+
+	var Overlay = function (_Component) {
+	  (0, _inherits3.default)(Overlay, _Component);
+
+	  function Overlay() {
+	    (0, _classCallCheck3.default)(this, Overlay);
+	    return (0, _possibleConstructorReturn3.default)(this, (Overlay.__proto__ || (0, _getPrototypeOf2.default)(Overlay)).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(Overlay, [{
+	    key: 'setOpacity',
+	    value: function setOpacity(opacity) {
+	      this.refs.overlay.style.opacity = opacity;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          autoLockScrolling = _props.autoLockScrolling,
+	          show = _props.show,
+	          style = _props.style,
+	          transitionEnabled = _props.transitionEnabled,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['autoLockScrolling', 'show', 'style', 'transitionEnabled']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { ref: 'overlay', style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+	        autoLockScrolling && _react2.default.createElement(_AutoLockScrolling2.default, { lock: show })
+	      );
+	    }
+	  }]);
+	  return Overlay;
+	}(_react.Component);
+
+	Overlay.defaultProps = {
+	  autoLockScrolling: true,
+	  style: {},
+	  transitionEnabled: true
+	};
+	Overlay.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? Overlay.propTypes = {
+	  autoLockScrolling: _react.PropTypes.bool,
+	  show: _react.PropTypes.bool.isRequired,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  transitionEnabled: _react.PropTypes.bool
+	} : void 0;
+	exports.default = Overlay;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 506 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(220);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(225);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(226);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(230);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(265);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var originalBodyOverflow = null;
+	var lockingCounter = 0;
+
+	var AutoLockScrolling = function (_Component) {
+	  (0, _inherits3.default)(AutoLockScrolling, _Component);
+
+	  function AutoLockScrolling() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, AutoLockScrolling);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = AutoLockScrolling.__proto__ || (0, _getPrototypeOf2.default)(AutoLockScrolling)).call.apply(_ref, [this].concat(args))), _this), _this.locked = false, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(AutoLockScrolling, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.props.lock === true) {
+	        this.preventScrolling();
+	      }
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (this.props.lock !== nextProps.lock) {
+	        if (nextProps.lock) {
+	          this.preventScrolling();
+	        } else {
+	          this.allowScrolling();
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.allowScrolling();
+	    }
+
+	    // force to only lock/unlock once
+
+	  }, {
+	    key: 'preventScrolling',
+	    value: function preventScrolling() {
+	      if (this.locked === true) {
+	        return;
+	      }
+
+	      lockingCounter = lockingCounter + 1;
+	      this.locked = true;
+
+	      // only lock the first time the component is mounted.
+	      if (lockingCounter === 1) {
+	        var body = document.getElementsByTagName('body')[0];
+	        originalBodyOverflow = body.style.overflow;
+	        body.style.overflow = 'hidden';
+	      }
+	    }
+	  }, {
+	    key: 'allowScrolling',
+	    value: function allowScrolling() {
+	      if (this.locked === true) {
+	        lockingCounter = lockingCounter - 1;
+	        this.locked = false;
+	      }
+
+	      if (lockingCounter === 0 && originalBodyOverflow !== null) {
+	        var body = document.getElementsByTagName('body')[0];
+	        body.style.overflow = originalBodyOverflow || '';
+	        originalBodyOverflow = null;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return null;
+	    }
+	  }]);
+	  return AutoLockScrolling;
+	}(_react.Component);
+
+	process.env.NODE_ENV !== "production" ? AutoLockScrolling.propTypes = {
+	  lock: _react.PropTypes.bool.isRequired
+	} : void 0;
+	exports.default = AutoLockScrolling;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 507 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _RaisedButton = __webpack_require__(377);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _CircularProgress = __webpack_require__(434);
+
+	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var styles = {
+		circProgress: {
+			position: "absolute"
+		},
+		buttons: {
+			margin: 12
+		}
+	};
+
+	var Timer = function (_React$Component) {
+		_inherits(Timer, _React$Component);
+
+		function Timer(props) {
+			_classCallCheck(this, Timer);
+
+			var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
+
+			_this.state = {
+				secondsRemaining: 1500,
+				completed: 100,
+				totalElapsed: 0 };
+			return _this;
+		}
+
+		_createClass(Timer, [{
+			key: 'tick',
+			value: function tick() {
+				this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.setState({ secondsRemaining: this.props.second_count - 1 });
+				this.interval = setInterval(this.tick(), 1000);
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				clearInterval(this.interval);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var minutes = this.state.secondsRemaining / 60;
+				var seconds = this.state.secondsRemaining % 60;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'time_count' },
+						this.minutes,
+						':',
+						this.seconds,
+						' '
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
+						_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons })
+					)
+				);
+			}
+		}]);
+
+		return Timer;
+	}(_react2.default.Component);
+
+	exports.default = Timer;
 
 /***/ }
 /******/ ]);

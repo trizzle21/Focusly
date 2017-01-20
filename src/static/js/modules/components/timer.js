@@ -18,7 +18,7 @@ class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {	
-			secondsRemaining:0,
+			secondsRemaining:1500,
 			completed: 100,
 			totalElapsed: 0,//this.props.time
 		};
@@ -40,26 +40,15 @@ class Timer extends React.Component {
   	}
 
 	render() {
-		var minutes = this.secondsRemaining/60;
-		var seconds = this.secondsRemaining % 60;
+		var minutes = this.state.secondsRemaining/60;
+		var seconds = this.state.secondsRemaining % 60;
 
 		return (
 			<div>
-				<div className="circleProgress">
-					<CircularProgress
-          				mode="determinate"
-          				value={this.state.completed}
-		 		 		style={styles.circProgress}
-          				size={400}
-          				thickness={7}
-        	
-       			 	/>
-					<div className="time_count">{this.minutes}:{this.seconds} </div>
-				</div>
+				<div className="time_count">{this.minutes}:{this.seconds} </div>
 
 				<div className="row">
-					<RaisedButton label="Start" primary={true} style={styles.buttons} />
-    				<RaisedButton label="Stop" secondary={true} style={styles.buttons} />
+					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} />
 				</div>
 			</div>
 

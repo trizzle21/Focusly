@@ -19,6 +19,7 @@ const styles = {
   title: {
   	marginLeft: 43,
     marginRight: 43,
+    
 
   }
 

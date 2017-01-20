@@ -1,6 +1,8 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import Timer from './components/timer.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from './components/customtheme.js';
 
 
 
@@ -8,7 +10,10 @@ class MainApp extends React.Component {
 	constructor(props){
 		super(props);
 		this.states= {
-			time:1500,
+			
+			// sessions: this.props.sessions,
+			// work_music: this.props.WorkMusicType,
+			// rest_music: this.props.RestMusicType,
 			
 		}
 
@@ -19,27 +24,15 @@ class MainApp extends React.Component {
 
   		//render form here
   		return (
- 			<MuiThemeProvider>
+  			<MuiThemeProvider muiTheme={theme}>
+				
 				<div className="container">
- 					<div className="nav sidebar-nav">
- 						
 
- 						<ul class="">
- 							<li></li>
- 							<li></li>
-							<li></li>
-
-
- 						</ul>
-
-
-
- 					</div>
  				
 
- 				<div className="">
+ 				<div className="count_down_clock">
 
- 					<Timer start={this.state.time} />
+ 					<Timer />
 
 
  				</div>
@@ -49,4 +42,7 @@ class MainApp extends React.Component {
  				</div>
  			</MuiThemeProvider>
  		)
-} 
+	}
+}
+
+export default MainApp

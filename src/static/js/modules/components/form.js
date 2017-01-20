@@ -4,6 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Link } from 'react-router'
 
 import theme from './customtheme';
 
@@ -19,6 +20,7 @@ const styles = {
   },
   counter: {
     marginLeft:15,
+    fontSize:16,
   },
   select: {
     marginLeft:15,
@@ -73,7 +75,8 @@ class EntryForm extends React.Component {
   <MuiThemeProvider muiTheme={theme}>
  		<form style={styles.main} className="spotify_login" onSubmit={this.handleSubmit}>
   			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
-  			<h4 style={styles.counter}>{this.state.SessionSlider} sessions</h4>
+  			<p className="secondaryText" style={styles.counter}>{this.state.SessionSlider} sessions</p>
+        
         	<SelectField
           		floatingLabelText="Working Music"
           		value={this.state.WorkMusicType}
@@ -104,17 +107,15 @@ class EntryForm extends React.Component {
           <br />
 
       <div className="mainButton">
-  <a href="/login">
+ <Link to={{ pathname: '/timer', query: { name: 'ryan' } }}>
   <RaisedButton
       label="Submit"
       labelPosition="after"
       primary={true}
       style={styles.button}
       containerElement="label"
-      type="submit" value="Post"
-      ontap
   />
-  </a>
+  </Link>
   </div>
      
 

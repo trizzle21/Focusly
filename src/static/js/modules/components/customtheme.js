@@ -13,7 +13,10 @@ const muiTheme = getMuiTheme({
     primaryColor: teal500,
 
   },
+  slider: {
+  	selectionColor: teal500,
 
+  }
 });
 
 export default muiTheme
