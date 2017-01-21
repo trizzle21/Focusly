@@ -23,9 +23,13 @@ class Timer extends React.Component {
 		super(props);
 		this.state = {	
 			isCounting:true,
+			workSession:true,
 			secondsRemaining:1500,
 			completed: 100,
 			interval:setInterval(this.tick.bind(this), 1000),
+			sessionCount:this.props.sessionCount,
+
+
 		};
 	}
 
@@ -35,6 +39,16 @@ class Timer extends React.Component {
 			this.setState({secondsRemaining: this.state.secondsRemaining - 1, completed: (this.state.secondsRemaining/1500)*100});
 		} else {
        		clearInterval(this.state.interval);
+       		if(this.state.sessionCount != 0 && this.state.workSession == false){
+       			sessionCount--;
+       			this.state.workSession = true;
+       			this.setState({secondsRemaining: 300, completed: (this.state.secondsRemaining/300)*100,workSession: true});
+       		} else if (this.state.sessionCount != 0){
+				this.state.workSession = true;
+       			this.setState({secondsRemaining: 1500, completed: (this.state.secondsRemaining/1500)*100,workSession: false});
+       		} else {
+
+       		}
    		}
 
 	}

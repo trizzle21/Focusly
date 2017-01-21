@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var querystring = require('querystring');
 
 var client_id = 'dd3b496ac42541ffabfb3ebb08ad58e6'; // client id
-var client_secret = 'de59360fdd5746648baaa44f3c342832'; //  secret
+var client_secret = ''; //  secret
 var redirect_uri = 'http://localhost:3000/#/tabata_form'; // redirect uri
 
 

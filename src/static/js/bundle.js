@@ -49920,9 +49920,12 @@
 
 			_this.state = {
 				isCounting: true,
+				workSession: true,
 				secondsRemaining: 1500,
 				completed: 100,
-				interval: setInterval(_this.tick.bind(_this), 1000)
+				interval: setInterval(_this.tick.bind(_this), 1000),
+				sessionCount: _this.props.sessionCount
+
 			};
 			return _this;
 		}
@@ -49934,6 +49937,14 @@
 					this.setState({ secondsRemaining: this.state.secondsRemaining - 1, completed: this.state.secondsRemaining / 1500 * 100 });
 				} else {
 					clearInterval(this.state.interval);
+					if (this.state.sessionCount != 0 && this.state.workSession == false) {
+						sessionCount--;
+						this.state.workSession = true;
+						this.setState({ secondsRemaining: 300, completed: this.state.secondsRemaining / 300 * 100, workSession: true });
+					} else if (this.state.sessionCount != 0) {
+						this.state.workSession = true;
+						this.setState({ secondsRemaining: 1500, completed: this.state.secondsRemaining / 1500 * 100, workSession: false });
+					} else {}
 				}
 			}
 		}, {
