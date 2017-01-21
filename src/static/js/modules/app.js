@@ -13,22 +13,25 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import MenuItem from 'material-ui/MenuItem';
 
 
+const styles ={
+	appBar: {
+		margin:0,
+	}
+}
 
 
 
 class MainApp extends React.Component {
 	constructor(props){
 		super(props);
-		this.states= {
-			
-			// sessions: this.props.sessions,
-			// work_music: this.props.WorkMusicType,
-			// rest_music: this.props.RestMusicType,
+		this.state= {
+			open: true,
+			sessions: this.props.location.query.sessions,
 			
 		}
-
 	}
 
 
@@ -38,30 +41,57 @@ class MainApp extends React.Component {
   		return (
   			<MuiThemeProvider muiTheme={theme}>
 				  <div>
-				  	<AppBar
-    					title="Focusly"
-    					iconElementLeft={<Link to="/tabata"><IconButton><ArrowBack /></IconButton></Link>}
- 				 	/>
-			
+
 
 				<div className="grid-container">
-					<div className="col-4">
 
 
-					</div>
- 				
+				<div className="row">
+ 					<div className="col-3">
+						<Drawer width={'25%'}  open={this.state.open} >
+
+
+
+
+       	 				</Drawer>
+
+
+ 					</div>
+ 					
+
+
+ 					<div className="col-9">
+						<AppBar
+    						style={styles.appBar}
+    						title="Focusly"
+    						iconElementLeft={<Link to="/tabata"><IconButton  ><ArrowBack color={"white"}/></IconButton></Link>}
+ 					 		color="#009688"
+ 					 	/>
+ 					 	<h4>Sessions: {this.state.sessions}</h4>
+
+ 					 	<div className="count_down_clock">
+ 							<Timer />
+						</div>
+
+
+
+ 					</div>
+
+ 				</div>
+
+
+				<div className="row">
+ 					<div className="col-2"></div>
+
  				<div className="col-8">
  					<div className="col-3"></div>
 					
 					<div className="col-6">
 
- 						<div className="count_down_clock">
- 							<Timer />
-						</div>
 
 					</div>
-					<div className="col-3"></div>
-
+					<div className="col-2"></div>
+				</div>
 				</div>
 
 

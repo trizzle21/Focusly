@@ -19,7 +19,7 @@ render((
   <Router history={hashHistory}>
     <Route path='/' component={signin}/>
     <Route path="/tabata" component={FormCard}/>
-    <Route name='/timer/:name' path='/timer' component={app}/>
+    <Route name='/timer/:sessions' path='/timer' component={app}/>
     <Route path='*' component={NotFound} />
   </Router>
 ), document.getElementById('app'))

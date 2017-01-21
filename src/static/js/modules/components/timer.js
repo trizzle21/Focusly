@@ -10,6 +10,8 @@ import theme from './customtheme.js';
 const styles = {
   circProgress: {
     position: "absolute",
+    marginTop:20,
+    marginLeft:220,
   },
   buttons: {
   	margin: 12,
@@ -30,7 +32,7 @@ class Timer extends React.Component {
 
 	tick(){
 		if(this.state.secondsRemaining >= 0) { 
-			this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+			this.setState({secondsRemaining: this.state.secondsRemaining - 1, completed: (this.state.secondsRemaining/1500)*100});
 		} else {
        		clearInterval(this.state.interval);
    		}
@@ -65,10 +67,22 @@ class Timer extends React.Component {
 			<MuiThemeProvider muiTheme={theme}>
 
 			<div>
-				<div className="time_count">{minutes}:{seconds} </div>
+				<div className="circularProgress">
+				<CircularProgress
+          			mode="determinate"
+          			value={this.state.completed}
+          			size={450}
+          			thickness={15}
+          			style={styles.circProgress}
+          			color="#009688"
+        		/>
+        		</div>
+        		<div className="timer_button">
+					<div className="time_count">{minutes}:{seconds} </div>
 
-				<div className="pause_button">
-					<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.pause.bind(this)}/>
+					<div className="pause_button">
+						<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.pause.bind(this)}/>
+					</div>
 				</div>
 			</div>
 			</MuiThemeProvider>

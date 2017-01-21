@@ -1,5 +1,5 @@
 import React from 'react';
-import {teal500} from 'material-ui/styles/colors';
+import {teal500, grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -16,6 +16,9 @@ const muiTheme = getMuiTheme({
   slider: {
   	selectionColor: teal500,
 
+  },
+  appBar:{
+  	color:grey500,
   }
 });
 
