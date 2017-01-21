@@ -41,11 +41,9 @@ class Timer extends React.Component {
        		clearInterval(this.state.interval);
        		if(this.state.sessionCount != 0 && this.state.workSession == false){
        			sessionCount--;
-       			this.state.workSession = true;
        			this.setState({secondsRemaining: 300, completed: (this.state.secondsRemaining/300)*100,workSession: true});
        		} else if (this.state.sessionCount != 0){
-				this.state.workSession = true;
-       			this.setState({secondsRemaining: 1500, completed: (this.state.secondsRemaining/1500)*100,workSession: false});
+       			this.setState({secondsRemaining: 1500, completed: (this.state.secondsRemaining/1500)*100, workSession: false});
        		} else {
 
        		}

@@ -30,9 +30,13 @@ class MainApp extends React.Component {
 		this.state= {
 			open: true,
 			sessions: this.props.location.query.sessions,
-			
+			sessionName:'work'
 		}
+
 	}
+
+
+
 
 
   	render() {
