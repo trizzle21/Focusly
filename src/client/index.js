@@ -13,17 +13,6 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
-
-render((
-  <Router history={hashHistory}>
-    <Route path='/' component={signin}/>
-    <Route name='timer' path='/timer' component={app}/>
-    <Route path='*' component={NotFound} />
-  </Router>
-), document.getElementById('app'))
-
-
-
 class Root extends React.Component {
 	render(){
 		return(
@@ -39,5 +28,5 @@ class Root extends React.Component {
 }
 
 
-const root_element = document.getElementById('app'))
+const root_element = document.getElementById('app');
 render(<Root />, rootElement);
