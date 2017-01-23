@@ -15,7 +15,7 @@ var app = express()
 
 app.set('views', './views')
 app.set('view engine', 'pug')
-app.use('/client/static', express.static('static'))
+app.use(express.static('client'))
 
 
 var generate_random = function(length){
