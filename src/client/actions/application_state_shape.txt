@@ -1,40 +1,52 @@
 //shape of application state
-
+//example
 {
-	Session:{
-		count:4,
-		isCurrent:true,
-		recommendationSeeds:{
-			genres: [...]
-		}
-		subSessions:{
-			workSession:{
-				id:1,
-				isActive:true,
-				length:2500,
-				playlist: {
-					"tracks" : [ {
-						...
-
-					}]
-				},
-				recommendation_seed:"movies",
-			},
-			restSession:{
-				id:2,
-				isActive:false,
-				length:300,
-				playlist: {
-					...
-				},
-				recommendation_seed:"rock",
-
-			}
-		}
-
-	}
-	
+    domainData1 : {},
+    domainData2 : {},
+    appState1 : {},
+    appState2 : {},
+    ui : {
+        uiState1 : {},
+        uiState2 : {},
+    }
 }
+
+//Actual
+{
+  session:{
+    count:4,
+    isCurrent:true,
+    currentSession: 1,
+    recommendationSeeds:{
+      genres: [...]
+    },
+    subSessions:{
+      workSession:{
+        id:1,
+        isActive:true,
+        length:2500,
+        playlist: {
+          "tracks" : [ {
+            ...
+
+          }]
+        },
+        recommendation_seed:"movies",
+      },
+      restSession:{
+        id:2,
+        isActive:false,
+        length:300,
+        playlist: {
+          ...
+        },
+        recommendation_seed:"movies",
+
+      }
+    }
+  }
+
+  }
 
 
 
