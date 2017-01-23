@@ -41612,11 +41612,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'col-3' },
-	                _react2.default.createElement(
-	                  _Drawer2.default,
-	                  { width: 250, open: this.state.open },
-	                  'HELLO'
-	                )
+	                _react2.default.createElement(_Drawer2.default, { width: 250, open: this.state.open })
 	              ),
 	              _react2.default.createElement(
 	                'div',

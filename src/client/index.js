@@ -8,7 +8,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 
-import signin from "./containers/Signin.js";
+import signin from "./containers/signin.js";
 import app from "./containers/app.js";
 
 injectTapEventPlugin();
@@ -17,19 +17,23 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
+const store = createStore(
+	...reducers
 
+)
 
 
 class Root extends React.Component {
 	render(){
 		return(
-//			<Provider store={store}>
+			<Provider store={store}>
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
     				<Route name='timer' path='/timer/:accessToken/:refreshToken' component={app}/>
    	 				<Route path='*' component={NotFound} />
+  					<Route path='/error/:errorMsg' component={error}/>
   				</Router>
-//  			</Provider> <Route path="/error/:errorMsg" component={Error} />
+  			</Provider> 
 
 		);
 	}

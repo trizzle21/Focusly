@@ -31,7 +31,7 @@
 
           }]
         },
-        recommendation_seed:"movies",
+        recommendation_seed:"rock",
       },
       restSession:{
         id:2,
@@ -44,7 +44,20 @@
 
       }
     }
+  },
+  ui: {
+    tabataForm: {
+      numOfSessions: 1,
+      WorkMusicType: 1,
+      RestMusicType: 1,
+      SessionSlider: 1.0,
+    };
+
+    }
+
   }
+
+
 
   }
 
