@@ -2,7 +2,7 @@
 import { render } from 'react-dom'
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory, browserHistory } from 'react-router'
 
 import signin from "./containers/Signin.js";
 import app from "./containers/app.js";
@@ -19,10 +19,11 @@ class Root extends React.Component {
 //			<Provider store={store}>
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
-    				<Route name='timer' path='/timer' component={app}/>
+    				<Route name='timer' path='/timer/:accessToken/:refreshToken' component={app}/>
    	 				<Route path='*' component={NotFound} />
   				</Router>
-//  			</Provider>
+//  			</Provider> <Route path="/error/:errorMsg" component={Error} />
+
 		);
 	}
 }
