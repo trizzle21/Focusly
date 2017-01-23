@@ -82,11 +82,6 @@ class Timer extends React.Component {
 		return (
 			<MuiThemeProvider muiTheme={theme}>
 
-
-
-
-
-
 			<div>
 				<div className="circularProgress">
 				<CircularProgress
