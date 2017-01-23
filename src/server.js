@@ -15,7 +15,7 @@ var app = express()
 
 app.set('views', './views')
 app.set('view engine', 'pug')
-app.use('/static', express.static('static'))
+app.use('/client/static', express.static('static'))
 
 
 var generate_random = function(length){
@@ -34,9 +34,9 @@ app.get('/', function (req, res) {
 
 })
 
-app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'bundle.js'));
-});
+/*app.get('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'client/bundle.js'));
+});*/
 
 
 app.get('/login', function (req, res) {

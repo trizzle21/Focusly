@@ -6,7 +6,7 @@ import {Card, CardTitle} from 'material-ui/Card';
 import { Link } from 'react-router'
 import Paper from 'material-ui/Paper';
 
-import theme from './components/customtheme';
+import theme from '../components/customtheme';
 
 
 const styles = {

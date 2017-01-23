@@ -4,8 +4,9 @@ import { Link } from 'react-router'
 
 
 //Custom imports
-import Timer from './components/timer.js';
-import theme from './components/customtheme.js';
+import Timer from '../components/timer.js';
+import theme from '../components/customtheme.js';
+import EntryForm from '../components/form.js'; 
 
 //Material UI imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -16,7 +17,6 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import CardTitle from 'material-ui/Card';
-import EntryForm from './components/form.js'; 
 import Dialog from 'material-ui/Dialog';
 
 
