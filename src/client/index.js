@@ -24,3 +24,20 @@ render((
 
 
 
+class Root extends React.Component {
+	render(){
+		return(
+//			<Provider store={store}>
+  				<Router history={hashHistory}>
+   					<Route path='/' component={signin}/>
+    				<Route name='timer' path='/timer' component={app}/>
+   	 				<Route path='*' component={NotFound} />
+  				</Router>
+//  			</Provider>
+		);
+	}
+}
+
+
+const root_element = document.getElementById('app'))
+render(<Root />, rootElement);
