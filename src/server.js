@@ -2,6 +2,7 @@ var express = require('express')
 var request = require('request');
 var cookieParser = require('cookie-parser');
 var querystring = require('querystring');
+var path = require('path');
 
 var client_id = 'dd3b496ac42541ffabfb3ebb08ad58e6'; // client id
 var client_secret = ''; //  secret
@@ -33,7 +34,9 @@ app.get('/', function (req, res) {
 
 })
 
-
+app.get('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'bundle.js'));
+});
 
 
 app.get('/login', function (req, res) {

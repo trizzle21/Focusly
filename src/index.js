@@ -1,11 +1,11 @@
 'use strict'
 import { render } from 'react-dom'
 import React from 'react';
-import MainAppBar from "./modules/navbar.js";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route, hashHistory } from 'react-router'
-import signin from "./modules/Signin.js";
-import app from "./modules/app.js";
+
+import signin from "./containers/Signin.js";
+import app from "./containers/app.js";
 
 injectTapEventPlugin();
 
