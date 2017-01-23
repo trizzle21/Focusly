@@ -106,17 +106,6 @@ class EntryForm extends React.Component {
 
           <br />
 
-      <div className="mainButton">
- <Link to={{ pathname: '/timer', query: { sessions: this.state.numOfSessions } }}>
-  <RaisedButton
-      label="Submit"
-      labelPosition="after"
-      primary={true}
-      style={styles.button}
-      containerElement="label"
-  />
-  </Link>
-  </div>
      
 
     	</form>

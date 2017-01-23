@@ -7,6 +7,10 @@ import theme from './customtheme.js';
 
 
 
+
+
+
+
 const styles = {
   circProgress: {
     position: "absolute",
@@ -77,6 +81,11 @@ class Timer extends React.Component {
 		}
 		return (
 			<MuiThemeProvider muiTheme={theme}>
+
+
+
+
+
 
 			<div>
 				<div className="circularProgress">

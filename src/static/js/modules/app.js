@@ -14,12 +14,22 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import CardTitle from 'material-ui/Card';
+import EntryForm from './components/form.js'; 
+import Dialog from 'material-ui/Dialog';
+
+
 
 
 const styles ={
 	appBar: {
 		margin:0,
-	}
+	},
+	submit: {
+  
+  	}
+
 }
 
 
@@ -28,7 +38,8 @@ class MainApp extends React.Component {
 	constructor(props){
 		super(props);
 		this.state= {
-			open: true,
+			openDrawer: true,
+			openDialog:true,
 			sessions: this.props.location.query.sessions,
 			sessionName:'work'
 		}
@@ -36,25 +47,53 @@ class MainApp extends React.Component {
 	}
 
 
+	submitSession(){
+		this.setState({openDialog:false});
+
+	}
 
 
 
   	render() {
-
+  		
+	const actions = [
+  		<RaisedButton
+      		label="Submit"
+      		labelPosition="after"
+      		primary={true}
+      		style={styles.button}
+      		containerElement="label"
+      		onClick={this.submitSession.bind(this)}
+  		/>
+    ];
   		//render form here
   		return (
   			<MuiThemeProvider muiTheme={theme}>
-				  <div>
+				<div>
 
+				<Dialog
+          			title="Set Up Tabata Session"
+          			subtitle="To get started, choose Tabata length and number of sessions"
+          			actions={actions}
+          			modal={true}
+          			open={this.state.openDialog}
+        		>
+  
+				<EntryForm />
+
+        		</Dialog>
+
+
+				
 
 				<div className="grid-container">
 
 
 				<div className="row">
  					<div className="col-3">
-						<Drawer width={'25%'}  open={this.state.open} >
+						<Drawer width={250}  open={this.state.open} >
 
-
+						HELLO
 
 
        	 				</Drawer>
@@ -74,7 +113,7 @@ class MainApp extends React.Component {
  					 	<h4>Sessions: {this.state.sessions}</h4>
 
  					 	<div className="count_down_clock">
- 							<Timer />
+ 							<Timer  />
 						</div>
 
 

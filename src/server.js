@@ -5,7 +5,7 @@ var querystring = require('querystring');
 
 var client_id = 'dd3b496ac42541ffabfb3ebb08ad58e6'; // client id
 var client_secret = ''; //  secret
-var redirect_uri = 'http://localhost:3000/#/tabata_form'; // redirect uri
+var redirect_uri = 'http://localhost:3000/#/timer'; // redirect uri
 
 
 var app = express()
@@ -29,9 +29,11 @@ var generate_random = function(length){
 var stateKey = 'spotify_auth_state';
 
 app.get('/', function (req, res) {
-	res.render('index')
+  res.render('index')
 
 })
+
+
 
 
 app.get('/login', function (req, res) {

@@ -1,7 +1,6 @@
 'use strict'
 import { render } from 'react-dom'
 import React from 'react';
-import FormCard from "./modules/tabata_form.js";
 import MainAppBar from "./modules/navbar.js";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route, hashHistory } from 'react-router'
@@ -18,8 +17,7 @@ const NotFound = () => (
 render((
   <Router history={hashHistory}>
     <Route path='/' component={signin}/>
-    <Route path="/tabata" component={FormCard}/>
-    <Route name='/timer/:sessions' path='/timer' component={app}/>
+    <Route name='timer' path='/timer' component={app}/>
     <Route path='*' component={NotFound} />
   </Router>
 ), document.getElementById('app'))
