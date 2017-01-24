@@ -1,4 +1,6 @@
-import * as ActionTypes from '../actions'
+import {
+	SLIDER_INCR, SLIDER_DECR, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_SUCCESS, SPOTIFY_GENRE_SEED_FAILURE
+} from '../actions/actions';
 
 
 

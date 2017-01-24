@@ -15,7 +15,6 @@ export const SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
 export const SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
 
 
-
 export function setTokens({accessToken, refreshToken}) {
 	if (accessToken) {
 		spotifyApi.setAccessToken(accessToken);
@@ -57,9 +56,19 @@ export const SLIDER_DECR = 'SLIDER_DECR';
 export const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
 export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 
+export const workMusicSelect = (musicType) => {
+	return {
+		type: WORK_MUSIC_SELECT,
+		newGenre: musicType
+	}
+}
 
-
-
+export const restMusicSelect = (musicType) => {
+	return {
+		type: REST_MUSIC_SELECT,
+		newGenre: musicType
+	}
+}
 
 
 
