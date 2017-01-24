@@ -8,33 +8,27 @@ import tabataForm from './tabataForm';
 const initialState = {
   accessToken: null,
   refreshToken: null,
+  loading:true
+  working:true,
   session:{
     count:0,
     isCurrent:false,
     currentSession: 1,
     recommendationSeeds: null,
-    subSessions:{
-      workSession:{
+    subSession:{
         id:1,
         isActive:true,
         length:2500,
         playlist: null,
         recommendation_seed:null,
-      },
-      restSession:{
-        id:2,
-        isActive:false,
-        length:300,
-        playlist: null,
-        recommendation_seed:null,
-      }
-    }
   },
   ui: {
     tabataForm: {
+      loadind:true,
       WorkMusicType: '',
       RestMusicType: '',
       SessionSlider: 1.0,
+      recommendationSeeds:null,
     },
 
     }
