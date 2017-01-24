@@ -3,9 +3,6 @@ import {
 } from '../actions/actions';
 
 
-
-
-
 export default function tabataForm(state, action){
 	switch(action.type){
 		case SLIDER_INCR:

@@ -9,15 +9,15 @@ export default function spotifyRecommendations(state, actions) {
 		  case SPOTIFY_TOKENS:
     		const {accessToken, refreshToken} = action;
     		return Object.assign({}, state, {accessToken, refreshToken});
-
-
-		case SPOTIFY_REC_BEGIN
+		
+		case SPOTIFY_REC_BEGIN:
 		  	return Object.assign({}, state, {
-   	 			user: Object.assign({}, state.user, {loading: true})
+   	 			
   			});
-
-
-
+		case SPOTIFY_REC_SUCCESS:
+		  	return Object.assign({}, state, {
+   	 			
+  			});
 
 
 }
