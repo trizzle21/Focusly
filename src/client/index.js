@@ -7,7 +7,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
-
+import reducer from './reducers/reducer.js'
 import signin from "./containers/signin.js";
 import app from "./containers/app.js";
 
@@ -17,10 +17,7 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
-const store = createStore(
-	...reducers
-
-)
+const store = createStore(reducer)
 
 
 class Root extends React.Component {
