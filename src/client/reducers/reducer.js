@@ -43,7 +43,7 @@ const initialState = {
 
 
 
-export default function timerApp(state=initialState, action){
+export default function TimerApp(state=initialState, action){
   return {
     tabataForm: tabataForm(state.ui.tabataForm, action),
 
