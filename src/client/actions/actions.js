@@ -49,12 +49,31 @@ export function getAvailableGenreSeeds(){
 
 
 
+function makeAction(type,...argNames){
+	return function(...args){
+		let action = {type}
+		argNames.forEach((arg,index) => {
+			action.argNames[index] = args[index]
+		})
+		return action
+	}
+}
+
+
+
+
+
+
 //Session Form
 export const SLIDER_INCR = 'SLIDER_INCR';
 export const SLIDER_DECR = 'SLIDER_DECR';
 
 export const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
 export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+
+
+
+
 
 export const workMusicSelect = (musicType) => {
 	return {
@@ -72,14 +91,11 @@ export const restMusicSelect = (musicType) => {
 
 
 
-
-
-
-
-
-//Timer Set
+//Timer UI
 export const COUNT_SET = 'COUNT_SET';
 export const COUNT_DECREMENT ='COUNT_DECREMENT';
+
+
 
 
 
