@@ -51,7 +51,7 @@
       WorkMusicType: 1,
       RestMusicType: 1,
       SessionSlider: 1.0,
-    };
+    },
 
     }
 

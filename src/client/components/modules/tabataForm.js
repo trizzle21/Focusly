@@ -14,6 +14,10 @@ class TabataForm extends React.Component {
 	}
 
 	render(){
+		const {
+			openDialog,submitSession
+		} = this.props
+
 		const actions = [
   			<RaisedButton
   				label="Submit"
@@ -21,10 +25,9 @@ class TabataForm extends React.Component {
 				primary={true}
 				style={styles.button}
 				containerElement="label"
-				onClick={this.propssubmitSession.bind(this)}
+				onClick={this.props.submitSession.bind(this)}
 			/>
 		];
-		
 		return (
   		<MuiThemeProvider muiTheme={theme}>
   			<div>

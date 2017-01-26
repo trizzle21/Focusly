@@ -34,19 +34,12 @@ app.get('/', function (req, res) {
 
 })
 
-/*app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'client/bundle.js'));
-});*/
 
 
 app.get('/login', function (req, res) {
-	
 	var state = generate_random(16);
 	res.cookie(stateKey, state);
-
-
-
-  	var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email';
 	res.redirect('https://accounts.spotify.com/authorize?' +
 		querystring.stringify({
 			response_type: 'code',
