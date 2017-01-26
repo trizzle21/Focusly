@@ -31,20 +31,27 @@ class Timer extends React.Component {
 		secondsRemaining: PropTypes.number.isRequired,
 		sessionCount: PropTypes.number.isRequired,
 		isCounting:PropTypes.bool.isRequired,
+
+		//redux action hookups
+		decreaseSessionCount:PropTypes.func.isRequired
+		tick:PropTypes.func.isRequired
+		stopCounting:PropTypes.func.isRequired
+
+
+
 	}
 	constructor(props) {
 		super(props);
-		this.state = {	
-			completed: 100,
-			interval:setInterval(this.tick.bind(this), 1000),
-
-
-		};
 	}
 
-
+	componentWillMount(){
+		const tick = this.props.tick; 
+		this.interval setInterval(tick, 1000),
+	}
+	
 	tick(){
 		if(this.state.secondsRemaining >= 0) { 
+			
 			this.setState({secondsRemaining: this.state.secondsRemaining - 1, completed: (this.state.secondsRemaining/1500)*100});
 		} else {
        		clearInterval(this.state.interval);
@@ -52,7 +59,7 @@ class Timer extends React.Component {
        			sessionCount--;
        			this.setState({secondsRemaining: 300, completed: (this.state.secondsRemaining/300)*100,workSession: true});
        		} else if (this.state.sessionCount != 0){
-       			this.setState({secondsRemaining: 1500, completed: (this.state.secondsRemaining/1500)*100, workSession: false});
+       			this.setState({secondsRemaining: 1500, completed: (this.props.secondsRemaining/1500)*100);
        		} else {
 
        		}
@@ -61,13 +68,13 @@ class Timer extends React.Component {
 	}
 
 	pause(){
-		if(this.state.isCounting == true){
+		if(this.props.isCounting == true){
 			clearInterval(this.state.interval);
-			this.state.isCounting = false;
+			this.props.stopCounting();
 		} else {
-			var intervalID = setInterval(this.tick.bind(this), 1000);
+			var intervalID = setInterval(, 1000);
 			this.setState({interval:intervalID});
-			this.state.isCounting = true;
+			this.props.stopCounting();
 		}
 
 	}
@@ -75,12 +82,12 @@ class Timer extends React.Component {
 	
 	
 	componentWillUnmount() {
-    	clearInterval(this.state.interval);
+    	clearInterval(this.interval);
   	}
 
 	render() {
-		var minutes = Math.floor(this.state.secondsRemaining/60);
-		var seconds = this.state.secondsRemaining % 60;
+		var minutes = Math.floor(this.props.secondsRemaining/60);
+		var seconds = this.props.secondsRemaining % 60;
 		if(seconds < 10) {
 			seconds = '0' + seconds;
 		}
@@ -91,7 +98,7 @@ class Timer extends React.Component {
 				<div className="circularProgress">
 				<CircularProgress
           			mode="determinate"
-          			value={this.state.completed}
+          			value={this.props.completed}
           			size={450}
           			thickness={15}
           			style={styles.circProgress}
@@ -112,9 +119,17 @@ class Timer extends React.Component {
 }
 
 function mapStateToProps(state) {
-	
 	return {
 		session: state.session,
+
+	}
+}
+
+function mapdispatchtoProps(dispatch){
+	return {
+		tick: function(secondsRemaining){ dispatch(actions.tick(secondsRemaining))},
+		decreaseSessionCount: function(currentSessionCount){},
+		stopCounting: function(){dispatch},
 	}
 }
 
