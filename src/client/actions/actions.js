@@ -48,7 +48,7 @@ export function getAvailableGenreSeeds(){
 }
 
 
-
+//Builds Actions for me
 function makeAction(type,...argNames){
 	return function(...args){
 		let action = {type}
@@ -75,13 +75,13 @@ export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 
 
 
-export const workMusicSelect = (musicType) => {
+export const workMusicSelect = makeAction('WORK_MUSIC_SELECT', 'musicType' )
+ (musicType) => {
 	return {
 		type: WORK_MUSIC_SELECT,
 		newGenre: musicType
 	}
 }
-
 export const restMusicSelect = (musicType) => {
 	return {
 		type: REST_MUSIC_SELECT,
