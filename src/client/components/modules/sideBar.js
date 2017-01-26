@@ -22,9 +22,10 @@ class SideBar extends ReactComponent {
 
 
 	render(){
-		
-		<Drawer width={250}  open={true} >
-		</Drawer>
+	 	<div className="col-3">
+			<Drawer width={250}  open={true} >
+			</Drawer>
+		</div>
 
 
 	}

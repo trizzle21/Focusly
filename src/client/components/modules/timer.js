@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { propTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+//Import specific uncreated actions
+
 import RaisedButton from 'material-ui/RaisedButton';
 
 import CircularProgress from 'material-ui/CircularProgress';
@@ -23,15 +27,16 @@ const styles = {
 };
 
 class Timer extends React.Component {
+	static propTypes = {
+		secondsRemaining: PropTypes.number.isRequired,
+		sessionCount: PropTypes.number.isRequired,
+		isCounting:PropTypes.bool.isRequired,
+	}
 	constructor(props) {
 		super(props);
 		this.state = {	
-			isCounting:true,
-			workSession:true,
-			secondsRemaining:1500,
 			completed: 100,
 			interval:setInterval(this.tick.bind(this), 1000),
-			sessionCount:this.props.sessionCount,
 
 
 		};
@@ -106,5 +111,12 @@ class Timer extends React.Component {
 	}
 }
 
-export default Timer
+function mapStateToProps(state) {
+	
+	return {
+		session: state.session,
+	}
+}
+
+export default connect(mapStateToProps)(Timer);Timer
 
