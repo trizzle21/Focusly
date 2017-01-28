@@ -31,12 +31,13 @@ class Timer extends React.Component {
 		secondsRemaining: PropTypes.number.isRequired,
 		sessionCount: PropTypes.number.isRequired,
 		isCounting:PropTypes.bool.isRequired,
-
+		workSession:PropTypes.object.isRequired,
+		restSession:PropTypes.object.isRequired,
 		//redux action hookups
-		decreaseSessionCount:PropTypes.func.isRequired
-		tick:PropTypes.func.isRequired
-		stopCounting:PropTypes.func.isRequired
-
+		decreaseSessionCount:PropTypes.func.isRequired,
+		tick:PropTypes.func.isRequired,
+		stopCounting:PropTypes.func.isRequired,
+		setSessionLength:PropTypes.func.isRequired,
 
 
 	}
@@ -46,10 +47,17 @@ class Timer extends React.Component {
 
 	componentWillMount(){
 		const tick = this.props.tick; 
+		if(this.props.session.working){
+			this.props.setSessionLength(this.props.workSession.length)
+		} else{
+			this.props.setSessionLength(this.props.workSession.length)
+		}
+
 		this.interval setInterval(tick, 1000),
 	}
 	
 	tick(){
+		//Going to move this to be an action
 		if(this.state.secondsRemaining >= 0) { 
 			
 			this.setState({secondsRemaining: this.state.secondsRemaining - 1, completed: (this.state.secondsRemaining/1500)*100});
@@ -68,6 +76,7 @@ class Timer extends React.Component {
 	}
 
 	pause(){
+		//Going to move this to be an action
 		if(this.props.isCounting == true){
 			clearInterval(this.state.interval);
 			this.props.stopCounting();
@@ -86,6 +95,7 @@ class Timer extends React.Component {
   	}
 
 	render() {
+
 		var minutes = Math.floor(this.props.secondsRemaining/60);
 		var seconds = this.props.secondsRemaining % 60;
 		if(seconds < 10) {
@@ -130,6 +140,7 @@ function mapdispatchtoProps(dispatch){
 		tick: function(secondsRemaining){ dispatch(actions.tick(secondsRemaining))},
 		decreaseSessionCount: function(currentSessionCount){},
 		stopCounting: function(){dispatch},
+		setSessionLength:function(intervalTime){dispatch({type:'setSessionLength', intervalTime})}
 	}
 }
 
