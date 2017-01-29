@@ -85,9 +85,17 @@ export const restMusicSelect = makeAction('REST_MUSIC_SELECT', 'musicType' );
 
 
 //Timer Data
-export const COUNT_SET = 'COUNT_SET';
-export const COUNT_DECREMENT ='COUNT_DECREMENT';
+export const CYCLE_SET = 'CYCLE_SET';
+export const SESSION_TYPE_SET = 'SESSION_TYPE_SET';
 
+
+
+export const cycleSet = makeAction(CYCLE_SET, data )
+export const sessionTypeSet = makeAction(SESSION_TYPE_SET, session_type)
+
+
+
+//TODO Add more Session Data
 
 
 
