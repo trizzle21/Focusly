@@ -33,7 +33,7 @@ export default function tabataForm(state, action){
     		});
   		case RECOMMENDATION_SET:
             return Object.assign({}, state, {
-                reccomendationSet:true,
+                recomendationSet:true,
             }
         case SPOTIFY_GENRE_SEED_FAILURE:
 			return state

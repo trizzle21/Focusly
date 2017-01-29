@@ -16,6 +16,7 @@ const initialState = {
     restRecommendationSeeds: null,
     workRecommendationSeeds: null,
     secondsRemaining:0,
+    completed:100,
   }  
   ui: {
     tabataForm: {

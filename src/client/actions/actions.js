@@ -87,12 +87,13 @@ export const restMusicSelect = makeAction('REST_MUSIC_SELECT', 'musicType' );
 //Timer Data
 export const CYCLE_SET = 'CYCLE_SET';
 export const SESSION_TYPE_SET = 'SESSION_TYPE_SET';
+export const TICK = 'TICK';
 
 
 
-export const cycleSet = makeAction(CYCLE_SET, data )
-export const sessionTypeSet = makeAction(SESSION_TYPE_SET, session_type)
-
+export const cycleSet = makeAction(CYCLE_SET, data );
+export const sessionTypeSet = makeAction(SESSION_TYPE_SET, session_type);
+export const tick = makeAction(TICK);
 
 
 //TODO Add more Session Data
