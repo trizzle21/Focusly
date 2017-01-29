@@ -60,6 +60,9 @@ function makeAction(type,...argNames){
 }
 
 
+//Session Setup 
+export const makeAction('RECOMMENDATION_SET');
+
 
 
 
@@ -75,27 +78,20 @@ export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 
 
 
-export const workMusicSelect = makeAction('WORK_MUSIC_SELECT', 'musicType' )
- (musicType) => {
-	return {
-		type: WORK_MUSIC_SELECT,
-		newGenre: musicType
-	}
-}
-export const restMusicSelect = (musicType) => {
-	return {
-		type: REST_MUSIC_SELECT,
-		newGenre: musicType
-	}
-}
+export const workMusicSelect = makeAction('WORK_MUSIC_SELECT', 'musicType' );
+export const restMusicSelect = makeAction('REST_MUSIC_SELECT', 'musicType' );
 
 
 
-//Timer UI
+
+//Timer Data
 export const COUNT_SET = 'COUNT_SET';
 export const COUNT_DECREMENT ='COUNT_DECREMENT';
 
 
+
+
+//Timer UI
 
 
 

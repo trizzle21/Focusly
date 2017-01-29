@@ -4,7 +4,7 @@ import tabataForm from './tabataForm';
 
 
 
-
+//TODO sessions and Tabata Count are different
 const initialState = {
   accessToken: null,
   refreshToken: null,
