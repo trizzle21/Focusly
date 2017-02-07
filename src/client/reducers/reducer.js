@@ -15,6 +15,7 @@ const initialState = {
     working:true,
     restRecommendationSeeds: null,
     workRecommendationSeeds: null,
+    initialSeconds:0,
     secondsRemaining:0,
     completed:100,
   }  

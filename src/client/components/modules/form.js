@@ -1,12 +1,16 @@
 import React from 'react';
+
 import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router'
 
 import theme from './customtheme';
+import MusicMenuItems from './musicMenuItems';
+
+
 
 
 const styles = {
@@ -73,9 +77,9 @@ class EntryForm extends React.Component {
   		//render form here
   		return (
   <MuiThemeProvider muiTheme={theme}>
- 		<form style={styles.main} className="spotify_login" onSubmit={this.handleSubmit}>
+ 		<form style={styles.main} className="spotify_login" >
   			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
-  			<p className="secondaryText" style={styles.counter}>{this.state.SessionSlider} sessions</p>
+  			<p className="secondaryText" style={styles.counter}>{this.state.SessionSlider}>Cycles</p>
         
         	<SelectField
           		floatingLabelText="Working Music"
@@ -83,10 +87,6 @@ class EntryForm extends React.Component {
           		onChange={this.WorkMusicTypeChange.bind(this)}
               style={styles.select}
         	>
-        		<MenuItem value={1} primaryText="Movie Soundtrack" />
-        		<MenuItem value={2} primaryText="Relaxing" />
-    	    	<MenuItem value={3} primaryText="Classical" />
-	        	<MenuItem value={4} primaryText="Surprise Me" />
 
 
        	 	</SelectField>

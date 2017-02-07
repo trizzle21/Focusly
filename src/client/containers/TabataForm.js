@@ -25,7 +25,7 @@ class TabataForm extends React.Component {
 				primary={true}
 				style={styles.button}
 				containerElement="label"
-				onClick={this.props.submitSession.bind(this)}
+				onClick={this.props.submitSession}
 			/>
 		];
 		return (

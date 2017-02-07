@@ -34,16 +34,10 @@ const styles ={
 
 export default class PresentationalApp extends React.component{
 	
-	static propTypes = {
-    	value: PropTypes.string.isRequired,
-    	onChange: PropTypes.func.isRequired
-  		openDialog:PropTypes.bool
-
-
-  	}
-
-
-
+	constructor(props){
+		super(props);
+  	
+    }
 	
 
 	render() {
@@ -55,7 +49,7 @@ export default class PresentationalApp extends React.component{
       			primary={true}
       			style={styles.button}
       			containerElement="label"
-      			onClick={this.submitSession.bind(this)}
+      			onClick={this.props.submitSession}
   			/>
     	];
 
@@ -81,9 +75,8 @@ export default class PresentationalApp extends React.component{
 	    						style={styles.appBar}
 	    						title="Focusly"
 	    						iconElementLeft={<Link to="/tabata"><IconButton  ><ArrowBack color={"white"}/></IconButton></Link>}
-	 					 		color="#009688"
 	 					 	/>
-	 					 	<h4>Sessions: {this.state.sessions}</h4>
+	 					 	<h4>Cycles: {this.props.cycles}</h4>
 
 	 					 	<div className="count_down_clock">
 	 							<Timer  />
