@@ -11,25 +11,26 @@ export default function TimerReducer(state, actions){
 				cycles: actions.data
 			})
 		case SESSION_TYPE_SET:
-			return Object.assign({}, state, {
-				if(state.working){
+			if(state.working){
+				return Object.assign({}, state, {
 					working:!state.working,
 					secondsRemaining: 1200,
 					initialSeconds:1200
-				} else {
+				})
+			} else {
+				return Object.assign({}, state, {
 					working:!state.working,
 					secondsRemaining: 300,
 					initialSeconds:300,
-
-				}
+				});
 			}
 		case TICK:
 			return Object.assign({}, state, {
 				secondsRemaining: state.secondsRemaining-1,
 				completed: (state.secondsRemaining/state.initialSeconds)*100,
 		}
-
-
+		
+	}
 
 
 

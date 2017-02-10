@@ -9,16 +9,16 @@ import spotifyRecomendations from './spotifyRecomendations';
 const initialState = {
   accessToken: null,
   refreshToken: null,
-  loading:true
+  loading:true,
   session:{
-    cycles:0
+    cycles:0,
     working:true,
     restRecommendationSeeds: null,
     workRecommendationSeeds: null,
     initialSeconds:0,
     secondsRemaining:0,
     completed:100,
-  }  
+  },  
   ui: {
     tabataForm: {
       loading: true,
@@ -38,6 +38,6 @@ export default function TimerApp(state=initialState, action){
   return {
     tabataForm: tabataForm(state.ui.tabataForm, action),
     timer: timer(state.session, action),
-    spotifyRecomendations: spotifyRecomendations(state),
+    //spotifyRecomendations: spotifyRecomendations(state),
   }
 }
