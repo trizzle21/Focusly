@@ -8,7 +8,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 import reducer from './reducers/reducer.js'
-import signin from "./containers/signin.js";
+import signin from "./components/signin.js";
 import app from "./containers/app.js";
 
 injectTapEventPlugin();
