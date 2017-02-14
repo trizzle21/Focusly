@@ -41,9 +41,6 @@ class Timer extends React.Component {
 
 
 	}
-	constructor(props) {
-		super(props);
-	}
 
 	componentWillMount(){
 		const tick = this.props.tick; 
