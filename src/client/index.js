@@ -7,9 +7,9 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
-import reducer from './reducers/reducer.js'
+import {reducer, initialState} from './reducers/reducer.js'
 import signin from "./components/signin.js";
-import app from "./containers/app.js";
+import app from "./App.js";
 
 injectTapEventPlugin();
 
@@ -17,7 +17,11 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
-const store = createStore(reducer)
+const store = createStore(reducer, initialState)
+
+
+
+
 
 
 class Root extends React.Component {
@@ -27,7 +31,7 @@ class Root extends React.Component {
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
     				<Route name='timer' path='/timer/:accessToken/:refreshToken' component={app}/>
-   	 				<Route path='*' component={NotFound} />
+            <Route path='*' component={NotFound} />
   					<Route path='/error/:errorMsg' component={error}/>
   				</Router>
   			</Provider> 
