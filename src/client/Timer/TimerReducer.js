@@ -1,5 +1,5 @@
 import {
-	CYCLE_SET, SESSION_TYPE_SET, TICK,
+	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,
  } from '../actions/actions';
 
 
@@ -8,7 +8,7 @@ export default function TimerReducer(state, actions){
 	switch(actions.type){
 		case CYCLE_SET:
 			return Object.assign({}, state, {
-				cycles: actions.cycleCount
+				cycles: actions.cycleCount,
 			});
 		case SESSION_TYPE_SET:
 			if(actions.sessionType == 'working'){
@@ -40,16 +40,23 @@ export default function TimerReducer(state, actions){
 				} else {
 					return Object.assign({}, state, {
 						working:true,
+						cycles: state.cycles-1,
 						secondsRemaining: 1200,
 						initialSeconds:1200,			
 					});
 
 				}
 			} 
+		case START_STOP:
+			return Object.assign({}, state, {
+				isCounting: !state.isCounting,
+			});
+ 
+
 		default:
 			return state;
 	}
 
-
+}
 
 

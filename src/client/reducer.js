@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 import tabataForm from './Form/FormReducer';
 import timer from './Timer/TimerReducer';
-import spotifyRecomendations from './Spotify/SpotifyReducers';
+import spotifyAuth from './Spotify/SpotifyReducers';
 //cycles are 25+5minute intervals
 
 //TODO sessions and Tabata Count are different
@@ -24,7 +24,6 @@ const initialState = {
     isCounting:false,
   },
   
-
   tabataForm: {
     loading: true,
     WorkMusicType: '',
@@ -43,6 +42,6 @@ export default function TimerApp(state=initialState, action){
   return {
     tabataForm: tabataForm(state.tabataForm, action),
     timer: timer(state.timer, action),
-    spotifyRecomendations: spotifyRecomendations(state.spotify, action),
+    spotifyAuth: spotifyRecomendations(state.spotify, action),
   }
 }

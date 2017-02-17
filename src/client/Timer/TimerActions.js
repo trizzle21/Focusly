@@ -14,7 +14,7 @@ function sessionTypeSet(session_type){
 	return { type: SESSION_TYPE_SET, sessionType: session_type};
 }
 
-function tick(){
+export function tick(){
 	return { type: TICK };
 }
 

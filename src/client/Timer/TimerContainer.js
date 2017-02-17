@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
-
+import Timer from './Timer';
 
 
 
@@ -23,56 +23,29 @@ class TimerContainer extends React.Component {
 		secondsRemaining: PropTypes.number.isRequired,
 		sessionCount: PropTypes.number.isRequired,
 		isCounting:PropTypes.bool.isRequired,
-		workSession:PropTypes.object.isRequired,
-		restSession:PropTypes.object.isRequired,
+		working:PropTypes.bool.isRequired,
 		//redux action hookups
 		decreaseSessionCount:PropTypes.func.isRequired,
 		tick:PropTypes.func.isRequired,
 		stopCounting:PropTypes.func.isRequired,
-		setSessionLength:PropTypes.func.isRequired,
 
 
 	}
 
 	componentWillMount(){
-		const tick = this.props.tick; 
-		if(this.props.session.working){
-			this.props.setSessionLength(this.props.workSession.length)
-		} else{
-			this.props.setSessionLength(this.props.workSession.length)
-		}
+		this.props.sessionTypeSet('working')
 
-		this.interval setInterval(tick, 1000),
 	}
 	
-	tick(){
-		//Going to move this to be an action
-		if(this.state.secondsRemaining >= 0) { 
-			
-			this.setState({secondsRemaining: this.state.secondsRemaining - 1, completed: (this.state.secondsRemaining/1500)*100});
-		} else {
-       		clearInterval(this.state.interval);
-       		if(this.state.sessionCount != 0 && this.state.workSession == false){
-       			sessionCount--;
-       			this.setState({secondsRemaining: 300, completed: (this.state.secondsRemaining/300)*100,workSession: true});
-       		} else if (this.state.sessionCount != 0){
-       			this.setState({secondsRemaining: 1500, completed: (this.props.secondsRemaining/1500)*100);
-       		} else {
-
-       		}
-   		}
-
-	}
-
 	pause(){
 		//Going to move this to be an action
 		if(this.props.isCounting === true){
 			clearInterval(this.state.interval);
-			this.props.stopCounting();
+			this.props.startStop();
 		} else {
-			var intervalID = setInterval(, 1000);
+			var intervalID = setInterval(this.props.tick(), 1000);
 			this.setState({interval:intervalID});
-			this.props.stopCounting();
+			this.props.startStop();
 		}
 
 	}
@@ -83,7 +56,12 @@ class TimerContainer extends React.Component {
 
 	render() {
 		<div>
-		 <Timer />
+		 <Timer 
+		 	pause={this.pause} 
+		 	tick={this.props.tick()} 
+			secondsRemaining={this.props.secondsRemaining}
+			cycles={this.props.cycles}
+		 	/>
 		</div>
 	}
 }
@@ -93,19 +71,22 @@ class TimerContainer extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		session: state.session,
+		working: state.working,
+		secondsRemaining:state.secondsRemaining,
+		cycles:state.cycles,
 
 	}
 }
 
-function mapdispatchtoProps(dispatch){
+function mapDispatchToProps(dispatch) {
 	return {
-		tick: function(secondsRemaining){ dispatch(actions.tick(secondsRemaining))},
-		decreaseSessionCount: function(currentSessionCount){},
-		stopCounting: function(){dispatch},
-		setSessionLength:function(intervalTime){dispatch({type:'setSessionLength', intervalTime})}
+		tick: bindActionCreators(tick(), dispatch), 
+		decreaseSessionCount: bindActionCreators(tick(), dispatch),
+		startStop: bindActionCreators(startStop()dispatch),
+		cycleSet: bindActionCreators(cycleSet(), dispatch),
+		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
 	}
 }
 
-export default connect(mapStateToProps)(Timer);Timer
+export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
 
