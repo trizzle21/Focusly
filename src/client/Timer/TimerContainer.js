@@ -25,15 +25,17 @@ class TimerContainer extends React.Component {
 		isCounting:PropTypes.bool.isRequired,
 		working:PropTypes.bool.isRequired,
 		//redux action hookups
-		decreaseSessionCount:PropTypes.func.isRequired,
+		sessionTypeSet:PropTypes.func.isRequired,
 		tick:PropTypes.func.isRequired,
-		stopCounting:PropTypes.func.isRequired,
-
+		startStop:PropTypes.func.isRequired,
+		cycleSet:PropTypes.func.isRequired,
 
 	}
 
 	componentWillMount(){
 		this.props.sessionTypeSet('working')
+		var interval = setInterval(this.props.tick(), 1000);
+
 
 	}
 	
@@ -43,8 +45,7 @@ class TimerContainer extends React.Component {
 			clearInterval(this.state.interval);
 			this.props.startStop();
 		} else {
-			var intervalID = setInterval(this.props.tick(), 1000);
-			this.setState({interval:intervalID});
+			var interval = setInterval(this.props.tick(), 1000);
 			this.props.startStop();
 		}
 
@@ -61,6 +62,7 @@ class TimerContainer extends React.Component {
 		 	tick={this.props.tick()} 
 			secondsRemaining={this.props.secondsRemaining}
 			cycles={this.props.cycles}
+			//startStop={this.props.startStop}
 		 	/>
 		</div>
 	}
@@ -74,6 +76,7 @@ function mapStateToProps(state) {
 		working: state.working,
 		secondsRemaining:state.secondsRemaining,
 		cycles:state.cycles,
+		isCounting:state.isCounting,
 
 	}
 }
@@ -81,7 +84,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		tick: bindActionCreators(tick(), dispatch), 
-		decreaseSessionCount: bindActionCreators(tick(), dispatch),
 		startStop: bindActionCreators(startStop()dispatch),
 		cycleSet: bindActionCreators(cycleSet(), dispatch),
 		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
