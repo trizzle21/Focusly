@@ -8,7 +8,7 @@ import {
 }   from '../actions/index';
 
 
-class SideBar extends ReactComponent {
+class SideBarContainer extends ReactComponent {
 	static PropTypes = {
 
 	}
@@ -22,11 +22,9 @@ class SideBar extends ReactComponent {
 
 
 	render(){
-	 	<div className="col-3">
-			<Drawer width={250}  open={true} >
-			</Drawer>
+		<div> 
+			<SideBar />
 		</div>
-
 
 	}
 
@@ -35,4 +33,4 @@ class SideBar extends ReactComponent {
 
 
 
-export default SideBar;
+export default SideBarContainer;

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PresentationalApp from '../components/Session.js';
 
 
-class MainApp extends React.Component {  	
+class App extends React.Component {  	
   static propTypes = {
       cycles: PropTypes.string.isRequired,
 
@@ -20,14 +20,16 @@ class MainApp extends React.Component {
 
 
   	render() {
-  		
-
-  		//render form here
   		return (
-  			
-        <PresentationalApp />
+  			<div className="grid-container">
+          <div className="row">
+            <div className="col-3">
+              <SideBar />
+            </div>
+            
+
   		)
 	}
 }
 
-export default MainApp
+export default App
