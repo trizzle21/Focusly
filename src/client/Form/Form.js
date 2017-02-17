@@ -59,7 +59,7 @@ class EntryForm extends React.Component {
   	
 
 	// Controls each state change
-  	handleSliderChange (event, value) {
+  	handleChange (event, value) {
   		this.setState({SessionSlider:value});
   	}
 	
@@ -78,10 +78,12 @@ class EntryForm extends React.Component {
   		return (
   <MuiThemeProvider muiTheme={theme}>
  		<form style={styles.main} className="spotify_login" >
-  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
-  			<p className="secondaryText" style={styles.counter}>{this.state.SessionSlider}>Cycles</p>
+  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
+  			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
         
-        	<SelectField
+        	
+
+          <SelectField
           		floatingLabelText="Working Music"
           		value={this.state.WorkMusicType}
           		onChange={this.WorkMusicTypeChange.bind(this)}

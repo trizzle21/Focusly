@@ -8,15 +8,15 @@ export default function TimerReducer(state, actions){
 	switch(actions.type){
 		case CYCLE_SET:
 			return Object.assign({}, state, {
-				cycles: actions.data
-			})
+				cycles: actions.cycleCount
+			});
 		case SESSION_TYPE_SET:
-			if(state.working){
+			if(actions.sessionType == 'working'){
 				return Object.assign({}, state, {
 					working:!state.working,
 					secondsRemaining: 1200,
 					initialSeconds:1200
-				})
+				});
 			} else {
 				return Object.assign({}, state, {
 					working:!state.working,
@@ -25,13 +25,31 @@ export default function TimerReducer(state, actions){
 				});
 			}
 		case TICK:
-			return Object.assign({}, state, {
-				secondsRemaining: state.secondsRemaining-1,
-				completed: (state.secondsRemaining/state.initialSeconds)*100,
-		}
-		
+			if(this.state.secondsRemaining >= 0) { 
+				return Object.assign({}, state, {
+					secondsRemaining: state.secondsRemaining-1,
+					completed: (state.secondsRemaining/state.initialSeconds)*100,
+				});
+			} else {
+				if(state.working === true){
+					return Object.assign({}, state, {
+						working:false,
+						secondsRemaining: 300,
+						initialSeconds:300,			
+					});
+				} else {
+					return Object.assign({}, state, {
+						working:true,
+						secondsRemaining: 1200,
+						initialSeconds:1200,			
+					});
+
+				}
+			} 
+		default:
+			return state;
 	}
 
 
 
-}
+

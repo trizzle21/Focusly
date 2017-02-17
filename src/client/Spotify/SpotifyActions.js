@@ -1,12 +1,21 @@
+//Spotify Actions
 import Spotify from 'spotify-web-api-js';
-import * as types from '../constants/ActionTypes';
-
-
 const spotifyApi = new Spotify();
 
 
 
 //Spotify Login
+export const SPOTIFY_TOKENS = 'SPOTIFY_TOKENS';
+export const SPOTIFY_REC_BEGIN = 'SPOTIFY_ME_BEGIN';
+export const SPOTIFY_REC_SUCCESS = 'SPOTIFY_ME_SUCCESS';
+export const SPOTIFY_REC_FAILURE = 'SPOTIFY_ME_FAILURE';
+
+export const SPOTIFY_GENRE_SEED_BEGIN = 'SPOTIFY_ME_BEGIN';
+export const SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
+export const SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
+
+
+
 
 
 export function setTokens({accessToken, refreshToken}) {
@@ -40,51 +49,3 @@ export function getAvailableGenreSeeds(){
 		});
 	};
 }
-
-
-//Builds Actions for me
-function makeAction(type,...argNames){
-	return function(...args){
-		let action = {type}
-		argNames.forEach((arg,index) => {
-			action.argNames[index] = args[index]
-		})
-		return action
-	}
-}
-
-
-//Session Setup 
-export const makeAction(types.RECOMMENDATION_SET);
-
-
-
-
-
-//Session Form
-export const workMusicSelect = makeAction(types.WORK_MUSIC_SELECT, 'musicType' );
-export const restMusicSelect = makeAction(types.REST_MUSIC_SELECT, 'musicType' );
-
-
-
-
-//Timer Data
-
-
-export const cycleSet = makeAction(types.CYCLE_SET, data );
-export const sessionTypeSet = makeAction(types.SESSION_TYPE_SET, session_type);
-export const tick = makeAction(types.TICK);
-
-
-//TODO Add more Session Data
-
-
-
-//Timer UI
-
-
-
-
-
-
-

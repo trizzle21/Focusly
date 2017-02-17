@@ -66,7 +66,7 @@ class TimerContainer extends React.Component {
 
 	pause(){
 		//Going to move this to be an action
-		if(this.props.isCounting == true){
+		if(this.props.isCounting === true){
 			clearInterval(this.state.interval);
 			this.props.stopCounting();
 		} else {
@@ -77,8 +77,6 @@ class TimerContainer extends React.Component {
 
 	}
 
-	
-	
 	componentWillUnmount() {
     	clearInterval(this.interval);
   	}

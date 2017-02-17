@@ -2,7 +2,7 @@
 export const CYCLE_SET = 'CYCLE_SET';
 export const SESSION_TYPE_SET = 'SESSION_TYPE_SET';
 export const TICK = 'TICK';
-
+export const START_STOP = 'START_STOP';
 
 
 
@@ -11,7 +11,7 @@ function cycleSet(cycleCount) {
 }
 
 function sessionTypeSet(session_type){
-	return { type: SESSION_TYPE_SET, SESSION_TYPE: session_type};
+	return { type: SESSION_TYPE_SET, sessionType: session_type};
 }
 
 function tick(){
@@ -19,7 +19,8 @@ function tick(){
 }
 
 
-export const sessionTypeSet = makeAction(types.SESSION_TYPE_SET, session_type);
-export const tick = makeAction(types.TICK);
+function startStop(){
+	return { type: START_STOP };
+}
 
 
