@@ -11,6 +11,15 @@ class TabataForm extends React.Component {
 	static propTypes {
 		openDialog:PropTypes.bool.isRequired,
 		submitSession: PropTypes.func.isRequired,
+		SessionSlider: PropTypes.number.isRequired,
+		WorkMusicType: PropTypes.number.isRequired,
+		RestMusicType: PropTypes.number.isRequired,
+		SessionSlider: PropTypes.number.isRequired,
+
+
+
+
+
 	}
 
 	render(){

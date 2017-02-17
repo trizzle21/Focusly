@@ -35,8 +35,6 @@ class TimerContainer extends React.Component {
 	componentWillMount(){
 		this.props.sessionTypeSet('working')
 		var interval = setInterval(this.props.tick(), 1000);
-
-
 	}
 	
 	pause(){
