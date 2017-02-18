@@ -1,6 +1,12 @@
 import {
-	SLIDER_INCR, SLIDER_DECR, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_SUCCESS, SPOTIFY_GENRE_SEED_FAILURE
-} from '../actions/actions';
+	SLIDER_INCR, SLIDER_DECR, WORK_MUSIC_SELECT, REST_MUSIC_SELECT
+} from './FormActions';
+
+
+import {
+  SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_SUCCESS, SPOTIFY_GENRE_SEED_FAILURE
+} from '../Spotify/SpotifyActions';
+
 
 
 export default function tabataForm(state, action){
@@ -21,22 +27,8 @@ export default function tabataForm(state, action){
 			return Object.assign({}, state, {
             	RestMusicType: action.newGenre
          	 })
-  		case SPOTIFY_GENRE_SEED_BEGIN:
-    		return Object.assign({}, state, {
-    			recommendationSeed: state.recommendationSeed,
-    			loading:true,
-    		});
-  		case SPOTIFY_GENRE_SEED_SUCCESS:
-    		return Object.assign({}, state, {
-    			recommendationSeed: action.data,
-    			loading:false,
-    		});
-  		case RECOMMENDATION_SET:
-            return Object.assign({}, state, {
-                recomendationSet:true,
-            }
-        case SPOTIFY_GENRE_SEED_FAILURE:
-			return state
+    case SUBMIT_FORM:
+      //Set UI, figure out how to start everything up
 		default:
 			return state
 

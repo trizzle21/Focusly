@@ -1,27 +1,32 @@
 //Form Actions
 
-export const SLIDER_INCR = 'SLIDER_INCR';
-export const SLIDER_DECR = 'SLIDER_DECR';
-
-export const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
-export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+import actionCreator from '../ActionCreaor';
 
 
-function sliderIncr() {
-	return { type: SLIDER_INCR }
-}
+const SLIDER_INCR = 'SLIDER_INCR';
+const SLIDER_DECR = 'SLIDER_DECR';
 
-function sliderDecr() {
-	return { type: SLIDER_DECR }
-}
+const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
+const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+
+
+const SUBMIT_SESSION = 'SUBMIT_SESSION';
 
 
 
-function WORK_MUSIC_SELECT(musicType) {
-	return {type: WORK_MUSIC_SELECT, newGenre: musicType}
+export const sliderIncr = actionCreator(SLIDER_INCR);
+export const sliderIncr = actionCreator(SLIDER_DECR);
 
-}
+export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
+export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 
-function REST_MUSIC_SELECT(musicType) {
+export const submitSession = actionCreator(SUBMIT_SESSION);
+
+function restMusicSelect(musicType) {
 	return {type: REST_MUSIC_SELECT, newGenre: musicType}
+}
+
+
+function submitSession(){
+	return {type:SUBMIT_SESSION};
 }

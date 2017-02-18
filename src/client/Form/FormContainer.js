@@ -7,10 +7,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 
 
-class TabataForm extends React.Component {
+class FormContainer extends React.Component {
 	static propTypes {
 		openDialog:PropTypes.bool.isRequired,
 		submitSession: PropTypes.func.isRequired,
+		//
 		SessionSlider: PropTypes.number.isRequired,
 		WorkMusicType: PropTypes.number.isRequired,
 		RestMusicType: PropTypes.number.isRequired,
@@ -47,7 +48,11 @@ class TabataForm extends React.Component {
 	   				modal={true}
 	    			open={this.props.openDialog}
 				>
-				<EntryForm />
+				<EntryForm 
+
+
+
+				/>
 
 				</Dialog>
 			</div>
@@ -59,4 +64,4 @@ class TabataForm extends React.Component {
 }
 
 
-export default TabataForm
+export default connect(mapStateToProps, mapDispatchToProps)(TabataForm)
