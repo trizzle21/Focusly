@@ -17,6 +17,9 @@ class FormContainer extends React.Component {
 		RestMusicType: PropTypes.number.isRequired,
 		SessionSlider: PropTypes.number.isRequired,
 
+		//functions
+		submitSession: PropTypes.func.isRequired,
+
 
 
 
@@ -49,6 +52,9 @@ class FormContainer extends React.Component {
 	    			open={this.props.openDialog}
 				>
 				<EntryForm 
+					SessionSlider={this.props.SessionSlider}
+
+
 
 
 
@@ -64,4 +70,12 @@ class FormContainer extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(TabataForm)
+function mapStateToProps(state){
+	return {
+		openDialog:state.openDialog,
+
+
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);
