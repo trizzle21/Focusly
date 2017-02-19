@@ -53,9 +53,10 @@ class FormContainer extends React.Component {
 				>
 				<EntryForm 
 					SessionSlider={this.props.SessionSlider}
-
-
-
+					WorkMusicType={this.props.WorkMusicType}
+					RestMusicType={this.prop.RestMusicType}
+					WorkMusicTypeChange={this.prop.WorkMusicChange}
+					RestkMusicTypeChange={this.prop.RestMusicChange}
 
 
 				/>
@@ -73,6 +74,7 @@ class FormContainer extends React.Component {
 function mapStateToProps(state){
 	return {
 		openDialog:state.openDialog,
+
 
 
 	}

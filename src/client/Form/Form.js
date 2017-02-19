@@ -78,14 +78,14 @@ class EntryForm extends React.Component {
   		return (
   <MuiThemeProvider muiTheme={theme}>
  		<form style={styles.main} className="spotify_login" >
-  			<Slider step={1.0} value={this.state.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
+  			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
   			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
         
         	
 
           <SelectField
           		floatingLabelText="Working Music"
-          		value={this.state.WorkMusicType}
+          		value={this.props.WorkMusicType}
           		onChange={this.WorkMusicTypeChange.bind(this)}
               style={styles.select}
         	>
@@ -95,7 +95,7 @@ class EntryForm extends React.Component {
 
       		<SelectField
           		floatingLabelText="Resting Music"
-          		value={this.state.RestMusicType}
+          		value={this.prop.RestMusicType}
           		onChange={this.RestMusicTypeChange.bind(this)}
               style={styles.select}
         	>
