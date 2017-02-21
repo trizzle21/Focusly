@@ -70,6 +70,10 @@ class FormContainer extends React.Component {
 
 }
 
+function mapDispatchtoProps(dispatch){
+	
+}
+
 
 function mapStateToProps(state){
 	return {
