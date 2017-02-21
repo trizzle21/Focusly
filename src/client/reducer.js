@@ -26,6 +26,7 @@ const initialState = {
   
   tabataForm: {
     loading: true,
+    openDialog:true,
     WorkMusicType: '',
     RestMusicType: '',
     SessionSlider: 1.0,

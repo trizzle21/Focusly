@@ -51,7 +51,8 @@ export default function TimerReducer(state, actions){
 			return Object.assign({}, state, {
 				isCounting: !state.isCounting,
 			});
- 
+     	case SUBMIT_FORM:
+      		//Sets everything up, is part of Form
 
 		default:
 			return state;
