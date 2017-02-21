@@ -35,83 +35,54 @@ const styles = {
 
 
 class EntryForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {	
-			numOfSessions: 1,
-			WorkMusicType: 1,
-			RestMusicType: 1,
-			SessionSlider: 1.0,
-
-		};
-	}
-	
-
-
-
-
-   	handleSubmit(event) {
-	  	event.preventDefault();	
-		  //ajax call?
-		  console.log("submitted");
-	  }
-
-  	
-
-	// Controls each state change
-  	handleChange (event, value) {
-  		this.setState({SessionSlider:value});
-  	}
-	
-	RestMusicTypeChange (event, index, value) {
-  		this.setState({RestMusicType:value});
-  	}
-
-	WorkMusicTypeChange (event, index, value) {
-  		this.setState({WorkMusicType:value});
-  	}
-
-
-  	render() {
-
+  	render() {\
   		//render form here
   		return (
-  <MuiThemeProvider muiTheme={theme}>
- 		<form style={styles.main} className="spotify_login" >
-  			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
-  			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
-        
-        	
+        <MuiThemeProvider muiTheme={theme}>
+ 		       <form style={styles.main} className="spotify_login" >
+      			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
+      			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
+              <SelectField
+              		floatingLabelText="Working Music"
+              		value={this.props.WorkMusicType}
+              		onChange={this.props.WorkMusicTypeChange}
+                  style={styles.select}
+            	>
 
-          <SelectField
-          		floatingLabelText="Working Music"
-          		value={this.props.WorkMusicType}
-          		onChange={this.WorkMusicTypeChange.bind(this)}
-              style={styles.select}
-        	>
+              {this.props.recommendationSeeds.map(function(seed){
+                  return <MenuItem value={seed} primaryText={seed} />
+
+              })}
 
 
-       	 	</SelectField>
 
-      		<SelectField
-          		floatingLabelText="Resting Music"
-          		value={this.prop.RestMusicType}
-          		onChange={this.RestMusicTypeChange.bind(this)}
-              style={styles.select}
-        	>
-        		<MenuItem value={1} primaryText="Rock" />
-        		<MenuItem value={2} primaryText="Punk" />
-    	    	<MenuItem value={3} primaryText="Top 40" />
-	        	<MenuItem value={4} primaryText="Surprise Me" />
+           	 	</SelectField>
 
-        	</SelectField>
+          		<SelectField
+              		floatingLabelText="Resting Music"
+              		value={this.prop.RestMusicType}
+              		onChange={this.props.RestMusicTypeChange}
+                  style={styles.select}
+            	>
+            		{this.props.recommendationSeeds.map(function(seed){
+                  return <MenuItem value={seed} primaryText={seed} />
+                })}
 
-          <br />
 
-     
 
-    	</form>
-      </MuiThemeProvider>
+                <MenuItem value={1} primaryText="Rock" />
+            		<MenuItem value={2} primaryText="Punk" />
+        	    	<MenuItem value={3} primaryText="Top 40" />
+    	        	<MenuItem value={4} primaryText="Surprise Me" />
+
+            	</SelectField>
+
+              <br />
+
+         
+
+        	</form>
+          </MuiThemeProvider>
 
   		)
   	}

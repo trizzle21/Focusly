@@ -2,6 +2,13 @@ import React, {PropTypes} from 'react';
 
 import EntryForm from './form.js'; 
 
+import {	
+	sliderChange, workMusicSelect, restMusicSelect, submitSession,closeDialog,
+} from './FormActions';
+
+import submitSession from '../Timer/TimerActions';
+
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -10,7 +17,6 @@ import Dialog from 'material-ui/Dialog';
 class FormContainer extends React.Component {
 	static propTypes {
 		openDialog:PropTypes.bool.isRequired,
-		submitSession: PropTypes.func.isRequired,
 		//
 		SessionSlider: PropTypes.number.isRequired,
 		WorkMusicType: PropTypes.number.isRequired,
@@ -18,6 +24,11 @@ class FormContainer extends React.Component {
 		SessionSlider: PropTypes.number.isRequired,
 
 		//functions
+		sliderChange:PropTypes.func.isRequired,
+		workMusicSelect:PropTypes.func.isRequired,
+		restMusicSelect:PropTypes.func.isRequired,
+
+
 		submitSession: PropTypes.func.isRequired,
 
 
@@ -55,8 +66,10 @@ class FormContainer extends React.Component {
 					SessionSlider={this.props.SessionSlider}
 					WorkMusicType={this.props.WorkMusicType}
 					RestMusicType={this.props.RestMusicType}
-					WorkMusicTypeChange={this.prop.WorkMusicChange}
-					RestkMusicTypeChange={this.prop.RestMusicChange}
+					workMusicTypeChange={this.prop.workMusicSelect}
+					restkMusicTypeChange={this.prop.restMusicSelect}
+					sliderChange={this.props.sliderChange}
+					closeDialog={this.props.closeDialog}
 
 
 				/>
@@ -71,12 +84,13 @@ class FormContainer extends React.Component {
 }
 
 function mapDispatchtoProps(dispatch){
-	
+
 }
 
 
 function mapStateToProps(state){
 	return {
+		recommendationSeeds:state.recommendationSeeds,
 		openDialog:state.openDialog,
 		WorkMusicType: state.WorkMusicType,
 		RestMusicType: state.RestMusicType,
@@ -84,4 +98,10 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);
+export default connect(mapStateToProps, {
+	sliderChange,
+	workMusicSelect,
+	restMusicSelect,
+	closeDialog,
+	submitSession,
+})(FormContainer);

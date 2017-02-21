@@ -1,6 +1,11 @@
 import React from 'react';
 
 
+
+//GOING TO DELETE AFTER REVELANT PARTS ARE MOVED TO THE PROPER PART OF T
+
+
+
 //Custom imports
 import Timer from './modules/timer.js';
 import theme from './modules/customtheme.js';
