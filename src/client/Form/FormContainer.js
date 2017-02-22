@@ -71,7 +71,6 @@ class FormContainer extends React.Component {
 					sliderChange={this.props.sliderChange}
 					closeDialog={this.props.closeDialog}
 
-
 				/>
 
 				</Dialog>
@@ -83,9 +82,6 @@ class FormContainer extends React.Component {
 
 }
 
-function mapDispatchtoProps(dispatch){
-
-}
 
 
 function mapStateToProps(state){
@@ -95,6 +91,7 @@ function mapStateToProps(state){
 		WorkMusicType: state.WorkMusicType,
 		RestMusicType: state.RestMusicType,
 		SessionSlider:state.SessionSlider,
+
 	}
 }
 

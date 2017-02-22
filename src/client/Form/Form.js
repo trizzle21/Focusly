@@ -35,7 +35,7 @@ const styles = {
 
 
 class EntryForm extends React.Component {
-  	render() {\
+  	render() {
   		//render form here
   		return (
         <MuiThemeProvider muiTheme={theme}>
@@ -67,14 +67,6 @@ class EntryForm extends React.Component {
             		{this.props.recommendationSeeds.map(function(seed){
                   return <MenuItem value={seed} primaryText={seed} />
                 })}
-
-
-
-                <MenuItem value={1} primaryText="Rock" />
-            		<MenuItem value={2} primaryText="Punk" />
-        	    	<MenuItem value={3} primaryText="Top 40" />
-    	        	<MenuItem value={4} primaryText="Surprise Me" />
-
             	</SelectField>
 
               <br />
