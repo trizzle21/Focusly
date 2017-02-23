@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import EntryForm from './form.js'; 
 
 import {	
-	sliderChange, workMusicSelect, restMusicSelect, submitSession,closeDialog,
+	sliderChange, workMusicSelect, restMusicSelect,closeDialog,
 } from './FormActions';
 
 import submitSession from '../Timer/TimerActions';
@@ -15,27 +15,6 @@ import Dialog from 'material-ui/Dialog';
 
 
 class FormContainer extends React.Component {
-	static propTypes {
-		openDialog:PropTypes.bool.isRequired,
-		//
-		SessionSlider: PropTypes.number.isRequired,
-		WorkMusicType: PropTypes.number.isRequired,
-		RestMusicType: PropTypes.number.isRequired,
-		SessionSlider: PropTypes.number.isRequired,
-
-		//functions
-		sliderChange:PropTypes.func.isRequired,
-		workMusicSelect:PropTypes.func.isRequired,
-		restMusicSelect:PropTypes.func.isRequired,
-
-
-		submitSession: PropTypes.func.isRequired,
-
-
-
-
-
-	}
 
 	render(){
 		const {
@@ -81,6 +60,22 @@ class FormContainer extends React.Component {
 	}
 
 }
+
+FormContainer.propTypes ={
+	openDialog:PropTypes.bool.isRequired,
+	SessionSlider: PropTypes.number.isRequired,
+	WorkMusicType: PropTypes.number.isRequired,
+	RestMusicType: PropTypes.number.isRequired,
+	SessionSlider: PropTypes.number.isRequired,
+	//functions
+	sliderChange:PropTypes.func.isRequired,
+	workMusicSelect:PropTypes.func.isRequired,
+	restMusicSelect:PropTypes.func.isRequired,
+	submitSession: PropTypes.func.isRequired,
+}
+
+
+
 
 
 

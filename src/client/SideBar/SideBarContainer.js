@@ -5,13 +5,13 @@ import Drawer from 'material-ui/Drawer';
 import {
   getMyRecommendations,
   setTokens,
-}   from '../actions/index';
+}   from '../Spotify/SpotifyActions';
 
 
 class SideBarContainer extends ReactComponent {
-	static PropTypes = {
+	// static PropTypes = {
 
-	}
+	// }
 
 	componentChange(){
 		const {dispatch, params} = this.props;
@@ -28,7 +28,7 @@ class SideBarContainer extends ReactComponent {
 
 	}
 
-
+}
 
 
 

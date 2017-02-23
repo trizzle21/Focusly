@@ -1,35 +1,24 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import { Link } from 'react-router';
  
 
 import { connect } from 'react-redux';
 
-import PresentationalApp from '../components/Session.js';
 
 
-import Main from './containers/TimerContainer';
-import SideBar from './containers/SideBarContainer';
-import TabataForm from './containers/SideBarContainer';
-
-
-
-
-class App extends React.Component {  	
-  static propTypes = {
-      cycles: PropTypes.string.isRequired,
-
-    }
+import Main from './Timer/TimerContainer';
+import SideBar from './SideBar/SideBarContainer';
+import Form from './Form/FormContainer';
 
 
 
 
-
-
+export default class App extends React.Component {  	
 
   	render() {
   		return (
   			<MuiThemeProvider muiTheme={theme}>
-          <TabataForm />
+          <Form />
           <div className="grid-container">
             <div className="row">
               <div className="col-3">
@@ -47,4 +36,3 @@ class App extends React.Component {
 	}
 }
 
-export default App

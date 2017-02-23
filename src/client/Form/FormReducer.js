@@ -19,8 +19,6 @@ export default function tabataForm(state, action){
 			return Object.assign({}, state, {
             	RestMusicType: action.newGenre
          	 })
-    case SUBMIT_FORM:
-      //Set UI, figure out how to start everything up
 		case CLOSE_DIALOG:
       return Object.assign({}, state, {
               openDialog: !this.state.openDialog,

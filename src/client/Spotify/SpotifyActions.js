@@ -31,9 +31,9 @@ export function getMyRecommendations(options){
 	return dispatch=> {
 		dispatch({type: types.SPOTIFY_REC_BEGIN});
 		spotifyApi.getRecommendations(options).then(data => {
-			dispatch({type: types.SPOTIFY_REC_SUCCESS data:data})
+			dispatch({type: types.SPOTIFY_REC_SUCCESS, data:data})
 		}).catch(e => {
-			dispatch({type: types.SPOTIFY_REC_SUCCESS error:e})
+			dispatch({type: types.SPOTIFY_REC_SUCCESS, error:e})
 		});
 	};
 }
@@ -43,9 +43,9 @@ export function getAvailableGenreSeeds(){
 	return dispatch=> {
 		dispatch({type: types.SPOTIFY_GENRE_SEED_BEGIN});
 		spotifyApi.getAvailableGenreSeeds(options).then(data => {
-			dispatch({type: types.SPOTIFY_GENRE_SEED_SUCCESS data:data})
+			dispatch({type: types.SPOTIFY_GENRE_SEED_SUCCESS, data:data})
 		}).catch(e => {
-			dispatch({type: types.SPOTIFY_GENRE_SEED_SUCCESS error:e})
+			dispatch({type: types.SPOTIFY_GENRE_SEED_SUCCESS, error:e})
 		});
 	};
 }

@@ -31,12 +31,12 @@ export default function spotifyRecommendations(state, actions) {
   		case RECOMMENDATION_SET:
             return Object.assign({}, state, {
                 recomendationSet:true,
-            }
+            });
       case SPOTIFY_GENRE_SEED_FAILURE:
-			 return state
+          return state;
 
 
+  }
 }
-
 
 

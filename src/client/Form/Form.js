@@ -7,8 +7,7 @@ import Slider from 'material-ui/Slider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router'
 
-import theme from './customtheme';
-import MusicMenuItems from './musicMenuItems';
+import theme from '../Spotify/modules/CustomTheme';
 
 
 
@@ -53,12 +52,10 @@ class EntryForm extends React.Component {
                   return <MenuItem value={seed} primaryText={seed} />
 
               })}
-
-
-
            	 	</SelectField>
 
-          		<SelectField
+          		
+              <SelectField
               		floatingLabelText="Resting Music"
               		value={this.prop.RestMusicType}
               		onChange={this.props.RestMusicTypeChange}

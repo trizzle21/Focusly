@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
@@ -19,19 +19,6 @@ const styles = {
 };
 
 class TimerContainer extends React.Component {
-	static propTypes = {
-		secondsRemaining: PropTypes.number.isRequired,
-		sessionCount: PropTypes.number.isRequired,
-		isCounting:PropTypes.bool.isRequired,
-		working:PropTypes.bool.isRequired,
-		//redux action hookups
-		sessionTypeSet:PropTypes.func.isRequired,
-		tick:PropTypes.func.isRequired,
-		startStop:PropTypes.func.isRequired,
-		cycleSet:PropTypes.func.isRequired,
-
-	}
-
 	componentWillMount(){
 		this.props.sessionTypeSet('working')
 		var interval = setInterval(this.props.tick(), 1000);
@@ -67,6 +54,19 @@ class TimerContainer extends React.Component {
 }
 
 
+TimerContainer.propTypes = {
+	secondsRemaining: React.PropTypes.number.isRequired,
+	sessionCount: React.PropTypes.number.isRequired,
+	isCounting:React.PropTypes.bool.isRequired,
+	working:React.PropTypes.bool.isRequired,
+	//redux action hookups
+	sessionTypeSet:React.PropTypes.func.isRequired,
+	tick:React.PropTypes.func.isRequired,
+	startStop:React.PropTypes.func.isRequired,
+	cycleSet:React.PropTypes.func.isRequired,
+}
+
+
 
 
 function mapStateToProps(state) {
@@ -82,7 +82,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		tick: bindActionCreators(tick(), dispatch), 
-		startStop: bindActionCreators(startStop()dispatch),
+		startStop: bindActionCreators(startStop(), dispatch),
 		cycleSet: bindActionCreators(cycleSet(), dispatch),
 		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
 	}

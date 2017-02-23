@@ -1,5 +1,5 @@
 //Form Actions
-import actionCreator from '../ActionCreaor';
+import actionCreator from '../ActionCreator';
 
 
 const SLIDER_CHANGE = 'SLIDER_CHANGE';
@@ -9,8 +9,8 @@ const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 
 
 const SUBMIT_SESSION = 'SUBMIT_SESSION';
-
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
+
 
 export const sliderChange = actionCreator(SLIDER_CHANGE, 'data');
 

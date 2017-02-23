@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import theme from './customtheme.js';
+import theme from '../Spotify/modules/CustomTheme.js';
 
 import AppBar from 'material-ui/AppBar';
 
@@ -68,3 +68,5 @@ export default class Timer extends React.Component {
 			</MuiThemeProvider>
 		)
 	}
+}
+

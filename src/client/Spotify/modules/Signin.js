@@ -6,7 +6,7 @@ import {Card, CardTitle} from 'material-ui/Card';
 import { Link } from 'react-router'
 import Paper from 'material-ui/Paper';
 
-import theme from '../components/customtheme';
+import theme from './CustomTheme';
 
 
 const styles = {
@@ -72,21 +72,25 @@ const sheet =
 	</div>
 	</div></MuiThemeProvider>;
 
-const SignIn = () => (
-  		<MuiThemeProvider muiTheme={theme}>
-			<div className="SignInBody">
-				<div className="col-2"></div>
-				<div className="col-8">
-					<Paper className="card" children={sheet} style={styles.paper} zDepth={3}/>
-    			</div>
-				<div className="col-2"></div>
+export default class SignIn extends React.Component {
+  		
+  	render(){
+  		return (	
+  			<MuiThemeProvider muiTheme={theme}>
+				<div className="SignInBody">
+					<div className="col-2"></div>
+					<div className="col-8">
+						<Paper className="card" children={sheet} style={styles.paper} zDepth={3}/>
+    				</div>
+					<div className="col-2"></div>
 
 
-			</div>
-		</MuiThemeProvider>
-);
+				</div>
+			</MuiThemeProvider>
+
+		);
+  	}
+ }
 
 
 
-
-export default SignIn

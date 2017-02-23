@@ -1,15 +1,16 @@
 'use strict'
-import { render } from 'react-dom'
+import { render } from 'react-dom';
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route, hashHistory, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import { Router, Route, hashHistory, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
-import {reducer, initialState} from './reducers/reducer.js'
-import signin from "./components/signin.js";
-import app from "./App.js";
+import error from "./Spotify/modules/Error";
+import {reducer, initialState} from './reducer';
+import signin from "./Spotify/modules/Signin";
+import app from "./App";
 
 injectTapEventPlugin();
 

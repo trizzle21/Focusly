@@ -1,6 +1,6 @@
 import {
 	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,
- } from '../actions/actions';
+ } from './TimerActions';
 
 
 
