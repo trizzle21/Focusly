@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
 import Timer from './Timer';
 
 
-
+import { tick, startStop, sessionTypeSet, cycleSet } from './TimerActions';
 
 const styles = {
   circProgress: {
@@ -20,7 +20,8 @@ const styles = {
 
 class TimerContainer extends React.Component {
 	componentWillMount(){
-		this.props.sessionTypeSet('working')
+		this.props.sessionTypeSet('working');
+		this.props.cycleSet(5);
 		var interval = setInterval(this.props.tick(), 1000);
 	}
 	
@@ -47,7 +48,7 @@ class TimerContainer extends React.Component {
 		 	tick={this.props.tick()} 
 			secondsRemaining={this.props.secondsRemaining}
 			cycles={this.props.cycles}
-			//startStop={this.props.startStop}
+			startStop={this.props.startStop}
 		 	/>
 		</div>
 	}
@@ -79,14 +80,19 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		tick: bindActionCreators(tick(), dispatch), 
-		startStop: bindActionCreators(startStop(), dispatch),
-		cycleSet: bindActionCreators(cycleSet(), dispatch),
-		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
-	}
-}
+// function mapDispatchToProps(dispatch) {
+// 	return {
+// 		tick: bindActionCreators(tick(), dispatch), 
+// 		startStop: bindActionCreators(startStop(), dispatch),
+// 		cycleSet: bindActionCreators(cycleSet(), dispatch),
+// 		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
+// 	}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
+export default connect(mapStateToProps, {
+	tick,
+	startStop,
+	cycleSet,
+	sessionTypeSet
+})(TimerContainer);
 

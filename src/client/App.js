@@ -6,26 +6,25 @@ import { connect } from 'react-redux';
 
 
 
-import Main from './Timer/TimerContainer';
+import Timer from './Timer/TimerContainer';
 import SideBar from './SideBar/SideBarContainer';
 import Form from './Form/FormContainer';
 
-
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from './Spotify/modules/CustomTheme';
 
 export default class App extends React.Component {  	
 
   	render() {
   		return (
   			<MuiThemeProvider muiTheme={theme}>
-          <Form />
           <div className="grid-container">
             <div className="row">
               <div className="col-3">
-                <SideBar />
+                
               </div>
             <div className="col-9">
-              <Main />
+              <Timer />
             </div>
           </div>
           </div>
@@ -36,3 +35,19 @@ export default class App extends React.Component {
 	}
 }
 
+
+
+
+        // <MuiThemeProvider muiTheme={theme}>
+        //   <Form />
+        //   <div className="grid-container">
+        //     <div className="row">
+        //       <div className="col-3">
+        //         <SideBar />
+        //       </div>
+        //     <div className="col-9">
+        //       <Main />
+        //     </div>
+        //   </div>
+        //   </div>
+        // </MuiThemeProvider>

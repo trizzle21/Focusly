@@ -31,8 +31,7 @@ class Root extends React.Component {
 			<Provider store={store}>
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
-    				<Route name='timer' path='/timer/:accessToken/:refreshToken' component={app}/>
-            <Route path='*' component={NotFound} />
+    				<Route name='/timer' path='timer' component={app}/>
   					<Route path='/error/:errorMsg' component={error}/>
   				</Router>
   			</Provider> 
@@ -40,5 +39,7 @@ class Root extends React.Component {
 		);
 	}
 }
+
+//:accessToken/:refreshToken
 
 ReactDom.render(<Root />, document.getElementById('app'));

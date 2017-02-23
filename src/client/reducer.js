@@ -21,7 +21,7 @@ export const initialState = {
     initialSeconds:0,
     secondsRemaining:0,
     completed:100,
-    isCounting:false,
+    isCounting:true,
   },
   
   tabataForm: {
@@ -40,6 +40,7 @@ export const initialState = {
 
 
 export function reducer(state=initialState, action){
+  console.log(initialState);
   return {
     tabataForm: tabataForm(state.tabataForm, action),
     timer: timer(state.timer, action),
