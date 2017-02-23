@@ -2,6 +2,7 @@
 import Spotify from 'spotify-web-api-js';
 const spotifyApi = new Spotify();
 
+import actionCreator from '../ActionCreator';
 
 
 //Spotify Login
@@ -14,6 +15,7 @@ export const SPOTIFY_GENRE_SEED_BEGIN = 'SPOTIFY_ME_BEGIN';
 export const SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
 export const SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
 
+export const RECOMMENDATION_SET = 'RECOMMENDATION_SET';
 
 
 

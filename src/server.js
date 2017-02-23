@@ -4,9 +4,8 @@ var cookieParser = require('cookie-parser');
 var querystring = require('querystring');
 var path = require('path');
 
-var client_id = 'dd3b496ac42541ffabfb3ebb08ad58e6'; // client id
-var client_secret = ''; //  secret
-var redirect_uri = 'http://localhost:3000/#/timer'; // redirect uri
+const clientData = require('./ClientSecrets');// client id
+
 
 
 var app = express()
@@ -43,9 +42,9 @@ app.get('/login', function (req, res) {
 	res.redirect('https://accounts.spotify.com/authorize?' +
 		querystring.stringify({
 			response_type: 'code',
-			client_id: client_id,
+			client_id: clientData.client_id,
 			scope: scope,
-			redirect_uri: redirect_uri,
+			redirect_uri: clientData.redirect_uri,
 			state: state
 		})
 	);	
@@ -66,11 +65,11 @@ app.get('/callback', function(req, res) {
   			url: 'https://accounts.spotify.com/api/token',
   			form: {
   				code: code,
-  				redirect_uri: redirect_uri,
+  				redirect_uri: clientData.redirect_uri,
   				grant_type: 'authorization_code',
   			},
   			headers: {
-  				'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+  				'Authorization': 'Basic ' + (new Buffer(clientData.client_id + ':' + clientData.client_secret).toString('base64'))
   			},
   			json: true
   		};
@@ -91,7 +90,7 @@ app.get('/callback', function(req, res) {
   				console.log(body);
   			});
   			
-  			res.redirect('/#' + 
+  			res.redirect('/#/' + 
   				querystring.stringify({
   					access_token: access_token,
   					refresh_token: refresh_token,
@@ -99,7 +98,7 @@ app.get('/callback', function(req, res) {
 
 
   		} else {
-  			res.redirect('/#' + 
+  			res.redirect('/#/' + 
   				querystring.stringify({
   					error: 'invalid token'
   				}));

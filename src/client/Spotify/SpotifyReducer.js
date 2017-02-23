@@ -1,10 +1,11 @@
 import {
-  SPOTIFY_TOKENS, SPOTIFY_REC_BEGIN, SPOTIFY_REC_SUCCESS, SPOTIFY_REC_FAILURE
+  SPOTIFY_TOKENS, SPOTIFY_REC_BEGIN, SPOTIFY_REC_SUCCESS, SPOTIFY_REC_FAILURE, 
+  SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_FAILURE, SPOTIFY_GENRE_SEED_SUCCESS, RECOMMENDATION_SET
 } from './SpotifyActions';
 
 
 //todo 
-export default function spotifyRecommendations(state, actions) {
+export default function spotifyRecommendations(state, action) {
 	switch(action.type){
 		  case SPOTIFY_TOKENS:
     		const {accessToken, refreshToken} = action;
@@ -27,11 +28,9 @@ export default function spotifyRecommendations(state, actions) {
     		return Object.assign({}, state, {
     			recommendationSeed: action.data,
     			loading:false,
+          recomendationSet:true,
+
     		});
-  		case RECOMMENDATION_SET:
-            return Object.assign({}, state, {
-                recomendationSet:true,
-            });
       case SPOTIFY_GENRE_SEED_FAILURE:
           return state;
 

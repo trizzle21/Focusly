@@ -29669,12 +29669,11 @@
 	var _SpotifyActions = __webpack_require__(288);
 
 	//todo 
-	function spotifyRecommendations(state, actions) {
+	function spotifyRecommendations(state, action) {
 	  switch (action.type) {
 	    case _SpotifyActions.SPOTIFY_TOKENS:
-	      var _action = action,
-	          accessToken = _action.accessToken,
-	          refreshToken = _action.refreshToken;
+	      var accessToken = action.accessToken,
+	          refreshToken = action.refreshToken;
 
 	      return Object.assign({}, state, { accessToken: accessToken, refreshToken: refreshToken });
 
@@ -29682,21 +29681,19 @@
 	      return Object.assign({}, state, {});
 	    case _SpotifyActions.SPOTIFY_REC_SUCCESS:
 	      return Object.assign({}, state, {});
-	    case SPOTIFY_GENRE_SEED_BEGIN:
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_BEGIN:
 	      return Object.assign({}, state, {
 	        recommendationSeed: state.recommendationSeed,
 	        loading: true
 	      });
-	    case SPOTIFY_GENRE_SEED_SUCCESS:
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_SUCCESS:
 	      return Object.assign({}, state, {
 	        recommendationSeed: action.data,
-	        loading: false
-	      });
-	    case RECOMMENDATION_SET:
-	      return Object.assign({}, state, {
+	        loading: false,
 	        recomendationSet: true
+
 	      });
-	    case SPOTIFY_GENRE_SEED_FAILURE:
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_FAILURE:
 	      return state;
 
 	  }
@@ -29711,7 +29708,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_BEGIN = exports.SPOTIFY_TOKENS = undefined;
+	exports.RECOMMENDATION_SET = exports.SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_BEGIN = exports.SPOTIFY_TOKENS = undefined;
 	exports.setTokens = setTokens;
 	exports.getMyRecommendations = getMyRecommendations;
 	exports.getAvailableGenreSeeds = getAvailableGenreSeeds;
@@ -29720,12 +29717,16 @@
 
 	var _spotifyWebApiJs2 = _interopRequireDefault(_spotifyWebApiJs);
 
+	var _ActionCreator = __webpack_require__(284);
+
+	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var spotifyApi = new _spotifyWebApiJs2.default();
+	var spotifyApi = new _spotifyWebApiJs2.default(); //Spotify Actions
+
 
 	//Spotify Login
-	//Spotify Actions
 	var SPOTIFY_TOKENS = exports.SPOTIFY_TOKENS = 'SPOTIFY_TOKENS';
 	var SPOTIFY_REC_BEGIN = exports.SPOTIFY_REC_BEGIN = 'SPOTIFY_ME_BEGIN';
 	var SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_SUCCESS = 'SPOTIFY_ME_SUCCESS';
@@ -29734,6 +29735,8 @@
 	var SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_GENRE_SEED_BEGIN = 'SPOTIFY_ME_BEGIN';
 	var SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
 	var SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
+
+	var RECOMMENDATION_SET = exports.RECOMMENDATION_SET = 'RECOMMENDATION_SET';
 
 	function setTokens(_ref) {
 		var accessToken = _ref.accessToken,
