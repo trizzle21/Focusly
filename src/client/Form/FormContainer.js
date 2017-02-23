@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import EntryForm from './form.js'; 
 
@@ -62,16 +63,16 @@ class FormContainer extends React.Component {
 }
 
 FormContainer.propTypes ={
-	openDialog:PropTypes.bool.isRequired,
-	SessionSlider: PropTypes.number.isRequired,
-	WorkMusicType: PropTypes.number.isRequired,
-	RestMusicType: PropTypes.number.isRequired,
-	SessionSlider: PropTypes.number.isRequired,
+	openDialog:React.PropTypes.bool.isRequired,
+	SessionSlider: React.PropTypes.number.isRequired,
+	WorkMusicType: React.PropTypes.number.isRequired,
+	RestMusicType: React.PropTypes.number.isRequired,
+	SessionSlider: React.PropTypes.number.isRequired,
 	//functions
-	sliderChange:PropTypes.func.isRequired,
-	workMusicSelect:PropTypes.func.isRequired,
-	restMusicSelect:PropTypes.func.isRequired,
-	submitSession: PropTypes.func.isRequired,
+	sliderChange:React.PropTypes.func.isRequired,
+	workMusicSelect:React.PropTypes.func.isRequired,
+	restMusicSelect:React.PropTypes.func.isRequired,
+	submitSession: React.PropTypes.func.isRequired,
 }
 
 

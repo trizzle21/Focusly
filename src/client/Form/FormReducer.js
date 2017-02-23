@@ -1,5 +1,5 @@
 import {
-	SLIDER_INCR, SLIDER_DECR, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, 
+	SLIDER_CHANGE, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, CLOSE_DIALOG,
 } from './FormActions';
 
 
@@ -7,7 +7,7 @@ import {
 
 export default function tabataForm(state, action){
 	switch(action.type){
-		case SLIDR_CHANGE:
+		case SLIDER_CHANGE:
 			return Object.assign({}, state, {
             	SessionSlider: action.value
          	 })

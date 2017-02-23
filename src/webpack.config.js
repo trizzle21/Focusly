@@ -9,10 +9,15 @@ module.exports = {
         path:     '',
         filename: './client/bundle.js',
     },
+    
+
 
 
     plugins: [
-      new BundleTracker({path: __dirname, filename: './assets/webpack-stats.json'})
+      new BundleTracker({path: __dirname, filename: './assets/webpack-stats.json'}),
+      new webpack.ProvidePlugin({
+        "React": "react",
+       }),
     ],
     
     module: {

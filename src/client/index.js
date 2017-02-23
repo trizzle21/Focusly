@@ -1,5 +1,5 @@
 'use strict'
-import { render } from 'react-dom';
+import ReactDom from 'react-dom';
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
@@ -18,7 +18,7 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
-const store = createStore(reducer, initialState)
+const store = createStore(reducer, initialState);
 
 
 
@@ -41,6 +41,4 @@ class Root extends React.Component {
 	}
 }
 
-
-const root_element = document.getElementById('app');
-render(<Root />, rootElement);
+ReactDom.render(<Root />, document.getElementById('app'));

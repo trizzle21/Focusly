@@ -70,10 +70,10 @@ const sheet =
 	/>
 	</a>
 	</div>
-	</div></MuiThemeProvider>;
+	</div>
+	</MuiThemeProvider>;
 
 export default class SignIn extends React.Component {
-  		
   	render(){
   		return (	
   			<MuiThemeProvider muiTheme={theme}>

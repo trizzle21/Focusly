@@ -2,6 +2,8 @@ import {
 	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,
  } from './TimerActions';
 
+import { SUBMIT_FORM } from '../Form/FormActions';
+
 
 
 export default function TimerReducer(state, actions){

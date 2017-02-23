@@ -43,6 +43,6 @@ export function reducer(state=initialState, action){
   return {
     tabataForm: tabataForm(state.tabataForm, action),
     timer: timer(state.timer, action),
-    spotifyAuth: spotifyRecomendations(state.spotify, action),
+    spotifyAuth: spotifyAuth(state.spotify, action),
   }
 }
