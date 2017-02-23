@@ -1,14 +1,19 @@
 import React from 'react';
 
+import { Link } from 'react-router';
 
 
 import RaisedButton from 'material-ui/RaisedButton';
-
+import IconButton from 'material-ui/IconButton';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import MenuItem from 'material-ui/MenuItem';
+import AppBar from 'material-ui/AppBar';
 import CircularProgress from 'material-ui/CircularProgress';
+
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from '../Spotify/modules/CustomTheme.js';
 
-import AppBar from 'material-ui/AppBar';
 
 
 const styles ={
@@ -37,6 +42,7 @@ export default class Timer extends React.Component {
 		}
 		return (
 			<MuiThemeProvider muiTheme={theme}>
+			   	<div>
 			   	<AppBar
                   style={styles.appBar}
                   title="Focusly"
@@ -64,6 +70,7 @@ export default class Timer extends React.Component {
 							<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.props.pause}/>
 						</div>
 					</div>
+				</div>
 				</div>
 			</MuiThemeProvider>
 		)

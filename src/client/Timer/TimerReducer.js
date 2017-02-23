@@ -5,8 +5,22 @@ import {
 import { SUBMIT_FORM } from '../Form/FormActions';
 
 
+const time_state={
+    cycles:4,
+    working:true,
+    restRecommendationSeeds: null,
+    workRecommendationSeeds: null,
+    initialSeconds:2500,
+    secondsRemaining:2500,
+    completed:100,
+    isCounting:true,
+}
 
-export default function TimerReducer(state, actions){
+
+console.log(time_state);
+
+
+export default function TimerReducer(state=time_state, actions){
 	switch(actions.type){
 		case CYCLE_SET:
 			return Object.assign({}, state, {
@@ -27,7 +41,7 @@ export default function TimerReducer(state, actions){
 				});
 			}
 		case TICK:
-			if(this.state.secondsRemaining >= 0) { 
+			if(state.secondsRemaining >= 0) { 
 				return Object.assign({}, state, {
 					secondsRemaining: state.secondsRemaining-1,
 					completed: (state.secondsRemaining/state.initialSeconds)*100,

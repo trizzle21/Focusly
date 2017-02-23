@@ -19,7 +19,7 @@ const styles = {
 };
 
 class TimerContainer extends React.Component {
-	componentWillMount(){
+	componentWillReceiveProps(){
 		this.props.sessionTypeSet('working');
 		this.props.cycleSet(5);
 		var interval = setInterval(this.props.tick(), 1000);
@@ -28,7 +28,7 @@ class TimerContainer extends React.Component {
 	pause(){
 		//Going to move this to be an action
 		if(this.props.isCounting === true){
-			clearInterval(this.state.interval);
+			clearInterval(this.interval);
 			this.props.startStop();
 		} else {
 			var interval = setInterval(this.props.tick(), 1000);
@@ -42,7 +42,7 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
-		<div>
+		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
 		 	tick={this.props.tick()} 
@@ -51,22 +51,21 @@ class TimerContainer extends React.Component {
 			startStop={this.props.startStop}
 		 	/>
 		</div>
-	}
+	);}
 }
 
 
 TimerContainer.propTypes = {
-	secondsRemaining: React.PropTypes.number.isRequired,
-	sessionCount: React.PropTypes.number.isRequired,
-	isCounting:React.PropTypes.bool.isRequired,
-	working:React.PropTypes.bool.isRequired,
-	//redux action hookups
-	sessionTypeSet:React.PropTypes.func.isRequired,
-	tick:React.PropTypes.func.isRequired,
-	startStop:React.PropTypes.func.isRequired,
-	cycleSet:React.PropTypes.func.isRequired,
+	secondsRemaining: React.PropTypes.number,
+	sessionCount: React.PropTypes.number,
+	isCounting:React.PropTypes.bool,
+	working:React.PropTypes.bool,
+	//redux action 
+	sessionTypeSet:React.PropTypes.func,
+	tick:React.PropTypes.func,	
+	startStop:React.PropTypes.func,
+	cycleSet:React.PropTypes.func,
 }
-
 
 
 
@@ -93,6 +92,6 @@ export default connect(mapStateToProps, {
 	tick,
 	startStop,
 	cycleSet,
-	sessionTypeSet
-})(TimerContainer);
+	sessionTypeSet,
+})(TimerContainer)
 

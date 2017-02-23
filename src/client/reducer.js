@@ -39,11 +39,17 @@ export const initialState = {
 
 
 
-export function reducer(state=initialState, action){
-  console.log(initialState);
-  return {
-    tabataForm: tabataForm(state.tabataForm, action),
-    timer: timer(state.timer, action),
-    spotifyAuth: spotifyAuth(state.spotify, action),
-  }
-}
+export default combineReducers({
+  tabataForm,
+  timer,
+  // spotifyAuth,
+});
+
+
+// export function reducer(state=initialState, action){
+//   return {
+//     tabataForm: tabataForm(state.tabataForm, action),
+//     timer: timer(state.timer, action),
+//     spotifyAuth: spotifyAuth(state.spotify, action),
+//   }
+// }

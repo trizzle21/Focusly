@@ -3,9 +3,19 @@ import {
 } from './FormActions';
 
 
+var Form_State = {
+    loading: true,
+    openDialog:true,
+    WorkMusicType: '',
+    RestMusicType: '',
+    SessionSlider: 1.0,
+    recommendationSeeds:null,
+}
 
 
-export default function tabataForm(state, action){
+
+
+export default function tabataForm(state=Form_State, action){
 	switch(action.type){
 		case SLIDER_CHANGE:
 			return Object.assign({}, state, {

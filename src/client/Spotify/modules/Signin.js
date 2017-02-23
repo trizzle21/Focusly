@@ -3,7 +3,7 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardTitle} from 'material-ui/Card';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
 
 import theme from './CustomTheme';

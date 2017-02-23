@@ -8,7 +8,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import error from "./Spotify/modules/Error";
-import {reducer, initialState} from './reducer';
+import reducer from './reducer';
 import signin from "./Spotify/modules/Signin";
 import app from "./App";
 
@@ -18,7 +18,7 @@ const NotFound = () => (
   <h1>404.. This page is not found!</h1>)
 
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducer);
 
 
 

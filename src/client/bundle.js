@@ -74,11 +74,13 @@
 
 	var _reducer = __webpack_require__(281);
 
-	var _Signin = __webpack_require__(290);
+	var _reducer2 = _interopRequireDefault(_reducer);
+
+	var _Signin = __webpack_require__(282);
 
 	var _Signin2 = _interopRequireDefault(_Signin);
 
-	var _App = __webpack_require__(500);
+	var _App = __webpack_require__(492);
 
 	var _App2 = _interopRequireDefault(_App);
 
@@ -100,7 +102,7 @@
 	  );
 	};
 
-	var store = (0, _redux.createStore)(_reducer.reducer, _reducer.initialState);
+	var store = (0, _redux.createStore)(_reducer2.default);
 
 	var Root = function (_React$Component) {
 	  _inherits(Root, _React$Component);
@@ -29392,19 +29394,18 @@
 	  value: true
 	});
 	exports.initialState = undefined;
-	exports.reducer = reducer;
 
 	var _redux = __webpack_require__(244);
 
-	var _FormReducer = __webpack_require__(282);
+	var _FormReducer = __webpack_require__(554);
 
 	var _FormReducer2 = _interopRequireDefault(_FormReducer);
 
-	var _TimerReducer = __webpack_require__(285);
+	var _TimerReducer = __webpack_require__(555);
 
 	var _TimerReducer2 = _interopRequireDefault(_TimerReducer);
 
-	var _SpotifyReducer = __webpack_require__(287);
+	var _SpotifyReducer = __webpack_require__(556);
 
 	var _SpotifyReducer2 = _interopRequireDefault(_SpotifyReducer);
 
@@ -29442,1785 +29443,21 @@
 
 	};
 
-	function reducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  var action = arguments[1];
+	exports.default = (0, _redux.combineReducers)({
+	  tabataForm: _FormReducer2.default,
+	  timer: _TimerReducer2.default
+	});
 
-	  console.log(initialState);
-	  return {
-	    tabataForm: (0, _FormReducer2.default)(state.tabataForm, action),
-	    timer: (0, _TimerReducer2.default)(state.timer, action),
-	    spotifyAuth: (0, _SpotifyReducer2.default)(state.spotify, action)
-	  };
-	}
+	// export function reducer(state=initialState, action){
+	//   return {
+	//     tabataForm: tabataForm(state.tabataForm, action),
+	//     timer: timer(state.timer, action),
+	//     spotifyAuth: spotifyAuth(state.spotify, action),
+	//   }
+	// }
 
 /***/ },
 /* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = tabataForm;
-
-	var _FormActions = __webpack_require__(283);
-
-	function tabataForm(state, action) {
-		switch (action.type) {
-			case _FormActions.SLIDER_CHANGE:
-				return Object.assign({}, state, {
-					SessionSlider: action.value
-				});
-			case _FormActions.WORK_MUSIC_SELECT:
-				return Object.assign({}, state, {
-					WorkMusicType: action.newGenre
-				});
-			case _FormActions.REST_MUSIC_SELECT:
-				return Object.assign({}, state, {
-					RestMusicType: action.newGenre
-				});
-			case _FormActions.CLOSE_DIALOG:
-				return Object.assign({}, state, {
-					openDialog: !this.state.openDialog
-				});
-			default:
-				return state;
-
-		}
-	}
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.closeDialog = exports.submitSession = exports.restMusicSelect = exports.workMusicSelect = exports.sliderChange = undefined;
-
-	var _ActionCreator = __webpack_require__(284);
-
-	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var SLIDER_CHANGE = 'SLIDER_CHANGE'; //Form Actions
-
-
-	var WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
-	var REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
-
-	var SUBMIT_SESSION = 'SUBMIT_SESSION';
-	var CLOSE_DIALOG = 'CLOSE_DIALOG';
-
-	var sliderChange = exports.sliderChange = (0, _ActionCreator2.default)(SLIDER_CHANGE, 'data');
-
-	var workMusicSelect = exports.workMusicSelect = (0, _ActionCreator2.default)(WORK_MUSIC_SELECT, 'newGenre');
-	var restMusicSelect = exports.restMusicSelect = (0, _ActionCreator2.default)(REST_MUSIC_SELECT, 'newGenre');
-
-	var submitSession = exports.submitSession = (0, _ActionCreator2.default)(SUBMIT_SESSION, 'slider', 'restGenre');
-
-	var closeDialog = exports.closeDialog = (0, _ActionCreator2.default)(CLOSE_DIALOG);
-
-/***/ },
-/* 284 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = actionCreator;
-	//Action Creator
-
-	function actionCreator(type) {
-		for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-			args[_key - 1] = arguments[_key];
-		}
-
-		return function () {
-			for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-				args[_key2] = arguments[_key2];
-			}
-
-			var action = { type: type };
-			argNames.forEach(function (arg, index) {
-				action[argNames[index]] = args[index];
-			});
-			return action;
-		};
-	}
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = TimerReducer;
-
-	var _TimerActions = __webpack_require__(286);
-
-	var _FormActions = __webpack_require__(283);
-
-	function TimerReducer(state, actions) {
-		switch (actions.type) {
-			case _TimerActions.CYCLE_SET:
-				return Object.assign({}, state, {
-					cycles: actions.cycleCount
-				});
-			case _TimerActions.SESSION_TYPE_SET:
-				if (actions.sessionType == 'working') {
-					return Object.assign({}, state, {
-						working: !state.working,
-						secondsRemaining: 1200,
-						initialSeconds: 1200
-					});
-				} else {
-					return Object.assign({}, state, {
-						working: !state.working,
-						secondsRemaining: 300,
-						initialSeconds: 300
-					});
-				}
-			case _TimerActions.TICK:
-				if (this.state.secondsRemaining >= 0) {
-					return Object.assign({}, state, {
-						secondsRemaining: state.secondsRemaining - 1,
-						completed: state.secondsRemaining / state.initialSeconds * 100
-					});
-				} else {
-					if (state.working === true) {
-						return Object.assign({}, state, {
-							working: false,
-							secondsRemaining: 300,
-							initialSeconds: 300
-						});
-					} else {
-						return Object.assign({}, state, {
-							working: true,
-							cycles: state.cycles - 1,
-							secondsRemaining: 1200,
-							initialSeconds: 1200
-						});
-					}
-				}
-			case _TimerActions.START_STOP:
-				return Object.assign({}, state, {
-					isCounting: !state.isCounting
-				});
-			case _FormActions.SUBMIT_FORM:
-			//Sets everything up, is part of Form
-
-			default:
-				return state;
-		}
-	}
-
-/***/ },
-/* 286 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.tick = tick;
-	//Timer Actions
-	var CYCLE_SET = exports.CYCLE_SET = 'CYCLE_SET';
-	var SESSION_TYPE_SET = exports.SESSION_TYPE_SET = 'SESSION_TYPE_SET';
-	var TICK = exports.TICK = 'TICK';
-	var START_STOP = exports.START_STOP = 'START_STOP';
-
-	function cycleSet(cycleCount) {
-		return { type: CYCLE_SET, cycleCount: cycleCount };
-	}
-
-	function sessionTypeSet(session_type) {
-		return { type: SESSION_TYPE_SET, sessionType: session_type };
-	}
-
-	function tick() {
-		return { type: TICK };
-	}
-
-	function startStop() {
-		return { type: START_STOP };
-	}
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = spotifyRecommendations;
-
-	var _SpotifyActions = __webpack_require__(288);
-
-	//todo 
-	function spotifyRecommendations(state, action) {
-	  switch (action.type) {
-	    case _SpotifyActions.SPOTIFY_TOKENS:
-	      var accessToken = action.accessToken,
-	          refreshToken = action.refreshToken;
-
-	      return Object.assign({}, state, { accessToken: accessToken, refreshToken: refreshToken });
-
-	    case _SpotifyActions.SPOTIFY_REC_BEGIN:
-	      return Object.assign({}, state, {});
-	    case _SpotifyActions.SPOTIFY_REC_SUCCESS:
-	      return Object.assign({}, state, {});
-	    case _SpotifyActions.SPOTIFY_GENRE_SEED_BEGIN:
-	      return Object.assign({}, state, {
-	        recommendationSeed: state.recommendationSeed,
-	        loading: true
-	      });
-	    case _SpotifyActions.SPOTIFY_GENRE_SEED_SUCCESS:
-	      return Object.assign({}, state, {
-	        recommendationSeed: action.data,
-	        loading: false,
-	        recomendationSet: true
-
-	      });
-	    case _SpotifyActions.SPOTIFY_GENRE_SEED_FAILURE:
-	      return state;
-
-	  }
-	}
-
-/***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.RECOMMENDATION_SET = exports.SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_BEGIN = exports.SPOTIFY_TOKENS = undefined;
-	exports.setTokens = setTokens;
-	exports.getMyRecommendations = getMyRecommendations;
-	exports.getAvailableGenreSeeds = getAvailableGenreSeeds;
-
-	var _spotifyWebApiJs = __webpack_require__(289);
-
-	var _spotifyWebApiJs2 = _interopRequireDefault(_spotifyWebApiJs);
-
-	var _ActionCreator = __webpack_require__(284);
-
-	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var spotifyApi = new _spotifyWebApiJs2.default(); //Spotify Actions
-
-
-	//Spotify Login
-	var SPOTIFY_TOKENS = exports.SPOTIFY_TOKENS = 'SPOTIFY_TOKENS';
-	var SPOTIFY_REC_BEGIN = exports.SPOTIFY_REC_BEGIN = 'SPOTIFY_ME_BEGIN';
-	var SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_SUCCESS = 'SPOTIFY_ME_SUCCESS';
-	var SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_FAILURE = 'SPOTIFY_ME_FAILURE';
-
-	var SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_GENRE_SEED_BEGIN = 'SPOTIFY_ME_BEGIN';
-	var SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
-	var SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
-
-	var RECOMMENDATION_SET = exports.RECOMMENDATION_SET = 'RECOMMENDATION_SET';
-
-	function setTokens(_ref) {
-		var accessToken = _ref.accessToken,
-		    refreshToken = _ref.refreshToken;
-
-		if (accessToken) {
-			spotifyApi.setAccessToken(accessToken);
-		}
-		return { type: types.SPOTIFY_TOKENS, accessToken: accessToken, refreshToken: refreshToken };
-	}
-
-	function getMyRecommendations(options) {
-		return function (dispatch) {
-			dispatch({ type: types.SPOTIFY_REC_BEGIN });
-			spotifyApi.getRecommendations(options).then(function (data) {
-				dispatch({ type: types.SPOTIFY_REC_SUCCESS, data: data });
-			}).catch(function (e) {
-				dispatch({ type: types.SPOTIFY_REC_SUCCESS, error: e });
-			});
-		};
-	}
-
-	function getAvailableGenreSeeds() {
-		return function (dispatch) {
-			dispatch({ type: types.SPOTIFY_GENRE_SEED_BEGIN });
-			spotifyApi.getAvailableGenreSeeds(options).then(function (data) {
-				dispatch({ type: types.SPOTIFY_GENRE_SEED_SUCCESS, data: data });
-			}).catch(function (e) {
-				dispatch({ type: types.SPOTIFY_GENRE_SEED_SUCCESS, error: e });
-			});
-		};
-	}
-
-/***/ },
-/* 289 */
-/***/ function(module, exports) {
-
-	/* global module */
-	'use strict';
-	var SpotifyWebApi = (function() {
-
-	  var _baseUri = 'https://api.spotify.com/v1';
-	  var _accessToken = null;
-	  var _promiseImplementation = null;
-
-	  var WrapPromiseWithAbort = function(promise, onAbort) {
-	    promise.abort = onAbort;
-	    return promise;
-	  };
-
-	  var _promiseProvider = function(promiseFunction, onAbort) {
-	    var returnedPromise;
-	    if (_promiseImplementation !== null) {
-	      var deferred = _promiseImplementation.defer();
-	      promiseFunction(function(resolvedResult) {
-	        deferred.resolve(resolvedResult);
-	      }, function(rejectedResult) {
-	        deferred.reject(rejectedResult);
-	      });
-	      returnedPromise = deferred.promise;
-	    } else {
-	      if (window.Promise) {
-	        returnedPromise = new window.Promise(promiseFunction);
-	      }
-	    }
-
-	    if (returnedPromise) {
-	      return new WrapPromiseWithAbort(returnedPromise, onAbort);
-	    } else {
-	      return null;
-	    }
-	  };
-
-	  var _extend = function() {
-	    var args = Array.prototype.slice.call(arguments);
-	    var target = args[0];
-	    var objects = args.slice(1);
-	    target = target || {};
-	    objects.forEach(function(object) {
-	      for (var j in object) {
-	        if (object.hasOwnProperty(j)) {
-	          target[j] = object[j];
-	        }
-	      }
-	    });
-	    return target;
-	  };
-
-	  var _buildUrl = function(url, parameters) {
-	    var qs = '';
-	    for (var key in parameters) {
-	      if (parameters.hasOwnProperty(key)) {
-	        var value = parameters[key];
-	        qs += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
-	      }
-	    }
-	    if (qs.length > 0) {
-	      // chop off last '&'
-	      qs = qs.substring(0, qs.length - 1);
-	      url = url + '?' + qs;
-	    }
-	    return url;
-	  };
-
-	  var _performRequest = function(requestData, callback) {
-
-	    var req = new XMLHttpRequest();
-
-	    var promiseFunction = function(resolve, reject) {
-
-	      function success(data) {
-	        if (resolve) {
-	          resolve(data);
-	        }
-	        if (callback) {
-	          callback(null, data);
-	        }
-	      }
-
-	      function failure() {
-	        if (reject) {
-	          reject(req);
-	        }
-	        if (callback) {
-	          callback(req, null);
-	        }
-	      }
-
-	      var type = requestData.type || 'GET';
-	      req.open(type, _buildUrl(requestData.url, requestData.params));
-	      if (_accessToken) {
-	        req.setRequestHeader('Authorization', 'Bearer ' + _accessToken);
-	      }
-
-	      req.onreadystatechange = function() {
-	        if (req.readyState === 4) {
-	          var data = null;
-	          try {
-	            data = req.responseText ? JSON.parse(req.responseText) : '';
-	          } catch (e) {
-	            console.error(e);
-	          }
-
-	          if (req.status >= 200 && req.status < 300) {
-	            success(data);
-	          } else {
-	            failure();
-	          }
-	        }
-	      };
-
-	      if (type === 'GET') {
-	        req.send(null);
-	      } else {
-	        req.send(requestData.postData ? JSON.stringify(requestData.postData) : null);
-	      }
-	    };
-
-	    if (callback) {
-	      promiseFunction();
-	      return null;
-	    } else {
-	      return _promiseProvider(promiseFunction, function() {
-	        req.abort();
-	      });
-	    }
-	  };
-
-	  var _checkParamsAndPerformRequest = function(requestData, options, callback, optionsAlwaysExtendParams) {
-	    var opt = {};
-	    var cb = null;
-
-	    if (typeof options === 'object') {
-	      opt = options;
-	      cb = callback;
-	    } else if (typeof options === 'function') {
-	      cb = options;
-	    }
-
-	    // options extend postData, if any. Otherwise they extend parameters sent in the url
-	    var type = requestData.type || 'GET';
-	    if (type !== 'GET' && requestData.postData && !optionsAlwaysExtendParams) {
-	      requestData.postData = _extend(requestData.postData, opt);
-	    } else {
-	      requestData.params = _extend(requestData.params, opt);
-	    }
-	    return _performRequest(requestData, cb);
-	  };
-
-	  var Constr = function() {};
-
-	  Constr.prototype = {
-	    constructor: SpotifyWebApi
-	  };
-
-	  /**
-	   * Fetches a resource through a generic GET request.
-	   *
-	   * @param {string} url The URL to be fetched
-	   * @param {function(Object,Object)} callback An optional callback
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getGeneric = function(url, callback) {
-	    var requestData = {
-	      url: url
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Fetches information about the current user.
-	   * See [Get Current User's Profile](https://developer.spotify.com/web-api/get-current-users-profile/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getMe = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches current user's saved tracks.
-	   * See [Get Current User's Saved Tracks](https://developer.spotify.com/web-api/get-users-saved-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getMySavedTracks = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/tracks'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Adds a list of tracks to the current user's saved tracks.
-	   * See [Save Tracks for Current User](https://developer.spotify.com/web-api/save-tracks-user/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
-	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.addToMySavedTracks = function(trackIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/tracks',
-	      type: 'PUT',
-	      postData: trackIds
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Remove a list of tracks from the current user's saved tracks.
-	   * See [Remove Tracks for Current User](https://developer.spotify.com/web-api/remove-tracks-user/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
-	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.removeFromMySavedTracks = function(trackIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/tracks',
-	      type: 'DELETE',
-	      postData: trackIds
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Checks if the current user's saved tracks contains a certain list of tracks.
-	   * See [Check Current User's Saved Tracks](https://developer.spotify.com/web-api/check-users-saved-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
-	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.containsMySavedTracks = function(trackIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/tracks/contains',
-	      params: { ids: trackIds.join(',') }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get a list of the albums saved in the current Spotify user's "Your Music" library.
-	   * See [Get Current User's Saved Albums](https://developer.spotify.com/web-api/get-users-saved-albums/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getMySavedAlbums = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/albums'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Save one or more albums to the current user's "Your Music" library.
-	   * See [Save Albums for Current User](https://developer.spotify.com/web-api/save-albums-user/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
-	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.addToMySavedAlbums = function(albumIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/albums',
-	      type: 'PUT',
-	      postData: albumIds
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Remove one or more albums from the current user's "Your Music" library.
-	   * See [Remove Albums for Current User](https://developer.spotify.com/web-api/remove-albums-user/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
-	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.removeFromMySavedAlbums = function(albumIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/albums',
-	      type: 'DELETE',
-	      postData: albumIds
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Check if one or more albums is already saved in the current Spotify user's "Your Music" library.
-	   * See [Check User's Saved Albums](https://developer.spotify.com/web-api/check-users-saved-albums/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
-	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.containsMySavedAlbums = function(albumIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/albums/contains',
-	      params: { ids: albumIds.join(',') }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get the current user’s top artists based on calculated affinity.
-	   * See [Get a User’s Top Artists](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getMyTopArtists = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/top/artists'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get the current user’s top tracks based on calculated affinity.
-	   * See [Get a User’s Top Tracks](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getMyTopTracks = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/top/tracks'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Adds the current user as a follower of one or more other Spotify users.
-	   * See [Follow Artists or Users](https://developer.spotify.com/web-api/follow-artists-users/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
-	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.followUsers = function(userIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/',
-	      type: 'PUT',
-	      params: {
-	        ids: userIds.join(','),
-	        type: 'user'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Adds the current user as a follower of one or more artists.
-	   * See [Follow Artists or Users](https://developer.spotify.com/web-api/follow-artists-users/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
-	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.followArtists = function(artistIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/',
-	      type: 'PUT',
-	      params: {
-	        ids: artistIds.join(','),
-	        type: 'artist'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Add the current user as a follower of one playlist.
-	   * See [Follow a Playlist](https://developer.spotify.com/web-api/follow-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
-	   * the playlist, it is easy to find the owner's user id
-	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Object} options A JSON object with options that can be passed. For instance,
-	   * whether you want the playlist to be followed privately ({public: false})
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.followPlaylist = function(ownerId, playlistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers',
-	      type: 'PUT',
-	      postData: {}
-	    };
-
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Removes the current user as a follower of one or more other Spotify users.
-	   * See [Unfollow Artists or Users](https://developer.spotify.com/web-api/unfollow-artists-users/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
-	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.unfollowUsers = function(userIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/',
-	      type: 'DELETE',
-	      params: {
-	        ids: userIds.join(','),
-	        type: 'user'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Removes the current user as a follower of one or more artists.
-	   * See [Unfollow Artists or Users](https://developer.spotify.com/web-api/unfollow-artists-users/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
-	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.unfollowArtists = function(artistIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/',
-	      type: 'DELETE',
-	      params: {
-	        ids: artistIds.join(','),
-	        type: 'artist'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Remove the current user as a follower of one playlist.
-	   * See [Unfollow a Playlist](https://developer.spotify.com/web-api/unfollow-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
-	   * the playlist, it is easy to find the owner's user id
-	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.unfollowPlaylist = function(ownerId, playlistId, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers',
-	      type: 'DELETE'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Checks to see if the current user is following one or more other Spotify users.
-	   * See [Check if Current User Follows Users or Artists](https://developer.spotify.com/web-api/check-current-user-follows/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
-	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
-	   * whether the user is following the users sent in the request.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.isFollowingUsers = function(userIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/contains',
-	      type: 'GET',
-	      params: {
-	        ids: userIds.join(','),
-	        type: 'user'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Checks to see if the current user is following one or more artists.
-	   * See [Check if Current User Follows](https://developer.spotify.com/web-api/check-current-user-follows/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
-	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
-	   * whether the user is following the artists sent in the request.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.isFollowingArtists = function(artistIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following/contains',
-	      type: 'GET',
-	      params: {
-	        ids: artistIds.join(','),
-	        type: 'artist'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Check to see if one or more Spotify users are following a specified playlist.
-	   * See [Check if Users Follow a Playlist](https://developer.spotify.com/web-api/check-user-following-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
-	   * the playlist, it is easy to find the owner's user id
-	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
-	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
-	   * whether the users are following the playlist sent in the request.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.areFollowingPlaylist = function(ownerId, playlistId, userIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers/contains',
-	      type: 'GET',
-	      params: {
-	        ids: userIds.join(',')
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, callback);
-	  };
-
-	  /**
-	   * Get the current user's followed artists.
-	   * See [Get User's Followed Artists](https://developer.spotify.com/web-api/get-followed-artists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} [options] Options, being after and limit.
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is an object with a paged object containing
-	   * artists.
-	   * @returns {Promise|undefined} A promise that if successful, resolves to an object containing a paging object which contains
-	   * artists objects. Not returned if a callback is given.
-	   */
-	  Constr.prototype.getFollowedArtists = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/me/following',
-	      type: 'GET',
-	      params: {
-	        type: 'artist'
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches information about a specific user.
-	   * See [Get a User's Profile](https://developer.spotify.com/web-api/get-users-profile/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the id (e.g. spotify:user:<here_is_the_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getUser = function(userId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId)
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a list of the current user's playlists.
-	   * See [Get a List of a User's Playlists](https://developer.spotify.com/web-api/get-list-users-playlists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId An optional id of the user. If you know the Spotify URI it is easy
-	   * to find the id (e.g. spotify:user:<here_is_the_id>). If not provided, the id of the user that granted
-	   * the permissions will be used.
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getUserPlaylists = function(userId, options, callback) {
-	    var requestData;
-	    if (typeof userId === 'string') {
-	      requestData = {
-	        url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists'
-	      };
-	    } else {
-	      requestData = {
-	        url: _baseUri + '/me/playlists'
-	      };
-	      callback = options;
-	      options = userId;
-	    }
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a specific playlist.
-	   * See [Get a Playlist](https://developer.spotify.com/web-api/get-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getPlaylist = function(userId, playlistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches the tracks from a specific playlist.
-	   * See [Get a Playlist's Tracks](https://developer.spotify.com/web-api/get-playlists-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getPlaylistTracks = function(userId, playlistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Creates a playlist and stores it in the current user's library.
-	   * See [Create a Playlist](https://developer.spotify.com/web-api/create-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. You may want to user the "getMe" function to
-	   * find out the id of the current logged in user
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.createPlaylist = function(userId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists',
-	      type: 'POST',
-	      postData: options
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Change a playlist's name and public/private state
-	   * See [Change a Playlist's Details](https://developer.spotify.com/web-api/change-playlist-details/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. You may want to user the "getMe" function to
-	   * find out the id of the current logged in user
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Object} data A JSON object with the data to update. E.g. {name: 'A new name', public: true}
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.changePlaylistDetails = function(userId, playlistId, data, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId,
-	      type: 'PUT',
-	      postData: data
-	    };
-	    return _checkParamsAndPerformRequest(requestData, data, callback);
-	  };
-
-	  /**
-	   * Add tracks to a playlist.
-	   * See [Add Tracks to a Playlist](https://developer.spotify.com/web-api/add-tracks-to-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<string>} uris An array of Spotify URIs for the tracks
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.addTracksToPlaylist = function(userId, playlistId, uris, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'POST',
-	      postData: {
-	        uris: uris
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback, true);
-	  };
-
-	  /**
-	   * Replace the tracks of a playlist
-	   * See [Replace a Playlist's Tracks](https://developer.spotify.com/web-api/replace-playlists-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<string>} uris An array of Spotify URIs for the tracks
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.replaceTracksInPlaylist = function(userId, playlistId, uris, callback) {
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'PUT',
-	      postData: {uris: uris}
-	    };
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Reorder tracks in a playlist
-	   * See [Reorder a Playlist’s Tracks](https://developer.spotify.com/web-api/reorder-playlists-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {number} rangeStart The position of the first track to be reordered.
-	   * @param {number} insertBefore The position where the tracks should be inserted. To reorder the tracks to
-	   * the end of the playlist, simply set insert_before to the position after the last track.
-	   * @param {Object} options An object with optional parameters (range_length, snapshot_id)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.reorderTracksInPlaylist = function(userId, playlistId, rangeStart, insertBefore, options, callback) {
-	    /* eslint-disable camelcase */
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'PUT',
-	      postData: {
-	        range_start: rangeStart,
-	        insert_before: insertBefore
-	      }
-	    };
-	    /* eslint-enable camelcase */
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Remove tracks from a playlist
-	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<Object>} uris An array of tracks to be removed. Each element of the array can be either a
-	   * string, in which case it is treated as a URI, or an object containing the properties `uri` (which is a
-	   * string) and `positions` (which is an array of integers).
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.removeTracksFromPlaylist = function(userId, playlistId, uris, callback) {
-	    var dataToBeSent = uris.map(function(uri) {
-	      if (typeof uri === 'string') {
-	        return { uri: uri };
-	      } else {
-	        return uri;
-	      }
-	    });
-
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'DELETE',
-	      postData: {tracks: dataToBeSent}
-	    };
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Remove tracks from a playlist, specifying a snapshot id.
-	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<Object>} uris An array of tracks to be removed. Each element of the array can be either a
-	   * string, in which case it is treated as a URI, or an object containing the properties `uri` (which is a
-	   * string) and `positions` (which is an array of integers).
-	   * @param {string} snapshotId The playlist's snapshot ID against which you want to make the changes
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.removeTracksFromPlaylistWithSnapshotId = function(userId, playlistId, uris, snapshotId, callback) {
-	    var dataToBeSent = uris.map(function(uri) {
-	      if (typeof uri === 'string') {
-	        return { uri: uri };
-	      } else {
-	        return uri;
-	      }
-	    });
-	    /* eslint-disable camelcase */
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'DELETE',
-	      postData: {
-	        tracks: dataToBeSent,
-	        snapshot_id: snapshotId
-	      }
-	    };
-	    /* eslint-enable camelcase */
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Remove tracks from a playlist, specifying the positions of the tracks to be removed.
-	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
-	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
-	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
-	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
-	   * @param {Array<number>} positions array of integers containing the positions of the tracks to remove
-	   * from the playlist.
-	   * @param {string} snapshotId The playlist's snapshot ID against which you want to make the changes
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.removeTracksFromPlaylistInPositions = function(userId, playlistId, positions, snapshotId, callback) {
-	    /* eslint-disable camelcase */
-	    var requestData = {
-	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
-	      type: 'DELETE',
-	      postData: {
-	        positions: positions,
-	        snapshot_id: snapshotId
-	      }
-	    };
-	    /* eslint-enable camelcase */
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Fetches an album from the Spotify catalog.
-	   * See [Get an Album](https://developer.spotify.com/web-api/get-album/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} albumId The id of the album. If you know the Spotify URI it is easy
-	   * to find the album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAlbum = function(albumId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/albums/' + albumId
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches the tracks of an album from the Spotify catalog.
-	   * See [Get an Album's Tracks](https://developer.spotify.com/web-api/get-albums-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} albumId The id of the album. If you know the Spotify URI it is easy
-	   * to find the album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAlbumTracks = function(albumId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/albums/' + albumId + '/tracks'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches multiple albums from the Spotify catalog.
-	   * See [Get Several Albums](https://developer.spotify.com/web-api/get-several-albums/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI it is easy
-	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAlbums = function(albumIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/albums/',
-	      params: { ids: albumIds.join(',') }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a track from the Spotify catalog.
-	   * See [Get a Track](https://developer.spotify.com/web-api/get-track/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
-	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getTrack = function(trackId, options, callback) {
-	    var requestData = {};
-	    requestData.url = _baseUri + '/tracks/' + trackId;
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches multiple tracks from the Spotify catalog.
-	   * See [Get Several Tracks](https://developer.spotify.com/web-api/get-several-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
-	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getTracks = function(trackIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/tracks/',
-	      params: { ids: trackIds.join(',') }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches an artist from the Spotify catalog.
-	   * See [Get an Artist](https://developer.spotify.com/web-api/get-artist/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
-	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getArtist = function(artistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/artists/' + artistId
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches multiple artists from the Spotify catalog.
-	   * See [Get Several Artists](https://developer.spotify.com/web-api/get-several-artists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
-	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getArtists = function(artistIds, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/artists/',
-	      params: { ids: artistIds.join(',') }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches the albums of an artist from the Spotify catalog.
-	   * See [Get an Artist's Albums](https://developer.spotify.com/web-api/get-artists-albums/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
-	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getArtistAlbums = function(artistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/artists/' + artistId + '/albums'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a list of top tracks of an artist from the Spotify catalog, for a specific country.
-	   * See [Get an Artist's Top Tracks](https://developer.spotify.com/web-api/get-artists-top-tracks/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
-	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {string} countryId The id of the country (e.g. ES for Spain or US for United States)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getArtistTopTracks = function(artistId, countryId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/artists/' + artistId + '/top-tracks',
-	      params: { country: countryId }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a list of artists related with a given one from the Spotify catalog.
-	   * See [Get an Artist's Related Artists](https://developer.spotify.com/web-api/get-related-artists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
-	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getArtistRelatedArtists = function(artistId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/artists/' + artistId + '/related-artists'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a list of Spotify featured playlists (shown, for example, on a Spotify player's "Browse" tab).
-	   * See [Get a List of Featured Playlists](https://developer.spotify.com/web-api/get-list-featured-playlists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getFeaturedPlaylists = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/browse/featured-playlists'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches a list of new album releases featured in Spotify (shown, for example, on a Spotify player's "Browse" tab).
-	   * See [Get a List of New Releases](https://developer.spotify.com/web-api/get-list-new-releases/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getNewReleases = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/browse/new-releases'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player's "Browse" tab).
-	   * See [Get a List of Categories](https://developer.spotify.com/web-api/get-list-categories/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getCategories = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/browse/categories'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get a single category used to tag items in Spotify (on, for example, the Spotify player's "Browse" tab).
-	   * See [Get a Category](https://developer.spotify.com/web-api/get-category/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} categoryId The id of the category. These can be found with the getCategories function
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getCategory = function(categoryId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/browse/categories/' + categoryId
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get a list of Spotify playlists tagged with a particular category.
-	   * See [Get a Category's Playlists](https://developer.spotify.com/web-api/get-categorys-playlists/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} categoryId The id of the category. These can be found with the getCategories function
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getCategoryPlaylists = function(categoryId, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/browse/categories/' + categoryId + '/playlists'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Get Spotify catalog information about artists, albums, tracks or playlists that match a keyword string.
-	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} query The search query
-	   * @param {Array<string>} types An array of item types to search across.
-	   * Valid types are: 'album', 'artist', 'playlist', and 'track'.
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.search = function(query, types, options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/search/',
-	      params: {
-	        q: query,
-	        type: types.join(',')
-	      }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Fetches albums from the Spotify catalog according to a query.
-	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} query The search query
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.searchAlbums = function(query, options, callback) {
-	    return this.search(query, ['album'], options, callback);
-	  };
-
-	  /**
-	   * Fetches artists from the Spotify catalog according to a query.
-	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} query The search query
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.searchArtists = function(query, options, callback) {
-	    return this.search(query, ['artist'], options, callback);
-	  };
-
-	  /**
-	   * Fetches tracks from the Spotify catalog according to a query.
-	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} query The search query
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.searchTracks = function(query, options, callback) {
-	    return this.search(query, ['track'], options, callback);
-	  };
-
-	  /**
-	   * Fetches playlists from the Spotify catalog according to a query.
-	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} query The search query
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.searchPlaylists = function(query, options, callback) {
-	    return this.search(query, ['playlist'], options, callback);
-	  };
-
-	  /**
-	   * Get audio features for a single track identified by its unique Spotify ID.
-	   * See [Get Audio Features for a Track](https://developer.spotify.com/web-api/get-audio-features/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
-	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAudioFeaturesForTrack = function(trackId, callback) {
-	    var requestData = {};
-	    requestData.url = _baseUri + '/audio-features/' + trackId;
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Get audio features for multiple tracks based on their Spotify IDs.
-	   * See [Get Audio Features for Several Tracks](https://developer.spotify.com/web-api/get-several-audio-features/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
-	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAudioFeaturesForTracks = function(trackIds, callback) {
-	    var requestData = {
-	      url: _baseUri + '/audio-features',
-	      params: { ids: trackIds }
-	    };
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Get audio analysis for a single track identified by its unique Spotify ID.
-	   * See [Get Audio Analysis for a Track](https://developer.spotify.com/web-api/get-audio-analysis/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
-	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAudioAnalysisForTrack = function(trackId, callback) {
-	    var requestData = {};
-	    requestData.url = _baseUri + '/audio-analysis/' + trackId;
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Create a playlist-style listening experience based on seed artists, tracks and genres.
-	   * See [Get Recommendations Based on Seeds](https://developer.spotify.com/web-api/get-recommendations/) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {Object} options A JSON object with options that can be passed
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getRecommendations = function(options, callback) {
-	    var requestData = {
-	      url: _baseUri + '/recommendations'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, options, callback);
-	  };
-
-	  /**
-	   * Retrieve a list of available genres seed parameter values for recommendations.
-	   * See [Available Genre Seeds](https://developer.spotify.com/web-api/get-recommendations/#available-genre-seeds) on
-	   * the Spotify Developer site for more information about the endpoint.
-	   *
-	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
-	   * one is the error object (null if no error), and the second is the value if the request succeeded.
-	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
-	   */
-	  Constr.prototype.getAvailableGenreSeeds = function(callback) {
-	    var requestData = {
-	      url: _baseUri + '/recommendations/available-genre-seeds'
-	    };
-	    return _checkParamsAndPerformRequest(requestData, {}, callback);
-	  };
-
-	  /**
-	   * Gets the access token in use.
-	   *
-	   * @return {string} accessToken The access token
-	   */
-	  Constr.prototype.getAccessToken = function() {
-	    return _accessToken;
-	  };
-
-	  /**
-	   * Sets the access token to be used.
-	   * See [the Authorization Guide](https://developer.spotify.com/web-api/authorization-guide/) on
-	   * the Spotify Developer site for more information about obtaining an access token.
-	   *
-	   * @param {string} accessToken The access token
-	   * @return {void}
-	   */
-	  Constr.prototype.setAccessToken = function(accessToken) {
-	    _accessToken = accessToken;
-	  };
-
-	  /**
-	   * Sets an implementation of Promises/A+ to be used. E.g. Q, when.
-	   * See [Conformant Implementations](https://github.com/promises-aplus/promises-spec/blob/master/implementations.md)
-	   * for a list of some available options
-	   *
-	   * @param {Object} PromiseImplementation A Promises/A+ valid implementation
-	   * @throws {Error} If the implementation being set doesn't conform with Promises/A+
-	   * @return {void}
-	   */
-	  Constr.prototype.setPromiseImplementation = function(PromiseImplementation) {
-	    var valid = false;
-	    try {
-	      var p = new PromiseImplementation(function(resolve) {
-	        resolve();
-	      });
-	      if (typeof p.then === 'function' && typeof p.catch === 'function') {
-	        valid = true;
-	      }
-	    } catch (e) {
-	      console.error(e);
-	    }
-	    if (valid) {
-	      _promiseImplementation = PromiseImplementation;
-	    } else {
-	      throw new Error('Unsupported implementation of Promises/A+');
-	    }
-	  };
-
-	  return Constr;
-	})();
-
-	if (typeof module === 'object' && typeof module.exports === 'object') {
-	  module.exports = SpotifyWebApi;
-	}
-
-
-/***/ },
-/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31235,27 +29472,27 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _android = __webpack_require__(291);
+	var _android = __webpack_require__(283);
 
 	var _android2 = _interopRequireDefault(_android);
 
-	var _MuiThemeProvider = __webpack_require__(398);
+	var _MuiThemeProvider = __webpack_require__(390);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
-	var _RaisedButton = __webpack_require__(459);
+	var _RaisedButton = __webpack_require__(451);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _Card = __webpack_require__(482);
+	var _Card = __webpack_require__(474);
 
 	var _reactRouter = __webpack_require__(184);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _CustomTheme = __webpack_require__(499);
+	var _CustomTheme = __webpack_require__(491);
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
@@ -31396,7 +29633,7 @@
 	exports.default = SignIn;
 
 /***/ },
-/* 291 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31409,11 +29646,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -31433,22 +29670,22 @@
 	exports.default = ActionAndroid;
 
 /***/ },
-/* 292 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _shouldUpdate = __webpack_require__(293);
+	var _shouldUpdate = __webpack_require__(285);
 
 	var _shouldUpdate2 = _interopRequireDefault(_shouldUpdate);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _createHelper = __webpack_require__(294);
+	var _createHelper = __webpack_require__(286);
 
 	var _createHelper2 = _interopRequireDefault(_createHelper);
 
@@ -31461,7 +29698,7 @@
 	exports.default = (0, _createHelper2.default)(pure, 'pure', true, true);
 
 /***/ },
-/* 293 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31470,11 +29707,11 @@
 
 	var _react = __webpack_require__(177);
 
-	var _createHelper = __webpack_require__(294);
+	var _createHelper = __webpack_require__(286);
 
 	var _createHelper2 = _interopRequireDefault(_createHelper);
 
-	var _createEagerFactory = __webpack_require__(297);
+	var _createEagerFactory = __webpack_require__(289);
 
 	var _createEagerFactory2 = _interopRequireDefault(_createEagerFactory);
 
@@ -31514,7 +29751,7 @@
 	exports.default = (0, _createHelper2.default)(shouldUpdate, 'shouldUpdate');
 
 /***/ },
-/* 294 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31527,7 +29764,7 @@
 	  if (process.env.NODE_ENV !== 'production' && setDisplayName) {
 	    var _ret = function () {
 	      /* eslint-disable global-require */
-	      var wrapDisplayName = __webpack_require__(295).default;
+	      var wrapDisplayName = __webpack_require__(287).default;
 	      /* eslint-enable global-require */
 
 	      if (noArgs) {
@@ -31572,14 +29809,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 295 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _getDisplayName = __webpack_require__(296);
+	var _getDisplayName = __webpack_require__(288);
 
 	var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
@@ -31592,7 +29829,7 @@
 	exports.default = wrapDisplayName;
 
 /***/ },
-/* 296 */
+/* 288 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31613,18 +29850,18 @@
 	exports.default = getDisplayName;
 
 /***/ },
-/* 297 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _createEagerElementUtil = __webpack_require__(298);
+	var _createEagerElementUtil = __webpack_require__(290);
 
 	var _createEagerElementUtil2 = _interopRequireDefault(_createEagerElementUtil);
 
-	var _isReferentiallyTransparentFunctionComponent = __webpack_require__(299);
+	var _isReferentiallyTransparentFunctionComponent = __webpack_require__(291);
 
 	var _isReferentiallyTransparentFunctionComponent2 = _interopRequireDefault(_isReferentiallyTransparentFunctionComponent);
 
@@ -31640,7 +29877,7 @@
 	exports.default = createFactory;
 
 /***/ },
-/* 298 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31679,14 +29916,14 @@
 	exports.default = createEagerElementUtil;
 
 /***/ },
-/* 299 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isClassComponent = __webpack_require__(300);
+	var _isClassComponent = __webpack_require__(292);
 
 	var _isClassComponent2 = _interopRequireDefault(_isClassComponent);
 
@@ -31699,7 +29936,7 @@
 	exports.default = isReferentiallyTransparentFunctionComponent;
 
 /***/ },
-/* 300 */
+/* 292 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31712,7 +29949,7 @@
 	exports.default = isClassComponent;
 
 /***/ },
-/* 301 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31728,7 +29965,7 @@
 	exports.default = _shallowEqual2.default;
 
 /***/ },
-/* 302 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31738,7 +29975,7 @@
 	});
 	exports.default = undefined;
 
-	var _SvgIcon = __webpack_require__(303);
+	var _SvgIcon = __webpack_require__(295);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -31747,7 +29984,7 @@
 	exports.default = _SvgIcon2.default;
 
 /***/ },
-/* 303 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31756,35 +29993,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -31792,7 +30029,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -31914,14 +30151,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 304 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _assign = __webpack_require__(305);
+	var _assign = __webpack_require__(297);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -31942,35 +30179,35 @@
 	};
 
 /***/ },
-/* 305 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(306), __esModule: true };
+	module.exports = { "default": __webpack_require__(298), __esModule: true };
 
 /***/ },
-/* 306 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(307);
-	module.exports = __webpack_require__(310).Object.assign;
+	__webpack_require__(299);
+	module.exports = __webpack_require__(302).Object.assign;
 
 /***/ },
-/* 307 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(308);
+	var $export = __webpack_require__(300);
 
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(323)});
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(315)});
 
 /***/ },
-/* 308 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(309)
-	  , core      = __webpack_require__(310)
-	  , ctx       = __webpack_require__(311)
-	  , hide      = __webpack_require__(313)
+	var global    = __webpack_require__(301)
+	  , core      = __webpack_require__(302)
+	  , ctx       = __webpack_require__(303)
+	  , hide      = __webpack_require__(305)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -32030,7 +30267,7 @@
 	module.exports = $export;
 
 /***/ },
-/* 309 */
+/* 301 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -32039,18 +30276,18 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 310 */
+/* 302 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 311 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(312);
+	var aFunction = __webpack_require__(304);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -32071,7 +30308,7 @@
 	};
 
 /***/ },
-/* 312 */
+/* 304 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -32080,12 +30317,12 @@
 	};
 
 /***/ },
-/* 313 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(314)
-	  , createDesc = __webpack_require__(322);
-	module.exports = __webpack_require__(318) ? function(object, key, value){
+	var dP         = __webpack_require__(306)
+	  , createDesc = __webpack_require__(314);
+	module.exports = __webpack_require__(310) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -32093,15 +30330,15 @@
 	};
 
 /***/ },
-/* 314 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(315)
-	  , IE8_DOM_DEFINE = __webpack_require__(317)
-	  , toPrimitive    = __webpack_require__(321)
+	var anObject       = __webpack_require__(307)
+	  , IE8_DOM_DEFINE = __webpack_require__(309)
+	  , toPrimitive    = __webpack_require__(313)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(318) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(310) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -32114,17 +30351,17 @@
 	};
 
 /***/ },
-/* 315 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(316);
+	var isObject = __webpack_require__(308);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 316 */
+/* 308 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -32132,24 +30369,24 @@
 	};
 
 /***/ },
-/* 317 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(318) && !__webpack_require__(319)(function(){
-	  return Object.defineProperty(__webpack_require__(320)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(310) && !__webpack_require__(311)(function(){
+	  return Object.defineProperty(__webpack_require__(312)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 318 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(319)(function(){
+	module.exports = !__webpack_require__(311)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 319 */
+/* 311 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -32161,11 +30398,11 @@
 	};
 
 /***/ },
-/* 320 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(316)
-	  , document = __webpack_require__(309).document
+	var isObject = __webpack_require__(308)
+	  , document = __webpack_require__(301).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -32173,11 +30410,11 @@
 	};
 
 /***/ },
-/* 321 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(316);
+	var isObject = __webpack_require__(308);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -32190,7 +30427,7 @@
 	};
 
 /***/ },
-/* 322 */
+/* 314 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -32203,20 +30440,20 @@
 	};
 
 /***/ },
-/* 323 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys  = __webpack_require__(324)
-	  , gOPS     = __webpack_require__(339)
-	  , pIE      = __webpack_require__(340)
-	  , toObject = __webpack_require__(341)
-	  , IObject  = __webpack_require__(328)
+	var getKeys  = __webpack_require__(316)
+	  , gOPS     = __webpack_require__(331)
+	  , pIE      = __webpack_require__(332)
+	  , toObject = __webpack_require__(333)
+	  , IObject  = __webpack_require__(320)
 	  , $assign  = Object.assign;
 
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(319)(function(){
+	module.exports = !$assign || __webpack_require__(311)(function(){
 	  var A = {}
 	    , B = {}
 	    , S = Symbol()
@@ -32241,25 +30478,25 @@
 	} : $assign;
 
 /***/ },
-/* 324 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(325)
-	  , enumBugKeys = __webpack_require__(338);
+	var $keys       = __webpack_require__(317)
+	  , enumBugKeys = __webpack_require__(330);
 
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 325 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(326)
-	  , toIObject    = __webpack_require__(327)
-	  , arrayIndexOf = __webpack_require__(331)(false)
-	  , IE_PROTO     = __webpack_require__(335)('IE_PROTO');
+	var has          = __webpack_require__(318)
+	  , toIObject    = __webpack_require__(319)
+	  , arrayIndexOf = __webpack_require__(323)(false)
+	  , IE_PROTO     = __webpack_require__(327)('IE_PROTO');
 
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -32275,7 +30512,7 @@
 	};
 
 /***/ },
-/* 326 */
+/* 318 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -32284,28 +30521,28 @@
 	};
 
 /***/ },
-/* 327 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(328)
-	  , defined = __webpack_require__(330);
+	var IObject = __webpack_require__(320)
+	  , defined = __webpack_require__(322);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 328 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(329);
+	var cof = __webpack_require__(321);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 329 */
+/* 321 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -32315,7 +30552,7 @@
 	};
 
 /***/ },
-/* 330 */
+/* 322 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -32325,14 +30562,14 @@
 	};
 
 /***/ },
-/* 331 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(327)
-	  , toLength  = __webpack_require__(332)
-	  , toIndex   = __webpack_require__(334);
+	var toIObject = __webpack_require__(319)
+	  , toLength  = __webpack_require__(324)
+	  , toIndex   = __webpack_require__(326);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -32351,18 +30588,18 @@
 	};
 
 /***/ },
-/* 332 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(333)
+	var toInteger = __webpack_require__(325)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 333 */
+/* 325 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -32373,10 +30610,10 @@
 	};
 
 /***/ },
-/* 334 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(333)
+	var toInteger = __webpack_require__(325)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -32385,20 +30622,20 @@
 	};
 
 /***/ },
-/* 335 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(336)('keys')
-	  , uid    = __webpack_require__(337);
+	var shared = __webpack_require__(328)('keys')
+	  , uid    = __webpack_require__(329);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 336 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(309)
+	var global = __webpack_require__(301)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -32406,7 +30643,7 @@
 	};
 
 /***/ },
-/* 337 */
+/* 329 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -32416,7 +30653,7 @@
 	};
 
 /***/ },
-/* 338 */
+/* 330 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -32425,29 +30662,29 @@
 	).split(',');
 
 /***/ },
-/* 339 */
+/* 331 */
 /***/ function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 /***/ },
-/* 340 */
+/* 332 */
 /***/ function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 /***/ },
-/* 341 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(330);
+	var defined = __webpack_require__(322);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 342 */
+/* 334 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32467,40 +30704,40 @@
 	};
 
 /***/ },
-/* 343 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(344), __esModule: true };
+	module.exports = { "default": __webpack_require__(336), __esModule: true };
 
 /***/ },
-/* 344 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(345);
-	module.exports = __webpack_require__(310).Object.getPrototypeOf;
+	__webpack_require__(337);
+	module.exports = __webpack_require__(302).Object.getPrototypeOf;
 
 /***/ },
-/* 345 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject        = __webpack_require__(341)
-	  , $getPrototypeOf = __webpack_require__(346);
+	var toObject        = __webpack_require__(333)
+	  , $getPrototypeOf = __webpack_require__(338);
 
-	__webpack_require__(347)('getPrototypeOf', function(){
+	__webpack_require__(339)('getPrototypeOf', function(){
 	  return function getPrototypeOf(it){
 	    return $getPrototypeOf(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 346 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(326)
-	  , toObject    = __webpack_require__(341)
-	  , IE_PROTO    = __webpack_require__(335)('IE_PROTO')
+	var has         = __webpack_require__(318)
+	  , toObject    = __webpack_require__(333)
+	  , IE_PROTO    = __webpack_require__(327)('IE_PROTO')
 	  , ObjectProto = Object.prototype;
 
 	module.exports = Object.getPrototypeOf || function(O){
@@ -32512,13 +30749,13 @@
 	};
 
 /***/ },
-/* 347 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(308)
-	  , core    = __webpack_require__(310)
-	  , fails   = __webpack_require__(319);
+	var $export = __webpack_require__(300)
+	  , core    = __webpack_require__(302)
+	  , fails   = __webpack_require__(311);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
 	    , exp = {};
@@ -32527,7 +30764,7 @@
 	};
 
 /***/ },
-/* 348 */
+/* 340 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32541,14 +30778,14 @@
 	};
 
 /***/ },
-/* 349 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(350);
+	var _defineProperty = __webpack_require__(342);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -32573,38 +30810,38 @@
 	}();
 
 /***/ },
-/* 350 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(351), __esModule: true };
+	module.exports = { "default": __webpack_require__(343), __esModule: true };
 
 /***/ },
-/* 351 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(352);
-	var $Object = __webpack_require__(310).Object;
+	__webpack_require__(344);
+	var $Object = __webpack_require__(302).Object;
 	module.exports = function defineProperty(it, key, desc){
 	  return $Object.defineProperty(it, key, desc);
 	};
 
 /***/ },
-/* 352 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(308);
+	var $export = __webpack_require__(300);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(318), 'Object', {defineProperty: __webpack_require__(314).f});
+	$export($export.S + $export.F * !__webpack_require__(310), 'Object', {defineProperty: __webpack_require__(306).f});
 
 /***/ },
-/* 353 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _typeof2 = __webpack_require__(354);
+	var _typeof2 = __webpack_require__(346);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -32619,18 +30856,18 @@
 	};
 
 /***/ },
-/* 354 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _iterator = __webpack_require__(355);
+	var _iterator = __webpack_require__(347);
 
 	var _iterator2 = _interopRequireDefault(_iterator);
 
-	var _symbol = __webpack_require__(374);
+	var _symbol = __webpack_require__(366);
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -32645,28 +30882,28 @@
 	};
 
 /***/ },
-/* 355 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(356), __esModule: true };
+	module.exports = { "default": __webpack_require__(348), __esModule: true };
 
 /***/ },
-/* 356 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(357);
-	__webpack_require__(369);
-	module.exports = __webpack_require__(373).f('iterator');
+	__webpack_require__(349);
+	__webpack_require__(361);
+	module.exports = __webpack_require__(365).f('iterator');
 
 /***/ },
-/* 357 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $at  = __webpack_require__(358)(true);
+	var $at  = __webpack_require__(350)(true);
 
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(359)(String, 'String', function(iterated){
+	__webpack_require__(351)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -32681,11 +30918,11 @@
 	});
 
 /***/ },
-/* 358 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(333)
-	  , defined   = __webpack_require__(330);
+	var toInteger = __webpack_require__(325)
+	  , defined   = __webpack_require__(322);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -32703,20 +30940,20 @@
 	};
 
 /***/ },
-/* 359 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(360)
-	  , $export        = __webpack_require__(308)
-	  , redefine       = __webpack_require__(361)
-	  , hide           = __webpack_require__(313)
-	  , has            = __webpack_require__(326)
-	  , Iterators      = __webpack_require__(362)
-	  , $iterCreate    = __webpack_require__(363)
-	  , setToStringTag = __webpack_require__(367)
-	  , getPrototypeOf = __webpack_require__(346)
-	  , ITERATOR       = __webpack_require__(368)('iterator')
+	var LIBRARY        = __webpack_require__(352)
+	  , $export        = __webpack_require__(300)
+	  , redefine       = __webpack_require__(353)
+	  , hide           = __webpack_require__(305)
+	  , has            = __webpack_require__(318)
+	  , Iterators      = __webpack_require__(354)
+	  , $iterCreate    = __webpack_require__(355)
+	  , setToStringTag = __webpack_require__(359)
+	  , getPrototypeOf = __webpack_require__(338)
+	  , ITERATOR       = __webpack_require__(360)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -32778,35 +31015,35 @@
 	};
 
 /***/ },
-/* 360 */
+/* 352 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 361 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(313);
+	module.exports = __webpack_require__(305);
 
 /***/ },
-/* 362 */
+/* 354 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 363 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var create         = __webpack_require__(364)
-	  , descriptor     = __webpack_require__(322)
-	  , setToStringTag = __webpack_require__(367)
+	var create         = __webpack_require__(356)
+	  , descriptor     = __webpack_require__(314)
+	  , setToStringTag = __webpack_require__(359)
 	  , IteratorPrototype = {};
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(313)(IteratorPrototype, __webpack_require__(368)('iterator'), function(){ return this; });
+	__webpack_require__(305)(IteratorPrototype, __webpack_require__(360)('iterator'), function(){ return this; });
 
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -32814,27 +31051,27 @@
 	};
 
 /***/ },
-/* 364 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject    = __webpack_require__(315)
-	  , dPs         = __webpack_require__(365)
-	  , enumBugKeys = __webpack_require__(338)
-	  , IE_PROTO    = __webpack_require__(335)('IE_PROTO')
+	var anObject    = __webpack_require__(307)
+	  , dPs         = __webpack_require__(357)
+	  , enumBugKeys = __webpack_require__(330)
+	  , IE_PROTO    = __webpack_require__(327)('IE_PROTO')
 	  , Empty       = function(){ /* empty */ }
 	  , PROTOTYPE   = 'prototype';
 
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function(){
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(320)('iframe')
+	  var iframe = __webpack_require__(312)('iframe')
 	    , i      = enumBugKeys.length
 	    , lt     = '<'
 	    , gt     = '>'
 	    , iframeDocument;
 	  iframe.style.display = 'none';
-	  __webpack_require__(366).appendChild(iframe);
+	  __webpack_require__(358).appendChild(iframe);
 	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
 	  // createDict = iframe.contentWindow.Object;
 	  // html.removeChild(iframe);
@@ -32861,14 +31098,14 @@
 
 
 /***/ },
-/* 365 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP       = __webpack_require__(314)
-	  , anObject = __webpack_require__(315)
-	  , getKeys  = __webpack_require__(324);
+	var dP       = __webpack_require__(306)
+	  , anObject = __webpack_require__(307)
+	  , getKeys  = __webpack_require__(316);
 
-	module.exports = __webpack_require__(318) ? Object.defineProperties : function defineProperties(O, Properties){
+	module.exports = __webpack_require__(310) ? Object.defineProperties : function defineProperties(O, Properties){
 	  anObject(O);
 	  var keys   = getKeys(Properties)
 	    , length = keys.length
@@ -32879,30 +31116,30 @@
 	};
 
 /***/ },
-/* 366 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(309).document && document.documentElement;
+	module.exports = __webpack_require__(301).document && document.documentElement;
 
 /***/ },
-/* 367 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(314).f
-	  , has = __webpack_require__(326)
-	  , TAG = __webpack_require__(368)('toStringTag');
+	var def = __webpack_require__(306).f
+	  , has = __webpack_require__(318)
+	  , TAG = __webpack_require__(360)('toStringTag');
 
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 368 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store      = __webpack_require__(336)('wks')
-	  , uid        = __webpack_require__(337)
-	  , Symbol     = __webpack_require__(309).Symbol
+	var store      = __webpack_require__(328)('wks')
+	  , uid        = __webpack_require__(329)
+	  , Symbol     = __webpack_require__(301).Symbol
 	  , USE_SYMBOL = typeof Symbol == 'function';
 
 	var $exports = module.exports = function(name){
@@ -32913,14 +31150,14 @@
 	$exports.store = store;
 
 /***/ },
-/* 369 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(370);
-	var global        = __webpack_require__(309)
-	  , hide          = __webpack_require__(313)
-	  , Iterators     = __webpack_require__(362)
-	  , TO_STRING_TAG = __webpack_require__(368)('toStringTag');
+	__webpack_require__(362);
+	var global        = __webpack_require__(301)
+	  , hide          = __webpack_require__(305)
+	  , Iterators     = __webpack_require__(354)
+	  , TO_STRING_TAG = __webpack_require__(360)('toStringTag');
 
 	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
 	  var NAME       = collections[i]
@@ -32931,20 +31168,20 @@
 	}
 
 /***/ },
-/* 370 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(371)
-	  , step             = __webpack_require__(372)
-	  , Iterators        = __webpack_require__(362)
-	  , toIObject        = __webpack_require__(327);
+	var addToUnscopables = __webpack_require__(363)
+	  , step             = __webpack_require__(364)
+	  , Iterators        = __webpack_require__(354)
+	  , toIObject        = __webpack_require__(319);
 
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(359)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(351)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -32970,13 +31207,13 @@
 	addToUnscopables('entries');
 
 /***/ },
-/* 371 */
+/* 363 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 372 */
+/* 364 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -32984,58 +31221,58 @@
 	};
 
 /***/ },
-/* 373 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports.f = __webpack_require__(368);
+	exports.f = __webpack_require__(360);
 
 /***/ },
-/* 374 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(375), __esModule: true };
+	module.exports = { "default": __webpack_require__(367), __esModule: true };
 
 /***/ },
-/* 375 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(376);
-	__webpack_require__(385);
-	__webpack_require__(386);
-	__webpack_require__(387);
-	module.exports = __webpack_require__(310).Symbol;
+	__webpack_require__(368);
+	__webpack_require__(377);
+	__webpack_require__(378);
+	__webpack_require__(379);
+	module.exports = __webpack_require__(302).Symbol;
 
 /***/ },
-/* 376 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var global         = __webpack_require__(309)
-	  , has            = __webpack_require__(326)
-	  , DESCRIPTORS    = __webpack_require__(318)
-	  , $export        = __webpack_require__(308)
-	  , redefine       = __webpack_require__(361)
-	  , META           = __webpack_require__(377).KEY
-	  , $fails         = __webpack_require__(319)
-	  , shared         = __webpack_require__(336)
-	  , setToStringTag = __webpack_require__(367)
-	  , uid            = __webpack_require__(337)
-	  , wks            = __webpack_require__(368)
-	  , wksExt         = __webpack_require__(373)
-	  , wksDefine      = __webpack_require__(378)
-	  , keyOf          = __webpack_require__(379)
-	  , enumKeys       = __webpack_require__(380)
-	  , isArray        = __webpack_require__(381)
-	  , anObject       = __webpack_require__(315)
-	  , toIObject      = __webpack_require__(327)
-	  , toPrimitive    = __webpack_require__(321)
-	  , createDesc     = __webpack_require__(322)
-	  , _create        = __webpack_require__(364)
-	  , gOPNExt        = __webpack_require__(382)
-	  , $GOPD          = __webpack_require__(384)
-	  , $DP            = __webpack_require__(314)
-	  , $keys          = __webpack_require__(324)
+	var global         = __webpack_require__(301)
+	  , has            = __webpack_require__(318)
+	  , DESCRIPTORS    = __webpack_require__(310)
+	  , $export        = __webpack_require__(300)
+	  , redefine       = __webpack_require__(353)
+	  , META           = __webpack_require__(369).KEY
+	  , $fails         = __webpack_require__(311)
+	  , shared         = __webpack_require__(328)
+	  , setToStringTag = __webpack_require__(359)
+	  , uid            = __webpack_require__(329)
+	  , wks            = __webpack_require__(360)
+	  , wksExt         = __webpack_require__(365)
+	  , wksDefine      = __webpack_require__(370)
+	  , keyOf          = __webpack_require__(371)
+	  , enumKeys       = __webpack_require__(372)
+	  , isArray        = __webpack_require__(373)
+	  , anObject       = __webpack_require__(307)
+	  , toIObject      = __webpack_require__(319)
+	  , toPrimitive    = __webpack_require__(313)
+	  , createDesc     = __webpack_require__(314)
+	  , _create        = __webpack_require__(356)
+	  , gOPNExt        = __webpack_require__(374)
+	  , $GOPD          = __webpack_require__(376)
+	  , $DP            = __webpack_require__(306)
+	  , $keys          = __webpack_require__(316)
 	  , gOPD           = $GOPD.f
 	  , dP             = $DP.f
 	  , gOPN           = gOPNExt.f
@@ -33158,11 +31395,11 @@
 
 	  $GOPD.f = $getOwnPropertyDescriptor;
 	  $DP.f   = $defineProperty;
-	  __webpack_require__(383).f = gOPNExt.f = $getOwnPropertyNames;
-	  __webpack_require__(340).f  = $propertyIsEnumerable;
-	  __webpack_require__(339).f = $getOwnPropertySymbols;
+	  __webpack_require__(375).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(332).f  = $propertyIsEnumerable;
+	  __webpack_require__(331).f = $getOwnPropertySymbols;
 
-	  if(DESCRIPTORS && !__webpack_require__(360)){
+	  if(DESCRIPTORS && !__webpack_require__(352)){
 	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
 	  }
 
@@ -33237,7 +31474,7 @@
 	});
 
 	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(313)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(305)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 	// 19.4.3.5 Symbol.prototype[@@toStringTag]
 	setToStringTag($Symbol, 'Symbol');
 	// 20.2.1.9 Math[@@toStringTag]
@@ -33246,18 +31483,18 @@
 	setToStringTag(global.JSON, 'JSON', true);
 
 /***/ },
-/* 377 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var META     = __webpack_require__(337)('meta')
-	  , isObject = __webpack_require__(316)
-	  , has      = __webpack_require__(326)
-	  , setDesc  = __webpack_require__(314).f
+	var META     = __webpack_require__(329)('meta')
+	  , isObject = __webpack_require__(308)
+	  , has      = __webpack_require__(318)
+	  , setDesc  = __webpack_require__(306).f
 	  , id       = 0;
 	var isExtensible = Object.isExtensible || function(){
 	  return true;
 	};
-	var FREEZE = !__webpack_require__(319)(function(){
+	var FREEZE = !__webpack_require__(311)(function(){
 	  return isExtensible(Object.preventExtensions({}));
 	});
 	var setMeta = function(it){
@@ -33304,25 +31541,25 @@
 	};
 
 /***/ },
-/* 378 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global         = __webpack_require__(309)
-	  , core           = __webpack_require__(310)
-	  , LIBRARY        = __webpack_require__(360)
-	  , wksExt         = __webpack_require__(373)
-	  , defineProperty = __webpack_require__(314).f;
+	var global         = __webpack_require__(301)
+	  , core           = __webpack_require__(302)
+	  , LIBRARY        = __webpack_require__(352)
+	  , wksExt         = __webpack_require__(365)
+	  , defineProperty = __webpack_require__(306).f;
 	module.exports = function(name){
 	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
 	  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
 	};
 
 /***/ },
-/* 379 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getKeys   = __webpack_require__(324)
-	  , toIObject = __webpack_require__(327);
+	var getKeys   = __webpack_require__(316)
+	  , toIObject = __webpack_require__(319);
 	module.exports = function(object, el){
 	  var O      = toIObject(object)
 	    , keys   = getKeys(O)
@@ -33333,13 +31570,13 @@
 	};
 
 /***/ },
-/* 380 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(324)
-	  , gOPS    = __webpack_require__(339)
-	  , pIE     = __webpack_require__(340);
+	var getKeys = __webpack_require__(316)
+	  , gOPS    = __webpack_require__(331)
+	  , pIE     = __webpack_require__(332);
 	module.exports = function(it){
 	  var result     = getKeys(it)
 	    , getSymbols = gOPS.f;
@@ -33353,22 +31590,22 @@
 	};
 
 /***/ },
-/* 381 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(329);
+	var cof = __webpack_require__(321);
 	module.exports = Array.isArray || function isArray(arg){
 	  return cof(arg) == 'Array';
 	};
 
 /***/ },
-/* 382 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(327)
-	  , gOPN      = __webpack_require__(383).f
+	var toIObject = __webpack_require__(319)
+	  , gOPN      = __webpack_require__(375).f
 	  , toString  = {}.toString;
 
 	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -33388,30 +31625,30 @@
 
 
 /***/ },
-/* 383 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-	var $keys      = __webpack_require__(325)
-	  , hiddenKeys = __webpack_require__(338).concat('length', 'prototype');
+	var $keys      = __webpack_require__(317)
+	  , hiddenKeys = __webpack_require__(330).concat('length', 'prototype');
 
 	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 	  return $keys(O, hiddenKeys);
 	};
 
 /***/ },
-/* 384 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pIE            = __webpack_require__(340)
-	  , createDesc     = __webpack_require__(322)
-	  , toIObject      = __webpack_require__(327)
-	  , toPrimitive    = __webpack_require__(321)
-	  , has            = __webpack_require__(326)
-	  , IE8_DOM_DEFINE = __webpack_require__(317)
+	var pIE            = __webpack_require__(332)
+	  , createDesc     = __webpack_require__(314)
+	  , toIObject      = __webpack_require__(319)
+	  , toPrimitive    = __webpack_require__(313)
+	  , has            = __webpack_require__(318)
+	  , IE8_DOM_DEFINE = __webpack_require__(309)
 	  , gOPD           = Object.getOwnPropertyDescriptor;
 
-	exports.f = __webpack_require__(318) ? gOPD : function getOwnPropertyDescriptor(O, P){
+	exports.f = __webpack_require__(310) ? gOPD : function getOwnPropertyDescriptor(O, P){
 	  O = toIObject(O);
 	  P = toPrimitive(P, true);
 	  if(IE8_DOM_DEFINE)try {
@@ -33421,40 +31658,40 @@
 	};
 
 /***/ },
-/* 385 */
+/* 377 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 386 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(378)('asyncIterator');
+	__webpack_require__(370)('asyncIterator');
 
 /***/ },
-/* 387 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(378)('observable');
+	__webpack_require__(370)('observable');
 
 /***/ },
-/* 388 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _setPrototypeOf = __webpack_require__(389);
+	var _setPrototypeOf = __webpack_require__(381);
 
 	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 
-	var _create = __webpack_require__(393);
+	var _create = __webpack_require__(385);
 
 	var _create2 = _interopRequireDefault(_create);
 
-	var _typeof2 = __webpack_require__(354);
+	var _typeof2 = __webpack_require__(346);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -33477,34 +31714,34 @@
 	};
 
 /***/ },
-/* 389 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(390), __esModule: true };
+	module.exports = { "default": __webpack_require__(382), __esModule: true };
 
 /***/ },
-/* 390 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(391);
-	module.exports = __webpack_require__(310).Object.setPrototypeOf;
+	__webpack_require__(383);
+	module.exports = __webpack_require__(302).Object.setPrototypeOf;
 
 /***/ },
-/* 391 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(308);
-	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(392).set});
+	var $export = __webpack_require__(300);
+	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(384).set});
 
 /***/ },
-/* 392 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(316)
-	  , anObject = __webpack_require__(315);
+	var isObject = __webpack_require__(308)
+	  , anObject = __webpack_require__(307);
 	var check = function(O, proto){
 	  anObject(O);
 	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
@@ -33513,7 +31750,7 @@
 	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
 	    function(test, buggy, set){
 	      try {
-	        set = __webpack_require__(311)(Function.call, __webpack_require__(384).f(Object.prototype, '__proto__').set, 2);
+	        set = __webpack_require__(303)(Function.call, __webpack_require__(376).f(Object.prototype, '__proto__').set, 2);
 	        set(test, []);
 	        buggy = !(test instanceof Array);
 	      } catch(e){ buggy = true; }
@@ -33528,31 +31765,31 @@
 	};
 
 /***/ },
-/* 393 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(394), __esModule: true };
+	module.exports = { "default": __webpack_require__(386), __esModule: true };
 
 /***/ },
-/* 394 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(395);
-	var $Object = __webpack_require__(310).Object;
+	__webpack_require__(387);
+	var $Object = __webpack_require__(302).Object;
 	module.exports = function create(P, D){
 	  return $Object.create(P, D);
 	};
 
 /***/ },
-/* 395 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(308)
+	var $export = __webpack_require__(300)
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	$export($export.S, 'Object', {create: __webpack_require__(364)});
+	$export($export.S, 'Object', {create: __webpack_require__(356)});
 
 /***/ },
-/* 396 */
+/* 388 */
 /***/ function(module, exports) {
 
 	module.exports = function (target) {
@@ -33569,7 +31806,7 @@
 
 
 /***/ },
-/* 397 */
+/* 389 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33608,7 +31845,7 @@
 	};
 
 /***/ },
-/* 398 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -33617,29 +31854,29 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(177);
 
-	var _getMuiTheme = __webpack_require__(399);
+	var _getMuiTheme = __webpack_require__(391);
 
 	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
 
@@ -33680,7 +31917,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 399 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33689,47 +31926,47 @@
 	  value: true
 	});
 
-	var _toConsumableArray2 = __webpack_require__(400);
+	var _toConsumableArray2 = __webpack_require__(392);
 
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 	exports.default = getMuiTheme;
 
-	var _lodash = __webpack_require__(410);
+	var _lodash = __webpack_require__(402);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _colorManipulator = __webpack_require__(411);
+	var _colorManipulator = __webpack_require__(403);
 
-	var _lightBaseTheme = __webpack_require__(412);
+	var _lightBaseTheme = __webpack_require__(404);
 
 	var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);
 
-	var _zIndex = __webpack_require__(415);
+	var _zIndex = __webpack_require__(407);
 
 	var _zIndex2 = _interopRequireDefault(_zIndex);
 
-	var _autoprefixer = __webpack_require__(416);
+	var _autoprefixer = __webpack_require__(408);
 
 	var _autoprefixer2 = _interopRequireDefault(_autoprefixer);
 
-	var _callOnce = __webpack_require__(452);
+	var _callOnce = __webpack_require__(444);
 
 	var _callOnce2 = _interopRequireDefault(_callOnce);
 
-	var _rtl = __webpack_require__(453);
+	var _rtl = __webpack_require__(445);
 
 	var _rtl2 = _interopRequireDefault(_rtl);
 
-	var _compose = __webpack_require__(457);
+	var _compose = __webpack_require__(449);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
-	var _typography = __webpack_require__(458);
+	var _typography = __webpack_require__(450);
 
 	var _typography2 = _interopRequireDefault(_typography);
 
-	var _colors = __webpack_require__(413);
+	var _colors = __webpack_require__(405);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34064,14 +32301,14 @@
 	}
 
 /***/ },
-/* 400 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _from = __webpack_require__(401);
+	var _from = __webpack_require__(393);
 
 	var _from2 = _interopRequireDefault(_from);
 
@@ -34090,34 +32327,34 @@
 	};
 
 /***/ },
-/* 401 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(402), __esModule: true };
+	module.exports = { "default": __webpack_require__(394), __esModule: true };
 
 /***/ },
-/* 402 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(357);
-	__webpack_require__(403);
-	module.exports = __webpack_require__(310).Array.from;
+	__webpack_require__(349);
+	__webpack_require__(395);
+	module.exports = __webpack_require__(302).Array.from;
 
 /***/ },
-/* 403 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var ctx            = __webpack_require__(311)
-	  , $export        = __webpack_require__(308)
-	  , toObject       = __webpack_require__(341)
-	  , call           = __webpack_require__(404)
-	  , isArrayIter    = __webpack_require__(405)
-	  , toLength       = __webpack_require__(332)
-	  , createProperty = __webpack_require__(406)
-	  , getIterFn      = __webpack_require__(407);
+	var ctx            = __webpack_require__(303)
+	  , $export        = __webpack_require__(300)
+	  , toObject       = __webpack_require__(333)
+	  , call           = __webpack_require__(396)
+	  , isArrayIter    = __webpack_require__(397)
+	  , toLength       = __webpack_require__(324)
+	  , createProperty = __webpack_require__(398)
+	  , getIterFn      = __webpack_require__(399);
 
-	$export($export.S + $export.F * !__webpack_require__(409)(function(iter){ Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(401)(function(iter){ Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
 	    var O       = toObject(arrayLike)
@@ -34147,11 +32384,11 @@
 
 
 /***/ },
-/* 404 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
-	var anObject = __webpack_require__(315);
+	var anObject = __webpack_require__(307);
 	module.exports = function(iterator, fn, value, entries){
 	  try {
 	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -34164,12 +32401,12 @@
 	};
 
 /***/ },
-/* 405 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
-	var Iterators  = __webpack_require__(362)
-	  , ITERATOR   = __webpack_require__(368)('iterator')
+	var Iterators  = __webpack_require__(354)
+	  , ITERATOR   = __webpack_require__(360)('iterator')
 	  , ArrayProto = Array.prototype;
 
 	module.exports = function(it){
@@ -34177,12 +32414,12 @@
 	};
 
 /***/ },
-/* 406 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $defineProperty = __webpack_require__(314)
-	  , createDesc      = __webpack_require__(322);
+	var $defineProperty = __webpack_require__(306)
+	  , createDesc      = __webpack_require__(314);
 
 	module.exports = function(object, index, value){
 	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
@@ -34190,25 +32427,25 @@
 	};
 
 /***/ },
-/* 407 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(408)
-	  , ITERATOR  = __webpack_require__(368)('iterator')
-	  , Iterators = __webpack_require__(362);
-	module.exports = __webpack_require__(310).getIteratorMethod = function(it){
+	var classof   = __webpack_require__(400)
+	  , ITERATOR  = __webpack_require__(360)('iterator')
+	  , Iterators = __webpack_require__(354);
+	module.exports = __webpack_require__(302).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
 	};
 
 /***/ },
-/* 408 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(329)
-	  , TAG = __webpack_require__(368)('toStringTag')
+	var cof = __webpack_require__(321)
+	  , TAG = __webpack_require__(360)('toStringTag')
 	  // ES3 wrong here
 	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -34231,10 +32468,10 @@
 	};
 
 /***/ },
-/* 409 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ITERATOR     = __webpack_require__(368)('iterator')
+	var ITERATOR     = __webpack_require__(360)('iterator')
 	  , SAFE_CLOSING = false;
 
 	try {
@@ -34257,7 +32494,7 @@
 	};
 
 /***/ },
-/* 410 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -36471,7 +34708,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(258)(module)))
 
 /***/ },
-/* 411 */
+/* 403 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36708,7 +34945,7 @@
 	}
 
 /***/ },
-/* 412 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36717,11 +34954,11 @@
 	  value: true
 	});
 
-	var _colors = __webpack_require__(413);
+	var _colors = __webpack_require__(405);
 
-	var _colorManipulator = __webpack_require__(411);
+	var _colorManipulator = __webpack_require__(403);
 
-	var _spacing = __webpack_require__(414);
+	var _spacing = __webpack_require__(406);
 
 	var _spacing2 = _interopRequireDefault(_spacing);
 
@@ -36757,7 +34994,7 @@
 	    */
 
 /***/ },
-/* 413 */
+/* 405 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37052,7 +35289,7 @@
 	var lightWhite = exports.lightWhite = 'rgba(255, 255, 255, 0.54)';
 
 /***/ },
-/* 414 */
+/* 406 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37076,7 +35313,7 @@
 	};
 
 /***/ },
-/* 415 */
+/* 407 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37098,7 +35335,7 @@
 	};
 
 /***/ },
-/* 416 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -37107,7 +35344,7 @@
 	  value: true
 	});
 
-	var _typeof2 = __webpack_require__(354);
+	var _typeof2 = __webpack_require__(346);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -37165,7 +35402,7 @@
 	  }
 	};
 
-	var _inlineStylePrefixer = __webpack_require__(417);
+	var _inlineStylePrefixer = __webpack_require__(409);
 
 	var _inlineStylePrefixer2 = _interopRequireDefault(_inlineStylePrefixer);
 
@@ -37179,7 +35416,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 417 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37192,67 +35429,67 @@
 	// special flexbox specifications
 
 
-	var _prefixAll2 = __webpack_require__(418);
+	var _prefixAll2 = __webpack_require__(410);
 
 	var _prefixAll3 = _interopRequireDefault(_prefixAll2);
 
-	var _getBrowserInformation = __webpack_require__(435);
+	var _getBrowserInformation = __webpack_require__(427);
 
 	var _getBrowserInformation2 = _interopRequireDefault(_getBrowserInformation);
 
-	var _getPrefixedKeyframes = __webpack_require__(438);
+	var _getPrefixedKeyframes = __webpack_require__(430);
 
 	var _getPrefixedKeyframes2 = _interopRequireDefault(_getPrefixedKeyframes);
 
-	var _capitalizeString = __webpack_require__(420);
+	var _capitalizeString = __webpack_require__(412);
 
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 
-	var _sortPrefixedStyle = __webpack_require__(421);
+	var _sortPrefixedStyle = __webpack_require__(413);
 
 	var _sortPrefixedStyle2 = _interopRequireDefault(_sortPrefixedStyle);
 
-	var _prefixProps = __webpack_require__(439);
+	var _prefixProps = __webpack_require__(431);
 
 	var _prefixProps2 = _interopRequireDefault(_prefixProps);
 
-	var _position = __webpack_require__(440);
+	var _position = __webpack_require__(432);
 
 	var _position2 = _interopRequireDefault(_position);
 
-	var _calc = __webpack_require__(442);
+	var _calc = __webpack_require__(434);
 
 	var _calc2 = _interopRequireDefault(_calc);
 
-	var _zoomCursor = __webpack_require__(443);
+	var _zoomCursor = __webpack_require__(435);
 
 	var _zoomCursor2 = _interopRequireDefault(_zoomCursor);
 
-	var _grabCursor = __webpack_require__(444);
+	var _grabCursor = __webpack_require__(436);
 
 	var _grabCursor2 = _interopRequireDefault(_grabCursor);
 
-	var _flex = __webpack_require__(445);
+	var _flex = __webpack_require__(437);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _sizing = __webpack_require__(446);
+	var _sizing = __webpack_require__(438);
 
 	var _sizing2 = _interopRequireDefault(_sizing);
 
-	var _gradient = __webpack_require__(447);
+	var _gradient = __webpack_require__(439);
 
 	var _gradient2 = _interopRequireDefault(_gradient);
 
-	var _transition = __webpack_require__(448);
+	var _transition = __webpack_require__(440);
 
 	var _transition2 = _interopRequireDefault(_transition);
 
-	var _flexboxIE = __webpack_require__(450);
+	var _flexboxIE = __webpack_require__(442);
 
 	var _flexboxIE2 = _interopRequireDefault(_flexboxIE);
 
-	var _flexboxOld = __webpack_require__(451);
+	var _flexboxOld = __webpack_require__(443);
 
 	var _flexboxOld2 = _interopRequireDefault(_flexboxOld);
 
@@ -37413,7 +35650,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 418 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37423,51 +35660,51 @@
 	});
 	exports.default = prefixAll;
 
-	var _prefixProps = __webpack_require__(419);
+	var _prefixProps = __webpack_require__(411);
 
 	var _prefixProps2 = _interopRequireDefault(_prefixProps);
 
-	var _capitalizeString = __webpack_require__(420);
+	var _capitalizeString = __webpack_require__(412);
 
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 
-	var _sortPrefixedStyle = __webpack_require__(421);
+	var _sortPrefixedStyle = __webpack_require__(413);
 
 	var _sortPrefixedStyle2 = _interopRequireDefault(_sortPrefixedStyle);
 
-	var _position = __webpack_require__(423);
+	var _position = __webpack_require__(415);
 
 	var _position2 = _interopRequireDefault(_position);
 
-	var _calc = __webpack_require__(424);
+	var _calc = __webpack_require__(416);
 
 	var _calc2 = _interopRequireDefault(_calc);
 
-	var _cursor = __webpack_require__(427);
+	var _cursor = __webpack_require__(419);
 
 	var _cursor2 = _interopRequireDefault(_cursor);
 
-	var _flex = __webpack_require__(428);
+	var _flex = __webpack_require__(420);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _sizing = __webpack_require__(429);
+	var _sizing = __webpack_require__(421);
 
 	var _sizing2 = _interopRequireDefault(_sizing);
 
-	var _gradient = __webpack_require__(430);
+	var _gradient = __webpack_require__(422);
 
 	var _gradient2 = _interopRequireDefault(_gradient);
 
-	var _transition = __webpack_require__(431);
+	var _transition = __webpack_require__(423);
 
 	var _transition2 = _interopRequireDefault(_transition);
 
-	var _flexboxIE = __webpack_require__(433);
+	var _flexboxIE = __webpack_require__(425);
 
 	var _flexboxIE2 = _interopRequireDefault(_flexboxIE);
 
-	var _flexboxOld = __webpack_require__(434);
+	var _flexboxOld = __webpack_require__(426);
 
 	var _flexboxOld2 = _interopRequireDefault(_flexboxOld);
 
@@ -37533,7 +35770,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 419 */
+/* 411 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37545,7 +35782,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 420 */
+/* 412 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37562,7 +35799,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 421 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37572,7 +35809,7 @@
 	});
 	exports.default = sortPrefixedStyle;
 
-	var _isPrefixedProperty = __webpack_require__(422);
+	var _isPrefixedProperty = __webpack_require__(414);
 
 	var _isPrefixedProperty2 = _interopRequireDefault(_isPrefixedProperty);
 
@@ -37594,7 +35831,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 422 */
+/* 414 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37610,7 +35847,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 423 */
+/* 415 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37627,7 +35864,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 424 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37637,11 +35874,11 @@
 	});
 	exports.default = calc;
 
-	var _joinPrefixedValue = __webpack_require__(425);
+	var _joinPrefixedValue = __webpack_require__(417);
 
 	var _joinPrefixedValue2 = _interopRequireDefault(_joinPrefixedValue);
 
-	var _isPrefixedValue = __webpack_require__(426);
+	var _isPrefixedValue = __webpack_require__(418);
 
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -37657,7 +35894,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 425 */
+/* 417 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37682,7 +35919,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 426 */
+/* 418 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37700,7 +35937,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 427 */
+/* 419 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37710,7 +35947,7 @@
 	});
 	exports.default = cursor;
 
-	var _joinPrefixedValue = __webpack_require__(425);
+	var _joinPrefixedValue = __webpack_require__(417);
 
 	var _joinPrefixedValue2 = _interopRequireDefault(_joinPrefixedValue);
 
@@ -37731,7 +35968,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 428 */
+/* 420 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37752,7 +35989,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 429 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37762,7 +35999,7 @@
 	});
 	exports.default = sizing;
 
-	var _joinPrefixedValue = __webpack_require__(425);
+	var _joinPrefixedValue = __webpack_require__(417);
 
 	var _joinPrefixedValue2 = _interopRequireDefault(_joinPrefixedValue);
 
@@ -37793,7 +36030,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 430 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37803,11 +36040,11 @@
 	});
 	exports.default = gradient;
 
-	var _joinPrefixedValue = __webpack_require__(425);
+	var _joinPrefixedValue = __webpack_require__(417);
 
 	var _joinPrefixedValue2 = _interopRequireDefault(_joinPrefixedValue);
 
-	var _isPrefixedValue = __webpack_require__(426);
+	var _isPrefixedValue = __webpack_require__(418);
 
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -37823,7 +36060,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 431 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37833,19 +36070,19 @@
 	});
 	exports.default = transition;
 
-	var _hyphenateStyleName = __webpack_require__(432);
+	var _hyphenateStyleName = __webpack_require__(424);
 
 	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
 
-	var _capitalizeString = __webpack_require__(420);
+	var _capitalizeString = __webpack_require__(412);
 
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 
-	var _isPrefixedValue = __webpack_require__(426);
+	var _isPrefixedValue = __webpack_require__(418);
 
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
-	var _prefixProps = __webpack_require__(419);
+	var _prefixProps = __webpack_require__(411);
 
 	var _prefixProps2 = _interopRequireDefault(_prefixProps);
 
@@ -37910,7 +36147,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 432 */
+/* 424 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37932,7 +36169,7 @@
 
 
 /***/ },
-/* 433 */
+/* 425 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37969,7 +36206,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 434 */
+/* 426 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38010,7 +36247,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 435 */
+/* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38019,7 +36256,7 @@
 	  value: true
 	});
 
-	var _bowser = __webpack_require__(436);
+	var _bowser = __webpack_require__(428);
 
 	var _bowser2 = _interopRequireDefault(_bowser);
 
@@ -38123,7 +36360,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 436 */
+/* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -38134,7 +36371,7 @@
 
 	!function (root, name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
-	  else if (true) __webpack_require__(437)(name, definition)
+	  else if (true) __webpack_require__(429)(name, definition)
 	  else root[name] = definition()
 	}(this, 'bowser', function () {
 	  /**
@@ -38709,14 +36946,14 @@
 
 
 /***/ },
-/* 437 */
+/* 429 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 438 */
+/* 430 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38741,7 +36978,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 439 */
+/* 431 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38753,7 +36990,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 440 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38763,7 +37000,7 @@
 	});
 	exports.default = position;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38785,7 +37022,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 441 */
+/* 433 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38801,7 +37038,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 442 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38811,7 +37048,7 @@
 	});
 	exports.default = calc;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38835,7 +37072,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 443 */
+/* 435 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38845,7 +37082,7 @@
 	});
 	exports.default = zoomCursor;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38871,7 +37108,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 444 */
+/* 436 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38881,7 +37118,7 @@
 	});
 	exports.default = grabCursor;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38906,7 +37143,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 445 */
+/* 437 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38916,7 +37153,7 @@
 	});
 	exports.default = flex;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38942,7 +37179,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 446 */
+/* 438 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38952,7 +37189,7 @@
 	});
 	exports.default = sizing;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -38992,7 +37229,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 447 */
+/* 439 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39002,7 +37239,7 @@
 	});
 	exports.default = gradient;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -39028,7 +37265,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 448 */
+/* 440 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39041,11 +37278,11 @@
 
 	exports.default = transition;
 
-	var _hyphenateStyleName = __webpack_require__(432);
+	var _hyphenateStyleName = __webpack_require__(424);
 
 	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
 
-	var _unprefixProperty = __webpack_require__(449);
+	var _unprefixProperty = __webpack_require__(441);
 
 	var _unprefixProperty2 = _interopRequireDefault(_unprefixProperty);
 
@@ -39094,7 +37331,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 449 */
+/* 441 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39111,7 +37348,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 450 */
+/* 442 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39121,7 +37358,7 @@
 	});
 	exports.default = flexboxIE;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -39175,7 +37412,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 451 */
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39185,7 +37422,7 @@
 	});
 	exports.default = flexboxOld;
 
-	var _getPrefixedValue = __webpack_require__(441);
+	var _getPrefixedValue = __webpack_require__(433);
 
 	var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -39246,7 +37483,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 452 */
+/* 444 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39278,7 +37515,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 453 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39287,7 +37524,7 @@
 	  value: true
 	});
 
-	var _keys = __webpack_require__(454);
+	var _keys = __webpack_require__(446);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
@@ -39380,34 +37617,34 @@
 	}
 
 /***/ },
-/* 454 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(455), __esModule: true };
+	module.exports = { "default": __webpack_require__(447), __esModule: true };
 
 /***/ },
-/* 455 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(456);
-	module.exports = __webpack_require__(310).Object.keys;
+	__webpack_require__(448);
+	module.exports = __webpack_require__(302).Object.keys;
 
 /***/ },
-/* 456 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(341)
-	  , $keys    = __webpack_require__(324);
+	var toObject = __webpack_require__(333)
+	  , $keys    = __webpack_require__(316);
 
-	__webpack_require__(347)('keys', function(){
+	__webpack_require__(339)('keys', function(){
 	  return function keys(it){
 	    return $keys(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 457 */
+/* 449 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39441,7 +37678,7 @@
 	}
 
 /***/ },
-/* 458 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39450,11 +37687,11 @@
 	  value: true
 	});
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _colors = __webpack_require__(413);
+	var _colors = __webpack_require__(405);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39481,7 +37718,7 @@
 	exports.default = new Typography();
 
 /***/ },
-/* 459 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39491,7 +37728,7 @@
 	});
 	exports.default = undefined;
 
-	var _RaisedButton = __webpack_require__(460);
+	var _RaisedButton = __webpack_require__(452);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -39500,7 +37737,7 @@
 	exports.default = _RaisedButton2.default;
 
 /***/ },
-/* 460 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39509,35 +37746,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -39545,19 +37782,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _colorManipulator = __webpack_require__(411);
+	var _colorManipulator = __webpack_require__(403);
 
-	var _childUtils = __webpack_require__(461);
+	var _childUtils = __webpack_require__(453);
 
-	var _EnhancedButton = __webpack_require__(464);
+	var _EnhancedButton = __webpack_require__(456);
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
@@ -39981,7 +38218,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 461 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39996,7 +38233,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsCreateFragment = __webpack_require__(462);
+	var _reactAddonsCreateFragment = __webpack_require__(454);
 
 	var _reactAddonsCreateFragment2 = _interopRequireDefault(_reactAddonsCreateFragment);
 
@@ -40038,13 +38275,13 @@
 	}
 
 /***/ },
-/* 462 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(463).create;
+	module.exports = __webpack_require__(455).create;
 
 /***/ },
-/* 463 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -40118,7 +38355,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 464 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40127,35 +38364,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -40163,21 +38400,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _childUtils = __webpack_require__(461);
+	var _childUtils = __webpack_require__(453);
 
-	var _events = __webpack_require__(465);
+	var _events = __webpack_require__(457);
 
 	var _events2 = _interopRequireDefault(_events);
 
-	var _keycode = __webpack_require__(466);
+	var _keycode = __webpack_require__(458);
 
 	var _keycode2 = _interopRequireDefault(_keycode);
 
-	var _FocusRipple = __webpack_require__(467);
+	var _FocusRipple = __webpack_require__(459);
 
 	var _FocusRipple2 = _interopRequireDefault(_FocusRipple);
 
-	var _TouchRipple = __webpack_require__(475);
+	var _TouchRipple = __webpack_require__(467);
 
 	var _TouchRipple2 = _interopRequireDefault(_TouchRipple);
 
@@ -40536,7 +38773,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 465 */
+/* 457 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40580,7 +38817,7 @@
 	};
 
 /***/ },
-/* 466 */
+/* 458 */
 /***/ function(module, exports) {
 
 	// Source: http://jsfiddle.net/vWx8V/
@@ -40732,7 +38969,7 @@
 
 
 /***/ },
-/* 467 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40741,27 +38978,27 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -40773,19 +39010,19 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _autoPrefix = __webpack_require__(468);
+	var _autoPrefix = __webpack_require__(460);
 
 	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _ScaleIn = __webpack_require__(469);
+	var _ScaleIn = __webpack_require__(461);
 
 	var _ScaleIn2 = _interopRequireDefault(_ScaleIn);
 
@@ -40933,7 +39170,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 468 */
+/* 460 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -40948,7 +39185,7 @@
 	};
 
 /***/ },
-/* 469 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40957,35 +39194,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -40993,11 +39230,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsTransitionGroup = __webpack_require__(470);
+	var _reactAddonsTransitionGroup = __webpack_require__(462);
 
 	var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransitionGroup);
 
-	var _ScaleInChild = __webpack_require__(474);
+	var _ScaleInChild = __webpack_require__(466);
 
 	var _ScaleInChild2 = _interopRequireDefault(_ScaleInChild);
 
@@ -41079,13 +39316,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 470 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(471);
+	module.exports = __webpack_require__(463);
 
 /***/ },
-/* 471 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -41109,7 +39346,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(87);
-	var ReactTransitionChildMapping = __webpack_require__(472);
+	var ReactTransitionChildMapping = __webpack_require__(464);
 
 	var emptyFunction = __webpack_require__(18);
 
@@ -41318,7 +39555,7 @@
 	module.exports = ReactTransitionGroup;
 
 /***/ },
-/* 472 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -41333,7 +39570,7 @@
 
 	'use strict';
 
-	var flattenChildren = __webpack_require__(473);
+	var flattenChildren = __webpack_require__(465);
 
 	var ReactTransitionChildMapping = {
 	  /**
@@ -41426,7 +39663,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 473 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -41507,7 +39744,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 474 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41516,35 +39753,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -41556,11 +39793,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _autoPrefix = __webpack_require__(468);
+	var _autoPrefix = __webpack_require__(460);
 
 	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -41679,7 +39916,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 475 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41688,35 +39925,35 @@
 	  value: true
 	});
 
-	var _toConsumableArray2 = __webpack_require__(400);
+	var _toConsumableArray2 = __webpack_require__(392);
 
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _toArray2 = __webpack_require__(476);
+	var _toArray2 = __webpack_require__(468);
 
 	var _toArray3 = _interopRequireDefault(_toArray2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -41728,15 +39965,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactAddonsTransitionGroup = __webpack_require__(470);
+	var _reactAddonsTransitionGroup = __webpack_require__(462);
 
 	var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransitionGroup);
 
-	var _dom = __webpack_require__(477);
+	var _dom = __webpack_require__(469);
 
 	var _dom2 = _interopRequireDefault(_dom);
 
-	var _CircleRipple = __webpack_require__(478);
+	var _CircleRipple = __webpack_require__(470);
 
 	var _CircleRipple2 = _interopRequireDefault(_CircleRipple);
 
@@ -41990,14 +40227,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 476 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _from = __webpack_require__(401);
+	var _from = __webpack_require__(393);
 
 	var _from2 = _interopRequireDefault(_from);
 
@@ -42008,7 +40245,7 @@
 	};
 
 /***/ },
-/* 477 */
+/* 469 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -42037,7 +40274,7 @@
 	};
 
 /***/ },
-/* 478 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42046,35 +40283,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -42086,15 +40323,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _autoPrefix = __webpack_require__(468);
+	var _autoPrefix = __webpack_require__(460);
 
 	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -42211,7 +40448,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 479 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42221,7 +40458,7 @@
 	});
 	exports.default = undefined;
 
-	var _Paper = __webpack_require__(480);
+	var _Paper = __webpack_require__(472);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
@@ -42230,7 +40467,7 @@
 	exports.default = _Paper2.default;
 
 /***/ },
-/* 480 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42239,35 +40476,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -42275,11 +40512,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -42382,7 +40619,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 481 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42418,7 +40655,7 @@
 	};
 
 /***/ },
-/* 482 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42428,31 +40665,31 @@
 	});
 	exports.default = exports.CardExpandable = exports.CardActions = exports.CardText = exports.CardMedia = exports.CardTitle = exports.CardHeader = exports.Card = undefined;
 
-	var _Card2 = __webpack_require__(483);
+	var _Card2 = __webpack_require__(475);
 
 	var _Card3 = _interopRequireDefault(_Card2);
 
-	var _CardHeader2 = __webpack_require__(492);
+	var _CardHeader2 = __webpack_require__(484);
 
 	var _CardHeader3 = _interopRequireDefault(_CardHeader2);
 
-	var _CardTitle2 = __webpack_require__(495);
+	var _CardTitle2 = __webpack_require__(487);
 
 	var _CardTitle3 = _interopRequireDefault(_CardTitle2);
 
-	var _CardMedia2 = __webpack_require__(496);
+	var _CardMedia2 = __webpack_require__(488);
 
 	var _CardMedia3 = _interopRequireDefault(_CardMedia2);
 
-	var _CardText2 = __webpack_require__(497);
+	var _CardText2 = __webpack_require__(489);
 
 	var _CardText3 = _interopRequireDefault(_CardText2);
 
-	var _CardActions2 = __webpack_require__(498);
+	var _CardActions2 = __webpack_require__(490);
 
 	var _CardActions3 = _interopRequireDefault(_CardActions2);
 
-	var _CardExpandable2 = __webpack_require__(484);
+	var _CardExpandable2 = __webpack_require__(476);
 
 	var _CardExpandable3 = _interopRequireDefault(_CardExpandable2);
 
@@ -42468,7 +40705,7 @@
 	exports.default = _Card3.default;
 
 /***/ },
-/* 483 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42477,35 +40714,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -42513,11 +40750,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _CardExpandable = __webpack_require__(484);
+	var _CardExpandable = __webpack_require__(476);
 
 	var _CardExpandable2 = _interopRequireDefault(_CardExpandable);
 
@@ -42688,7 +40925,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 484 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42697,27 +40934,27 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -42725,15 +40962,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _keyboardArrowUp = __webpack_require__(485);
+	var _keyboardArrowUp = __webpack_require__(477);
 
 	var _keyboardArrowUp2 = _interopRequireDefault(_keyboardArrowUp);
 
-	var _keyboardArrowDown = __webpack_require__(486);
+	var _keyboardArrowDown = __webpack_require__(478);
 
 	var _keyboardArrowDown2 = _interopRequireDefault(_keyboardArrowDown);
 
-	var _IconButton = __webpack_require__(487);
+	var _IconButton = __webpack_require__(479);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
@@ -42795,7 +41032,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 485 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42808,11 +41045,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -42832,7 +41069,7 @@
 	exports.default = HardwareKeyboardArrowUp;
 
 /***/ },
-/* 486 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42845,11 +41082,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -42869,7 +41106,7 @@
 	exports.default = HardwareKeyboardArrowDown;
 
 /***/ },
-/* 487 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42879,7 +41116,7 @@
 	});
 	exports.default = undefined;
 
-	var _IconButton = __webpack_require__(488);
+	var _IconButton = __webpack_require__(480);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
@@ -42888,7 +41125,7 @@
 	exports.default = _IconButton2.default;
 
 /***/ },
-/* 488 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42897,35 +41134,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -42933,27 +41170,27 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _EnhancedButton = __webpack_require__(464);
+	var _EnhancedButton = __webpack_require__(456);
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _FontIcon = __webpack_require__(489);
+	var _FontIcon = __webpack_require__(481);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
 
-	var _Tooltip = __webpack_require__(491);
+	var _Tooltip = __webpack_require__(483);
 
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
-	var _childUtils = __webpack_require__(461);
+	var _childUtils = __webpack_require__(453);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43214,7 +41451,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 489 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43224,7 +41461,7 @@
 	});
 	exports.default = undefined;
 
-	var _FontIcon = __webpack_require__(490);
+	var _FontIcon = __webpack_require__(482);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
 
@@ -43233,7 +41470,7 @@
 	exports.default = _FontIcon2.default;
 
 /***/ },
-/* 490 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43242,35 +41479,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -43278,7 +41515,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -43393,7 +41630,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 491 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43402,35 +41639,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -43438,7 +41675,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -43622,7 +41859,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 492 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43631,35 +41868,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -43667,7 +41904,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Avatar = __webpack_require__(493);
+	var _Avatar = __webpack_require__(485);
 
 	var _Avatar2 = _interopRequireDefault(_Avatar);
 
@@ -43849,7 +42086,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 493 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43859,7 +42096,7 @@
 	});
 	exports.default = undefined;
 
-	var _Avatar = __webpack_require__(494);
+	var _Avatar = __webpack_require__(486);
 
 	var _Avatar2 = _interopRequireDefault(_Avatar);
 
@@ -43868,7 +42105,7 @@
 	exports.default = _Avatar2.default;
 
 /***/ },
-/* 494 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43877,35 +42114,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -44040,7 +42277,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 495 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44049,35 +42286,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -44215,7 +42452,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 496 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44224,35 +42461,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -44426,7 +42663,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 497 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44435,35 +42672,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -44549,7 +42786,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 498 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44558,35 +42795,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -44676,7 +42913,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 499 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44689,17 +42926,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _colors = __webpack_require__(413);
+	var _colors = __webpack_require__(405);
 
-	var _MuiThemeProvider = __webpack_require__(398);
+	var _MuiThemeProvider = __webpack_require__(390);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
-	var _getMuiTheme = __webpack_require__(399);
+	var _getMuiTheme = __webpack_require__(391);
 
 	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
 
-	var _RaisedButton = __webpack_require__(459);
+	var _RaisedButton = __webpack_require__(451);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -44722,7 +42959,7 @@
 	exports.default = muiTheme;
 
 /***/ },
-/* 500 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44741,23 +42978,23 @@
 
 	var _reactRedux = __webpack_require__(265);
 
-	var _TimerContainer = __webpack_require__(501);
+	var _TimerContainer = __webpack_require__(493);
 
 	var _TimerContainer2 = _interopRequireDefault(_TimerContainer);
 
-	var _SideBarContainer = __webpack_require__(508);
+	var _SideBarContainer = __webpack_require__(501);
 
 	var _SideBarContainer2 = _interopRequireDefault(_SideBarContainer);
 
-	var _FormContainer = __webpack_require__(519);
+	var _FormContainer = __webpack_require__(515);
 
 	var _FormContainer2 = _interopRequireDefault(_FormContainer);
 
-	var _MuiThemeProvider = __webpack_require__(398);
+	var _MuiThemeProvider = __webpack_require__(390);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
-	var _CustomTheme = __webpack_require__(499);
+	var _CustomTheme = __webpack_require__(491);
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
@@ -44823,7 +43060,7 @@
 	exports.default = App;
 
 /***/ },
-/* 501 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44842,11 +43079,11 @@
 
 	var _redux = __webpack_require__(244);
 
-	var _Timer = __webpack_require__(502);
+	var _Timer = __webpack_require__(494);
 
 	var _Timer2 = _interopRequireDefault(_Timer);
 
-	var _TimerActions = __webpack_require__(286);
+	var _TimerActions = __webpack_require__(500);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44879,8 +43116,8 @@
 		}
 
 		_createClass(TimerContainer, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps() {
 				this.props.sessionTypeSet('working');
 				this.props.cycleSet(5);
 				var interval = setInterval(this.props.tick(), 1000);
@@ -44890,7 +43127,7 @@
 			value: function pause() {
 				//Going to move this to be an action
 				if (this.props.isCounting === true) {
-					clearInterval(this.state.interval);
+					clearInterval(this.interval);
 					this.props.startStop();
 				} else {
 					var interval = setInterval(this.props.tick(), 1000);
@@ -44905,7 +43142,7 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				_react2.default.createElement(
+				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Timer2.default, {
@@ -44923,15 +43160,15 @@
 	}(_react2.default.Component);
 
 	TimerContainer.propTypes = {
-		secondsRemaining: _react2.default.PropTypes.number.isRequired,
-		sessionCount: _react2.default.PropTypes.number.isRequired,
-		isCounting: _react2.default.PropTypes.bool.isRequired,
-		working: _react2.default.PropTypes.bool.isRequired,
-		//redux action hookups
-		sessionTypeSet: _react2.default.PropTypes.func.isRequired,
-		tick: _react2.default.PropTypes.func.isRequired,
-		startStop: _react2.default.PropTypes.func.isRequired,
-		cycleSet: _react2.default.PropTypes.func.isRequired
+		secondsRemaining: _react2.default.PropTypes.number,
+		sessionCount: _react2.default.PropTypes.number,
+		isCounting: _react2.default.PropTypes.bool,
+		working: _react2.default.PropTypes.bool,
+		//redux action 
+		sessionTypeSet: _react2.default.PropTypes.func,
+		tick: _react2.default.PropTypes.func,
+		startStop: _react2.default.PropTypes.func,
+		cycleSet: _react2.default.PropTypes.func
 	};
 
 	function mapStateToProps(state) {
@@ -44961,7 +43198,7 @@
 	})(TimerContainer);
 
 /***/ },
-/* 502 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44976,25 +43213,39 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RaisedButton = __webpack_require__(459);
+	var _reactRouter = __webpack_require__(184);
+
+	var _RaisedButton = __webpack_require__(451);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _CircularProgress = __webpack_require__(503);
+	var _IconButton = __webpack_require__(479);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
+	var _arrowBack = __webpack_require__(557);
+
+	var _arrowBack2 = _interopRequireDefault(_arrowBack);
+
+	var _MenuItem = __webpack_require__(558);
+
+	var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+	var _AppBar = __webpack_require__(497);
+
+	var _AppBar2 = _interopRequireDefault(_AppBar);
+
+	var _CircularProgress = __webpack_require__(495);
 
 	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 
-	var _MuiThemeProvider = __webpack_require__(398);
+	var _MuiThemeProvider = __webpack_require__(390);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
-	var _CustomTheme = __webpack_require__(499);
+	var _CustomTheme = __webpack_require__(491);
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
-
-	var _AppBar = __webpack_require__(505);
-
-	var _AppBar2 = _interopRequireDefault(_AppBar);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45039,55 +43290,59 @@
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
-					_react2.default.createElement(_AppBar2.default, {
-						style: styles.appBar,
-						title: 'Focusly',
-						iconElementLeft: _react2.default.createElement(
-							Link,
-							{ to: '/tabata' },
-							_react2.default.createElement(
-								IconButton,
-								null,
-								_react2.default.createElement(ArrowBack, { color: "white" })
-							)
-						)
-					}),
-					_react2.default.createElement(
-						'h4',
-						null,
-						'Cycles: ',
-						this.props.cycles
-					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'count_down_clock' },
+						null,
+						_react2.default.createElement(_AppBar2.default, {
+							style: styles.appBar,
+							title: 'Focusly',
+							iconElementLeft: _react2.default.createElement(
+								_reactRouter.Link,
+								{ to: '/tabata' },
+								_react2.default.createElement(
+									_IconButton2.default,
+									null,
+									_react2.default.createElement(_arrowBack2.default, { color: "white" })
+								)
+							)
+						}),
 						_react2.default.createElement(
-							'div',
-							{ className: 'circularProgress' },
-							_react2.default.createElement(_CircularProgress2.default, {
-								mode: 'determinate',
-								value: this.props.completed,
-								size: 450,
-								thickness: 15,
-								style: styles.circProgress,
-								color: '#009688'
-							})
+							'h4',
+							null,
+							'Cycles: ',
+							this.props.cycles
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'timer_button' },
+							{ className: 'count_down_clock' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'time_count' },
-								minutes,
-								':',
-								seconds,
-								' '
+								{ className: 'circularProgress' },
+								_react2.default.createElement(_CircularProgress2.default, {
+									mode: 'determinate',
+									value: this.props.completed,
+									size: 450,
+									thickness: 15,
+									style: styles.circProgress,
+									color: '#009688'
+								})
 							),
 							_react2.default.createElement(
 								'div',
-								{ className: 'pause_button' },
-								_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.props.pause })
+								{ className: 'timer_button' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'time_count' },
+									minutes,
+									':',
+									seconds,
+									' '
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'pause_button' },
+									_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.props.pause })
+								)
 							)
 						)
 					)
@@ -45101,7 +43356,7 @@
 	exports.default = Timer;
 
 /***/ },
-/* 503 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45111,7 +43366,7 @@
 	});
 	exports.default = undefined;
 
-	var _CircularProgress = __webpack_require__(504);
+	var _CircularProgress = __webpack_require__(496);
 
 	var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 
@@ -45120,7 +43375,7 @@
 	exports.default = _CircularProgress2.default;
 
 /***/ },
-/* 504 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -45129,35 +43384,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -45165,11 +43420,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _autoPrefix = __webpack_require__(468);
+	var _autoPrefix = __webpack_require__(460);
 
 	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -45393,7 +43648,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 505 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45403,7 +43658,7 @@
 	});
 	exports.default = undefined;
 
-	var _AppBar = __webpack_require__(506);
+	var _AppBar = __webpack_require__(498);
 
 	var _AppBar2 = _interopRequireDefault(_AppBar);
 
@@ -45412,7 +43667,7 @@
 	exports.default = _AppBar2.default;
 
 /***/ },
-/* 506 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -45421,41 +43676,41 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _keys = __webpack_require__(454);
+	var _keys = __webpack_require__(446);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	exports.getStyles = getStyles;
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -45463,19 +43718,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _IconButton = __webpack_require__(487);
+	var _IconButton = __webpack_require__(479);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
-	var _menu = __webpack_require__(507);
+	var _menu = __webpack_require__(499);
 
 	var _menu2 = _interopRequireDefault(_menu);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -45798,7 +44053,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 507 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45811,11 +44066,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -45835,7 +44090,39 @@
 	exports.default = NavigationMenu;
 
 /***/ },
-/* 508 */
+/* 500 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.tick = tick;
+	//Timer Actions
+	var CYCLE_SET = exports.CYCLE_SET = 'CYCLE_SET';
+	var SESSION_TYPE_SET = exports.SESSION_TYPE_SET = 'SESSION_TYPE_SET';
+	var TICK = exports.TICK = 'TICK';
+	var START_STOP = exports.START_STOP = 'START_STOP';
+
+	function cycleSet(cycleCount) {
+		return { type: CYCLE_SET, cycleCount: cycleCount };
+	}
+
+	function sessionTypeSet(session_type) {
+		return { type: SESSION_TYPE_SET, sessionType: session_type };
+	}
+
+	function tick() {
+		return { type: TICK };
+	}
+
+	function startStop() {
+		return { type: START_STOP };
+	}
+
+/***/ },
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45850,15 +44137,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Drawer = __webpack_require__(509);
+	var _Drawer = __webpack_require__(502);
 
 	var _Drawer2 = _interopRequireDefault(_Drawer);
 
-	var _SideBar = __webpack_require__(518);
+	var _SideBar = __webpack_require__(511);
 
 	var _SideBar2 = _interopRequireDefault(_SideBar);
 
-	var _SpotifyActions = __webpack_require__(288);
+	var _SpotifyActions = __webpack_require__(512);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45904,7 +44191,7 @@
 	exports.default = SideBarContainer;
 
 /***/ },
-/* 509 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45914,7 +44201,7 @@
 	});
 	exports.default = undefined;
 
-	var _Drawer = __webpack_require__(510);
+	var _Drawer = __webpack_require__(503);
 
 	var _Drawer2 = _interopRequireDefault(_Drawer);
 
@@ -45923,7 +44210,7 @@
 	exports.default = _Drawer2.default;
 
 /***/ },
-/* 510 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -45932,27 +44219,27 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -45964,31 +44251,31 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactEventListener = __webpack_require__(511);
+	var _reactEventListener = __webpack_require__(504);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
-	var _keycode = __webpack_require__(466);
+	var _keycode = __webpack_require__(458);
 
 	var _keycode2 = _interopRequireDefault(_keycode);
 
-	var _autoPrefix = __webpack_require__(468);
+	var _autoPrefix = __webpack_require__(460);
 
 	var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _Overlay = __webpack_require__(516);
+	var _Overlay = __webpack_require__(509);
 
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -46389,7 +44676,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 511 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -46398,31 +44685,31 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _typeof2 = __webpack_require__(354);
+	var _typeof2 = __webpack_require__(346);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
-	var _assign = __webpack_require__(305);
+	var _assign = __webpack_require__(297);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -46432,7 +44719,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsShallowCompare = __webpack_require__(512);
+	var _reactAddonsShallowCompare = __webpack_require__(505);
 
 	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
@@ -46440,7 +44727,7 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _supports = __webpack_require__(514);
+	var _supports = __webpack_require__(507);
 
 	var supports = _interopRequireWildcard(_supports);
 
@@ -46602,13 +44889,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 512 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(513);
+	module.exports = __webpack_require__(506);
 
 /***/ },
-/* 513 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -46637,7 +44924,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 514 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46647,7 +44934,7 @@
 	});
 	exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = exports.canUseDOM = undefined;
 
-	var _defineProperty = __webpack_require__(515);
+	var _defineProperty = __webpack_require__(508);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -46690,7 +44977,7 @@
 	}();
 
 /***/ },
-/* 515 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -46699,7 +44986,7 @@
 	  value: true
 	});
 
-	var _defineProperty = __webpack_require__(350);
+	var _defineProperty = __webpack_require__(342);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -46714,7 +45001,7 @@
 	}
 
 /***/ },
-/* 516 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -46723,35 +45010,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -46759,11 +45046,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _AutoLockScrolling = __webpack_require__(517);
+	var _AutoLockScrolling = __webpack_require__(510);
 
 	var _AutoLockScrolling2 = _interopRequireDefault(_AutoLockScrolling);
 
@@ -46860,7 +45147,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 517 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -46869,23 +45156,23 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -46986,7 +45273,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 518 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47001,11 +45288,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Drawer = __webpack_require__(509);
+	var _Drawer = __webpack_require__(502);
 
 	var _Drawer2 = _interopRequireDefault(_Drawer);
 
-	var _CustomTheme = __webpack_require__(499);
+	var _CustomTheme = __webpack_require__(491);
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
@@ -47043,7 +45330,1555 @@
 	exports.default = SideBar;
 
 /***/ },
-/* 519 */
+/* 512 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.RECOMMENDATION_SET = exports.SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_BEGIN = exports.SPOTIFY_TOKENS = undefined;
+	exports.setTokens = setTokens;
+	exports.getMyRecommendations = getMyRecommendations;
+	exports.getAvailableGenreSeeds = getAvailableGenreSeeds;
+
+	var _spotifyWebApiJs = __webpack_require__(513);
+
+	var _spotifyWebApiJs2 = _interopRequireDefault(_spotifyWebApiJs);
+
+	var _ActionCreator = __webpack_require__(514);
+
+	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var spotifyApi = new _spotifyWebApiJs2.default(); //Spotify Actions
+
+
+	//Spotify Login
+	var SPOTIFY_TOKENS = exports.SPOTIFY_TOKENS = 'SPOTIFY_TOKENS';
+	var SPOTIFY_REC_BEGIN = exports.SPOTIFY_REC_BEGIN = 'SPOTIFY_ME_BEGIN';
+	var SPOTIFY_REC_SUCCESS = exports.SPOTIFY_REC_SUCCESS = 'SPOTIFY_ME_SUCCESS';
+	var SPOTIFY_REC_FAILURE = exports.SPOTIFY_REC_FAILURE = 'SPOTIFY_ME_FAILURE';
+
+	var SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_GENRE_SEED_BEGIN = 'SPOTIFY_ME_BEGIN';
+	var SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
+	var SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
+
+	var RECOMMENDATION_SET = exports.RECOMMENDATION_SET = 'RECOMMENDATION_SET';
+
+	function setTokens(_ref) {
+		var accessToken = _ref.accessToken,
+		    refreshToken = _ref.refreshToken;
+
+		if (accessToken) {
+			spotifyApi.setAccessToken(accessToken);
+		}
+		return { type: types.SPOTIFY_TOKENS, accessToken: accessToken, refreshToken: refreshToken };
+	}
+
+	function getMyRecommendations(options) {
+		return function (dispatch) {
+			dispatch({ type: types.SPOTIFY_REC_BEGIN });
+			spotifyApi.getRecommendations(options).then(function (data) {
+				dispatch({ type: types.SPOTIFY_REC_SUCCESS, data: data });
+			}).catch(function (e) {
+				dispatch({ type: types.SPOTIFY_REC_SUCCESS, error: e });
+			});
+		};
+	}
+
+	function getAvailableGenreSeeds() {
+		return function (dispatch) {
+			dispatch({ type: types.SPOTIFY_GENRE_SEED_BEGIN });
+			spotifyApi.getAvailableGenreSeeds(options).then(function (data) {
+				dispatch({ type: types.SPOTIFY_GENRE_SEED_SUCCESS, data: data });
+			}).catch(function (e) {
+				dispatch({ type: types.SPOTIFY_GENRE_SEED_SUCCESS, error: e });
+			});
+		};
+	}
+
+/***/ },
+/* 513 */
+/***/ function(module, exports) {
+
+	/* global module */
+	'use strict';
+	var SpotifyWebApi = (function() {
+
+	  var _baseUri = 'https://api.spotify.com/v1';
+	  var _accessToken = null;
+	  var _promiseImplementation = null;
+
+	  var WrapPromiseWithAbort = function(promise, onAbort) {
+	    promise.abort = onAbort;
+	    return promise;
+	  };
+
+	  var _promiseProvider = function(promiseFunction, onAbort) {
+	    var returnedPromise;
+	    if (_promiseImplementation !== null) {
+	      var deferred = _promiseImplementation.defer();
+	      promiseFunction(function(resolvedResult) {
+	        deferred.resolve(resolvedResult);
+	      }, function(rejectedResult) {
+	        deferred.reject(rejectedResult);
+	      });
+	      returnedPromise = deferred.promise;
+	    } else {
+	      if (window.Promise) {
+	        returnedPromise = new window.Promise(promiseFunction);
+	      }
+	    }
+
+	    if (returnedPromise) {
+	      return new WrapPromiseWithAbort(returnedPromise, onAbort);
+	    } else {
+	      return null;
+	    }
+	  };
+
+	  var _extend = function() {
+	    var args = Array.prototype.slice.call(arguments);
+	    var target = args[0];
+	    var objects = args.slice(1);
+	    target = target || {};
+	    objects.forEach(function(object) {
+	      for (var j in object) {
+	        if (object.hasOwnProperty(j)) {
+	          target[j] = object[j];
+	        }
+	      }
+	    });
+	    return target;
+	  };
+
+	  var _buildUrl = function(url, parameters) {
+	    var qs = '';
+	    for (var key in parameters) {
+	      if (parameters.hasOwnProperty(key)) {
+	        var value = parameters[key];
+	        qs += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+	      }
+	    }
+	    if (qs.length > 0) {
+	      // chop off last '&'
+	      qs = qs.substring(0, qs.length - 1);
+	      url = url + '?' + qs;
+	    }
+	    return url;
+	  };
+
+	  var _performRequest = function(requestData, callback) {
+
+	    var req = new XMLHttpRequest();
+
+	    var promiseFunction = function(resolve, reject) {
+
+	      function success(data) {
+	        if (resolve) {
+	          resolve(data);
+	        }
+	        if (callback) {
+	          callback(null, data);
+	        }
+	      }
+
+	      function failure() {
+	        if (reject) {
+	          reject(req);
+	        }
+	        if (callback) {
+	          callback(req, null);
+	        }
+	      }
+
+	      var type = requestData.type || 'GET';
+	      req.open(type, _buildUrl(requestData.url, requestData.params));
+	      if (_accessToken) {
+	        req.setRequestHeader('Authorization', 'Bearer ' + _accessToken);
+	      }
+
+	      req.onreadystatechange = function() {
+	        if (req.readyState === 4) {
+	          var data = null;
+	          try {
+	            data = req.responseText ? JSON.parse(req.responseText) : '';
+	          } catch (e) {
+	            console.error(e);
+	          }
+
+	          if (req.status >= 200 && req.status < 300) {
+	            success(data);
+	          } else {
+	            failure();
+	          }
+	        }
+	      };
+
+	      if (type === 'GET') {
+	        req.send(null);
+	      } else {
+	        req.send(requestData.postData ? JSON.stringify(requestData.postData) : null);
+	      }
+	    };
+
+	    if (callback) {
+	      promiseFunction();
+	      return null;
+	    } else {
+	      return _promiseProvider(promiseFunction, function() {
+	        req.abort();
+	      });
+	    }
+	  };
+
+	  var _checkParamsAndPerformRequest = function(requestData, options, callback, optionsAlwaysExtendParams) {
+	    var opt = {};
+	    var cb = null;
+
+	    if (typeof options === 'object') {
+	      opt = options;
+	      cb = callback;
+	    } else if (typeof options === 'function') {
+	      cb = options;
+	    }
+
+	    // options extend postData, if any. Otherwise they extend parameters sent in the url
+	    var type = requestData.type || 'GET';
+	    if (type !== 'GET' && requestData.postData && !optionsAlwaysExtendParams) {
+	      requestData.postData = _extend(requestData.postData, opt);
+	    } else {
+	      requestData.params = _extend(requestData.params, opt);
+	    }
+	    return _performRequest(requestData, cb);
+	  };
+
+	  var Constr = function() {};
+
+	  Constr.prototype = {
+	    constructor: SpotifyWebApi
+	  };
+
+	  /**
+	   * Fetches a resource through a generic GET request.
+	   *
+	   * @param {string} url The URL to be fetched
+	   * @param {function(Object,Object)} callback An optional callback
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getGeneric = function(url, callback) {
+	    var requestData = {
+	      url: url
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Fetches information about the current user.
+	   * See [Get Current User's Profile](https://developer.spotify.com/web-api/get-current-users-profile/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getMe = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches current user's saved tracks.
+	   * See [Get Current User's Saved Tracks](https://developer.spotify.com/web-api/get-users-saved-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getMySavedTracks = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/tracks'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Adds a list of tracks to the current user's saved tracks.
+	   * See [Save Tracks for Current User](https://developer.spotify.com/web-api/save-tracks-user/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
+	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.addToMySavedTracks = function(trackIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/tracks',
+	      type: 'PUT',
+	      postData: trackIds
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Remove a list of tracks from the current user's saved tracks.
+	   * See [Remove Tracks for Current User](https://developer.spotify.com/web-api/remove-tracks-user/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
+	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.removeFromMySavedTracks = function(trackIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/tracks',
+	      type: 'DELETE',
+	      postData: trackIds
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Checks if the current user's saved tracks contains a certain list of tracks.
+	   * See [Check Current User's Saved Tracks](https://developer.spotify.com/web-api/check-users-saved-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
+	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.containsMySavedTracks = function(trackIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/tracks/contains',
+	      params: { ids: trackIds.join(',') }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get a list of the albums saved in the current Spotify user's "Your Music" library.
+	   * See [Get Current User's Saved Albums](https://developer.spotify.com/web-api/get-users-saved-albums/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getMySavedAlbums = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/albums'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Save one or more albums to the current user's "Your Music" library.
+	   * See [Save Albums for Current User](https://developer.spotify.com/web-api/save-albums-user/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
+	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.addToMySavedAlbums = function(albumIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/albums',
+	      type: 'PUT',
+	      postData: albumIds
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Remove one or more albums from the current user's "Your Music" library.
+	   * See [Remove Albums for Current User](https://developer.spotify.com/web-api/remove-albums-user/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
+	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.removeFromMySavedAlbums = function(albumIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/albums',
+	      type: 'DELETE',
+	      postData: albumIds
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Check if one or more albums is already saved in the current Spotify user's "Your Music" library.
+	   * See [Check User's Saved Albums](https://developer.spotify.com/web-api/check-users-saved-albums/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI, it is easy
+	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.containsMySavedAlbums = function(albumIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/albums/contains',
+	      params: { ids: albumIds.join(',') }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get the current user’s top artists based on calculated affinity.
+	   * See [Get a User’s Top Artists](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getMyTopArtists = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/top/artists'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get the current user’s top tracks based on calculated affinity.
+	   * See [Get a User’s Top Tracks](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getMyTopTracks = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/top/tracks'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Adds the current user as a follower of one or more other Spotify users.
+	   * See [Follow Artists or Users](https://developer.spotify.com/web-api/follow-artists-users/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
+	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.followUsers = function(userIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/',
+	      type: 'PUT',
+	      params: {
+	        ids: userIds.join(','),
+	        type: 'user'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Adds the current user as a follower of one or more artists.
+	   * See [Follow Artists or Users](https://developer.spotify.com/web-api/follow-artists-users/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
+	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.followArtists = function(artistIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/',
+	      type: 'PUT',
+	      params: {
+	        ids: artistIds.join(','),
+	        type: 'artist'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Add the current user as a follower of one playlist.
+	   * See [Follow a Playlist](https://developer.spotify.com/web-api/follow-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
+	   * the playlist, it is easy to find the owner's user id
+	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Object} options A JSON object with options that can be passed. For instance,
+	   * whether you want the playlist to be followed privately ({public: false})
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.followPlaylist = function(ownerId, playlistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers',
+	      type: 'PUT',
+	      postData: {}
+	    };
+
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Removes the current user as a follower of one or more other Spotify users.
+	   * See [Unfollow Artists or Users](https://developer.spotify.com/web-api/unfollow-artists-users/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
+	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.unfollowUsers = function(userIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/',
+	      type: 'DELETE',
+	      params: {
+	        ids: userIds.join(','),
+	        type: 'user'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Removes the current user as a follower of one or more artists.
+	   * See [Unfollow Artists or Users](https://developer.spotify.com/web-api/unfollow-artists-users/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
+	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.unfollowArtists = function(artistIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/',
+	      type: 'DELETE',
+	      params: {
+	        ids: artistIds.join(','),
+	        type: 'artist'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Remove the current user as a follower of one playlist.
+	   * See [Unfollow a Playlist](https://developer.spotify.com/web-api/unfollow-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
+	   * the playlist, it is easy to find the owner's user id
+	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an empty value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.unfollowPlaylist = function(ownerId, playlistId, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers',
+	      type: 'DELETE'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Checks to see if the current user is following one or more other Spotify users.
+	   * See [Check if Current User Follows Users or Artists](https://developer.spotify.com/web-api/check-current-user-follows/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
+	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
+	   * whether the user is following the users sent in the request.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.isFollowingUsers = function(userIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/contains',
+	      type: 'GET',
+	      params: {
+	        ids: userIds.join(','),
+	        type: 'user'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Checks to see if the current user is following one or more artists.
+	   * See [Check if Current User Follows](https://developer.spotify.com/web-api/check-current-user-follows/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
+	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
+	   * whether the user is following the artists sent in the request.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.isFollowingArtists = function(artistIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following/contains',
+	      type: 'GET',
+	      params: {
+	        ids: artistIds.join(','),
+	        type: 'artist'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Check to see if one or more Spotify users are following a specified playlist.
+	   * See [Check if Users Follow a Playlist](https://developer.spotify.com/web-api/check-user-following-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} ownerId The id of the playlist owner. If you know the Spotify URI of
+	   * the playlist, it is easy to find the owner's user id
+	   * (e.g. spotify:user:<here_is_the_owner_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<string>} userIds The ids of the users. If you know their Spotify URI it is easy
+	   * to find their user id (e.g. spotify:user:<here_is_the_user_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an array of boolean values that indicate
+	   * whether the users are following the playlist sent in the request.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.areFollowingPlaylist = function(ownerId, playlistId, userIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(ownerId) + '/playlists/' + playlistId + '/followers/contains',
+	      type: 'GET',
+	      params: {
+	        ids: userIds.join(',')
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, callback);
+	  };
+
+	  /**
+	   * Get the current user's followed artists.
+	   * See [Get User's Followed Artists](https://developer.spotify.com/web-api/get-followed-artists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} [options] Options, being after and limit.
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is an object with a paged object containing
+	   * artists.
+	   * @returns {Promise|undefined} A promise that if successful, resolves to an object containing a paging object which contains
+	   * artists objects. Not returned if a callback is given.
+	   */
+	  Constr.prototype.getFollowedArtists = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/me/following',
+	      type: 'GET',
+	      params: {
+	        type: 'artist'
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches information about a specific user.
+	   * See [Get a User's Profile](https://developer.spotify.com/web-api/get-users-profile/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the id (e.g. spotify:user:<here_is_the_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getUser = function(userId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId)
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a list of the current user's playlists.
+	   * See [Get a List of a User's Playlists](https://developer.spotify.com/web-api/get-list-users-playlists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId An optional id of the user. If you know the Spotify URI it is easy
+	   * to find the id (e.g. spotify:user:<here_is_the_id>). If not provided, the id of the user that granted
+	   * the permissions will be used.
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getUserPlaylists = function(userId, options, callback) {
+	    var requestData;
+	    if (typeof userId === 'string') {
+	      requestData = {
+	        url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists'
+	      };
+	    } else {
+	      requestData = {
+	        url: _baseUri + '/me/playlists'
+	      };
+	      callback = options;
+	      options = userId;
+	    }
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a specific playlist.
+	   * See [Get a Playlist](https://developer.spotify.com/web-api/get-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getPlaylist = function(userId, playlistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches the tracks from a specific playlist.
+	   * See [Get a Playlist's Tracks](https://developer.spotify.com/web-api/get-playlists-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getPlaylistTracks = function(userId, playlistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Creates a playlist and stores it in the current user's library.
+	   * See [Create a Playlist](https://developer.spotify.com/web-api/create-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. You may want to user the "getMe" function to
+	   * find out the id of the current logged in user
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.createPlaylist = function(userId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists',
+	      type: 'POST',
+	      postData: options
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Change a playlist's name and public/private state
+	   * See [Change a Playlist's Details](https://developer.spotify.com/web-api/change-playlist-details/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. You may want to user the "getMe" function to
+	   * find out the id of the current logged in user
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Object} data A JSON object with the data to update. E.g. {name: 'A new name', public: true}
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.changePlaylistDetails = function(userId, playlistId, data, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId,
+	      type: 'PUT',
+	      postData: data
+	    };
+	    return _checkParamsAndPerformRequest(requestData, data, callback);
+	  };
+
+	  /**
+	   * Add tracks to a playlist.
+	   * See [Add Tracks to a Playlist](https://developer.spotify.com/web-api/add-tracks-to-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<string>} uris An array of Spotify URIs for the tracks
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.addTracksToPlaylist = function(userId, playlistId, uris, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'POST',
+	      postData: {
+	        uris: uris
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback, true);
+	  };
+
+	  /**
+	   * Replace the tracks of a playlist
+	   * See [Replace a Playlist's Tracks](https://developer.spotify.com/web-api/replace-playlists-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<string>} uris An array of Spotify URIs for the tracks
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.replaceTracksInPlaylist = function(userId, playlistId, uris, callback) {
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'PUT',
+	      postData: {uris: uris}
+	    };
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Reorder tracks in a playlist
+	   * See [Reorder a Playlist’s Tracks](https://developer.spotify.com/web-api/reorder-playlists-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {number} rangeStart The position of the first track to be reordered.
+	   * @param {number} insertBefore The position where the tracks should be inserted. To reorder the tracks to
+	   * the end of the playlist, simply set insert_before to the position after the last track.
+	   * @param {Object} options An object with optional parameters (range_length, snapshot_id)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.reorderTracksInPlaylist = function(userId, playlistId, rangeStart, insertBefore, options, callback) {
+	    /* eslint-disable camelcase */
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'PUT',
+	      postData: {
+	        range_start: rangeStart,
+	        insert_before: insertBefore
+	      }
+	    };
+	    /* eslint-enable camelcase */
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Remove tracks from a playlist
+	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<Object>} uris An array of tracks to be removed. Each element of the array can be either a
+	   * string, in which case it is treated as a URI, or an object containing the properties `uri` (which is a
+	   * string) and `positions` (which is an array of integers).
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.removeTracksFromPlaylist = function(userId, playlistId, uris, callback) {
+	    var dataToBeSent = uris.map(function(uri) {
+	      if (typeof uri === 'string') {
+	        return { uri: uri };
+	      } else {
+	        return uri;
+	      }
+	    });
+
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'DELETE',
+	      postData: {tracks: dataToBeSent}
+	    };
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Remove tracks from a playlist, specifying a snapshot id.
+	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<Object>} uris An array of tracks to be removed. Each element of the array can be either a
+	   * string, in which case it is treated as a URI, or an object containing the properties `uri` (which is a
+	   * string) and `positions` (which is an array of integers).
+	   * @param {string} snapshotId The playlist's snapshot ID against which you want to make the changes
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.removeTracksFromPlaylistWithSnapshotId = function(userId, playlistId, uris, snapshotId, callback) {
+	    var dataToBeSent = uris.map(function(uri) {
+	      if (typeof uri === 'string') {
+	        return { uri: uri };
+	      } else {
+	        return uri;
+	      }
+	    });
+	    /* eslint-disable camelcase */
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'DELETE',
+	      postData: {
+	        tracks: dataToBeSent,
+	        snapshot_id: snapshotId
+	      }
+	    };
+	    /* eslint-enable camelcase */
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Remove tracks from a playlist, specifying the positions of the tracks to be removed.
+	   * See [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} userId The id of the user. If you know the Spotify URI it is easy
+	   * to find the user id (e.g. spotify:user:<here_is_the_user_id>:playlist:xxxx)
+	   * @param {string} playlistId The id of the playlist. If you know the Spotify URI it is easy
+	   * to find the playlist id (e.g. spotify:user:xxxx:playlist:<here_is_the_playlist_id>)
+	   * @param {Array<number>} positions array of integers containing the positions of the tracks to remove
+	   * from the playlist.
+	   * @param {string} snapshotId The playlist's snapshot ID against which you want to make the changes
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.removeTracksFromPlaylistInPositions = function(userId, playlistId, positions, snapshotId, callback) {
+	    /* eslint-disable camelcase */
+	    var requestData = {
+	      url: _baseUri + '/users/' + encodeURIComponent(userId) + '/playlists/' + playlistId + '/tracks',
+	      type: 'DELETE',
+	      postData: {
+	        positions: positions,
+	        snapshot_id: snapshotId
+	      }
+	    };
+	    /* eslint-enable camelcase */
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Fetches an album from the Spotify catalog.
+	   * See [Get an Album](https://developer.spotify.com/web-api/get-album/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} albumId The id of the album. If you know the Spotify URI it is easy
+	   * to find the album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAlbum = function(albumId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/albums/' + albumId
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches the tracks of an album from the Spotify catalog.
+	   * See [Get an Album's Tracks](https://developer.spotify.com/web-api/get-albums-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} albumId The id of the album. If you know the Spotify URI it is easy
+	   * to find the album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAlbumTracks = function(albumId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/albums/' + albumId + '/tracks'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches multiple albums from the Spotify catalog.
+	   * See [Get Several Albums](https://developer.spotify.com/web-api/get-several-albums/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} albumIds The ids of the albums. If you know their Spotify URI it is easy
+	   * to find their album id (e.g. spotify:album:<here_is_the_album_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAlbums = function(albumIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/albums/',
+	      params: { ids: albumIds.join(',') }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a track from the Spotify catalog.
+	   * See [Get a Track](https://developer.spotify.com/web-api/get-track/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
+	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getTrack = function(trackId, options, callback) {
+	    var requestData = {};
+	    requestData.url = _baseUri + '/tracks/' + trackId;
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches multiple tracks from the Spotify catalog.
+	   * See [Get Several Tracks](https://developer.spotify.com/web-api/get-several-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
+	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getTracks = function(trackIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/tracks/',
+	      params: { ids: trackIds.join(',') }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches an artist from the Spotify catalog.
+	   * See [Get an Artist](https://developer.spotify.com/web-api/get-artist/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
+	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getArtist = function(artistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/artists/' + artistId
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches multiple artists from the Spotify catalog.
+	   * See [Get Several Artists](https://developer.spotify.com/web-api/get-several-artists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} artistIds The ids of the artists. If you know their Spotify URI it is easy
+	   * to find their artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getArtists = function(artistIds, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/artists/',
+	      params: { ids: artistIds.join(',') }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches the albums of an artist from the Spotify catalog.
+	   * See [Get an Artist's Albums](https://developer.spotify.com/web-api/get-artists-albums/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
+	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getArtistAlbums = function(artistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/artists/' + artistId + '/albums'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a list of top tracks of an artist from the Spotify catalog, for a specific country.
+	   * See [Get an Artist's Top Tracks](https://developer.spotify.com/web-api/get-artists-top-tracks/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
+	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {string} countryId The id of the country (e.g. ES for Spain or US for United States)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getArtistTopTracks = function(artistId, countryId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/artists/' + artistId + '/top-tracks',
+	      params: { country: countryId }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a list of artists related with a given one from the Spotify catalog.
+	   * See [Get an Artist's Related Artists](https://developer.spotify.com/web-api/get-related-artists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} artistId The id of the artist. If you know the Spotify URI it is easy
+	   * to find the artist id (e.g. spotify:artist:<here_is_the_artist_id>)
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getArtistRelatedArtists = function(artistId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/artists/' + artistId + '/related-artists'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a list of Spotify featured playlists (shown, for example, on a Spotify player's "Browse" tab).
+	   * See [Get a List of Featured Playlists](https://developer.spotify.com/web-api/get-list-featured-playlists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getFeaturedPlaylists = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/browse/featured-playlists'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches a list of new album releases featured in Spotify (shown, for example, on a Spotify player's "Browse" tab).
+	   * See [Get a List of New Releases](https://developer.spotify.com/web-api/get-list-new-releases/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getNewReleases = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/browse/new-releases'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player's "Browse" tab).
+	   * See [Get a List of Categories](https://developer.spotify.com/web-api/get-list-categories/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getCategories = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/browse/categories'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get a single category used to tag items in Spotify (on, for example, the Spotify player's "Browse" tab).
+	   * See [Get a Category](https://developer.spotify.com/web-api/get-category/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} categoryId The id of the category. These can be found with the getCategories function
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getCategory = function(categoryId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/browse/categories/' + categoryId
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get a list of Spotify playlists tagged with a particular category.
+	   * See [Get a Category's Playlists](https://developer.spotify.com/web-api/get-categorys-playlists/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} categoryId The id of the category. These can be found with the getCategories function
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getCategoryPlaylists = function(categoryId, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/browse/categories/' + categoryId + '/playlists'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Get Spotify catalog information about artists, albums, tracks or playlists that match a keyword string.
+	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} query The search query
+	   * @param {Array<string>} types An array of item types to search across.
+	   * Valid types are: 'album', 'artist', 'playlist', and 'track'.
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.search = function(query, types, options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/search/',
+	      params: {
+	        q: query,
+	        type: types.join(',')
+	      }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Fetches albums from the Spotify catalog according to a query.
+	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} query The search query
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.searchAlbums = function(query, options, callback) {
+	    return this.search(query, ['album'], options, callback);
+	  };
+
+	  /**
+	   * Fetches artists from the Spotify catalog according to a query.
+	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} query The search query
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.searchArtists = function(query, options, callback) {
+	    return this.search(query, ['artist'], options, callback);
+	  };
+
+	  /**
+	   * Fetches tracks from the Spotify catalog according to a query.
+	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} query The search query
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.searchTracks = function(query, options, callback) {
+	    return this.search(query, ['track'], options, callback);
+	  };
+
+	  /**
+	   * Fetches playlists from the Spotify catalog according to a query.
+	   * See [Search for an Item](https://developer.spotify.com/web-api/search-item/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} query The search query
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.searchPlaylists = function(query, options, callback) {
+	    return this.search(query, ['playlist'], options, callback);
+	  };
+
+	  /**
+	   * Get audio features for a single track identified by its unique Spotify ID.
+	   * See [Get Audio Features for a Track](https://developer.spotify.com/web-api/get-audio-features/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
+	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAudioFeaturesForTrack = function(trackId, callback) {
+	    var requestData = {};
+	    requestData.url = _baseUri + '/audio-features/' + trackId;
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Get audio features for multiple tracks based on their Spotify IDs.
+	   * See [Get Audio Features for Several Tracks](https://developer.spotify.com/web-api/get-several-audio-features/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Array<string>} trackIds The ids of the tracks. If you know their Spotify URI it is easy
+	   * to find their track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAudioFeaturesForTracks = function(trackIds, callback) {
+	    var requestData = {
+	      url: _baseUri + '/audio-features',
+	      params: { ids: trackIds }
+	    };
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Get audio analysis for a single track identified by its unique Spotify ID.
+	   * See [Get Audio Analysis for a Track](https://developer.spotify.com/web-api/get-audio-analysis/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {string} trackId The id of the track. If you know the Spotify URI it is easy
+	   * to find the track id (e.g. spotify:track:<here_is_the_track_id>)
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAudioAnalysisForTrack = function(trackId, callback) {
+	    var requestData = {};
+	    requestData.url = _baseUri + '/audio-analysis/' + trackId;
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Create a playlist-style listening experience based on seed artists, tracks and genres.
+	   * See [Get Recommendations Based on Seeds](https://developer.spotify.com/web-api/get-recommendations/) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {Object} options A JSON object with options that can be passed
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getRecommendations = function(options, callback) {
+	    var requestData = {
+	      url: _baseUri + '/recommendations'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, options, callback);
+	  };
+
+	  /**
+	   * Retrieve a list of available genres seed parameter values for recommendations.
+	   * See [Available Genre Seeds](https://developer.spotify.com/web-api/get-recommendations/#available-genre-seeds) on
+	   * the Spotify Developer site for more information about the endpoint.
+	   *
+	   * @param {function(Object,Object)} callback An optional callback that receives 2 parameters. The first
+	   * one is the error object (null if no error), and the second is the value if the request succeeded.
+	   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	   */
+	  Constr.prototype.getAvailableGenreSeeds = function(callback) {
+	    var requestData = {
+	      url: _baseUri + '/recommendations/available-genre-seeds'
+	    };
+	    return _checkParamsAndPerformRequest(requestData, {}, callback);
+	  };
+
+	  /**
+	   * Gets the access token in use.
+	   *
+	   * @return {string} accessToken The access token
+	   */
+	  Constr.prototype.getAccessToken = function() {
+	    return _accessToken;
+	  };
+
+	  /**
+	   * Sets the access token to be used.
+	   * See [the Authorization Guide](https://developer.spotify.com/web-api/authorization-guide/) on
+	   * the Spotify Developer site for more information about obtaining an access token.
+	   *
+	   * @param {string} accessToken The access token
+	   * @return {void}
+	   */
+	  Constr.prototype.setAccessToken = function(accessToken) {
+	    _accessToken = accessToken;
+	  };
+
+	  /**
+	   * Sets an implementation of Promises/A+ to be used. E.g. Q, when.
+	   * See [Conformant Implementations](https://github.com/promises-aplus/promises-spec/blob/master/implementations.md)
+	   * for a list of some available options
+	   *
+	   * @param {Object} PromiseImplementation A Promises/A+ valid implementation
+	   * @throws {Error} If the implementation being set doesn't conform with Promises/A+
+	   * @return {void}
+	   */
+	  Constr.prototype.setPromiseImplementation = function(PromiseImplementation) {
+	    var valid = false;
+	    try {
+	      var p = new PromiseImplementation(function(resolve) {
+	        resolve();
+	      });
+	      if (typeof p.then === 'function' && typeof p.catch === 'function') {
+	        valid = true;
+	      }
+	    } catch (e) {
+	      console.error(e);
+	    }
+	    if (valid) {
+	      _promiseImplementation = PromiseImplementation;
+	    } else {
+	      throw new Error('Unsupported implementation of Promises/A+');
+	    }
+	  };
+
+	  return Constr;
+	})();
+
+	if (typeof module === 'object' && typeof module.exports === 'object') {
+	  module.exports = SpotifyWebApi;
+	}
+
+
+/***/ },
+/* 514 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = actionCreator;
+	//Action Creator
+
+	function actionCreator(type) {
+		for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+			args[_key - 1] = arguments[_key];
+		}
+
+		return function () {
+			for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+				args[_key2] = arguments[_key2];
+			}
+
+			var action = { type: type };
+			argNames.forEach(function (arg, index) {
+				action[argNames[index]] = args[index];
+			});
+			return action;
+		};
+	}
+
+/***/ },
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47062,21 +46897,21 @@
 
 	var _reactRedux = __webpack_require__(265);
 
-	var _form = __webpack_require__(520);
+	var _form = __webpack_require__(516);
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _FormActions = __webpack_require__(283);
+	var _FormActions = __webpack_require__(551);
 
-	var _TimerActions = __webpack_require__(286);
+	var _TimerActions = __webpack_require__(500);
 
 	var _TimerActions2 = _interopRequireDefault(_TimerActions);
 
-	var _RaisedButton = __webpack_require__(459);
+	var _RaisedButton = __webpack_require__(451);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _Dialog = __webpack_require__(555);
+	var _Dialog = __webpack_require__(552);
 
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 
@@ -47176,7 +47011,7 @@
 	})(FormContainer);
 
 /***/ },
-/* 520 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47191,25 +47026,25 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SelectField = __webpack_require__(521);
+	var _SelectField = __webpack_require__(517);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
-	var _RaisedButton = __webpack_require__(459);
+	var _RaisedButton = __webpack_require__(451);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _Slider = __webpack_require__(551);
+	var _Slider = __webpack_require__(547);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
-	var _MuiThemeProvider = __webpack_require__(398);
+	var _MuiThemeProvider = __webpack_require__(390);
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
 	var _reactRouter = __webpack_require__(184);
 
-	var _CustomTheme = __webpack_require__(499);
+	var _CustomTheme = __webpack_require__(491);
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
@@ -47302,7 +47137,7 @@
 	exports.default = EntryForm;
 
 /***/ },
-/* 521 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47312,7 +47147,7 @@
 	});
 	exports.default = undefined;
 
-	var _SelectField = __webpack_require__(522);
+	var _SelectField = __webpack_require__(518);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
@@ -47321,7 +47156,7 @@
 	exports.default = _SelectField2.default;
 
 /***/ },
-/* 522 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -47330,35 +47165,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -47366,11 +47201,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TextField = __webpack_require__(523);
+	var _TextField = __webpack_require__(519);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
-	var _DropDownMenu = __webpack_require__(529);
+	var _DropDownMenu = __webpack_require__(525);
 
 	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
 
@@ -47600,7 +47435,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 523 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47610,7 +47445,7 @@
 	});
 	exports.default = undefined;
 
-	var _TextField = __webpack_require__(524);
+	var _TextField = __webpack_require__(520);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
@@ -47619,7 +47454,7 @@
 	exports.default = _TextField2.default;
 
 /***/ },
-/* 524 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -47628,35 +47463,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -47668,27 +47503,27 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _EnhancedTextarea = __webpack_require__(525);
+	var _EnhancedTextarea = __webpack_require__(521);
 
 	var _EnhancedTextarea2 = _interopRequireDefault(_EnhancedTextarea);
 
-	var _TextFieldHint = __webpack_require__(526);
+	var _TextFieldHint = __webpack_require__(522);
 
 	var _TextFieldHint2 = _interopRequireDefault(_TextFieldHint);
 
-	var _TextFieldLabel = __webpack_require__(527);
+	var _TextFieldLabel = __webpack_require__(523);
 
 	var _TextFieldLabel2 = _interopRequireDefault(_TextFieldLabel);
 
-	var _TextFieldUnderline = __webpack_require__(528);
+	var _TextFieldUnderline = __webpack_require__(524);
 
 	var _TextFieldUnderline2 = _interopRequireDefault(_TextFieldUnderline);
 
@@ -48197,7 +48032,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 525 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48206,35 +48041,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -48242,7 +48077,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactEventListener = __webpack_require__(511);
+	var _reactEventListener = __webpack_require__(504);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
@@ -48443,7 +48278,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 526 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48452,7 +48287,7 @@
 	  value: true
 	});
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -48460,7 +48295,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -48525,7 +48360,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 527 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48534,7 +48369,7 @@
 	  value: true
 	});
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -48542,7 +48377,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -48642,7 +48477,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 528 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48651,7 +48486,7 @@
 	  value: true
 	});
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -48659,7 +48494,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -48780,7 +48615,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 529 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48790,11 +48625,11 @@
 	});
 	exports.default = exports.MenuItem = exports.DropDownMenu = undefined;
 
-	var _DropDownMenu2 = __webpack_require__(530);
+	var _DropDownMenu2 = __webpack_require__(526);
 
 	var _DropDownMenu3 = _interopRequireDefault(_DropDownMenu2);
 
-	var _MenuItem2 = __webpack_require__(545);
+	var _MenuItem2 = __webpack_require__(541);
 
 	var _MenuItem3 = _interopRequireDefault(_MenuItem2);
 
@@ -48805,7 +48640,7 @@
 	exports.default = _DropDownMenu3.default;
 
 /***/ },
-/* 530 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48814,35 +48649,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -48850,27 +48685,27 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _arrowDropDown = __webpack_require__(531);
+	var _arrowDropDown = __webpack_require__(527);
 
 	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
 
-	var _Menu = __webpack_require__(532);
+	var _Menu = __webpack_require__(528);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _ClearFix = __webpack_require__(538);
+	var _ClearFix = __webpack_require__(534);
 
 	var _ClearFix2 = _interopRequireDefault(_ClearFix);
 
-	var _Popover = __webpack_require__(540);
+	var _Popover = __webpack_require__(536);
 
 	var _Popover2 = _interopRequireDefault(_Popover);
 
-	var _PopoverAnimationVertical = __webpack_require__(544);
+	var _PopoverAnimationVertical = __webpack_require__(540);
 
 	var _PopoverAnimationVertical2 = _interopRequireDefault(_PopoverAnimationVertical);
 
@@ -49240,7 +49075,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 531 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49253,11 +49088,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -49277,7 +49112,7 @@
 	exports.default = NavigationArrowDropDown;
 
 /***/ },
-/* 532 */
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -49286,39 +49121,39 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _toArray2 = __webpack_require__(476);
+	var _toArray2 = __webpack_require__(468);
 
 	var _toArray3 = _interopRequireDefault(_toArray2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -49330,27 +49165,27 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _ClickAwayListener = __webpack_require__(533);
+	var _ClickAwayListener = __webpack_require__(529);
 
 	var _ClickAwayListener2 = _interopRequireDefault(_ClickAwayListener);
 
-	var _keycode = __webpack_require__(466);
+	var _keycode = __webpack_require__(458);
 
 	var _keycode2 = _interopRequireDefault(_keycode);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _List = __webpack_require__(534);
+	var _List = __webpack_require__(530);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _menuUtils = __webpack_require__(537);
+	var _menuUtils = __webpack_require__(533);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49919,7 +49754,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 533 */
+/* 529 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -49928,23 +49763,23 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -49954,7 +49789,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _events = __webpack_require__(465);
+	var _events = __webpack_require__(457);
 
 	var _events2 = _interopRequireDefault(_events);
 
@@ -50050,7 +49885,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 534 */
+/* 530 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50059,35 +49894,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -50095,7 +49930,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Subheader = __webpack_require__(535);
+	var _Subheader = __webpack_require__(531);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
@@ -50160,7 +49995,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 535 */
+/* 531 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50170,7 +50005,7 @@
 	});
 	exports.default = undefined;
 
-	var _Subheader = __webpack_require__(536);
+	var _Subheader = __webpack_require__(532);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
@@ -50179,7 +50014,7 @@
 	exports.default = _Subheader2.default;
 
 /***/ },
-/* 536 */
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50188,15 +50023,15 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -50264,7 +50099,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 537 */
+/* 533 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50274,11 +50109,11 @@
 	});
 	exports.HotKeyHolder = undefined;
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -50308,7 +50143,7 @@
 	}();
 
 /***/ },
-/* 538 */
+/* 534 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50317,11 +50152,11 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
@@ -50329,7 +50164,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BeforeAfterWrapper = __webpack_require__(539);
+	var _BeforeAfterWrapper = __webpack_require__(535);
 
 	var _BeforeAfterWrapper2 = _interopRequireDefault(_BeforeAfterWrapper);
 
@@ -50376,7 +50211,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 539 */
+/* 535 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50385,31 +50220,31 @@
 	  value: true
 	});
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -50532,7 +50367,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 540 */
+/* 536 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50541,35 +50376,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -50581,27 +50416,27 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactEventListener = __webpack_require__(511);
+	var _reactEventListener = __webpack_require__(504);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
-	var _RenderToLayer = __webpack_require__(541);
+	var _RenderToLayer = __webpack_require__(537);
 
 	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _lodash = __webpack_require__(542);
+	var _lodash = __webpack_require__(538);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _PopoverAnimationDefault = __webpack_require__(543);
+	var _PopoverAnimationDefault = __webpack_require__(539);
 
 	var _PopoverAnimationDefault2 = _interopRequireDefault(_PopoverAnimationDefault);
 
@@ -51020,7 +50855,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 541 */
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51029,23 +50864,23 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -51053,7 +50888,7 @@
 
 	var _reactDom = __webpack_require__(1);
 
-	var _dom = __webpack_require__(477);
+	var _dom = __webpack_require__(469);
 
 	var _dom2 = _interopRequireDefault(_dom);
 
@@ -51205,7 +51040,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 542 */
+/* 538 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -51651,7 +51486,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 543 */
+/* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51660,31 +51495,31 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
@@ -51692,11 +51527,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
@@ -51825,7 +51660,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 544 */
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51834,27 +51669,27 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -51862,15 +51697,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _propTypes = __webpack_require__(481);
+	var _propTypes = __webpack_require__(473);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -51974,7 +51809,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 545 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51983,35 +51818,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -52023,23 +51858,23 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _Popover = __webpack_require__(540);
+	var _Popover = __webpack_require__(536);
 
 	var _Popover2 = _interopRequireDefault(_Popover);
 
-	var _check = __webpack_require__(546);
+	var _check = __webpack_require__(542);
 
 	var _check2 = _interopRequireDefault(_check);
 
-	var _ListItem = __webpack_require__(547);
+	var _ListItem = __webpack_require__(543);
 
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 
-	var _Menu = __webpack_require__(532);
+	var _Menu = __webpack_require__(528);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
@@ -52356,7 +52191,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 546 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52369,11 +52204,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -52393,7 +52228,7 @@
 	exports.default = NavigationCheck;
 
 /***/ },
-/* 547 */
+/* 543 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52402,35 +52237,35 @@
 	  value: true
 	});
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -52442,33 +52277,33 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _shallowEqual = __webpack_require__(301);
+	var _shallowEqual = __webpack_require__(293);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _colorManipulator = __webpack_require__(411);
+	var _colorManipulator = __webpack_require__(403);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _EnhancedButton = __webpack_require__(464);
+	var _EnhancedButton = __webpack_require__(456);
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _IconButton = __webpack_require__(487);
+	var _IconButton = __webpack_require__(479);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
-	var _expandLess = __webpack_require__(548);
+	var _expandLess = __webpack_require__(544);
 
 	var _expandLess2 = _interopRequireDefault(_expandLess);
 
-	var _expandMore = __webpack_require__(549);
+	var _expandMore = __webpack_require__(545);
 
 	var _expandMore2 = _interopRequireDefault(_expandMore);
 
-	var _NestedList = __webpack_require__(550);
+	var _NestedList = __webpack_require__(546);
 
 	var _NestedList2 = _interopRequireDefault(_NestedList);
 
@@ -53110,7 +52945,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 548 */
+/* 544 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53123,11 +52958,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -53147,7 +52982,7 @@
 	exports.default = NavigationExpandLess;
 
 /***/ },
-/* 549 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53160,11 +52995,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pure = __webpack_require__(292);
+	var _pure = __webpack_require__(284);
 
 	var _pure2 = _interopRequireDefault(_pure);
 
-	var _SvgIcon = __webpack_require__(302);
+	var _SvgIcon = __webpack_require__(294);
 
 	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
 
@@ -53184,7 +53019,7 @@
 	exports.default = NavigationExpandMore;
 
 /***/ },
-/* 550 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -53197,7 +53032,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _List = __webpack_require__(534);
+	var _List = __webpack_require__(530);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -53239,7 +53074,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 551 */
+/* 547 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53249,7 +53084,7 @@
 	});
 	exports.default = undefined;
 
-	var _Slider = __webpack_require__(552);
+	var _Slider = __webpack_require__(548);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
@@ -53258,7 +53093,7 @@
 	exports.default = _Slider2.default;
 
 /***/ },
-/* 552 */
+/* 548 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -53267,39 +53102,39 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _defineProperty2 = __webpack_require__(553);
+	var _defineProperty2 = __webpack_require__(549);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -53307,7 +53142,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _keycode = __webpack_require__(466);
+	var _keycode = __webpack_require__(458);
 
 	var _keycode2 = _interopRequireDefault(_keycode);
 
@@ -53315,15 +53150,15 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _FocusRipple = __webpack_require__(467);
+	var _FocusRipple = __webpack_require__(459);
 
 	var _FocusRipple2 = _interopRequireDefault(_FocusRipple);
 
-	var _deprecatedPropType = __webpack_require__(554);
+	var _deprecatedPropType = __webpack_require__(550);
 
 	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
 
@@ -54105,14 +53940,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 553 */
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(350);
+	var _defineProperty = __webpack_require__(342);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -54134,7 +53969,7 @@
 	};
 
 /***/ },
-/* 554 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -54178,7 +54013,42 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 555 */
+/* 551 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.closeDialog = exports.submitSession = exports.restMusicSelect = exports.workMusicSelect = exports.sliderChange = undefined;
+
+	var _ActionCreator = __webpack_require__(514);
+
+	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SLIDER_CHANGE = 'SLIDER_CHANGE'; //Form Actions
+
+
+	var WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
+	var REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+
+	var SUBMIT_SESSION = 'SUBMIT_SESSION';
+	var CLOSE_DIALOG = 'CLOSE_DIALOG';
+
+	var sliderChange = exports.sliderChange = (0, _ActionCreator2.default)(SLIDER_CHANGE, 'data');
+
+	var workMusicSelect = exports.workMusicSelect = (0, _ActionCreator2.default)(WORK_MUSIC_SELECT, 'newGenre');
+	var restMusicSelect = exports.restMusicSelect = (0, _ActionCreator2.default)(REST_MUSIC_SELECT, 'newGenre');
+
+	var submitSession = exports.submitSession = (0, _ActionCreator2.default)(SUBMIT_SESSION, 'slider', 'restGenre');
+
+	var closeDialog = exports.closeDialog = (0, _ActionCreator2.default)(CLOSE_DIALOG);
+
+/***/ },
+/* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54188,7 +54058,7 @@
 	});
 	exports.default = undefined;
 
-	var _Dialog = __webpack_require__(556);
+	var _Dialog = __webpack_require__(553);
 
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 
@@ -54197,7 +54067,7 @@
 	exports.default = _Dialog2.default;
 
 /***/ },
-/* 556 */
+/* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -54206,35 +54076,35 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(304);
+	var _extends2 = __webpack_require__(296);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _objectWithoutProperties2 = __webpack_require__(342);
+	var _objectWithoutProperties2 = __webpack_require__(334);
 
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-	var _getPrototypeOf = __webpack_require__(343);
+	var _getPrototypeOf = __webpack_require__(335);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(348);
+	var _classCallCheck2 = __webpack_require__(340);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(349);
+	var _createClass2 = __webpack_require__(341);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(353);
+	var _possibleConstructorReturn2 = __webpack_require__(345);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(388);
+	var _inherits2 = __webpack_require__(380);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _simpleAssign = __webpack_require__(396);
+	var _simpleAssign = __webpack_require__(388);
 
 	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
@@ -54246,31 +54116,31 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactEventListener = __webpack_require__(511);
+	var _reactEventListener = __webpack_require__(504);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
-	var _keycode = __webpack_require__(466);
+	var _keycode = __webpack_require__(458);
 
 	var _keycode2 = _interopRequireDefault(_keycode);
 
-	var _transitions = __webpack_require__(397);
+	var _transitions = __webpack_require__(389);
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _Overlay = __webpack_require__(516);
+	var _Overlay = __webpack_require__(509);
 
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 
-	var _RenderToLayer = __webpack_require__(541);
+	var _RenderToLayer = __webpack_require__(537);
 
 	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
 
-	var _Paper = __webpack_require__(479);
+	var _Paper = __webpack_require__(471);
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _reactAddonsTransitionGroup = __webpack_require__(470);
+	var _reactAddonsTransitionGroup = __webpack_require__(462);
 
 	var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransitionGroup);
 
@@ -54788,6 +54658,240 @@
 	} : void 0;
 	exports.default = Dialog;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 554 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = tabataForm;
+
+	var _FormActions = __webpack_require__(551);
+
+	var Form_State = {
+	  loading: true,
+	  openDialog: true,
+	  WorkMusicType: '',
+	  RestMusicType: '',
+	  SessionSlider: 1.0,
+	  recommendationSeeds: null
+	};
+
+	function tabataForm() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Form_State;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _FormActions.SLIDER_CHANGE:
+	      return Object.assign({}, state, {
+	        SessionSlider: action.value
+	      });
+	    case _FormActions.WORK_MUSIC_SELECT:
+	      return Object.assign({}, state, {
+	        WorkMusicType: action.newGenre
+	      });
+	    case _FormActions.REST_MUSIC_SELECT:
+	      return Object.assign({}, state, {
+	        RestMusicType: action.newGenre
+	      });
+	    case _FormActions.CLOSE_DIALOG:
+	      return Object.assign({}, state, {
+	        openDialog: !this.state.openDialog
+	      });
+	    default:
+	      return state;
+
+	  }
+	}
+
+/***/ },
+/* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = TimerReducer;
+
+	var _TimerActions = __webpack_require__(500);
+
+	var _FormActions = __webpack_require__(551);
+
+	var time_state = {
+		cycles: 4,
+		working: true,
+		restRecommendationSeeds: null,
+		workRecommendationSeeds: null,
+		initialSeconds: 2500,
+		secondsRemaining: 2500,
+		completed: 100,
+		isCounting: true
+	};
+
+	console.log(time_state);
+
+	function TimerReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : time_state;
+		var actions = arguments[1];
+
+		switch (actions.type) {
+			case _TimerActions.CYCLE_SET:
+				return Object.assign({}, state, {
+					cycles: actions.cycleCount
+				});
+			case _TimerActions.SESSION_TYPE_SET:
+				if (actions.sessionType == 'working') {
+					return Object.assign({}, state, {
+						working: !state.working,
+						secondsRemaining: 1200,
+						initialSeconds: 1200
+					});
+				} else {
+					return Object.assign({}, state, {
+						working: !state.working,
+						secondsRemaining: 300,
+						initialSeconds: 300
+					});
+				}
+			case _TimerActions.TICK:
+				if (state.secondsRemaining >= 0) {
+					return Object.assign({}, state, {
+						secondsRemaining: state.secondsRemaining - 1,
+						completed: state.secondsRemaining / state.initialSeconds * 100
+					});
+				} else {
+					if (state.working === true) {
+						return Object.assign({}, state, {
+							working: false,
+							secondsRemaining: 300,
+							initialSeconds: 300
+						});
+					} else {
+						return Object.assign({}, state, {
+							working: true,
+							cycles: state.cycles - 1,
+							secondsRemaining: 1200,
+							initialSeconds: 1200
+						});
+					}
+				}
+			case _TimerActions.START_STOP:
+				return Object.assign({}, state, {
+					isCounting: !state.isCounting
+				});
+			case _FormActions.SUBMIT_FORM:
+			//Sets everything up, is part of Form
+
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 556 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = spotifyRecommendations;
+
+	var _SpotifyActions = __webpack_require__(512);
+
+	//todo 
+	function spotifyRecommendations(state, action) {
+	  switch (action.type) {
+	    case _SpotifyActions.SPOTIFY_TOKENS:
+	      var accessToken = action.accessToken,
+	          refreshToken = action.refreshToken;
+
+	      return Object.assign({}, state, { accessToken: accessToken, refreshToken: refreshToken });
+
+	    case _SpotifyActions.SPOTIFY_REC_BEGIN:
+	      return Object.assign({}, state, {});
+	    case _SpotifyActions.SPOTIFY_REC_SUCCESS:
+	      return Object.assign({}, state, {});
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_BEGIN:
+	      return Object.assign({}, state, {
+	        recommendationSeed: state.recommendationSeed,
+	        loading: true
+	      });
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_SUCCESS:
+	      return Object.assign({}, state, {
+	        recommendationSeed: action.data,
+	        loading: false,
+	        recomendationSet: true
+
+	      });
+	    case _SpotifyActions.SPOTIFY_GENRE_SEED_FAILURE:
+	      return state;
+
+	  }
+	}
+
+/***/ },
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(177);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(284);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(294);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavigationArrowBack = function NavigationArrowBack(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z' })
+	  );
+	};
+	NavigationArrowBack = (0, _pure2.default)(NavigationArrowBack);
+	NavigationArrowBack.displayName = 'NavigationArrowBack';
+	NavigationArrowBack.muiName = 'SvgIcon';
+
+	exports.default = NavigationArrowBack;
+
+/***/ },
+/* 558 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _MenuItem = __webpack_require__(541);
+
+	var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _MenuItem2.default;
 
 /***/ }
 /******/ ]);
