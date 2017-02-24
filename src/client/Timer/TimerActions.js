@@ -11,7 +11,7 @@ export function cycleSet(cycleCount) {
 }
 
 export function sessionTypeSet(session_type){
-	return { type: SESSION_TYPE_SET, sessionType: session_type};
+	return { type: SESSION_TYPE_SET, sessionType: session_type };
 }
 
 export function tick(){

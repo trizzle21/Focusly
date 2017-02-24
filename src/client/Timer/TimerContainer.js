@@ -20,8 +20,8 @@ const styles = {
 
 class TimerContainer extends React.Component {
 	componentWillReceiveProps(){
-		this.props.dispatch(sessionTypeSet('working'));
-		this.props.dispatch(cycleSet(5));
+		this.sessionTypeSet('working');
+		this.cycleSet(5);
 		var interval = setInterval(this.props.dispatch(tick()), 1000);
 	}
 
@@ -31,12 +31,16 @@ class TimerContainer extends React.Component {
 		//Going to move this to be an action
 		if(this.props.isCounting === true){
 			clearInterval(this.interval);
-			this.props.dispatch(startStop());
+			this.startStop();
 		} else {
 			var interval = setInterval(this.props.dispatch(tick()), 1000);
-			this.props.dispatch(startStop());
+			this.startStop();
 		}
 
+	}
+
+	startCounting(){
+		this.tick();
 	}
 
 	componentWillUnmount() {
@@ -48,10 +52,9 @@ class TimerContainer extends React.Component {
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
-		 	tick={this.props.dispatch(tick())} 
+		 	tick={this.startCounting} 
 			secondsRemaining={this.props.secondsRemaining}
 			cycles={this.props.cycles}
-			startStop={this.props.dispatch(startStop)}
 		 	/>
 		</div>
 	);}
@@ -64,12 +67,12 @@ TimerContainer.propTypes = {
 	isCounting:React.PropTypes.bool,
 	working:React.PropTypes.bool,
 	
-	dispatch:React.PropTypes.func.isRequired
+	//dispatch:React.PropTypes.func.isRequired
 	//redux action 
-	// sessionTypeSet:React.PropTypes.func,
-	// tick:React.PropTypes.func,	
-	// startStop:React.PropTypes.func,
-	// cycleSet:React.PropTypes.func,
+	sessionTypeSet:React.PropTypes.func,
+	tick:React.PropTypes.func,	
+	startStop:React.PropTypes.func,
+	cycleSet:React.PropTypes.func,
 }
 
 

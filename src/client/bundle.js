@@ -44914,8 +44914,8 @@
 		_createClass(TimerContainer, [{
 			key: 'componentWillReceiveProps',
 			value: function componentWillReceiveProps() {
-				this.props.dispatch((0, _TimerActions.sessionTypeSet)('working'));
-				this.props.dispatch((0, _TimerActions.cycleSet)(5));
+				this.sessionTypeSet('working');
+				this.cycleSet(5);
 				var interval = setInterval(this.props.dispatch((0, _TimerActions.tick)()), 1000);
 			}
 		}, {
@@ -44924,11 +44924,16 @@
 				//Going to move this to be an action
 				if (this.props.isCounting === true) {
 					clearInterval(this.interval);
-					this.props.dispatch((0, _TimerActions.startStop)());
+					this.startStop();
 				} else {
 					var interval = setInterval(this.props.dispatch((0, _TimerActions.tick)()), 1000);
-					this.props.dispatch((0, _TimerActions.startStop)());
+					this.startStop();
 				}
+			}
+		}, {
+			key: 'startCounting',
+			value: function startCounting() {
+				this.tick();
 			}
 		}, {
 			key: 'componentWillUnmount',
@@ -44944,10 +44949,9 @@
 					null,
 					_react2.default.createElement(_Timer2.default, {
 						pause: this.pause,
-						tick: this.props.dispatch((0, _TimerActions.tick)()),
+						tick: this.startCounting,
 						secondsRemaining: this.props.secondsRemaining,
-						cycles: this.props.cycles,
-						startStop: this.props.dispatch(_TimerActions.startStop)
+						cycles: this.props.cycles
 					})
 				);
 			}
@@ -44962,12 +44966,12 @@
 		isCounting: _react2.default.PropTypes.bool,
 		working: _react2.default.PropTypes.bool,
 
-		dispatch: _react2.default.PropTypes.func.isRequired
+		//dispatch:React.PropTypes.func.isRequired
 		//redux action 
-		// sessionTypeSet:React.PropTypes.func,
-		// tick:React.PropTypes.func,	
-		// startStop:React.PropTypes.func,
-		// cycleSet:React.PropTypes.func,
+		sessionTypeSet: _react2.default.PropTypes.func,
+		tick: _react2.default.PropTypes.func,
+		startStop: _react2.default.PropTypes.func,
+		cycleSet: _react2.default.PropTypes.func
 	};
 
 	function mapStateToProps(state) {
