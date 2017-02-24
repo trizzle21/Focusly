@@ -1,5 +1,5 @@
 import {
-	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,
+	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,SET_INTERVAL, CLEAR_INTERVAL
  } from './TimerActions';
 
 import { SUBMIT_FORM } from '../Form/FormActions';
@@ -9,6 +9,7 @@ import { SUBMIT_FORM } from '../Form/FormActions';
 const time_state={
     cycles:4,
     working:true,
+    intervalID:null,
     restRecommendationSeeds: null,
     workRecommendationSeeds: null,
     initialSeconds:1500,
@@ -18,11 +19,18 @@ const time_state={
 };
 
 
-console.log(time_state);
 
 
 export default function TimerReducer(state=time_state, actions){
 	switch(actions.type){
+		case SET_INTERVAL:
+			return Object.assign({}, state, {
+				intervalID: actions.intervalID,
+			});
+		case CLEAR_INTERVAL:
+			return Object.assign({}, state, {
+				intervalID: null,
+			});
 		case CYCLE_SET:
 			return Object.assign({}, state, {
 				cycles: actions.cycleCount,

@@ -3,7 +3,8 @@ export const CYCLE_SET = 'CYCLE_SET';
 export const SESSION_TYPE_SET = 'SESSION_TYPE_SET';
 export const TICK = 'TICK';
 export const START_STOP = 'START_STOP';
-
+export const SET_INTERVAL = 'SET_INTERVAL';
+export const CLEAR_INTERVAL = 'CLEAR_INTERVAL';
 
 
 export function cycleSet(cycleCount) {

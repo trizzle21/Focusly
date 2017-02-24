@@ -29590,6 +29590,7 @@
 	var time_state = {
 		cycles: 4,
 		working: true,
+		intervalID: null,
 		restRecommendationSeeds: null,
 		workRecommendationSeeds: null,
 		initialSeconds: 1500,
@@ -29598,13 +29599,19 @@
 		isCounting: true
 	};
 
-	console.log(time_state);
-
 	function TimerReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : time_state;
 		var actions = arguments[1];
 
 		switch (actions.type) {
+			case _TimerActions.SET_INTERVAL:
+				return Object.assign({}, state, {
+					intervalID: actions.intervalID
+				});
+			case _TimerActions.CLEAR_INTERVAL:
+				return Object.assign({}, state, {
+					intervalID: null
+				});
 			case _TimerActions.CYCLE_SET:
 				return Object.assign({}, state, {
 					cycles: actions.cycleCount
@@ -29675,6 +29682,8 @@
 	var SESSION_TYPE_SET = exports.SESSION_TYPE_SET = 'SESSION_TYPE_SET';
 	var TICK = exports.TICK = 'TICK';
 	var START_STOP = exports.START_STOP = 'START_STOP';
+	var SET_INTERVAL = exports.SET_INTERVAL = 'SET_INTERVAL';
+	var CLEAR_INTERVAL = exports.CLEAR_INTERVAL = 'CLEAR_INTERVAL';
 
 	function cycleSet(cycleCount) {
 		return { type: CYCLE_SET, cycleCount: cycleCount };
@@ -44919,53 +44928,60 @@
 				var _props = this.props,
 				    isCounting = _props.isCounting,
 				    secondsRemaining = _props.secondsRemaining,
-				    cycles = _props.cycles;
+				    cycles = _props.cycles,
+				    intervalID = _props.intervalID;
 				// this.props.sessionTypeSet('working');
 				// this.props.cycleSet(5);
 
-				var interval = setInterval(function () {
-					_this2.props.dispatch({ type: "TICK" });
+				var IntervalID = setInterval(function () {
+					_this2.props.dispatch({ type: 'TICK' });
 				}, 1000);
+				this.props.dispatch({ type: "SET_INTERVAL", intervalID: IntervalID });
 			}
 		}, {
 			key: 'pause',
 			value: function pause() {
 				var _this3 = this;
 
-				//Going to move this to be an action
 				if (this.props.isCounting) {
-					clearInterval(this.interval);
-					(0, _TimerActions.startStop)();
+					this.props.dispatch({ type: "START_STOP" });
+					clearInterval(this.props.intervalID);
 				} else {
-					var interval = setInterval(function () {
-						_this3.props.dispatch({ type: "TICK" });
+					this.props.dispatch({ type: "START_STOP" });
+					var intervalId = setInterval(function () {
+						_this3.props.dispatch({ type: 'TICK' });
 					}, 1000);
-					this.startStop();
+					this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 				}
-			}
-		}, {
-			key: 'startCounting',
-			value: function startCounting() {
-				this.tick();
 			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
-				clearInterval(this.interval);
+				this.props.dispatch({ type: "START_STOP" });
+				clearInterval(this.props.intervalID);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				//{secondsRemaining,startCounting}
+				var _props2 = this.props,
+				    startCounting = _props2.startCounting,
+				    secondsRemaining = _props2.secondsRemaining,
+				    isCounting = _props2.isCounting,
+				    cycles = _props2.cycles,
+				    dispatch = _props2.dispatch,
+				    intervalID = _props2.intervalID;
+
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Timer2.default, {
 						pause: this.pause,
-						tick: this.props.startCounting,
-						secondsRemaining: this.props.secondsRemaining,
-						isCounting: this.props.isCounting,
-						cycles: this.props.cycles
+						tick: startCounting,
+						secondsRemaining: secondsRemaining,
+						isCounting: isCounting,
+						cycles: cycles,
+						dispatch: dispatch,
+						intervalID: intervalID
 					})
 				);
 			}
@@ -44990,6 +45006,7 @@
 
 	function mapStateToProps(state) {
 		return {
+			intervalID: state.timer.intervalID,
 			working: state.timer.working,
 			secondsRemaining: state.timer.secondsRemaining,
 			cycles: state.timer.cycles,
@@ -45153,7 +45170,7 @@
 								_react2.default.createElement(
 									'div',
 									{ className: 'pause_button' },
-									_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.props.pause })
+									_react2.default.createElement(_RaisedButton2.default, { label: 'Start/Start', primary: true, style: styles.buttons, onClick: this.props.pause.bind(this) })
 								)
 							)
 						)

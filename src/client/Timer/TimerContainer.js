@@ -21,49 +21,44 @@ const styles = {
 class TimerContainer extends React.Component {
 
 
-
-
-
 	componentWillMount(){
-		const{isCounting, secondsRemaining,cycles } = this.props;
+		const{isCounting, secondsRemaining,cycles, intervalID } = this.props;
 		// this.props.sessionTypeSet('working');
 		// this.props.cycleSet(5);
-		var interval = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
+		var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
+		this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
+
 		
 	}
-
-
 	
 	pause(){
-		
-		//Going to move this to be an action
 		if(this.props.isCounting){
-			clearInterval(this.interval);
-			startStop();
+			this.props.dispatch({ type: "START_STOP" });
+			clearInterval(this.props.intervalID);
 		} else {
-			var interval = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
-			this.startStop();
+			this.props.dispatch({ type: "START_STOP" })
+			var intervalId = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
+			this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 		}
 
 	}
 
-	startCounting(){
-		this.tick();
-	}
-
 	componentWillUnmount() {
-    	clearInterval(this.interval);
+		this.props.dispatch({ type: "START_STOP" });
+		clearInterval(this.props.intervalID);
   	}
 
 	render() {
-		//{secondsRemaining,startCounting}
+		const { startCounting, secondsRemaining, isCounting, cycles, dispatch, intervalID} = this.props;
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
-		 	tick={this.props.startCounting} 
-			secondsRemaining={this.props.secondsRemaining}
-			isCounting={this.props.isCounting}
-			cycles={this.props.cycles}
+		 	tick={startCounting} 
+			secondsRemaining={secondsRemaining}
+			isCounting={isCounting}
+			cycles={cycles}
+			dispatch={dispatch}
+			intervalID={intervalID}
 		 	/>
 		</div>
 	);}
@@ -88,6 +83,7 @@ TimerContainer.propTypes = {
 
 function mapStateToProps(state) {
 	return {
+		intervalID: state.timer.intervalID,
 		working: state.timer.working,
 		secondsRemaining:state.timer.secondsRemaining,
 		cycles:state.timer.cycles,

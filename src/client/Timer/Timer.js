@@ -67,7 +67,7 @@ export default class Timer extends React.Component {
         			<div className="timer_button">
 						<div className="time_count">{minutes}:{seconds} </div>	
 						<div className="pause_button">
-							<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.props.pause}/>
+							<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.props.pause.bind(this)}/>
 						</div>
 					</div>
 				</div>
