@@ -5,16 +5,17 @@ import {
 import { SUBMIT_FORM } from '../Form/FormActions';
 
 
+
 const time_state={
     cycles:4,
     working:true,
     restRecommendationSeeds: null,
     workRecommendationSeeds: null,
-    initialSeconds:2500,
-    secondsRemaining:2500,
+    initialSeconds:1500,
+    secondsRemaining:1500,
     completed:100,
     isCounting:true,
-}
+};
 
 
 console.log(time_state);
@@ -30,8 +31,8 @@ export default function TimerReducer(state=time_state, actions){
 			if(actions.sessionType == 'working'){
 				return Object.assign({}, state, {
 					working:!state.working,
-					secondsRemaining: 1200,
-					initialSeconds:1200
+					secondsRemaining: 1500,
+					initialSeconds:1500
 				});
 			} else {
 				return Object.assign({}, state, {

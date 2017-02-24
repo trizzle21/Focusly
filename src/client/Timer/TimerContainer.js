@@ -20,8 +20,10 @@ const styles = {
 
 class TimerContainer extends React.Component {
 	componentWillReceiveProps(){
-		this.props.sessionTypeSet('working');
-		this.props.cycleSet(5);
+		console.log(this.props.sessionTypeSet);
+
+		//this.props.sessionTypeSet('working');
+		//this.props.cycleSet(5);
 		var interval = setInterval(this.props.tick(), 1000);
 	}
 	
@@ -71,13 +73,15 @@ TimerContainer.propTypes = {
 
 function mapStateToProps(state) {
 	return {
-		working: state.working,
-		secondsRemaining:state.secondsRemaining,
-		cycles:state.cycles,
-		isCounting:state.isCounting,
+		working: state.timer.working,
+		secondsRemaining:state.timer.secondsRemaining,
+		cycles:state.timer.cycles,
+		isCounting:state.timer.isCounting,
 
 	}
 }
+
+
 
 // function mapDispatchToProps(dispatch) {
 // 	return {
@@ -93,5 +97,5 @@ export default connect(mapStateToProps, {
 	startStop,
 	cycleSet,
 	sessionTypeSet,
-})(TimerContainer)
+})(TimerContainer);
 
