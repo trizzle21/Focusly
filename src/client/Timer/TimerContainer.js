@@ -19,21 +19,29 @@ const styles = {
 };
 
 class TimerContainer extends React.Component {
-	componentWillReceiveProps(){
-		this.sessionTypeSet('working');
-		this.cycleSet(5);
-		var interval = setInterval(this.props.dispatch(tick()), 1000);
+
+
+
+
+
+	componentWillMount(){
+		const{isCounting, secondsRemaining,cycles } = this.props;
+		// this.props.sessionTypeSet('working');
+		// this.props.cycleSet(5);
+		var interval = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
+		
 	}
 
 
 	
 	pause(){
+		
 		//Going to move this to be an action
-		if(this.props.isCounting === true){
+		if(this.props.isCounting){
 			clearInterval(this.interval);
-			this.startStop();
+			startStop();
 		} else {
-			var interval = setInterval(this.props.dispatch(tick()), 1000);
+			var interval = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 			this.startStop();
 		}
 
@@ -48,12 +56,13 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
-		
+		//{secondsRemaining,startCounting}
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
-		 	tick={this.startCounting} 
+		 	tick={this.props.startCounting} 
 			secondsRemaining={this.props.secondsRemaining}
+			isCounting={this.props.isCounting}
 			cycles={this.props.cycles}
 		 	/>
 		</div>

@@ -44912,21 +44912,34 @@
 		}
 
 		_createClass(TimerContainer, [{
-			key: 'componentWillReceiveProps',
-			value: function componentWillReceiveProps() {
-				this.sessionTypeSet('working');
-				this.cycleSet(5);
-				var interval = setInterval(this.props.dispatch((0, _TimerActions.tick)()), 1000);
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				var _this2 = this;
+
+				var _props = this.props,
+				    isCounting = _props.isCounting,
+				    secondsRemaining = _props.secondsRemaining,
+				    cycles = _props.cycles;
+				// this.props.sessionTypeSet('working');
+				// this.props.cycleSet(5);
+
+				var interval = setInterval(function () {
+					_this2.props.dispatch({ type: "TICK" });
+				}, 1000);
 			}
 		}, {
 			key: 'pause',
 			value: function pause() {
+				var _this3 = this;
+
 				//Going to move this to be an action
-				if (this.props.isCounting === true) {
+				if (this.props.isCounting) {
 					clearInterval(this.interval);
-					this.startStop();
+					(0, _TimerActions.startStop)();
 				} else {
-					var interval = setInterval(this.props.dispatch((0, _TimerActions.tick)()), 1000);
+					var interval = setInterval(function () {
+						_this3.props.dispatch({ type: "TICK" });
+					}, 1000);
 					this.startStop();
 				}
 			}
@@ -44943,14 +44956,15 @@
 		}, {
 			key: 'render',
 			value: function render() {
-
+				//{secondsRemaining,startCounting}
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Timer2.default, {
 						pause: this.pause,
-						tick: this.startCounting,
+						tick: this.props.startCounting,
 						secondsRemaining: this.props.secondsRemaining,
+						isCounting: this.props.isCounting,
 						cycles: this.props.cycles
 					})
 				);
