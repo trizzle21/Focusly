@@ -29637,7 +29637,7 @@
 						completed: state.secondsRemaining / state.initialSeconds * 100
 					});
 				} else {
-					if (state.working === true) {
+					if (state.working) {
 						return Object.assign({}, state, {
 							working: false,
 							secondsRemaining: 300,
