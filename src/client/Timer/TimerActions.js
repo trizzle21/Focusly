@@ -6,11 +6,11 @@ export const START_STOP = 'START_STOP';
 
 
 
-function cycleSet(cycleCount) {
+export function cycleSet(cycleCount) {
 	return { type: CYCLE_SET, cycleCount: cycleCount};
 }
 
-function sessionTypeSet(session_type){
+export function sessionTypeSet(session_type){
 	return { type: SESSION_TYPE_SET, sessionType: session_type};
 }
 
@@ -19,7 +19,7 @@ export function tick(){
 }
 
 
-function startStop(){
+export function startStop(){
 	return { type: START_STOP };
 }
 

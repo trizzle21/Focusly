@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
@@ -20,21 +20,21 @@ const styles = {
 
 class TimerContainer extends React.Component {
 	componentWillReceiveProps(){
-		console.log(this.props.sessionTypeSet);
-
-		//this.props.sessionTypeSet('working');
-		//this.props.cycleSet(5);
-		var interval = setInterval(this.props.tick(), 1000);
+		this.props.dispatch(sessionTypeSet('working'));
+		this.props.dispatch(cycleSet(5));
+		var interval = setInterval(this.props.dispatch(tick()), 1000);
 	}
+
+
 	
 	pause(){
 		//Going to move this to be an action
 		if(this.props.isCounting === true){
 			clearInterval(this.interval);
-			this.props.startStop();
+			this.props.dispatch(startStop());
 		} else {
-			var interval = setInterval(this.props.tick(), 1000);
-			this.props.startStop();
+			var interval = setInterval(this.props.dispatch(tick()), 1000);
+			this.props.dispatch(startStop());
 		}
 
 	}
@@ -44,13 +44,14 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
+		
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
-		 	tick={this.props.tick()} 
+		 	tick={this.props.dispatch(tick())} 
 			secondsRemaining={this.props.secondsRemaining}
 			cycles={this.props.cycles}
-			startStop={this.props.startStop}
+			startStop={this.props.dispatch(startStop)}
 		 	/>
 		</div>
 	);}
@@ -62,11 +63,13 @@ TimerContainer.propTypes = {
 	sessionCount: React.PropTypes.number,
 	isCounting:React.PropTypes.bool,
 	working:React.PropTypes.bool,
+	
+	dispatch:React.PropTypes.func.isRequired
 	//redux action 
-	sessionTypeSet:React.PropTypes.func,
-	tick:React.PropTypes.func,	
-	startStop:React.PropTypes.func,
-	cycleSet:React.PropTypes.func,
+	// sessionTypeSet:React.PropTypes.func,
+	// tick:React.PropTypes.func,	
+	// startStop:React.PropTypes.func,
+	// cycleSet:React.PropTypes.func,
 }
 
 
@@ -92,10 +95,5 @@ function mapStateToProps(state) {
 // 	}
 // }
 
-export default connect(mapStateToProps, {
-	tick,
-	startStop,
-	cycleSet,
-	sessionTypeSet,
-})(TimerContainer);
+export default connect(mapStateToProps)(TimerContainer);
 
