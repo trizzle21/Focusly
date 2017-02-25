@@ -49,7 +49,7 @@ export default class Timer extends React.Component {
                   iconElementLeft={<Link to="/tabata"><IconButton  ><ArrowBack color={"white"}/></IconButton></Link>}
               	/>
 
-				<h4>Cycles: {this.props.cycles}</h4>
+				<h4>Cycles Left: {this.props.cycles}</h4>
 
 
 

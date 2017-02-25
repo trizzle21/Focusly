@@ -21,12 +21,14 @@ const styles = {
 class TimerContainer extends React.Component {
 
 
+
 	componentWillMount(){
 		const{isCounting, secondsRemaining,cycles, intervalID } = this.props;
-		// this.props.sessionTypeSet('working');
-		// this.props.cycleSet(5);
-		var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
-		this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
+		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
+		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );
+;
+		// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
+		// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
 
 		
 	}
@@ -49,16 +51,16 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
-		const { startCounting, secondsRemaining, isCounting, cycles, dispatch, intervalID} = this.props;
+		console.log(this.props);
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 
-		 	tick={startCounting} 
-			secondsRemaining={secondsRemaining}
-			isCounting={isCounting}
-			cycles={cycles}
-			dispatch={dispatch}
-			intervalID={intervalID}
+			secondsRemaining={this.props.secondsRemaining}
+			isCounting={this.props.isCounting}
+			completed={this.props.completed}
+			cycles={this.props.cycles}
+			dispatch={this.props.dispatch}
+			intervalID={this.props.intervalID}
 		 	/>
 		</div>
 	);}
@@ -70,7 +72,8 @@ TimerContainer.propTypes = {
 	sessionCount: React.PropTypes.number,
 	isCounting:React.PropTypes.bool,
 	working:React.PropTypes.bool,
-	
+	cycles:React.PropTypes.number,
+	completed:React.PropTypes.number,
 	//dispatch:React.PropTypes.func.isRequired
 	//redux action 
 	sessionTypeSet:React.PropTypes.func,
@@ -88,7 +91,7 @@ function mapStateToProps(state) {
 		secondsRemaining:state.timer.secondsRemaining,
 		cycles:state.timer.cycles,
 		isCounting:state.timer.isCounting,
-
+		completed:state.timer.completed,
 	}
 }
 

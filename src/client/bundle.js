@@ -104,8 +104,6 @@
 
 	var store = (0, _redux.createStore)(_reducer2.default);
 
-	console.log(store.getState());
-
 	var Root = function (_React$Component) {
 	  _inherits(Root, _React$Component);
 
@@ -29596,7 +29594,7 @@
 		initialSeconds: 1500,
 		secondsRemaining: 1500,
 		completed: 100,
-		isCounting: true
+		isCounting: false
 	};
 
 	function TimerReducer() {
@@ -29617,15 +29615,15 @@
 					cycles: actions.cycleCount
 				});
 			case _TimerActions.SESSION_TYPE_SET:
-				if (actions.sessionType == 'working') {
+				if (actions.sessionType === 'working') {
 					return Object.assign({}, state, {
-						working: !state.working,
+						working: true,
 						secondsRemaining: 1500,
 						initialSeconds: 1500
 					});
 				} else {
 					return Object.assign({}, state, {
-						working: !state.working,
+						working: false,
 						secondsRemaining: 300,
 						initialSeconds: 300
 					});
@@ -44923,25 +44921,23 @@
 		_createClass(TimerContainer, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				var _this2 = this;
-
 				var _props = this.props,
 				    isCounting = _props.isCounting,
 				    secondsRemaining = _props.secondsRemaining,
 				    cycles = _props.cycles,
 				    intervalID = _props.intervalID;
-				// this.props.sessionTypeSet('working');
-				// this.props.cycleSet(5);
 
-				var IntervalID = setInterval(function () {
-					_this2.props.dispatch({ type: 'TICK' });
-				}, 1000);
-				this.props.dispatch({ type: "SET_INTERVAL", intervalID: IntervalID });
+				this.props.dispatch({ type: 'SESSION_TYPE_SET', sessionType: 'working' });
+				this.props.dispatch({ type: 'CYCLE_SET', cycleCount: 4 });
+				;
+				// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
+				// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
+
 			}
 		}, {
 			key: 'pause',
 			value: function pause() {
-				var _this3 = this;
+				var _this2 = this;
 
 				if (this.props.isCounting) {
 					this.props.dispatch({ type: "START_STOP" });
@@ -44949,7 +44945,7 @@
 				} else {
 					this.props.dispatch({ type: "START_STOP" });
 					var intervalId = setInterval(function () {
-						_this3.props.dispatch({ type: 'TICK' });
+						_this2.props.dispatch({ type: 'TICK' });
 					}, 1000);
 					this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 				}
@@ -44963,25 +44959,18 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var _props2 = this.props,
-				    startCounting = _props2.startCounting,
-				    secondsRemaining = _props2.secondsRemaining,
-				    isCounting = _props2.isCounting,
-				    cycles = _props2.cycles,
-				    dispatch = _props2.dispatch,
-				    intervalID = _props2.intervalID;
-
+				console.log(this.props);
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Timer2.default, {
 						pause: this.pause,
-						tick: startCounting,
-						secondsRemaining: secondsRemaining,
-						isCounting: isCounting,
-						cycles: cycles,
-						dispatch: dispatch,
-						intervalID: intervalID
+						secondsRemaining: this.props.secondsRemaining,
+						isCounting: this.props.isCounting,
+						completed: this.props.completed,
+						cycles: this.props.cycles,
+						dispatch: this.props.dispatch,
+						intervalID: this.props.intervalID
 					})
 				);
 			}
@@ -44995,7 +44984,8 @@
 		sessionCount: _react2.default.PropTypes.number,
 		isCounting: _react2.default.PropTypes.bool,
 		working: _react2.default.PropTypes.bool,
-
+		cycles: _react2.default.PropTypes.number,
+		completed: _react2.default.PropTypes.number,
 		//dispatch:React.PropTypes.func.isRequired
 		//redux action 
 		sessionTypeSet: _react2.default.PropTypes.func,
@@ -45010,8 +45000,8 @@
 			working: state.timer.working,
 			secondsRemaining: state.timer.secondsRemaining,
 			cycles: state.timer.cycles,
-			isCounting: state.timer.isCounting
-
+			isCounting: state.timer.isCounting,
+			completed: state.timer.completed
 		};
 	}
 
@@ -45138,7 +45128,7 @@
 						_react2.default.createElement(
 							'h4',
 							null,
-							'Cycles: ',
+							'Cycles Left: ',
 							this.props.cycles
 						),
 						_react2.default.createElement(

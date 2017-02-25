@@ -21,7 +21,6 @@ const NotFound = () => (
 const store = createStore(reducer);
 
 
-console.log(store.getState());
 
 
 

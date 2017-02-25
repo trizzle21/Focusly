@@ -15,9 +15,8 @@ const time_state={
     initialSeconds:1500,
     secondsRemaining:1500,
     completed:100,
-    isCounting:true,
+    isCounting:false,
 };
-
 
 
 
@@ -36,15 +35,15 @@ export default function TimerReducer(state=time_state, actions){
 				cycles: actions.cycleCount,
 			});
 		case SESSION_TYPE_SET:
-			if(actions.sessionType == 'working'){
+			if(actions.sessionType === 'working'){
 				return Object.assign({}, state, {
-					working:!state.working,
+					working:true,
 					secondsRemaining: 1500,
 					initialSeconds:1500
 				});
 			} else {
 				return Object.assign({}, state, {
-					working:!state.working,
+					working:false,
 					secondsRemaining: 300,
 					initialSeconds:300,
 				});
