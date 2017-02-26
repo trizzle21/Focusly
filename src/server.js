@@ -50,15 +50,17 @@ app.get('/login', function (req, res) {
 	);	
 
 
-})
+});
 
 
 app.get('/callback', function(req, res) {
-	  var code = req.query.code || null;
-  	var state = req.query.state || null;
-  	var storedState = req.cookies ? req.cookies[stateKey] : null;
-  	if (state === null || state !== storedState) {
-  		res.redirect('/#/error/state mismatch')
+	  const code = req.query.code || null;
+  	const state = req.query.state || null;
+  	const storedState = req.cookies ? req.cookies[stateKey] : null;
+  	console.log(state);
+    console.log(storedState);
+    if (state === null || state !== storedState) {
+  		res.redirect('/#/error/state mismatch');
   	} else {
   		res.clearCookie(stateKey);
   		var authOptions = {
@@ -75,7 +77,8 @@ app.get('/callback', function(req, res) {
   		};
   	
   	request.post(authOptions, function(error, response, body) {
-  		if(!error && response.statusCode === 200){
+  	
+    if(!error && response.statusCode === 200){
 
   			var access_token = body.access_token, 
   				refresh_token = body.refresh_token;

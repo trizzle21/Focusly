@@ -29358,7 +29358,7 @@
 		_createClass(errorMessage, [{
 			key: 'render',
 			value: function render() {
-				var errorMessage = this.props.params;
+				var error = this.props.params;
 				return (
 					//TODO stylize and make look good.
 					_react2.default.createElement(
@@ -29372,7 +29372,7 @@
 						_react2.default.createElement(
 							'p',
 							null,
-							errorMessage
+							error.errorMsg
 						)
 					)
 				);
