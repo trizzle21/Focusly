@@ -21,7 +21,8 @@ export default class App extends React.Component {
           <div className="grid-container">
             <div className="row">
               <div className="col-3">
-                
+                  <SideBar />
+
               </div>
             <div className="col-9">
               <Timer />

@@ -44830,7 +44830,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
-	            _react2.default.createElement('div', { className: 'col-3' }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-3' },
+	              _react2.default.createElement(_SideBarContainer2.default, null)
+	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-9' },
@@ -49934,7 +49938,7 @@
 
 
 			value: function render() {
-				_react2.default.createElement(
+				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_SideBar2.default, null)
@@ -50728,6 +50732,10 @@
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
+	var _MuiThemeProvider = __webpack_require__(398);
+
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50748,10 +50756,14 @@
 		_createClass(SideBar, [{
 			key: 'render',
 			value: function render() {
-				_react2.default.createElement(
-					MuiThemeProvider,
+				return _react2.default.createElement(
+					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
-					_react2.default.createElement(_Drawer2.default, { width: 250, open: true })
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(_Drawer2.default, { width: 250, open: true })
+					)
 				);
 			}
 		}]);

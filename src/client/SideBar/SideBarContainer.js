@@ -22,10 +22,11 @@ class SideBarContainer extends React.Component {
 
 
 	render(){
-		<div> 
-			<SideBar />
-		</div>
-
+		return(
+			<div> 
+				<SideBar />
+			</div>
+		);
 	}
 
 }
