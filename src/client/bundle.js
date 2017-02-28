@@ -124,6 +124,7 @@
 	          { history: _reactRouter.hashHistory },
 	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { name: '/timer', path: 'timer', component: _App2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { name: '/timer', path: 'timer/:accessToken/:refreshToken', component: _App2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/error/:errorMsg', component: _Error2.default })
 	        )
 	      );

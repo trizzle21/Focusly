@@ -32,6 +32,7 @@ class Root extends React.Component {
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
     				<Route name='/timer' path='timer' component={app}/>
+            <Route name='/timer' path='timer/:accessToken/:refreshToken' component={app}/>
   					<Route path='/error/:errorMsg' component={error}/>
   				</Router>
   			</Provider> 
