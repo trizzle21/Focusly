@@ -1,8 +1,10 @@
 var express = require('express')
 var request = require('request');
+var path = require('path');
+
 var cookieParser = require('cookie-parser');
 var querystring = require('querystring');
-var path = require('path');
+
 
 const clientData = require('./ClientSecrets');// client id
 
@@ -10,11 +12,12 @@ const clientData = require('./ClientSecrets');// client id
 
 var app = express()
 
-
-
 app.set('views', './views')
 app.set('view engine', 'pug')
-app.use(express.static('client'))
+
+var stateKey = 'spotify_auth_state';
+
+app.use(express.static('client')).use(cookieParser());
 
 
 var generate_random = function(length){
@@ -26,7 +29,6 @@ var generate_random = function(length){
 	return ran_text;
 }
 
-var stateKey = 'spotify_auth_state';
 
 app.get('/', function (req, res) {
   res.render('index')
@@ -57,8 +59,6 @@ app.get('/callback', function(req, res) {
 	  const code = req.query.code || null;
   	const state = req.query.state || null;
   	const storedState = req.cookies ? req.cookies[stateKey] : null;
-  	console.log(state);
-    console.log(storedState);
     if (state === null || state !== storedState) {
   		res.redirect('/#/error/state mismatch');
   	} else {
@@ -84,7 +84,7 @@ app.get('/callback', function(req, res) {
   				refresh_token = body.refresh_token;
 
   			var options = {
-  				url: 'https://api.spotify.com/v1/me',
+  				url: 'https://api.spotify.com/v1/recommendations',
   				headers: {'Authorization' : 'Bearer ' + access_token},
   				json: true,
   			};
@@ -93,7 +93,7 @@ app.get('/callback', function(req, res) {
   				console.log(body);
   			});
   			
-  			res.redirect('/#/' + 
+  			res.redirect('/#/timer/' + 
   				querystring.stringify({
   					access_token: access_token,
   					refresh_token: refresh_token,

@@ -51,7 +51,6 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
-		console.log(this.props);
 		return (<div>
 		 <Timer 
 		 	pause={this.pause} 

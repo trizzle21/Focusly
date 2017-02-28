@@ -44963,7 +44963,6 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				console.log(this.props);
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -45121,7 +45120,7 @@
 							title: 'Focusly',
 							iconElementLeft: _react2.default.createElement(
 								_reactRouter.Link,
-								{ to: '/tabata' },
+								{ to: '/' },
 								_react2.default.createElement(
 									_IconButton2.default,
 									null,
