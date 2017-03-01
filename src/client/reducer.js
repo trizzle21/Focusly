@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import tabataForm from './Form/FormReducer';
+import Form from './Form/FormReducer';
 import timer from './Timer/TimerReducer';
 import spotifyAuth from './Spotify/SpotifyReducer';
 //cycles are 25+5minute intervals
@@ -40,7 +40,7 @@ export const initialState = {
 
 
 export default combineReducers({
-  tabataForm,
+  Form,
   timer,
   // spotifyAuth,
 });

@@ -18,11 +18,8 @@ export const SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
 
 
 
-export function setTokens({accessToken, refreshToken}) {
-	if (accessToken) {
-		spotifyApi.setAccessToken(accessToken);
-	} 
-	return { type: types.SPOTIFY_TOKENS, accessToken,refreshToken}
+export function setTokens(accessToken, refreshToken) {
+	return { type: SPOTIFY_TOKENS, accessToken:accessToken, refreshToken:refreshToken}
 }
 
 
@@ -37,6 +34,10 @@ export function getMyRecommendations(options){
 		});
 	};
 }
+
+
+
+
 
 
 export function getAvailableGenreSeeds(){

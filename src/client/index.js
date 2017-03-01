@@ -12,6 +12,10 @@ import reducer from './reducer';
 import signin from "./Spotify/modules/Signin";
 import app from "./App";
 
+import setTokens from './Spotify/SpotifyActions';
+
+
+
 injectTapEventPlugin();
 
 const NotFound = () => (
@@ -32,7 +36,7 @@ class Root extends React.Component {
   				<Router history={hashHistory}>
    					<Route path='/' component={signin}/>
     				<Route name='/timer' path='timer' component={app}/>
-            <Route name='/timer' path='timer/:accessToken/:refreshToken' component={app}/>
+            <Route name='/timer' path='timer/:accessToken/:refreshToken' setToken={setTokens} component={app}/>
   					<Route path='/error/:errorMsg' component={error}/>
   				</Router>
   			</Provider> 

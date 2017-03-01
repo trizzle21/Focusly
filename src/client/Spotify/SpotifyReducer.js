@@ -27,7 +27,7 @@ export default function spotifyRecommendations(state, action) {
   		case SPOTIFY_GENRE_SEED_SUCCESS:
     		return Object.assign({}, state, {
     			recommendationSeed: action.data,
-    			loading:false,
+    			isloading:false,
           recomendationSet:true,
 
     		});

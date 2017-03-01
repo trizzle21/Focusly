@@ -84,6 +84,10 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _SpotifyActions = __webpack_require__(288);
+
+	var _SpotifyActions2 = _interopRequireDefault(_SpotifyActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -124,7 +128,7 @@
 	          { history: _reactRouter.hashHistory },
 	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { name: '/timer', path: 'timer', component: _App2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { name: '/timer', path: 'timer/:accessToken/:refreshToken', component: _App2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { name: '/timer', path: 'timer/:accessToken/:refreshToken', setToken: _SpotifyActions2.default, component: _App2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/error/:errorMsg', component: _Error2.default })
 	        )
 	      );
@@ -29445,7 +29449,7 @@
 	};
 
 	exports.default = (0, _redux.combineReducers)({
-	  tabataForm: _FormReducer2.default,
+	  Form: _FormReducer2.default,
 	  timer: _TimerReducer2.default
 	});
 
@@ -29464,46 +29468,58 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.default = tabataForm;
 
 	var _FormActions = __webpack_require__(283);
 
 	var Form_State = {
-	  loading: true,
-	  openDialog: true,
-	  WorkMusicType: '',
-	  RestMusicType: '',
-	  SessionSlider: 1.0,
-	  recommendationSeeds: null
+	    isLoading: true,
+	    openDialog: true,
+	    WorkMusicType: '',
+	    RestMusicType: '',
+	    SessionSlider: 1.0,
+	    recommendationSeeds: null
 	};
 
 	function tabataForm() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Form_State;
-	  var action = arguments[1];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Form_State;
+	    var action = arguments[1];
 
-	  switch (action.type) {
-	    case _FormActions.SLIDER_CHANGE:
-	      return Object.assign({}, state, {
-	        SessionSlider: action.value
-	      });
-	    case _FormActions.WORK_MUSIC_SELECT:
-	      return Object.assign({}, state, {
-	        WorkMusicType: action.newGenre
-	      });
-	    case _FormActions.REST_MUSIC_SELECT:
-	      return Object.assign({}, state, {
-	        RestMusicType: action.newGenre
-	      });
-	    case _FormActions.CLOSE_DIALOG:
-	      return Object.assign({}, state, {
-	        openDialog: !this.state.openDialog
-	      });
-	    default:
-	      return state;
+	    switch (action.type) {
+	        case _FormActions.SLIDER_CHANGE:
+	            return Object.assign({}, state, {
+	                SessionSlider: action.value
+	            });
+	        case _FormActions.WORK_MUSIC_SELECT:
+	            return Object.assign({}, state, {
+	                WorkMusicType: action.newGenre
+	            });
+	        case _FormActions.REST_MUSIC_SELECT:
+	            return Object.assign({}, state, {
+	                RestMusicType: action.newGenre
+	            });
+	        case _FormActions.CLOSE_DIALOG:
+	            return Object.assign({}, state, {
+	                openDialog: !this.state.openDialog
+	            });
+	        case _FormActions.SPOTIFY_GENRE_SEED_BEGIN:
+	            return Object.assign({}, state, {
+	                loading: true
+	            });
+	        case _FormActions.SPOTIFY_GENRE_SEED_SUCCESS:
+	            return Object.assign({}, state, {
+	                recommendationSeed: action.data,
+	                loading: false
 
-	  }
+	            });
+	        case _FormActions.SPOTIFY_GENRE_SEED_ERROR:
+	            return state;
+	        default:
+	            return state;
+
+	    }
 	}
 
 /***/ },
@@ -29513,9 +29529,9 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	exports.closeDialog = exports.submitSession = exports.restMusicSelect = exports.workMusicSelect = exports.sliderChange = undefined;
+	exports.getCategories = getCategories;
 
 	var _ActionCreator = __webpack_require__(284);
 
@@ -29532,14 +29548,33 @@
 	var SUBMIT_SESSION = 'SUBMIT_SESSION';
 	var CLOSE_DIALOG = 'CLOSE_DIALOG';
 
-	var sliderChange = exports.sliderChange = (0, _ActionCreator2.default)(SLIDER_CHANGE, 'data');
+	var SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
+	var SPOTIFY_GENRE_SEED_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
+	var SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
-	var workMusicSelect = exports.workMusicSelect = (0, _ActionCreator2.default)(WORK_MUSIC_SELECT, 'newGenre');
-	var restMusicSelect = exports.restMusicSelect = (0, _ActionCreator2.default)(REST_MUSIC_SELECT, 'newGenre');
+	function getCategories(options) {
+		var header = new Header();
+		var request = { method: "GET",
+			header: { 'Authorization': 'Bearer ' + options.accessToken }
+		};
+		return function (dispatch) {
+			dispatch({ type: "SPOTIFY_GENRE_SEED_BEGIN" });
+			fetch("https://api.spotify.com/v1/browse/categories", request).then(function (data) {
+				dispatch({ type: "SPOTIFY_GENRE_SEED_SUCCESS", data: data });
+			}).catch(function (e) {
+				dispatch({ type: "SPOTIFY_GENRE_SEED_ERROR", error: e });
+			});
+		};
+	};
 
-	var submitSession = exports.submitSession = (0, _ActionCreator2.default)(SUBMIT_SESSION, 'slider', 'restGenre');
+	// export const sliderChange = actionCreator(SLIDER_CHANGE, 'data');
 
-	var closeDialog = exports.closeDialog = (0, _ActionCreator2.default)(CLOSE_DIALOG);
+	// export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
+	// export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
+
+	// export const submitSession = actionCreator(SUBMIT_SESSION, 'slider', 'restGenre');
+
+	// export const closeDialog = actionCreator(CLOSE_DIALOG);
 
 /***/ },
 /* 284 */
@@ -29734,7 +29769,7 @@
 	    case _SpotifyActions.SPOTIFY_GENRE_SEED_SUCCESS:
 	      return Object.assign({}, state, {
 	        recommendationSeed: action.data,
-	        loading: false,
+	        isloading: false,
 	        recomendationSet: true
 
 	      });
@@ -29781,14 +29816,8 @@
 	var SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_SUCCESS = 'SPOTIFY_ME_SUCCESS';
 	var SPOTIFY_GENRE_SEED_FAILURE = exports.SPOTIFY_GENRE_SEED_FAILURE = 'SPOTIFY_ME_FAILURE';
 
-	function setTokens(_ref) {
-		var accessToken = _ref.accessToken,
-		    refreshToken = _ref.refreshToken;
-
-		if (accessToken) {
-			spotifyApi.setAccessToken(accessToken);
-		}
-		return { type: types.SPOTIFY_TOKENS, accessToken: accessToken, refreshToken: refreshToken };
+	function setTokens(accessToken, refreshToken) {
+		return { type: SPOTIFY_TOKENS, accessToken: accessToken, refreshToken: refreshToken };
 	}
 
 	function getMyRecommendations(options) {
@@ -44802,6 +44831,10 @@
 
 	var _CustomTheme2 = _interopRequireDefault(_CustomTheme);
 
+	var _SpotifyActions = __webpack_require__(288);
+
+	var _SpotifyActions2 = _interopRequireDefault(_SpotifyActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44828,6 +44861,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'grid-container' },
+	          _react2.default.createElement(_FormContainer2.default, { params: this.props.params }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
@@ -44989,13 +45023,7 @@
 		isCounting: _react2.default.PropTypes.bool,
 		working: _react2.default.PropTypes.bool,
 		cycles: _react2.default.PropTypes.number,
-		completed: _react2.default.PropTypes.number,
-		//dispatch:React.PropTypes.func.isRequired
-		//redux action 
-		sessionTypeSet: _react2.default.PropTypes.func,
-		tick: _react2.default.PropTypes.func,
-		startStop: _react2.default.PropTypes.func,
-		cycleSet: _react2.default.PropTypes.func
+		completed: _react2.default.PropTypes.number
 	};
 
 	function mapStateToProps(state) {
@@ -50799,6 +50827,8 @@
 
 	var _FormActions = __webpack_require__(283);
 
+	var _FormActions2 = _interopRequireDefault(_FormActions);
+
 	var _TimerActions = __webpack_require__(286);
 
 	var _TimerActions2 = _interopRequireDefault(_TimerActions);
@@ -50821,6 +50851,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//import setTokens from '../Spotify/SpotifyActions';
+
+
 	var FormContainer = function (_React$Component) {
 		_inherits(FormContainer, _React$Component);
 
@@ -50831,20 +50864,24 @@
 		}
 
 		_createClass(FormContainer, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
+				console.log(this.props);
+				this.props.getCategories({
+					accessToken: this.props.params.accessToken
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var _props = this.props,
-				    openDialog = _props.openDialog,
-				    submitSession = _props.submitSession;
-
-
 				var actions = [_react2.default.createElement(_RaisedButton2.default, {
 					label: 'Submit',
 					labelPosition: 'after',
 					primary: true,
 					style: styles.button,
 					containerElement: 'label',
-					onClick: this.props.submitSession
+					onClick: this.props.dispatch({ type: "SUBMIT_SESSION" })
 				})];
 				return _react2.default.createElement(
 					MuiThemeProvider,
@@ -50862,14 +50899,13 @@
 								open: this.props.openDialog
 							},
 							_react2.default.createElement(_form2.default, {
+								isLoading: this.props.isLoading,
 								SessionSlider: this.props.SessionSlider,
 								WorkMusicType: this.props.WorkMusicType,
 								RestMusicType: this.props.RestMusicType,
-								workMusicTypeChange: this.prop.workMusicSelect,
-								restkMusicTypeChange: this.prop.restMusicSelect,
 								sliderChange: this.props.sliderChange,
-								closeDialog: this.props.closeDialog
-
+								closeDialog: this.props.dispatch({ type: "CLOSE_DIALOG" }),
+								recommendationSeeds: this.props.recommendationSeeds
 							})
 						)
 					)
@@ -50881,29 +50917,27 @@
 	}(_react2.default.Component);
 
 	FormContainer.propTypes = (_FormContainer$propTy = {
-		openDialog: _react2.default.PropTypes.bool.isRequired,
-		SessionSlider: _react2.default.PropTypes.number.isRequired,
-		WorkMusicType: _react2.default.PropTypes.number.isRequired,
-		RestMusicType: _react2.default.PropTypes.number.isRequired
-	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number.isRequired), _defineProperty(_FormContainer$propTy, 'sliderChange', _react2.default.PropTypes.func.isRequired), _defineProperty(_FormContainer$propTy, 'workMusicSelect', _react2.default.PropTypes.func.isRequired), _defineProperty(_FormContainer$propTy, 'restMusicSelect', _react2.default.PropTypes.func.isRequired), _defineProperty(_FormContainer$propTy, 'submitSession', _react2.default.PropTypes.func.isRequired), _FormContainer$propTy);
+		isLoading: _react2.default.PropTypes.bool,
+		openDialog: _react2.default.PropTypes.bool,
+		SessionSlider: _react2.default.PropTypes.number,
+		WorkMusicType: _react2.default.PropTypes.string,
+		RestMusicType: _react2.default.PropTypes.string
+	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'recommendationSeeds', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'getCategories', _react2.default.PropTypes.func), _FormContainer$propTy);
 
 	function mapStateToProps(state) {
+		console.log(state);
 		return {
-			recommendationSeeds: state.recommendationSeeds,
-			openDialog: state.openDialog,
-			WorkMusicType: state.WorkMusicType,
-			RestMusicType: state.RestMusicType,
-			SessionSlider: state.SessionSlider
-
+			isLoading: state.Form.isLoading,
+			recommendationSeeds: state.Form.recommendationSeeds,
+			openDialog: state.Form.openDialog,
+			WorkMusicType: state.Form.WorkMusicType,
+			RestMusicType: state.Form.RestMusicType,
+			SessionSlider: state.Form.SessionSlider
 		};
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, {
-		sliderChange: _FormActions.sliderChange,
-		workMusicSelect: _FormActions.workMusicSelect,
-		restMusicSelect: _FormActions.restMusicSelect,
-		closeDialog: _FormActions.closeDialog,
-		submitSession: _TimerActions2.default
+		getCategories: _FormActions2.default
 	})(FormContainer);
 
 /***/ },
@@ -50984,46 +51018,58 @@
 	    key: 'render',
 	    value: function render() {
 	      //render form here
-	      return _react2.default.createElement(
-	        _MuiThemeProvider2.default,
-	        { muiTheme: _CustomTheme2.default },
-	        _react2.default.createElement(
-	          'form',
-	          { style: styles.main, className: 'spotify_login' },
-	          _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.props.SessionSlider, onChange: this.props.handleSliderChange(data), min: 1, max: 10, style: styles.slider }),
+	      if (this.props.isLoading) {
+	        return _react2.default.createElement(
+	          _MuiThemeProvider2.default,
+	          { muiTheme: _CustomTheme2.default },
 	          _react2.default.createElement(
-	            'p',
-	            { className: 'secondaryText', style: styles.counter },
-	            this.props.SessionSlider,
-	            '>Cycles'
-	          ),
+	            'div',
+	            null,
+	            'Loading...'
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          _MuiThemeProvider2.default,
+	          { muiTheme: _CustomTheme2.default },
 	          _react2.default.createElement(
-	            _SelectField2.default,
-	            {
-	              floatingLabelText: 'Working Music',
-	              value: this.props.WorkMusicType,
-	              onChange: this.props.WorkMusicTypeChange,
-	              style: styles.select
-	            },
-	            this.props.recommendationSeeds.map(function (seed) {
-	              return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
-	            })
-	          ),
-	          _react2.default.createElement(
-	            _SelectField2.default,
-	            {
-	              floatingLabelText: 'Resting Music',
-	              value: this.prop.RestMusicType,
-	              onChange: this.props.RestMusicTypeChange,
-	              style: styles.select
-	            },
-	            this.props.recommendationSeeds.map(function (seed) {
-	              return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
-	            })
-	          ),
-	          _react2.default.createElement('br', null)
-	        )
-	      );
+	            'form',
+	            { style: styles.main, className: 'spotify_login' },
+	            _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.props.SessionSlider, onChange: this.props.dispatch({ type: 'SLIDER_CHANGE', value: event.target.value }), min: 1, max: 10, style: styles.slider }),
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'secondaryText', style: styles.counter },
+	              this.props.SessionSlider,
+	              '>Cycles'
+	            ),
+	            _react2.default.createElement(
+	              _SelectField2.default,
+	              {
+	                floatingLabelText: 'Working Music',
+	                value: this.props.WorkMusicType,
+	                onChange: this.props.dispatch({ type: "WORK_MUSIC_SELECT", newGenre: this.prop.WorkMusicType }),
+	                style: styles.select
+	              },
+	              this.props.recommendationSeeds.map(function (seed) {
+	                return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
+	              })
+	            ),
+	            _react2.default.createElement(
+	              _SelectField2.default,
+	              {
+	                floatingLabelText: 'Resting Music',
+	                value: this.prop.RestMusicType,
+	                onChange: this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.target.value }),
+	                style: styles.select
+	              },
+	              this.props.recommendationSeeds.map(function (seed) {
+	                return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
+	              })
+	            ),
+	            _react2.default.createElement('br', null)
+	          )
+	        );
+	      }
 	    }
 	  }]);
 

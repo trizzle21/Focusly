@@ -74,11 +74,6 @@ TimerContainer.propTypes = {
 	cycles:React.PropTypes.number,
 	completed:React.PropTypes.number,
 	//dispatch:React.PropTypes.func.isRequired
-	//redux action 
-	sessionTypeSet:React.PropTypes.func,
-	tick:React.PropTypes.func,	
-	startStop:React.PropTypes.func,
-	cycleSet:React.PropTypes.func,
 }
 
 

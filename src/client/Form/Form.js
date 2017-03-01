@@ -36,15 +36,23 @@ const styles = {
 class EntryForm extends React.Component {
   	render() {
   		//render form here
-  		return (
+  		if (this.props.isLoading){
+        return(
+          <MuiThemeProvider muiTheme={theme}>
+            <div>Loading...</div>
+          </MuiThemeProvider>
+        );
+      } else {
+       return (
         <MuiThemeProvider muiTheme={theme}>
  		       <form style={styles.main} className="spotify_login" >
-      			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.handleSliderChange(data)} min={1} max={10} style={styles.slider}/>
+      			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.dispatch({type:'SLIDER_CHANGE', value: event.target.value})} min={1} max={10} style={styles.slider}/>
       			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
+            
               <SelectField
               		floatingLabelText="Working Music"
               		value={this.props.WorkMusicType}
-              		onChange={this.props.WorkMusicTypeChange}
+              		onChange={this.props.dispatch({type:"WORK_MUSIC_SELECT", newGenre: this.prop.WorkMusicType })}
                   style={styles.select}
             	>
 
@@ -58,7 +66,7 @@ class EntryForm extends React.Component {
               <SelectField
               		floatingLabelText="Resting Music"
               		value={this.prop.RestMusicType}
-              		onChange={this.props.RestMusicTypeChange}
+              		onChange={this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.target.value })}
                   style={styles.select}
             	>
             		{this.props.recommendationSeeds.map(function(seed){
@@ -73,8 +81,9 @@ class EntryForm extends React.Component {
         	</form>
           </MuiThemeProvider>
 
-  		)
+  		);
   	}
+  }
 
 
 	

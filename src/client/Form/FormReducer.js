@@ -1,10 +1,11 @@
 import {
-	SLIDER_CHANGE, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, CLOSE_DIALOG,
+	SLIDER_CHANGE, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, CLOSE_DIALOG, 
+    SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_SUCCESS, SPOTIFY_GENRE_SEED_ERROR
 } from './FormActions';
 
 
 var Form_State = {
-    loading: true,
+    isLoading: true,
     openDialog:true,
     WorkMusicType: '',
     RestMusicType: '',
@@ -30,11 +31,23 @@ export default function tabataForm(state=Form_State, action){
             	RestMusicType: action.newGenre
          	 })
 		case CLOSE_DIALOG:
-      return Object.assign({}, state, {
+            return Object.assign({}, state, {
               openDialog: !this.state.openDialog,
            })
-    default:
-			return state
+        case SPOTIFY_GENRE_SEED_BEGIN:
+            return Object.assign({}, state, {
+                loading:true,
+            });
+        case SPOTIFY_GENRE_SEED_SUCCESS:
+            return Object.assign({}, state, {
+                recommendationSeed: action.data,
+                loading:false,
+
+            });
+      case SPOTIFY_GENRE_SEED_ERROR:
+          return state;
+      default:
+			return state;
 
 	}
 
