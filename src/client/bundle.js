@@ -50868,7 +50868,7 @@
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
 				console.log(this.props);
-				this.props.getCategories({
+				(0, _FormActions2.default)({
 					accessToken: this.props.params.accessToken
 				});
 			}
