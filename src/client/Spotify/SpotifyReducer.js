@@ -5,6 +5,8 @@ import {
 
 
 //todo 
+
+
 export default function spotifyRecommendations(state, action) {
 	switch(action.type){
 		  case SPOTIFY_TOKENS:
@@ -27,7 +29,6 @@ export default function spotifyRecommendations(state, action) {
   		case SPOTIFY_GENRE_SEED_SUCCESS:
     		return Object.assign({}, state, {
     			recommendationSeed: action.data,
-    			isloading:false,
           recomendationSet:true,
 
     		});

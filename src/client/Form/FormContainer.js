@@ -4,16 +4,28 @@ import { connect } from 'react-redux';
 import EntryForm from './form.js'; 
 
 import {	
-	sliderChange, workMusicSelect, restMusicSelect,closeDialog,
+	sliderChange, workMusicSelect, restMusicSelect,
 } from './FormActions';
 
 import submitSession from '../Timer/TimerActions';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from '../Spotify/modules/CustomTheme.js';
+
+
 
 //import setTokens from '../Spotify/SpotifyActions';
-import getCategories from './FormActions';
+import {getCategories, closeDialog} from './FormActions';
+
+
+const styles = {
+  button: {
+  	margin: 12,
+  }
+
+}
 
 
 class FormContainer extends React.Component {
@@ -21,7 +33,7 @@ class FormContainer extends React.Component {
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
 		console.log(this.props);
-		getCategories({
+		this.props.getCategories({
 			accessToken:this.props.params.accessToken,
 		});
 	}
@@ -34,7 +46,7 @@ class FormContainer extends React.Component {
 				primary={true}
 				style={styles.button}
 				containerElement="label"
-				onClick={this.props.dispatch({type:"SUBMIT_SESSION"})}
+				onClick={this.props.submitSession}
 			/>
 		];
 		return (
@@ -54,7 +66,7 @@ class FormContainer extends React.Component {
 					WorkMusicType={this.props.WorkMusicType}
 					RestMusicType={this.props.RestMusicType}
 					sliderChange={this.props.sliderChange}
-					closeDialog={this.props.dispatch({type:"CLOSE_DIALOG"})}
+					closeDialog={this.props.closeDialog}
 					recommendationSeeds={this.props.recommendationSeeds}
 				/>
 
@@ -76,7 +88,8 @@ FormContainer.propTypes ={
 	SessionSlider: React.PropTypes.number,
 	recommendationSeeds:React.PropTypes.array,
 	getCategories:React.PropTypes.func,
-
+	closeDialog:React.PropTypes.func,
+	submitSession:React.PropTypes.func,
 }
 
 
@@ -96,6 +109,14 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps, {
-	getCategories,
-})(FormContainer);
+function mapDispatchToProps(dispatch){
+	return {
+		closeDialog,
+		getCategories,
+		submitSession
+	}
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);

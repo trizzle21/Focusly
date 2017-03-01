@@ -18,7 +18,6 @@ const SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
 
 export function getCategories(options){
-	var header = new Header()
 	var request = { method:"GET",
 					header: {'Authorization': 'Bearer ' + options.accessToken},
 					}
@@ -41,5 +40,5 @@ export function getCategories(options){
 
 // export const submitSession = actionCreator(SUBMIT_SESSION, 'slider', 'restGenre');
 
-// export const closeDialog = actionCreator(CLOSE_DIALOG);
+export const closeDialog = actionCreator(CLOSE_DIALOG);
 

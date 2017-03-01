@@ -23,10 +23,11 @@ class TimerContainer extends React.Component {
 
 
 	componentWillMount(){
-		const{isCounting, secondsRemaining,cycles, intervalID } = this.props;
+		
+		const{isCounting, secondsRemaining,cycles, intervalID, tick } = this.props;
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
 		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );
-;
+		tick();
 		// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
 
@@ -39,14 +40,14 @@ class TimerContainer extends React.Component {
 			clearInterval(this.props.intervalID);
 		} else {
 			this.props.dispatch({ type: "START_STOP" })
-			var intervalId = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
+			var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 			this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 		}
 
 	}
 
 	componentWillUnmount() {
-		this.props.dispatch({ type: "START_STOP" });
+
 		clearInterval(this.props.intervalID);
   	}
 
@@ -60,6 +61,7 @@ class TimerContainer extends React.Component {
 			cycles={this.props.cycles}
 			dispatch={this.props.dispatch}
 			intervalID={this.props.intervalID}
+		 	tick={this.props.tick()}
 		 	/>
 		</div>
 	);}
@@ -74,6 +76,7 @@ TimerContainer.propTypes = {
 	cycles:React.PropTypes.number,
 	completed:React.PropTypes.number,
 	//dispatch:React.PropTypes.func.isRequired
+	tick:React.PropTypes.func,
 }
 
 
@@ -91,14 +94,15 @@ function mapStateToProps(state) {
 
 
 
-// function mapDispatchToProps(dispatch) {
-// 	return {
-// 		tick: bindActionCreators(tick(), dispatch), 
-// 		startStop: bindActionCreators(startStop(), dispatch),
-// 		cycleSet: bindActionCreators(cycleSet(), dispatch),
-// 		sessionTypeSet:bindActionCreators(sessionTypeSet(), dispatch),
-// 	}
-// }
+function mapDispatchToProps(dispatch) {
+	return {
+		tick,
+		startStop,
+		sessionTypeSet,
+		cycleSet,
+		dispatch,
+	}
+}
 
-export default connect(mapStateToProps)(TimerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
 
