@@ -5,12 +5,12 @@ import {
 
 
 var Form_State = {
-    isLoading: true,
+    isLoading: false,
     openDialog:true,
     WorkMusicType: '',
     RestMusicType: '',
     SessionSlider: 1.0,
-    recommendationSeeds:null,
+    recommendationSeeds:[],
 }
 
 

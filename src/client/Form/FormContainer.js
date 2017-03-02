@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import EntryForm from './form.js'; 
+import { bindActionCreators, Dispatch } from 'redux';
 
 import {	
 	sliderChange, workMusicSelect, restMusicSelect,
@@ -32,6 +33,7 @@ class FormContainer extends React.Component {
 
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
+		console.log(this.props);
 		this.props.getCategories({
 			accessToken:this.props.params.accessToken,
 		});
@@ -71,6 +73,7 @@ class FormContainer extends React.Component {
 					sliderChange={this.props.sliderChange}
 					closeDialog={this.props.closeDialog}
 					recommendationSeeds={this.props.recommendationSeeds}
+					dispatch={this.props.dispatch}
 				/>
 
 				</Dialog>
@@ -114,10 +117,10 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
 	return {
-		closeDialog,
-		getCategories,
-		submitSession
-	}
+		dispatch,
+		getCategories:bindActionCreators(getCategories, dispatch),
+		
+	};
 }
 
 

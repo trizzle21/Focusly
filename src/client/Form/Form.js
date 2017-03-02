@@ -57,7 +57,7 @@ class EntryForm extends React.Component {
               <SelectField
               		floatingLabelText="Working Music"
               		value={this.props.WorkMusicType}
-              		onChange={this.props.dispatch({type:"WORK_MUSIC_SELECT", newGenre: this.prop.WorkMusicType })}
+              		onChange={this.props.dispatch({type:"WORK_MUSIC_SELECT", newGenre: this.props.WorkMusicType })}
                   style={styles.select}
             	>
 
@@ -70,7 +70,7 @@ class EntryForm extends React.Component {
           		
               <SelectField
               		floatingLabelText="Resting Music"
-              		value={this.prop.RestMusicType}
+              		value={this.props.RestMusicType}
               		onChange={this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.value })}
                   style={styles.select}
             	>

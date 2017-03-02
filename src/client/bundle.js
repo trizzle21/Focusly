@@ -29509,12 +29509,12 @@
 	var _FormActions = __webpack_require__(284);
 
 	var Form_State = {
-	    isLoading: true,
+	    isLoading: false,
 	    openDialog: true,
 	    WorkMusicType: '',
 	    RestMusicType: '',
 	    SessionSlider: 1.0,
-	    recommendationSeeds: null
+	    recommendationSeeds: []
 	};
 
 	function tabataForm() {
@@ -46341,6 +46341,8 @@
 
 	var _form2 = _interopRequireDefault(_form);
 
+	var _redux = __webpack_require__(244);
+
 	var _FormActions = __webpack_require__(284);
 
 	var _TimerActions = __webpack_require__(287);
@@ -46396,6 +46398,7 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
+				console.log(this.props);
 				this.props.getCategories({
 					accessToken: this.props.params.accessToken
 				});
@@ -46439,7 +46442,8 @@
 								RestMusicType: this.props.RestMusicType,
 								sliderChange: this.props.sliderChange,
 								closeDialog: this.props.closeDialog,
-								recommendationSeeds: this.props.recommendationSeeds
+								recommendationSeeds: this.props.recommendationSeeds,
+								dispatch: this.props.dispatch
 							})
 						)
 					)
@@ -46472,9 +46476,9 @@
 
 	function mapDispatchToProps(dispatch) {
 		return {
-			closeDialog: _FormActions.closeDialog,
-			getCategories: _FormActions.getCategories,
-			submitSession: _TimerActions2.default
+			dispatch: dispatch,
+			getCategories: (0, _redux.bindActionCreators)(_FormActions.getCategories, dispatch)
+
 		};
 	}
 
@@ -46592,7 +46596,7 @@
 	              {
 	                floatingLabelText: 'Working Music',
 	                value: this.props.WorkMusicType,
-	                onChange: this.props.dispatch({ type: "WORK_MUSIC_SELECT", newGenre: this.prop.WorkMusicType }),
+	                onChange: this.props.dispatch({ type: "WORK_MUSIC_SELECT", newGenre: this.props.WorkMusicType }),
 	                style: styles.select
 	              },
 	              this.props.recommendationSeeds.map(function (seed) {
@@ -46603,7 +46607,7 @@
 	              _SelectField2.default,
 	              {
 	                floatingLabelText: 'Resting Music',
-	                value: this.prop.RestMusicType,
+	                value: this.props.RestMusicType,
 	                onChange: this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.value }),
 	                style: styles.select
 	              },

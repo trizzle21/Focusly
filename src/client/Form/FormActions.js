@@ -31,7 +31,7 @@ export function getCategories(options){
 	var request = { method:"GET",
 					header: {'Authorization': 'Bearer ' + options.accessToken},
 					}
-	return dispatch => {
+	return (dispatch) => {
 		dispatch(SpotifyGenreSeedBegin());
 		fetch("https://api.spotify.com/v1/browse/categories", request)
 		.then(data => {
