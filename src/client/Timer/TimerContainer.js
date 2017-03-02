@@ -27,7 +27,6 @@ class TimerContainer extends React.Component {
 		const{isCounting, secondsRemaining,cycles, intervalID, tick } = this.props;
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
 		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );
-		tick();
 		// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
 

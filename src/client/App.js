@@ -20,6 +20,7 @@ export default class App extends React.Component {
       return (
   			<MuiThemeProvider muiTheme={theme}>
           <div className="grid-container">
+            <Form params={this.props.params}/>
 
             <div className="row">
               <div className="col-3">

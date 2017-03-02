@@ -29540,15 +29540,17 @@
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_BEGIN:
 	            return Object.assign({}, state, {
-	                loading: true
+	                isLoading: true
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_SUCCESS:
+	            console.log('success');
 	            return Object.assign({}, state, {
 	                recommendationSeed: action.data,
-	                loading: false
+	                isLoading: false
 
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_ERROR:
+	            console.log('error');
 	            return state;
 	        default:
 	            return state;
@@ -29565,7 +29567,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.closeDialog = undefined;
+	exports.closeDialog = exports.submitSession = undefined;
 	exports.getCategories = getCategories;
 
 	var _ActionCreator = __webpack_require__(285);
@@ -29594,6 +29596,8 @@
 		return function (dispatch) {
 			dispatch({ type: "SPOTIFY_GENRE_SEED_BEGIN" });
 			fetch("https://api.spotify.com/v1/browse/categories", request).then(function (data) {
+				return data.json();
+			}).then(function (json) {
 				dispatch({ type: "SPOTIFY_GENRE_SEED_SUCCESS", data: data });
 			}).catch(function (e) {
 				dispatch({ type: "SPOTIFY_GENRE_SEED_ERROR", error: e });
@@ -29606,7 +29610,7 @@
 	// export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
 	// export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 
-	// export const submitSession = actionCreator(SUBMIT_SESSION, 'slider', 'restGenre');
+	var submitSession = exports.submitSession = (0, _ActionCreator2.default)(SUBMIT_SESSION, 'slider', 'restGenre');
 
 	var closeDialog = exports.closeDialog = (0, _ActionCreator2.default)(CLOSE_DIALOG);
 
@@ -44897,6 +44901,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'grid-container' },
+	          _react2.default.createElement(_FormContainer2.default, { params: this.props.params }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
@@ -45006,7 +45011,6 @@
 
 				this.props.dispatch({ type: 'SESSION_TYPE_SET', sessionType: 'working' });
 				this.props.dispatch({ type: 'CYCLE_SET', cycleCount: 4 });
-				tick();
 				// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
 				// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
 
@@ -46385,10 +46389,14 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-				console.log(this.props);
 				this.props.getCategories({
 					accessToken: this.props.params.accessToken
 				});
+			}
+		}, {
+			key: 'submit',
+			value: function submit() {
+				console.log(this.props);
 			}
 		}, {
 			key: 'render',
@@ -46398,8 +46406,9 @@
 					labelPosition: 'after',
 					primary: true,
 					style: styles.button,
-					containerElement: 'label',
-					onClick: this.props.submitSession
+					containerElement: 'label'
+					//onClick={this.props.submitSession}
+					, onClick: this.submit.bind(this)
 				})];
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
@@ -46539,6 +46548,11 @@
 	  }
 
 	  _createClass(EntryForm, [{
+	    key: 'handleSliderChange',
+	    value: function handleSliderChange(event) {
+	      this.props.dispatch({ type: 'SLIDER_CHANGE', value: event.target.value });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      //render form here
@@ -46559,7 +46573,7 @@
 	          _react2.default.createElement(
 	            'form',
 	            { style: styles.main, className: 'spotify_login' },
-	            _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.props.SessionSlider, onChange: this.props.dispatch({ type: 'SLIDER_CHANGE', value: event.target.value }), min: 1, max: 10, style: styles.slider }),
+	            _react2.default.createElement(_Slider2.default, { step: 1.0, value: this.props.SessionSlider, onChange: this.handleSliderChange.bind(this), min: 1, max: 10, style: styles.slider }),
 	            _react2.default.createElement(
 	              'p',
 	              { className: 'secondaryText', style: styles.counter },
@@ -46583,7 +46597,7 @@
 	              {
 	                floatingLabelText: 'Resting Music',
 	                value: this.prop.RestMusicType,
-	                onChange: this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.target.value }),
+	                onChange: this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.value }),
 	                style: styles.select
 	              },
 	              this.props.recommendationSeeds.map(function (seed) {

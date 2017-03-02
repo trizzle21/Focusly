@@ -36,15 +36,18 @@ export default function tabataForm(state=Form_State, action){
            })
         case SPOTIFY_GENRE_SEED_BEGIN:
             return Object.assign({}, state, {
-                loading:true,
+                isLoading:true,
             });
         case SPOTIFY_GENRE_SEED_SUCCESS:
+            console.log('success');
             return Object.assign({}, state, {
                 recommendationSeed: action.data,
-                loading:false,
+                isLoading:false,
+
 
             });
       case SPOTIFY_GENRE_SEED_ERROR:
+          console.log('error');
           return state;
       default:
 			return state;

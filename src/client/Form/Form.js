@@ -34,7 +34,12 @@ const styles = {
 
 
 class EntryForm extends React.Component {
-  	render() {
+  	
+  handleSliderChange(event){
+    this.props.dispatch({type:'SLIDER_CHANGE', value: event.target.value});
+  }
+
+    render() {
   		//render form here
   		if (this.props.isLoading){
         return(
@@ -46,7 +51,7 @@ class EntryForm extends React.Component {
        return (
         <MuiThemeProvider muiTheme={theme}>
  		       <form style={styles.main} className="spotify_login" >
-      			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.props.dispatch({type:'SLIDER_CHANGE', value: event.target.value})} min={1} max={10} style={styles.slider}/>
+      			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
       			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider}>Cycles</p>
             
               <SelectField
@@ -66,7 +71,7 @@ class EntryForm extends React.Component {
               <SelectField
               		floatingLabelText="Resting Music"
               		value={this.prop.RestMusicType}
-              		onChange={this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.target.value })}
+              		onChange={this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.value })}
                   style={styles.select}
             	>
             		{this.props.recommendationSeeds.map(function(seed){

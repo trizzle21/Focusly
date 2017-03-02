@@ -32,12 +32,14 @@ class FormContainer extends React.Component {
 
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-		console.log(this.props);
 		this.props.getCategories({
 			accessToken:this.props.params.accessToken,
 		});
 	}
 
+	submit(){
+		console.log(this.props);
+	}
 	render(){
 		const actions = [
   			<RaisedButton
@@ -46,7 +48,8 @@ class FormContainer extends React.Component {
 				primary={true}
 				style={styles.button}
 				containerElement="label"
-				onClick={this.props.submitSession}
+				//onClick={this.props.submitSession}
+				onClick={this.submit.bind(this)}
 			/>
 		];
 		return (
