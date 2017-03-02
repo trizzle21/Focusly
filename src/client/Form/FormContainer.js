@@ -119,7 +119,6 @@ function mapDispatchToProps(dispatch){
 	return {
 		dispatch,
 		getCategories:bindActionCreators(getCategories, dispatch),
-		
 	};
 }
 

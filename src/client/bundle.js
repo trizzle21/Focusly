@@ -46478,7 +46478,6 @@
 		return {
 			dispatch: dispatch,
 			getCategories: (0, _redux.bindActionCreators)(_FormActions.getCategories, dispatch)
-
 		};
 	}
 
@@ -46564,6 +46563,16 @@
 	      this.props.dispatch({ type: 'SLIDER_CHANGE', value: event.target.value });
 	    }
 	  }, {
+	    key: 'handleRestChange',
+	    value: function handleRestChange(event) {
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.target.value });
+	    }
+	  }, {
+	    key: 'handleWorkChange',
+	    value: function handleWorkChange(event) {
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: event.target.value });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      //render form here
@@ -46596,7 +46605,7 @@
 	              {
 	                floatingLabelText: 'Working Music',
 	                value: this.props.WorkMusicType,
-	                onChange: this.props.dispatch({ type: "WORK_MUSIC_SELECT", newGenre: this.props.WorkMusicType }),
+	                onChange: this.handleWorkChange.bind(this),
 	                style: styles.select
 	              },
 	              this.props.recommendationSeeds.map(function (seed) {
@@ -46608,7 +46617,7 @@
 	              {
 	                floatingLabelText: 'Resting Music',
 	                value: this.props.RestMusicType,
-	                onChange: this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.value }),
+	                onChange: this.handleRestChange.bind(this),
 	                style: styles.select
 	              },
 	              this.props.recommendationSeeds.map(function (seed) {

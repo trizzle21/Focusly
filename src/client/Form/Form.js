@@ -39,6 +39,14 @@ class EntryForm extends React.Component {
     this.props.dispatch({type:'SLIDER_CHANGE', value: event.target.value});
   }
 
+  handleRestChange(event){
+    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.target.value  })
+  }
+
+  handleWorkChange(event){
+    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: event.target.value});
+  }
+
     render() {
   		//render form here
   		if (this.props.isLoading){
@@ -57,7 +65,7 @@ class EntryForm extends React.Component {
               <SelectField
               		floatingLabelText="Working Music"
               		value={this.props.WorkMusicType}
-              		onChange={this.props.dispatch({type:"WORK_MUSIC_SELECT", newGenre: this.props.WorkMusicType })}
+              		onChange={this.handleWorkChange.bind(this)}
                   style={styles.select}
             	>
 
@@ -71,7 +79,7 @@ class EntryForm extends React.Component {
               <SelectField
               		floatingLabelText="Resting Music"
               		value={this.props.RestMusicType}
-              		onChange={this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.value })}
+              		onChange={this.handleRestChange.bind(this)}
                   style={styles.select}
             	>
             		{this.props.recommendationSeeds.map(function(seed){
