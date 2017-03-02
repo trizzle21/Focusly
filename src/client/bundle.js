@@ -29547,7 +29547,6 @@
 	            return Object.assign({}, state, {
 	                recommendationSeed: action.data,
 	                isLoading: false
-
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_ERROR:
 	            console.log('error');
@@ -29589,16 +29588,24 @@
 	var SPOTIFY_GENRE_SEED_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
 	var SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
+	function SpotifyGenreSeedBegin() {
+		return { type: SPOTIFY_GENRE_SEED_BEGIN };
+	}
+	function SpotifyGenreSeedSuccess(data) {
+		return { type: SPOTIFY_GENRE_SEED_SUCCESS, data: data };
+	}
+	function SpotifyGenreSeedError(e) {
+		return { type: SPOTIFY_GENRE_SEED_ERROR, error: e };
+	}
+
 	function getCategories(options) {
 		var request = { method: "GET",
 			header: { 'Authorization': 'Bearer ' + options.accessToken }
 		};
 		return function (dispatch) {
-			dispatch({ type: "SPOTIFY_GENRE_SEED_BEGIN" });
+			dispatch(SpotifyGenreSeedBegin());
 			fetch("https://api.spotify.com/v1/browse/categories", request).then(function (data) {
-				return data.json();
-			}).then(function (json) {
-				dispatch({ type: "SPOTIFY_GENRE_SEED_SUCCESS", data: data });
+				dispatch(SpotifyGenreSeedSuccess(data));
 			}).catch(function (e) {
 				dispatch({ type: "SPOTIFY_GENRE_SEED_ERROR", error: e });
 			});

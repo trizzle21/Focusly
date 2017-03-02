@@ -43,8 +43,6 @@ export default function tabataForm(state=Form_State, action){
             return Object.assign({}, state, {
                 recommendationSeed: action.data,
                 isLoading:false,
-
-
             });
       case SPOTIFY_GENRE_SEED_ERROR:
           console.log('error');

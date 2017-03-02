@@ -15,6 +15,16 @@ const SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
 const SPOTIFY_GENRE_SEED_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
 const SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
+function SpotifyGenreSeedBegin(){ 
+    return { type: SPOTIFY_GENRE_SEED_BEGIN };
+}
+function SpotifyGenreSeedSuccess(data)  { 
+    return { type: SPOTIFY_GENRE_SEED_SUCCESS, data:data};
+}
+function SpotifyGenreSeedError(e) { 
+    return { type: SPOTIFY_GENRE_SEED_ERROR, error:e };
+}
+
 
 
 export function getCategories(options){
@@ -22,10 +32,10 @@ export function getCategories(options){
 					header: {'Authorization': 'Bearer ' + options.accessToken},
 					}
 	return dispatch => {
-		dispatch({type: "SPOTIFY_GENRE_SEED_BEGIN"});
-		fetch("https://api.spotify.com/v1/browse/categories", request).then(data => data.json())
-		.then(json => {
-			dispatch({type: "SPOTIFY_GENRE_SEED_SUCCESS", data:data})
+		dispatch(SpotifyGenreSeedBegin());
+		fetch("https://api.spotify.com/v1/browse/categories", request)
+		.then(data => {
+			dispatch(SpotifyGenreSeedSuccess(data));
 		}).catch(e => {
 			dispatch({type: "SPOTIFY_GENRE_SEED_ERROR", error:e})
 		});
