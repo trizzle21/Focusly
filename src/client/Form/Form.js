@@ -36,6 +36,7 @@ const styles = {
 class EntryForm extends React.Component {
   	
   handleSliderChange(event, value){
+    console.log(this.props);
     this.props.dispatch({type:'SLIDER_CHANGE', value: value});
   }
 

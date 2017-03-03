@@ -1,19 +1,20 @@
 //Form Actions
 import actionCreator from '../ActionCreator';
+import fetch from 'isomorphic-fetch'
 
 
-const SLIDER_CHANGE = 'SLIDER_CHANGE';
+export const SLIDER_CHANGE = 'SLIDER_CHANGE';
 
-const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
-const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+export const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
+export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 
 
-const SUBMIT_SESSION = 'SUBMIT_SESSION';
-const CLOSE_DIALOG = 'CLOSE_DIALOG';
+export const SUBMIT_SESSION = 'SUBMIT_SESSION';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 
-const SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
-const SPOTIFY_GENRE_SEED_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
-const SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
+export const SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
+export const SPOTIFY_GENRE_SEED_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
+export const SPOTIFY_GENRE_SEED_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
 function SpotifyGenreSeedBegin(){ 
     return { type: SPOTIFY_GENRE_SEED_BEGIN };
@@ -28,10 +29,6 @@ function SpotifyGenreSeedError(e) {
 
 
 export function getCategories(options){
-	console.log(options.accessToken);
-	var request = { method:"GET",
-					header: {'Authorization' : 'Bearer ' + options.accessToken},
-					}
 	return (dispatch) => {
 		dispatch(SpotifyGenreSeedBegin());
 		fetch("https://api.spotify.com/v1/browse/categories", {
@@ -39,10 +36,11 @@ export function getCategories(options){
 			headers: {'Authorization' : 'Bearer ' + options.accessToken}
 			})
 		.then(data => {
-			dispatch(SpotifyGenreSeedSuccess(data));
+			dispatch({type: "SPOTIFY_GENRE_SEED_SUCCESS", data:data});
 		}).catch(e => {
 			dispatch({type: "SPOTIFY_GENRE_SEED_ERROR", error:e})
 		});
+		
 	};
 };
 

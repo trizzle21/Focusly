@@ -106,12 +106,12 @@ FormContainer.propTypes ={
 function mapStateToProps(state){
 	console.log(state);
 	return {
-		isLoading:state.Form.isLoading,
-		recommendationSeeds:state.Form.recommendationSeeds,
-		openDialog:state.Form.openDialog,
-		WorkMusicType: state.Form.WorkMusicType,
-		RestMusicType: state.Form.RestMusicType,
-		SessionSlider:state.Form.SessionSlider,
+		isLoading:state.form.isLoading,
+		recommendationSeeds:state.form.recommendationSeeds,
+		openDialog:state.form.openDialog,
+		WorkMusicType: state.form.WorkMusicType,
+		RestMusicType: state.form.RestMusicType,
+		SessionSlider:state.form.SessionSlider,
 	}
 }
 

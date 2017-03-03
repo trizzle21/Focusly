@@ -14,12 +14,14 @@ var Form_State = {
 }
 
 
-export default function tabataForm(state=Form_State, action){
-	switch(action.type){
-		case SLIDER_CHANGE:
+export default function Form(state=Form_State, action){
+    switch(action.type){
+		case SLIDER_CHANGE:   
+            console.log(action);
             return Object.assign({}, state, {
-            	SessionSlider: action.value
-         	 })
+                    SessionSlider: action.value,
+                }
+         	 )
 		case WORK_MUSIC_SELECT:
 			return Object.assign({}, state, {
             	WorkMusicType: action.newGenre
@@ -43,7 +45,7 @@ export default function tabataForm(state=Form_State, action){
                 isLoading:false,
             });
       case SPOTIFY_GENRE_SEED_ERROR:
-          console.log('error');
+          console.log(action.e);
           return state;
       default:
 			return state;
