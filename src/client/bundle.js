@@ -29523,6 +29523,7 @@
 
 	    switch (action.type) {
 	        case _FormActions.SLIDER_CHANGE:
+	            console.log('sup');
 	            return Object.assign({}, state, {
 	                SessionSlider: action.value
 	            });
@@ -51096,18 +51097,18 @@
 
 	  _createClass(EntryForm, [{
 	    key: 'handleSliderChange',
-	    value: function handleSliderChange(event) {
-	      this.props.dispatch({ type: 'SLIDER_CHANGE', value: event.target.value });
+	    value: function handleSliderChange(event, value) {
+	      this.props.dispatch({ type: 'SLIDER_CHANGE', value: value });
 	    }
 	  }, {
 	    key: 'handleRestChange',
-	    value: function handleRestChange(event) {
-	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: event.target.value });
+	    value: function handleRestChange(event, value) {
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: value });
 	    }
 	  }, {
 	    key: 'handleWorkChange',
-	    value: function handleWorkChange(event) {
-	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: event.target.value });
+	    value: function handleWorkChange(event, value) {
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: value });
 	    }
 	  }, {
 	    key: 'render',

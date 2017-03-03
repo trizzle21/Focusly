@@ -14,12 +14,11 @@ var Form_State = {
 }
 
 
-
-
 export default function tabataForm(state=Form_State, action){
 	switch(action.type){
 		case SLIDER_CHANGE:
-			return Object.assign({}, state, {
+			console.log('sup');
+            return Object.assign({}, state, {
             	SessionSlider: action.value
          	 })
 		case WORK_MUSIC_SELECT:

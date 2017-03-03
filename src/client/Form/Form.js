@@ -35,16 +35,16 @@ const styles = {
 
 class EntryForm extends React.Component {
   	
-  handleSliderChange(event){
-    this.props.dispatch({type:'SLIDER_CHANGE', value: event.target.value});
+  handleSliderChange(event, value){
+    this.props.dispatch({type:'SLIDER_CHANGE', value: value});
   }
 
-  handleRestChange(event){
-    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: event.target.value  })
+  handleRestChange(event, value){
+    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: value  })
   }
 
-  handleWorkChange(event){
-    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: event.target.value});
+  handleWorkChange(event, value){
+    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: value});
   }
 
     render() {
