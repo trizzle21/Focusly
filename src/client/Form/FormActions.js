@@ -45,6 +45,10 @@ export function getCategories(options){
 };
 
 
+// export function getRecommendations(options){
+// 	return (dispatch) 
+// }
+
 
 // export const sliderChange = actionCreator(SLIDER_CHANGE, 'data');
 
