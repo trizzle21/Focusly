@@ -28,12 +28,16 @@ function SpotifyGenreSeedError(e) {
 
 
 export function getCategories(options){
+	console.log(options.accessToken);
 	var request = { method:"GET",
-					header: {'Authorization': 'Bearer ' + options.accessToken},
+					header: {'Authorization' : 'Bearer ' + options.accessToken},
 					}
 	return (dispatch) => {
 		dispatch(SpotifyGenreSeedBegin());
-		fetch("https://api.spotify.com/v1/browse/categories", request)
+		fetch("https://api.spotify.com/v1/browse/categories", {
+			method:"GET",
+			headers: {'Authorization' : 'Bearer ' + options.accessToken}
+			})
 		.then(data => {
 			dispatch(SpotifyGenreSeedSuccess(data));
 		}).catch(e => {

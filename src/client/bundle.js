@@ -29523,7 +29523,6 @@
 
 	    switch (action.type) {
 	        case _FormActions.SLIDER_CHANGE:
-	            console.log('sup');
 	            return Object.assign({}, state, {
 	                SessionSlider: action.value
 	            });
@@ -29600,12 +29599,16 @@
 	}
 
 	function getCategories(options) {
+		console.log(options.accessToken);
 		var request = { method: "GET",
 			header: { 'Authorization': 'Bearer ' + options.accessToken }
 		};
 		return function (dispatch) {
 			dispatch(SpotifyGenreSeedBegin());
-			fetch("https://api.spotify.com/v1/browse/categories", request).then(function (data) {
+			fetch("https://api.spotify.com/v1/browse/categories", {
+				method: "GET",
+				headers: { 'Authorization': 'Bearer ' + options.accessToken }
+			}).then(function (data) {
 				dispatch(SpotifyGenreSeedSuccess(data));
 			}).catch(function (e) {
 				dispatch({ type: "SPOTIFY_GENRE_SEED_ERROR", error: e });
@@ -50936,7 +50939,7 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-				console.log(this.props);
+				console.log(this.props.params.accessToken);
 				this.props.getCategories({
 					accessToken: this.props.params.accessToken
 				});

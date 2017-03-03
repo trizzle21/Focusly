@@ -33,7 +33,7 @@ class FormContainer extends React.Component {
 
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-		console.log(this.props);
+		console.log(this.props.params.accessToken);
 		this.props.getCategories({
 			accessToken:this.props.params.accessToken,
 		});
