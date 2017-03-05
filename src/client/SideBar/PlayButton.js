@@ -12,7 +12,7 @@ export default class PlayButton extends React.Component {
 		return(
 			<iFrame
        			className="SpotifyPlayer"
-        		src={'https://embed.spotify.com/?uri='+{this.props.uri}+'&view=coverartthis.props.view&theme=blakc'}
+        		src={'https://embed.spotify.com/?uri=${this.props.uri}&view=coverartthis.props.view&theme=blakc'}
         		width={size.large.width}
         		height={size.large.height}
         		frameBorder="0"
