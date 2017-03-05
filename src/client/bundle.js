@@ -45022,18 +45022,8 @@
 		_createClass(TimerContainer, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				var _props = this.props,
-				    isCounting = _props.isCounting,
-				    secondsRemaining = _props.secondsRemaining,
-				    cycles = _props.cycles,
-				    intervalID = _props.intervalID,
-				    tick = _props.tick;
-
 				this.props.dispatch({ type: 'SESSION_TYPE_SET', sessionType: 'working' });
 				this.props.dispatch({ type: 'CYCLE_SET', cycleCount: 4 });
-				// var IntervalID = setInterval(() => {this.props.dispatch({type:'TICK'})}, 1000);
-				// this.props.dispatch({ type: "SET_INTERVAL", intervalID:IntervalID });
-
 			}
 		}, {
 			key: 'pause',
