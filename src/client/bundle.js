@@ -50808,6 +50808,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _PlayButton = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./PlayButton\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _PlayButton2 = _interopRequireDefault(_PlayButton);
+
 	var _Drawer = __webpack_require__(533);
 
 	var _Drawer2 = _interopRequireDefault(_Drawer);
