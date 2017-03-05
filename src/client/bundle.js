@@ -29748,7 +29748,8 @@
 				return Object.assign({}, state, {
 					restRecommendationSeeds: actions.rest,
 					workRecommendationSeeds: actions.work,
-					cycles: actions.cycles
+					cycles: actions.cycles,
+					isCounting: true
 				});
 			default:
 				return state;
@@ -45032,6 +45033,7 @@
 
 				if (this.props.isCounting) {
 					this.props.dispatch({ type: "START_STOP" });
+					this.props.dispatch({ type: "CLEAR_INTERVAL" });
 					clearInterval(this.props.intervalID);
 				} else {
 					this.props.dispatch({ type: "START_STOP" });
@@ -50949,12 +50951,20 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
+				var _this2 = this;
+
 				this.props.dispatch({ type: 'SUBMIT_FORM',
 					cycles: this.props.SessionSlider,
 					rest: this.props.RestMusicType,
 					work: this.props.WorkMusicType
 				});
 				this.props.dispatch({ type: 'CLOSE_DIALOG' });
+
+				this.props.dispatch({ type: "START_STOP" });
+				var intervalId = setInterval(function () {
+					_this2.props.dispatch({ type: "TICK" });
+				}, 1000);
+				this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 			}
 		}, {
 			key: 'render',

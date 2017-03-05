@@ -24,15 +24,15 @@ class TimerContainer extends React.Component {
 
 	componentWillMount(){
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
-		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );
-
-		
+		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );		
 	}
 	
 	pause(){
 		if(this.props.isCounting){
 			this.props.dispatch({ type: "START_STOP" });
+			this.props.dispatch({ type: "CLEAR_INTERVAL" });
 			clearInterval(this.props.intervalID);
+
 		} else {
 			this.props.dispatch({ type: "START_STOP" })
 			var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);

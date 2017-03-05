@@ -45,6 +45,11 @@ class FormContainer extends React.Component {
 			work: this.props.WorkMusicType,
 		});
 		this.props.dispatch({type:'CLOSE_DIALOG'});
+		
+		this.props.dispatch({ type: "START_STOP" })
+		var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
+		this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
+
 	}
 	render(){
 		const actions = [

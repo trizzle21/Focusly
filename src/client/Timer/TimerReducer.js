@@ -80,6 +80,7 @@ export default function TimerReducer(state=time_state, actions){
 				restRecommendationSeeds: actions.rest,
 				workRecommendationSeeds: actions.work,
 				cycles: actions.cycles,
+				isCounting:true,
 			});
 		default:
 			return state;
