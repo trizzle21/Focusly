@@ -32,7 +32,7 @@ export default function Form(state=Form_State, action){
          	 })
 		case CLOSE_DIALOG:
             return Object.assign({}, state, {
-              openDialog: !this.state.openDialog,
+              openDialog: !state.openDialog,
            })
         case SPOTIFY_GENRE_SEED_BEGIN:
             return Object.assign({}, state, {

@@ -40,7 +40,7 @@ class FormContainer extends React.Component {
 	}
 
 	submit(){
-		console.log(this.props);
+		this.props.dispatch({type:'CLOSE_DIALOG'});
 	}
 	render(){
 		const actions = [
@@ -104,14 +104,13 @@ FormContainer.propTypes ={
 
 
 function mapStateToProps(state){
-	console.log(state);
 	return {
 		isLoading:state.form.isLoading,
 		recommendationSeeds:state.form.recommendationSeeds,
-		openDialog:state.form.openDialog,
+		openDialog: state.form.openDialog,
 		WorkMusicType: state.form.WorkMusicType,
 		RestMusicType: state.form.RestMusicType,
-		SessionSlider:state.form.SessionSlider,
+		SessionSlider: state.form.SessionSlider,
 	}
 }
 

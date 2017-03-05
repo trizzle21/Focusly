@@ -29537,7 +29537,7 @@
 	            });
 	        case _FormActions.CLOSE_DIALOG:
 	            return Object.assign({}, state, {
-	                openDialog: !this.state.openDialog
+	                openDialog: !state.openDialog
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_BEGIN:
 	            return Object.assign({}, state, {
@@ -50953,7 +50953,7 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
-				console.log(this.props);
+				this.props.dispatch({ type: 'CLOSE_DIALOG' });
 			}
 		}, {
 			key: 'render',
@@ -51010,7 +51010,6 @@
 	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'recommendationSeeds', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'getCategories', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'closeDialog', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'submitSession', _react2.default.PropTypes.func), _FormContainer$propTy);
 
 	function mapStateToProps(state) {
-		console.log(state);
 		return {
 			isLoading: state.form.isLoading,
 			recommendationSeeds: state.form.recommendationSeeds,
