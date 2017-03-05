@@ -46,9 +46,9 @@ class FormContainer extends React.Component {
 		});
 		this.props.dispatch({type:'CLOSE_DIALOG'});
 		
-		this.props.dispatch({ type: "START_STOP" })
-		var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
-		this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
+		// this.props.dispatch({ type: "START_STOP" })
+		// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
+		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 
 	}
 	render(){
@@ -59,7 +59,6 @@ class FormContainer extends React.Component {
 				primary={true}
 				style={styles.button}
 				containerElement="label"
-				//onClick={this.props.submitSession}
 				onClick={this.submit.bind(this)}
 			/>
 		];

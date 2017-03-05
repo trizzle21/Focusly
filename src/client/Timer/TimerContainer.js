@@ -24,7 +24,8 @@ class TimerContainer extends React.Component {
 
 	componentWillMount(){
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
-		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );		
+		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );	
+		this.pause();	
 	}
 	
 	pause(){
@@ -34,7 +35,7 @@ class TimerContainer extends React.Component {
 			clearInterval(this.props.intervalID);
 
 		} else {
-			this.props.dispatch({ type: "START_STOP" })
+			this.props.dispatch({ type: "START_STOP" });
 			var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 			this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 		}
@@ -47,19 +48,25 @@ class TimerContainer extends React.Component {
   	}
 
 	render() {
-		return (<div>
-		 <Timer 
-		 	pause={this.pause} 
-			secondsRemaining={this.props.secondsRemaining}
-			isCounting={this.props.isCounting}
-			completed={this.props.completed}
-			cycles={this.props.cycles}
-			dispatch={this.props.dispatch}
-			intervalID={this.props.intervalID}
-		 	tick={this.props.tick()}
-		 	/>
-		</div>
-	);}
+		if(!this.props.openDialog){
+			return (<div>
+		 		<Timer 
+		 			pause={this.pause} 
+					secondsRemaining={this.props.secondsRemaining}
+					isCounting={this.props.isCounting}
+					completed={this.props.completed}
+					cycles={this.props.cycles}
+					dispatch={this.props.dispatch}
+					intervalID={this.props.intervalID}
+		 			tick={this.props.tick()}
+		 			/>
+				</div>
+			);} else {
+				return (
+					<p>Waiting...</p>
+				)
+			}
+		} 
 }
 
 
@@ -70,6 +77,7 @@ TimerContainer.propTypes = {
 	working:React.PropTypes.bool,
 	cycles:React.PropTypes.number,
 	completed:React.PropTypes.number,
+	openDialog:React.PropTypes.bool,
 	//dispatch:React.PropTypes.func.isRequired
 	tick:React.PropTypes.func,
 }
@@ -84,6 +92,7 @@ function mapStateToProps(state) {
 		cycles:state.timer.cycles,
 		isCounting:state.timer.isCounting,
 		completed:state.timer.completed,
+		openDialog:state.form.openDialog,
 	}
 }
 

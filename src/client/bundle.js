@@ -45025,6 +45025,7 @@
 			value: function componentWillMount() {
 				this.props.dispatch({ type: 'SESSION_TYPE_SET', sessionType: 'working' });
 				this.props.dispatch({ type: 'CYCLE_SET', cycleCount: 4 });
+				this.pause();
 			}
 		}, {
 			key: 'pause',
@@ -45052,20 +45053,28 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_Timer2.default, {
-						pause: this.pause,
-						secondsRemaining: this.props.secondsRemaining,
-						isCounting: this.props.isCounting,
-						completed: this.props.completed,
-						cycles: this.props.cycles,
-						dispatch: this.props.dispatch,
-						intervalID: this.props.intervalID,
-						tick: this.props.tick()
-					})
-				);
+				if (!this.props.openDialog) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(_Timer2.default, {
+							pause: this.pause,
+							secondsRemaining: this.props.secondsRemaining,
+							isCounting: this.props.isCounting,
+							completed: this.props.completed,
+							cycles: this.props.cycles,
+							dispatch: this.props.dispatch,
+							intervalID: this.props.intervalID,
+							tick: this.props.tick()
+						})
+					);
+				} else {
+					return _react2.default.createElement(
+						'p',
+						null,
+						'Waiting...'
+					);
+				}
 			}
 		}]);
 
@@ -45079,6 +45088,7 @@
 		working: _react2.default.PropTypes.bool,
 		cycles: _react2.default.PropTypes.number,
 		completed: _react2.default.PropTypes.number,
+		openDialog: _react2.default.PropTypes.bool,
 		//dispatch:React.PropTypes.func.isRequired
 		tick: _react2.default.PropTypes.func
 	};
@@ -45090,7 +45100,8 @@
 			secondsRemaining: state.timer.secondsRemaining,
 			cycles: state.timer.cycles,
 			isCounting: state.timer.isCounting,
-			completed: state.timer.completed
+			completed: state.timer.completed,
+			openDialog: state.form.openDialog
 		};
 	}
 
@@ -50951,8 +50962,6 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
-				var _this2 = this;
-
 				this.props.dispatch({ type: 'SUBMIT_FORM',
 					cycles: this.props.SessionSlider,
 					rest: this.props.RestMusicType,
@@ -50960,11 +50969,9 @@
 				});
 				this.props.dispatch({ type: 'CLOSE_DIALOG' });
 
-				this.props.dispatch({ type: "START_STOP" });
-				var intervalId = setInterval(function () {
-					_this2.props.dispatch({ type: "TICK" });
-				}, 1000);
-				this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
+				// this.props.dispatch({ type: "START_STOP" })
+				// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
+				// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 			}
 		}, {
 			key: 'render',
@@ -50974,9 +50981,8 @@
 					labelPosition: 'after',
 					primary: true,
 					style: styles.button,
-					containerElement: 'label'
-					//onClick={this.props.submitSession}
-					, onClick: this.submit.bind(this)
+					containerElement: 'label',
+					onClick: this.submit.bind(this)
 				})];
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
