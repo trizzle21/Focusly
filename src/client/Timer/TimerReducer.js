@@ -7,7 +7,7 @@ import { SUBMIT_FORM } from '../Form/FormActions';
 
 
 const time_state={
-    cycles:4,
+    cycles:1,
     working:true,
     intervalID:null,
     restRecommendationSeeds: null,
@@ -76,8 +76,11 @@ export default function TimerReducer(state=time_state, actions){
 				isCounting: !state.isCounting,
 			});
      	case SUBMIT_FORM:
-      		//Sets everything up, is part of Form
-
+      		return Object.assign({}, state, {
+				restRecommendationSeeds: actions.rest,
+				workRecommendationSeeds: actions.work,
+				cycles: actions.cycles,
+			});
 		default:
 			return state;
 	}

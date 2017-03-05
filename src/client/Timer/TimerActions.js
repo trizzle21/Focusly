@@ -8,7 +8,7 @@ export const TICK = 'TICK';
 export const START_STOP = 'START_STOP';
 export const SET_INTERVAL = 'SET_INTERVAL';
 export const CLEAR_INTERVAL = 'CLEAR_INTERVAL';
-
+export const SUBMIT_FORM = 'SUBMIT_FORM';
 
 export function cycleSet(cycleCount) {
 	return { type: CYCLE_SET, cycleCount: cycleCount};

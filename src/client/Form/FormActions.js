@@ -7,9 +7,11 @@ export const SLIDER_CHANGE = 'SLIDER_CHANGE';
 
 export const WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
 export const REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+export const SUBMIT_FORM = 'SUBMIT_FORM';
 
 
-export const SUBMIT_SESSION = 'SUBMIT_SESSION';
+
+
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 
 export const SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
@@ -55,7 +57,6 @@ export function getCategories(options){
 // export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
 // export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 
-export const submitSession = actionCreator(SUBMIT_SESSION, 'slider', 'restGenre');
 
 export const closeDialog = actionCreator(CLOSE_DIALOG);
 

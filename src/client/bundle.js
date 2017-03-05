@@ -29567,7 +29567,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.closeDialog = exports.submitSession = exports.SPOTIFY_GENRE_SEED_ERROR = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.CLOSE_DIALOG = exports.SUBMIT_SESSION = exports.REST_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = exports.SLIDER_CHANGE = undefined;
+	exports.closeDialog = exports.SPOTIFY_GENRE_SEED_ERROR = exports.SPOTIFY_GENRE_SEED_SUCCESS = exports.SPOTIFY_GENRE_SEED_BEGIN = exports.CLOSE_DIALOG = exports.SUBMIT_FORM = exports.REST_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = exports.SLIDER_CHANGE = undefined;
 	exports.getCategories = getCategories;
 
 	var _ActionCreator = __webpack_require__(285);
@@ -29585,8 +29585,8 @@
 
 	var WORK_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = 'WORK_MUSIC_SELECT';
 	var REST_MUSIC_SELECT = exports.REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
+	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
 
-	var SUBMIT_SESSION = exports.SUBMIT_SESSION = 'SUBMIT_SESSION';
 	var CLOSE_DIALOG = exports.CLOSE_DIALOG = 'CLOSE_DIALOG';
 
 	var SPOTIFY_GENRE_SEED_BEGIN = exports.SPOTIFY_GENRE_SEED_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
@@ -29627,7 +29627,6 @@
 	// export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
 	// export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 
-	var submitSession = exports.submitSession = (0, _ActionCreator2.default)(SUBMIT_SESSION, 'slider', 'restGenre');
 
 	var closeDialog = exports.closeDialog = (0, _ActionCreator2.default)(CLOSE_DIALOG);
 
@@ -29677,7 +29676,7 @@
 	var _FormActions = __webpack_require__(284);
 
 	var time_state = {
-		cycles: 4,
+		cycles: 1,
 		working: true,
 		intervalID: null,
 		restRecommendationSeeds: null,
@@ -29746,8 +29745,11 @@
 					isCounting: !state.isCounting
 				});
 			case _FormActions.SUBMIT_FORM:
-			//Sets everything up, is part of Form
-
+				return Object.assign({}, state, {
+					restRecommendationSeeds: actions.rest,
+					workRecommendationSeeds: actions.work,
+					cycles: actions.cycles
+				});
 			default:
 				return state;
 		}
@@ -29762,7 +29764,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.startStop = exports.tick = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
+	exports.startStop = exports.tick = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
 	exports.cycleSet = cycleSet;
 	exports.sessionTypeSet = sessionTypeSet;
 
@@ -29779,6 +29781,7 @@
 	var START_STOP = exports.START_STOP = 'START_STOP';
 	var SET_INTERVAL = exports.SET_INTERVAL = 'SET_INTERVAL';
 	var CLEAR_INTERVAL = exports.CLEAR_INTERVAL = 'CLEAR_INTERVAL';
+	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
 
 	function cycleSet(cycleCount) {
 		return { type: CYCLE_SET, cycleCount: cycleCount };
@@ -50945,7 +50948,6 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-				console.log(this.props.params.accessToken);
 				this.props.getCategories({
 					accessToken: this.props.params.accessToken
 				});
@@ -50953,6 +50955,11 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
+				this.props.dispatch({ type: 'SUBMIT_FORM',
+					cycles: this.props.SessionSlider,
+					rest: this.props.RestMusicType,
+					work: this.props.WorkMusicType
+				});
 				this.props.dispatch({ type: 'CLOSE_DIALOG' });
 			}
 		}, {
