@@ -1,6 +1,8 @@
 import React from 'react';
 
 import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Slider from 'material-ui/Slider';
@@ -40,12 +42,12 @@ class EntryForm extends React.Component {
     this.props.dispatch({type:'SLIDER_CHANGE', value: value});
   }
 
-  handleRestChange(event, value){
-    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: value  })
+  handleRestChange(event, value, index){
+    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: index  })
   }
 
-  handleWorkChange(event, value){
-    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: value});
+  handleWorkChange(event, value, index){
+    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: index});
   }
 
     render() {
@@ -70,8 +72,8 @@ class EntryForm extends React.Component {
                   style={styles.select}
             	>
 
-              {this.props.recommendationSeeds.map(function(seed){
-                  return <MenuItem value={seed} primaryText={seed} />
+              {this.props.recommendationSeed.map(function(seed){
+                  return <MenuItem value={seed} key={seed} primaryText={seed} />
 
               })}
            	 	</SelectField>
@@ -83,8 +85,8 @@ class EntryForm extends React.Component {
               		onChange={this.handleRestChange.bind(this)}
                   style={styles.select}
             	>
-            		{this.props.recommendationSeeds.map(function(seed){
-                  return <MenuItem value={seed} primaryText={seed} />
+            		{this.props.recommendationSeed.map(function(seed){
+                  return <MenuItem value={seed} key={seed} primaryText={seed} />
                 })}
             	</SelectField>
 

@@ -49,6 +49,7 @@ class TimerContainer extends React.Component {
 
 	render() {
 		if(!this.props.openDialog){
+
 			return (<div>
 		 		<Timer 
 		 			pause={this.pause} 

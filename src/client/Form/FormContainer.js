@@ -39,13 +39,14 @@ class FormContainer extends React.Component {
 	}
 
 	submit(){
-		this.props.dispatch({type:'SUBMIT_FORM', 
-			cycles: this.props.SessionSlider,
-			rest: this.props.RestMusicType,
-			work: this.props.WorkMusicType,
-		});
-		this.props.dispatch({type:'CLOSE_DIALOG'});
-		
+		if(this.props.RestMusicType !== '' || this.props.WorkMusicType !== '' ){
+			this.props.dispatch({type:'SUBMIT_FORM', 
+				cycles: this.props.SessionSlider,
+				rest: this.props.RestMusicType,
+				work: this.props.WorkMusicType,
+			});
+			this.props.dispatch({type:'CLOSE_DIALOG'});
+		}
 		// this.props.dispatch({ type: "START_STOP" })
 		// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
@@ -62,9 +63,11 @@ class FormContainer extends React.Component {
 				onClick={this.submit.bind(this)}
 			/>
 		];
+
 		return (
   		
   		<MuiThemeProvider muiTheme={theme}>
+  		
   			<div>
 				<Dialog
 	    			title="Set Up Tabata Session"
@@ -80,7 +83,7 @@ class FormContainer extends React.Component {
 					RestMusicType={this.props.RestMusicType}
 					sliderChange={this.props.sliderChange}
 					closeDialog={this.props.closeDialog}
-					recommendationSeeds={this.props.recommendationSeeds}
+					recommendationSeed={this.props.recommendationSeed}
 					dispatch={this.props.dispatch}
 				/>
 
@@ -100,7 +103,7 @@ FormContainer.propTypes ={
 	WorkMusicType: React.PropTypes.string,
 	RestMusicType: React.PropTypes.string,
 	SessionSlider: React.PropTypes.number,
-	recommendationSeeds:React.PropTypes.array,
+	recommendationSeed:React.PropTypes.array,
 	getCategories:React.PropTypes.func,
 	closeDialog:React.PropTypes.func,
 	submitSession:React.PropTypes.func,
@@ -114,7 +117,7 @@ FormContainer.propTypes ={
 function mapStateToProps(state){
 	return {
 		isLoading:state.form.isLoading,
-		recommendationSeeds:state.form.recommendationSeeds,
+		recommendationSeed:state.form.recommendationSeed,
 		openDialog: state.form.openDialog,
 		WorkMusicType: state.form.WorkMusicType,
 		RestMusicType: state.form.RestMusicType,

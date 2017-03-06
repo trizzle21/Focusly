@@ -33,14 +33,15 @@ function SpotifyGenreSeedError(e) {
 export function getCategories(options){
 	return (dispatch) => {
 		dispatch(SpotifyGenreSeedBegin());
-		fetch("https://api.spotify.com/v1/browse/categories", {
+		fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
 			method:"GET",
 			headers: {'Authorization' : 'Bearer ' + options.accessToken}
 			})
-		.then(data => {
-			dispatch({type: "SPOTIFY_GENRE_SEED_SUCCESS", data:data});
-		}).catch(e => {
+		.then(data => data.json()).catch(e => {
 			dispatch({type: "SPOTIFY_GENRE_SEED_ERROR", error:e})
+		})
+		.then(json => {
+			dispatch({type: "SPOTIFY_GENRE_SEED_SUCCESS", data: json});
 		});
 		
 	};

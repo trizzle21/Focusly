@@ -76,6 +76,7 @@ export default function TimerReducer(state=time_state, actions){
 				isCounting: !state.isCounting,
 			});
      	case SUBMIT_FORM:
+      		console.log(actions.rest)
       		return Object.assign({}, state, {
 				restRecommendationSeeds: actions.rest,
 				workRecommendationSeeds: actions.work,

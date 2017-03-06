@@ -29514,7 +29514,7 @@
 	    WorkMusicType: '',
 	    RestMusicType: '',
 	    SessionSlider: 1.0,
-	    recommendationSeeds: []
+	    recommendationSeed: []
 	};
 
 	function Form() {
@@ -29546,11 +29546,11 @@
 	        case _FormActions.SPOTIFY_GENRE_SEED_SUCCESS:
 	            console.log('success');
 	            return Object.assign({}, state, {
-	                recommendationSeed: action.data,
+	                recommendationSeed: action.data.genres,
 	                isLoading: false
 	            });
 	        case _FormActions.SPOTIFY_GENRE_SEED_ERROR:
-	            console.log(action.e);
+	            console.log('error');
 	            return state;
 	        default:
 	            return state;
@@ -29606,13 +29606,15 @@
 	function getCategories(options) {
 		return function (dispatch) {
 			dispatch(SpotifyGenreSeedBegin());
-			(0, _isomorphicFetch2.default)("https://api.spotify.com/v1/browse/categories", {
+			(0, _isomorphicFetch2.default)("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
 				method: "GET",
 				headers: { 'Authorization': 'Bearer ' + options.accessToken }
 			}).then(function (data) {
-				dispatch({ type: "SPOTIFY_GENRE_SEED_SUCCESS", data: data });
+				return data.json();
 			}).catch(function (e) {
 				dispatch({ type: "SPOTIFY_GENRE_SEED_ERROR", error: e });
+			}).then(function (json) {
+				dispatch({ type: "SPOTIFY_GENRE_SEED_SUCCESS", data: json });
 			});
 		};
 	};
@@ -29745,6 +29747,7 @@
 					isCounting: !state.isCounting
 				});
 			case _FormActions.SUBMIT_FORM:
+				console.log(actions.rest);
 				return Object.assign({}, state, {
 					restRecommendationSeeds: actions.rest,
 					workRecommendationSeeds: actions.work,
@@ -29765,9 +29768,10 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.startStop = exports.tick = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
+	exports.SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = exports.SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = exports.SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = exports.startStop = exports.tick = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
 	exports.cycleSet = cycleSet;
 	exports.sessionTypeSet = sessionTypeSet;
+	exports.getSeedPlaylist = getSeedPlaylist;
 
 	var _ActionCreator = __webpack_require__(285);
 
@@ -29794,6 +29798,26 @@
 
 	var tick = exports.tick = (0, _ActionCreator2.default)(TICK);
 	var startStop = exports.startStop = (0, _ActionCreator2.default)(START_STOP);
+
+	var SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = exports.SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
+	var SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = exports.SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
+	var SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = exports.SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
+
+	function SpotifyRecomendationPlaylistBegin() {
+		return { type: SPOTIFY_GENRE_SEED_BEGIN };
+	}
+	function SpotifyRecomendationPlaylistSuccess(data) {
+		return { type: SPOTIFY_GENRE_SEED_SUCCESS, data: data };
+	}
+	function SpotifyRecomendationPlaylistError(e) {
+		return { type: SPOTIFY_GENRE_SEED_ERROR, error: e };
+	}
+
+	function getSeedPlaylist(options) {
+		return function (dispatch) {
+			dispatch();
+		};
+	}
 
 /***/ },
 /* 288 */
@@ -45054,6 +45078,7 @@
 			key: 'render',
 			value: function render() {
 				if (!this.props.openDialog) {
+
 					return _react2.default.createElement(
 						'div',
 						null,
@@ -50962,13 +50987,14 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
-				this.props.dispatch({ type: 'SUBMIT_FORM',
-					cycles: this.props.SessionSlider,
-					rest: this.props.RestMusicType,
-					work: this.props.WorkMusicType
-				});
-				this.props.dispatch({ type: 'CLOSE_DIALOG' });
-
+				if (this.props.RestMusicType !== '' || this.props.WorkMusicType !== '') {
+					this.props.dispatch({ type: 'SUBMIT_FORM',
+						cycles: this.props.SessionSlider,
+						rest: this.props.RestMusicType,
+						work: this.props.WorkMusicType
+					});
+					this.props.dispatch({ type: 'CLOSE_DIALOG' });
+				}
 				// this.props.dispatch({ type: "START_STOP" })
 				// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 				// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
@@ -50984,6 +51010,7 @@
 					containerElement: 'label',
 					onClick: this.submit.bind(this)
 				})];
+
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
@@ -51006,7 +51033,7 @@
 								RestMusicType: this.props.RestMusicType,
 								sliderChange: this.props.sliderChange,
 								closeDialog: this.props.closeDialog,
-								recommendationSeeds: this.props.recommendationSeeds,
+								recommendationSeed: this.props.recommendationSeed,
 								dispatch: this.props.dispatch
 							})
 						)
@@ -51024,12 +51051,12 @@
 		SessionSlider: _react2.default.PropTypes.number,
 		WorkMusicType: _react2.default.PropTypes.string,
 		RestMusicType: _react2.default.PropTypes.string
-	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'recommendationSeeds', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'getCategories', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'closeDialog', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'submitSession', _react2.default.PropTypes.func), _FormContainer$propTy);
+	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'recommendationSeed', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'getCategories', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'closeDialog', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'submitSession', _react2.default.PropTypes.func), _FormContainer$propTy);
 
 	function mapStateToProps(state) {
 		return {
 			isLoading: state.form.isLoading,
-			recommendationSeeds: state.form.recommendationSeeds,
+			recommendationSeed: state.form.recommendationSeed,
 			openDialog: state.form.openDialog,
 			WorkMusicType: state.form.WorkMusicType,
 			RestMusicType: state.form.RestMusicType,
@@ -51065,6 +51092,10 @@
 	var _SelectField = __webpack_require__(540);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
+
+	var _MenuItem = __webpack_require__(505);
+
+	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 
 	var _RaisedButton = __webpack_require__(460);
 
@@ -51128,13 +51159,13 @@
 	    }
 	  }, {
 	    key: 'handleRestChange',
-	    value: function handleRestChange(event, value) {
-	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: value });
+	    value: function handleRestChange(event, value, index) {
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: index });
 	    }
 	  }, {
 	    key: 'handleWorkChange',
-	    value: function handleWorkChange(event, value) {
-	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: value });
+	    value: function handleWorkChange(event, value, index) {
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: index });
 	    }
 	  }, {
 	    key: 'render',
@@ -51172,8 +51203,8 @@
 	                onChange: this.handleWorkChange.bind(this),
 	                style: styles.select
 	              },
-	              this.props.recommendationSeeds.map(function (seed) {
-	                return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
+	              this.props.recommendationSeed.map(function (seed) {
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed, key: seed, primaryText: seed });
 	              })
 	            ),
 	            _react2.default.createElement(
@@ -51184,8 +51215,8 @@
 	                onChange: this.handleRestChange.bind(this),
 	                style: styles.select
 	              },
-	              this.props.recommendationSeeds.map(function (seed) {
-	                return _react2.default.createElement(MenuItem, { value: seed, primaryText: seed });
+	              this.props.recommendationSeed.map(function (seed) {
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed, key: seed, primaryText: seed });
 	              })
 	            ),
 	            _react2.default.createElement('br', null)

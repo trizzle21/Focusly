@@ -10,7 +10,7 @@ var Form_State = {
     WorkMusicType: '',
     RestMusicType: '',
     SessionSlider: 1.0,
-    recommendationSeeds:[],
+    recommendationSeed:[],
 }
 
 
@@ -41,11 +41,11 @@ export default function Form(state=Form_State, action){
         case SPOTIFY_GENRE_SEED_SUCCESS:
             console.log('success');
             return Object.assign({}, state, {
-                recommendationSeed: action.data,
+                recommendationSeed: action.data.genres,
                 isLoading:false,
             });
       case SPOTIFY_GENRE_SEED_ERROR:
-          console.log(action.e);
+          console.log('error');
           return state;
       default:
 			return state;
