@@ -27,13 +27,13 @@ export const SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCES
 export const SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
 
 function SpotifyRecomendationPlaylistBegin(){ 
-    return { type: SPOTIFY_GENRE_SEED_BEGIN };
+    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN };
 }
 function SpotifyRecomendationPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_GENRE_SEED_SUCCESS, data:data};
+    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS, data:data};
 }
 function SpotifyRecomendationPlaylistError(e) { 
-    return { type: SPOTIFY_GENRE_SEED_ERROR, error:e };
+    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_ERROR, error:e };
 }
 
 
@@ -41,7 +41,19 @@ function SpotifyRecomendationPlaylistError(e) {
 
 export function getSeedPlaylist(options){
 	return (dispatch) => {
-		dispatch()
+		dispatch(SpotifyRecomendationPlaylistBegin())
+		fetch("https://api.spotify.com/v1/recommendations?min_energy=0.4&market=US&seed_genres="+ options.seed +"&min_popularity=50", {
+			method:"GET",
+			headers: {'Authorization' : 'Bearer ' + options.accessToken}
+			})
+		.then(data => data.json)
+		.catch(e => {
+			SpotifyRecomendationPlaylistError(e)
+		})
+		.then(json => )
+
+
+		)
 	}
 }
 

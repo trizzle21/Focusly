@@ -29440,7 +29440,7 @@
 
 	var _FormReducer2 = _interopRequireDefault(_FormReducer);
 
-	var _TimerReducer = __webpack_require__(286);
+	var _TimerReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Timer/TimerReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _TimerReducer2 = _interopRequireDefault(_TimerReducer);
 
@@ -29663,163 +29663,8 @@
 	}
 
 /***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = TimerReducer;
-
-	var _TimerActions = __webpack_require__(287);
-
-	var _FormActions = __webpack_require__(284);
-
-	var time_state = {
-		cycles: 1,
-		working: true,
-		intervalID: null,
-		restRecommendationSeeds: null,
-		workRecommendationSeeds: null,
-		initialSeconds: 1500,
-		secondsRemaining: 1500,
-		completed: 100,
-		isCounting: false
-	};
-
-	function TimerReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : time_state;
-		var actions = arguments[1];
-
-		switch (actions.type) {
-			case _TimerActions.SET_INTERVAL:
-				return Object.assign({}, state, {
-					intervalID: actions.intervalID
-				});
-			case _TimerActions.CLEAR_INTERVAL:
-				return Object.assign({}, state, {
-					intervalID: null
-				});
-			case _TimerActions.CYCLE_SET:
-				return Object.assign({}, state, {
-					cycles: actions.cycleCount
-				});
-			case _TimerActions.SESSION_TYPE_SET:
-				if (actions.sessionType === 'working') {
-					return Object.assign({}, state, {
-						working: true,
-						secondsRemaining: 1500,
-						initialSeconds: 1500
-					});
-				} else {
-					return Object.assign({}, state, {
-						working: false,
-						secondsRemaining: 300,
-						initialSeconds: 300
-					});
-				}
-			case _TimerActions.TICK:
-				if (state.secondsRemaining >= 0) {
-					return Object.assign({}, state, {
-						secondsRemaining: state.secondsRemaining - 1,
-						completed: state.secondsRemaining / state.initialSeconds * 100
-					});
-				} else {
-					if (state.working) {
-						return Object.assign({}, state, {
-							working: false,
-							secondsRemaining: 300,
-							initialSeconds: 300
-						});
-					} else {
-						return Object.assign({}, state, {
-							working: true,
-							cycles: state.cycles - 1,
-							secondsRemaining: 1200,
-							initialSeconds: 1200
-						});
-					}
-				}
-			case _TimerActions.START_STOP:
-				return Object.assign({}, state, {
-					isCounting: !state.isCounting
-				});
-			case _FormActions.SUBMIT_FORM:
-				console.log(actions.rest);
-				return Object.assign({}, state, {
-					restRecommendationSeeds: actions.rest,
-					workRecommendationSeeds: actions.work,
-					cycles: actions.cycles,
-					isCounting: true
-				});
-			default:
-				return state;
-		}
-	}
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = exports.SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = exports.SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = exports.startStop = exports.tick = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
-	exports.cycleSet = cycleSet;
-	exports.sessionTypeSet = sessionTypeSet;
-	exports.getSeedPlaylist = getSeedPlaylist;
-
-	var _ActionCreator = __webpack_require__(285);
-
-	var _ActionCreator2 = _interopRequireDefault(_ActionCreator);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//Timer Actions
-	var CYCLE_SET = exports.CYCLE_SET = 'CYCLE_SET';
-	var SESSION_TYPE_SET = exports.SESSION_TYPE_SET = 'SESSION_TYPE_SET';
-	var TICK = exports.TICK = 'TICK';
-	var START_STOP = exports.START_STOP = 'START_STOP';
-	var SET_INTERVAL = exports.SET_INTERVAL = 'SET_INTERVAL';
-	var CLEAR_INTERVAL = exports.CLEAR_INTERVAL = 'CLEAR_INTERVAL';
-	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
-
-	function cycleSet(cycleCount) {
-		return { type: CYCLE_SET, cycleCount: cycleCount };
-	}
-
-	function sessionTypeSet(session_type) {
-		return { type: SESSION_TYPE_SET, sessionType: session_type };
-	}
-
-	var tick = exports.tick = (0, _ActionCreator2.default)(TICK);
-	var startStop = exports.startStop = (0, _ActionCreator2.default)(START_STOP);
-
-	var SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = exports.SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
-	var SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = exports.SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
-	var SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = exports.SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
-
-	function SpotifyRecomendationPlaylistBegin() {
-		return { type: SPOTIFY_GENRE_SEED_BEGIN };
-	}
-	function SpotifyRecomendationPlaylistSuccess(data) {
-		return { type: SPOTIFY_GENRE_SEED_SUCCESS, data: data };
-	}
-	function SpotifyRecomendationPlaylistError(e) {
-		return { type: SPOTIFY_GENRE_SEED_ERROR, error: e };
-	}
-
-	function getSeedPlaylist(options) {
-		return function (dispatch) {
-			dispatch();
-		};
-	}
-
-/***/ },
+/* 286 */,
+/* 287 */,
 /* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45012,7 +44857,7 @@
 
 	var _Timer2 = _interopRequireDefault(_Timer);
 
-	var _TimerActions = __webpack_require__(287);
+	var _TimerActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./TimerActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50927,7 +50772,7 @@
 
 	var _FormActions = __webpack_require__(284);
 
-	var _TimerActions = __webpack_require__(287);
+	var _TimerActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../Timer/TimerActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _TimerActions2 = _interopRequireDefault(_TimerActions);
 

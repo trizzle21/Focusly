@@ -16,6 +16,7 @@ const time_state={
     secondsRemaining:1500,
     completed:100,
     isCounting:false,
+    sideBarLoad:false,
 };
 
 
@@ -76,13 +77,25 @@ export default function TimerReducer(state=time_state, actions){
 				isCounting: !state.isCounting,
 			});
      	case SUBMIT_FORM:
-      		console.log(actions.rest)
       		return Object.assign({}, state, {
 				restRecommendationSeeds: actions.rest,
 				workRecommendationSeeds: actions.work,
 				cycles: actions.cycles,
 				isCounting:true,
 			});
+		case SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN:
+		    return Object.assign({}, state, {
+
+		    }
+		case SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS:
+			return Object.assign({}, state, {
+
+		    }
+
+		case SPOTIFY_RECOMENDATION_PLAYLIST_ERROR:
+			return Object.assign({}, state, {
+
+		    }
 		default:
 			return state;
 	}
