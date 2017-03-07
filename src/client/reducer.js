@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 import form from './Form/FormReducer';
 import timer from './Timer/TimerReducer';
 import spotifyAuth from './Spotify/SpotifyReducer';
+import sidebar from './SideBar/SidebarReducer';
+
 //cycles are 25+5minute intervals
 
 //TODO sessions and Tabata Count are different
@@ -24,7 +26,7 @@ export const initialState = {
     isCounting:true,
   },
   
-  tabataForm: {
+  Form: {
     isloading: true,
     openDialog:true,
     WorkMusicType: '',
@@ -42,6 +44,7 @@ export const initialState = {
 export default combineReducers({
   form,
   timer,
+  sidebar,
   // spotifyAuth,
 });
 

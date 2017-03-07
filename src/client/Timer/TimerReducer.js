@@ -1,5 +1,6 @@
 import {
-	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,SET_INTERVAL, CLEAR_INTERVAL
+	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,SET_INTERVAL, CLEAR_INTERVAL, 
+	SPOTIFY_PLAYLIST_BEGIN, SPOTIFY_PLAYLIST_SUCCESS, SPOTIFY_PLAYLIST_ERROR
  } from './TimerActions';
 
 import { SUBMIT_FORM } from '../Form/FormActions';
@@ -77,25 +78,26 @@ export default function TimerReducer(state=time_state, actions){
 				isCounting: !state.isCounting,
 			});
      	case SUBMIT_FORM:
+      		console.log(actions.rest);
       		return Object.assign({}, state, {
 				restRecommendationSeeds: actions.rest,
 				workRecommendationSeeds: actions.work,
 				cycles: actions.cycles,
 				isCounting:true,
 			});
-		case SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN:
+		case SPOTIFY_PLAYLIST_BEGIN:
 		    return Object.assign({}, state, {
 
-		    }
-		case SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS:
+		    });
+		case SPOTIFY_PLAYLIST_SUCCESS:
 			return Object.assign({}, state, {
 
-		    }
+		    });
 
-		case SPOTIFY_RECOMENDATION_PLAYLIST_ERROR:
+		case SPOTIFY_PLAYLIST_ERROR:
 			return Object.assign({}, state, {
 
-		    }
+		    });
 		default:
 			return state;
 	}

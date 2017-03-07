@@ -47,6 +47,7 @@ class FormContainer extends React.Component {
 			});
 			this.props.dispatch({type:'CLOSE_DIALOG'});
 		}
+		
 		// this.props.dispatch({ type: "START_STOP" })
 		// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });

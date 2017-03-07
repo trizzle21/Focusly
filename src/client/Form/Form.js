@@ -73,7 +73,7 @@ class EntryForm extends React.Component {
             	>
 
               {this.props.recommendationSeed.map(function(seed){
-                  return <MenuItem value={seed} key={seed} primaryText={seed} />
+                  return <MenuItem value={seed.id} key={seed.id} primaryText={seed.name} />
 
               })}
            	 	</SelectField>
@@ -86,7 +86,7 @@ class EntryForm extends React.Component {
                   style={styles.select}
             	>
             		{this.props.recommendationSeed.map(function(seed){
-                  return <MenuItem value={seed} key={seed} primaryText={seed} />
+                  return <MenuItem value={seed.id} key={seed.id} primaryText={seed.name} />
                 })}
             	</SelectField>
 

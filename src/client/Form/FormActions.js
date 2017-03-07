@@ -33,7 +33,7 @@ function SpotifyGenreSeedError(e) {
 export function getCategories(options){
 	return (dispatch) => {
 		dispatch(SpotifyGenreSeedBegin());
-		fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
+		fetch("https://api.spotify.com/v1/me/playlists", {
 			method:"GET",
 			headers: {'Authorization' : 'Bearer ' + options.accessToken}
 			})

@@ -39,9 +39,9 @@ export default function Form(state=Form_State, action){
                 isLoading:true,
             });
         case SPOTIFY_GENRE_SEED_SUCCESS:
-            console.log('success');
+            console.log(action.data.items);
             return Object.assign({}, state, {
-                recommendationSeed: action.data.genres,
+                recommendationSeed: action.data.items,
                 isLoading:false,
             });
       case SPOTIFY_GENRE_SEED_ERROR:

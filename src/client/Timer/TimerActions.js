@@ -22,38 +22,40 @@ export const tick = actionCreator(TICK);
 export const startStop = actionCreator(START_STOP);
 
 
-export const SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN = "SPOTIFY_GENRE_SEED_BEGIN";
-export const SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS = "SPOTIFY_GENRE_SEED_SUCCESS";
-export const SPOTIFY_RECOMENDATION_PLAYLIST_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
+export const SPOTIFY_PLAYLIST_BEGIN = "SPOTIFY_PLAYLIST_BEGIN";
+export const SPOTIFY_PLAYLIST_SUCCESS = "SPOTIFY_PLAYLIST_SUCCESS";
+export const SPOTIFY_PLAYLIST_ERROR = "SPOTIFY_PLAYLIST_ERROR";
 
-function SpotifyRecomendationPlaylistBegin(){ 
-    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_BEGIN };
+function SpotifyPlaylistBegin(){ 
+    return { type: SPOTIFY_PLAYLIST_BEGIN };
 }
-function SpotifyRecomendationPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_SUCCESS, data:data};
+function SpotifyPlaylistSuccess(data)  { 
+    return { type: SPOTIFY_PLAYLIST_SUCCESS, data:data};
 }
-function SpotifyRecomendationPlaylistError(e) { 
-    return { type: SPOTIFY_RECOMENDATION_PLAYLIST_ERROR, error:e };
+function SpotifyPlaylistError(e) { 
+    return { type: SPOTIFY_PLAYLIST_ERROR, error:e };
 }
 
 
 
 
-export function getSeedPlaylist(options){
+export function getPlaylist(options){
 	return (dispatch) => {
-		dispatch(SpotifyRecomendationPlaylistBegin())
-		fetch("https://api.spotify.com/v1/recommendations?min_energy=0.4&market=US&seed_genres="+ options.seed +"&min_popularity=50", {
+		dispatch(SpotifyRecomendationPlaylistBegin());
+		fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
 			method:"GET",
 			headers: {'Authorization' : 'Bearer ' + options.accessToken}
 			})
-		.then(data => data.json)
+		.then(data => data.json())
 		.catch(e => {
-			SpotifyRecomendationPlaylistError(e)
+			dispatch(SpotifyRecomendationPlaylistError(e))
 		})
-		.then(json => )
+		.then(json => {
+			dispatch(SpotifyRecomendationPlaylistSuccess(json))
+		});
 
 
-		)
+		
 	}
 }
 
