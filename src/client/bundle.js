@@ -31944,52 +31944,52 @@
 	var SPOTIFY_REST_PLAYLIST_ERROR = exports.SPOTIFY_REST_PLAYLIST_ERROR = "SPOTIFY_REST_PLAYLIST_ERROR";
 
 	function SpotifyWorkPlaylistBegin() {
-		return { type: SPOTIFY_PLAYLIST_BEGIN };
+		return { type: SPOTIFY_WORK_PLAYLIST_BEGIN };
 	}
 	function SpotifyWorkPlaylistSuccess(data) {
-		return { type: SPOTIFY_PLAYLIST_SUCCESS, data: data };
+		return { type: SPOTIFY_WORK_PLAYLIST_SUCCESS, data: data };
 	}
 	function SpotifyWorkPlaylistError(e) {
-		return { type: SPOTIFY_PLAYLIST_ERROR, error: e };
+		return { type: SPOTIFY_WORK_PLAYLIST_ERROR, error: e };
 	}
 
 	function SpotifyRestPlaylistBegin() {
-		return { type: SPOTIFY_PLAYLIST_BEGIN };
+		return { type: SPOTIFY_REST_PLAYLIST_BEGIN };
 	}
 	function SpotifyRestPlaylistSuccess(data) {
-		return { type: SPOTIFY_PLAYLIST_SUCCESS, data: data };
+		return { type: SPOTIFY_REST_PLAYLIST_SUCCESS, data: data };
 	}
 	function SpotifyRestPlaylistError(e) {
-		return { type: SPOTIFY_PLAYLIST_ERROR, error: e };
+		return { type: SPOTIFY_REST_PLAYLIST_ERROR, error: e };
 	}
 
 	function getPlaylist(options, work) {
 		if (work === true) {
 			return function (dispatch) {
-				dispatch(SpotifyPlaylistBegin());
+				dispatch(SpotifyWorkPlaylistBegin());
 				fetch('https://api.spotify.com/v1/me/playlists/' + options.playlist_id, {
 					method: "GET",
 					headers: { 'Authorization': 'Bearer ' + options.accessToken }
 				}).then(function (data) {
 					return data.json();
 				}).catch(function (e) {
-					dispatch(SpotifyPlaylistError(e));
+					dispatch(SpotifyWorkPlaylistError(e));
 				}).then(function (json) {
-					dispatch(SpotifyPlaylistSuccess(json));
+					dispatch(SpotifyWorkPlaylistSuccess(json));
 				});
 			};
 		} else {
 			return function (dispatch) {
-				dispatch(SpotifyPlaylistBegin());
+				dispatch(SpotifyRestPlaylistBegin());
 				fetch('https://api.spotify.com/v1/me/playlists/' + options.playlist_id, {
 					method: "GET",
 					headers: { 'Authorization': 'Bearer ' + options.accessToken }
 				}).then(function (data) {
 					return data.json();
 				}).catch(function (e) {
-					dispatch(SpotifyPlaylistError(e));
+					dispatch(SpotifyRestPlaylistError(e));
 				}).then(function (json) {
-					dispatch(SpotifyPlaylistSuccess(json));
+					dispatch(SpotifyRestPlaylistSuccess(json));
 				});
 			};
 		}
@@ -45574,7 +45574,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-3' },
-	              _react2.default.createElement(_SideBarContainer2.default, null)
+	              _react2.default.createElement(_SideBarContainer2.default, { params: this.props.params })
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -50643,6 +50643,8 @@
 
 	var _reactRedux = __webpack_require__(265);
 
+	var _redux = __webpack_require__(244);
+
 	var _Drawer = __webpack_require__(561);
 
 	var _Drawer2 = _interopRequireDefault(_Drawer);
@@ -50652,8 +50654,6 @@
 	var _SideBar2 = _interopRequireDefault(_SideBar);
 
 	var _SideBarActions = __webpack_require__(294);
-
-	var _SideBarActions2 = _interopRequireDefault(_SideBarActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50684,18 +50684,27 @@
 			// }
 
 			value: function componentWillMount() {
-				var getPlaylist = this.props.getPlaylist;
+				if (this.props.openDialog !== true) {
+					var _getPlaylist = this.props.getPlaylist;
 
-				getPlaylist({
-					accessToken: this.props.params.accessToken
-				}, true);
-				getPlaylist({
-					accessToken: this.props.params.accessToken
-				}, false);
+					_getPlaylist({
+						accessToken: this.props.params.accessToken
+					}, true);
+					_getPlaylist({
+						accessToken: this.props.params.accessToken
+					}, false);
+				}
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+				if (this.props.openDialog === true) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						'TRUE'
+					);
+				}
 				if (this.props.working === true) {
 					return _react2.default.createElement(
 						'div',
@@ -50718,16 +50727,29 @@
 	SideBarContainer.propTypes = {
 		restPlaylistUri: _react2.default.PropTypes.number,
 		workPlaylistUri: _react2.default.PropTypes.number,
-		getPlaylist: _react2.default.PropTypes.func
+		getPlaylist: _react2.default.PropTypes.func,
+		openDialog: _react2.default.PropTypes.bool,
+		working: _react2.default.PropTypes.bool
 	};
 
 	function mapStateToProps(state) {
-		restPlaylistUri: SideBarState;
+		return {
+			restPlaylistUri: state.sidebar.restPlaylistUri,
+			workPlaylistUri: state.sidebar.workPlaylistUri,
+			openDialog: state.form.openDialog,
+			working: state.timer.working
+
+		};
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, {
-		getPlaylist: _SideBarActions2.default
-	})(SideBarContainer);
+	function mapDispatchToProps(dispatch) {
+		return {
+			dispatch: dispatch,
+			getPlaylist: (0, _redux.bindActionCreators)(_SideBarActions.getPlaylist, dispatch)
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SideBarContainer);
 
 /***/ },
 /* 537 */

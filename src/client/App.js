@@ -4,8 +4,6 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 
-
-
 import Timer from './Timer/TimerContainer';
 import SideBar from './SideBar/SideBarContainer';
 import Form from './Form/FormContainer';
@@ -13,6 +11,8 @@ import Form from './Form/FormContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './Spotify/modules/CustomTheme';
 import setTokens from './Spotify/SpotifyActions';
+
+
 
 export default class App extends React.Component {  	
 
@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
             <div className="row">
               <div className="col-3">
-                  <SideBar />
+                  <SideBar params={this.props.params}/>
 
               </div>
             <div className="col-9">

@@ -11,23 +11,23 @@ export const SPOTIFY_REST_PLAYLIST_ERROR = "SPOTIFY_REST_PLAYLIST_ERROR";
 
 
 function SpotifyWorkPlaylistBegin(){ 
-    return { type: SPOTIFY_PLAYLIST_BEGIN };
+    return { type: SPOTIFY_WORK_PLAYLIST_BEGIN };
 }
 function SpotifyWorkPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_PLAYLIST_SUCCESS, data:data};
+    return { type: SPOTIFY_WORK_PLAYLIST_SUCCESS, data:data};
 }
 function SpotifyWorkPlaylistError(e) { 
-    return { type: SPOTIFY_PLAYLIST_ERROR, error:e };
+    return { type: SPOTIFY_WORK_PLAYLIST_ERROR, error:e };
 }
 
 function SpotifyRestPlaylistBegin(){ 
-    return { type: SPOTIFY_PLAYLIST_BEGIN };
+    return { type: SPOTIFY_REST_PLAYLIST_BEGIN };
 }
 function SpotifyRestPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_PLAYLIST_SUCCESS, data:data};
+    return { type: SPOTIFY_REST_PLAYLIST_SUCCESS, data:data};
 }
 function SpotifyRestPlaylistError(e) { 
-    return { type: SPOTIFY_PLAYLIST_ERROR, error:e };
+    return { type: SPOTIFY_REST_PLAYLIST_ERROR, error:e };
 }
 
 
@@ -35,32 +35,32 @@ function SpotifyRestPlaylistError(e) {
 export function getPlaylist(options, work){
 	if (work === true){
 		return (dispatch) => {
-			dispatch(SpotifyPlaylistBegin());
+			dispatch(SpotifyWorkPlaylistBegin());
 			fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
 				method:"GET",
 				headers: {'Authorization' : 'Bearer ' + options.accessToken}
 				})
 			.then(data => data.json())
 			.catch(e => {
-				dispatch(SpotifyPlaylistError(e))
+				dispatch(SpotifyWorkPlaylistError(e))
 			})
 			.then(json => {
-				dispatch(SpotifyPlaylistSuccess(json))
+				dispatch(SpotifyWorkPlaylistSuccess(json))
 			});
 		}
 	} else {
 		return (dispatch) => {
-			dispatch(SpotifyPlaylistBegin());
+			dispatch(SpotifyRestPlaylistBegin());
 			fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
 				method:"GET",
 				headers: {'Authorization' : 'Bearer ' + options.accessToken}
 				})
 			.then(data => data.json())
 			.catch(e => {
-				dispatch(SpotifyPlaylistError(e))
+				dispatch(SpotifyRestPlaylistError(e))
 			})
 			.then(json => {
-				dispatch(SpotifyPlaylistSuccess(json))
+				dispatch(SpotifyRestPlaylistSuccess(json))
 			});
 		}
 
