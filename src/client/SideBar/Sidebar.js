@@ -25,8 +25,41 @@ const styles = {
 
 
 class SideBar extends React.Component {
+  	handleRestChange(event, value, index){
+    	this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: {
+    	  name: index,
+    	  owner: this.props.UserPlaylists[value].owner.id,
+   	   	  id:this.props.UserPlaylists[value].id
+   		 }  })
+  	}
+
+ 	handleWorkChange(event, value, index){
+    	console.log(index);
+    	this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: {
+      		name: index,
+      		owner: this.props.UserPlaylists[value].owner.id,
+      		id:this.props.UserPlaylists[value].id
+    	}});
+
+  	}
+
+  	changePlaylists(){
+  		this.props.getPlaylist({
+				accessToken:this.props.params.accessToken,
+				playlist:this.props.WorkMusicType,
+				work:true
+			});
+		this.props.getPlaylist({
+				accessToken:this.props.params.accessToken,
+				playlist:this.props.RestMusicType,
+				work:false,
+		});
+
+  	}
+
 	render(){
 		return(
+			
 			<MuiThemeProvider muiTheme={theme}>
 				<div>
 					<Drawer width={300}  open={true} >
@@ -34,7 +67,7 @@ class SideBar extends React.Component {
 						<SelectField
               				floatingLabelText="Working Music"
               				value={this.props.WorkMusicType.name}
-              				///onChange={this.handleWorkChange.bind(this)}
+              				onChange={this.handleWorkChange.bind(this)}
                   			style={styles.select}
             			>
 
@@ -48,7 +81,7 @@ class SideBar extends React.Component {
               			<SelectField
               				floatingLabelText="Resting Music"
               				value={this.props.RestMusicType.name}
-              				//onChange={this.handleRestChange.bind(this)}
+              				onChange={this.handleRestChange.bind(this)}
                   			style={styles.select}
             			>
 
@@ -58,7 +91,7 @@ class SideBar extends React.Component {
               			})}
             	</SelectField>
     					
-    					<RaisedButton label="Change Playlists"  style={styles.button} />
+    					<RaisedButton label="Change Playlists" onClick={this.changePlaylists.bind(this)}  style={styles.button} />
     					
     					<a href='/refresh_token'>
     						<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />

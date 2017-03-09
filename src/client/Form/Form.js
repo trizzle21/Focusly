@@ -68,7 +68,7 @@ class EntryForm extends React.Component {
       } else if (this.props.isLoading){
         return(
           <MuiThemeProvider muiTheme={theme}>
-            <div>Loading...</div>
+            <div>Loading... If this lasts longer than 5 seconds, refresh auth token</div>
           </MuiThemeProvider>
         );
       } else {

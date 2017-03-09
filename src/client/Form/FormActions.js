@@ -18,34 +18,6 @@ export const SPOTIFY_USER_BEGIN = "SPOTIFY_USER_BEGIN";
 export const SPOTIFY_USER_SUCCESS = "SPOTIFY_USER_SUCCESS";
 export const SPOTIFY_USER_ERROR = "SPOTIFY_USER_ERROR";
 
-function SpotifyUserBegin(){ 
-    return { type: SPOTIFY_GENRE_SEED_BEGIN };
-}
-function SpotifyUserSuccess(data)  { 
-    return { type: SPOTIFY_USER_SUCCESS, id:data};
-}
-function SpotifyUserError(e) { 
-    return { type: SPOTIFY_USER_ERROR, error:e };
-}
-
-
-
-
-export function getUserId(options){
-	return (dispatch) => {
-	dispatch(SpotifyUserBegin());
-	fetch("https://api.spotify.com/v1/me", {
-		method:"GET",
-		headers: {'Authorization' : 'Bearer ' + options.accessToken}
-		})
-	.then(data => data.json()).catch(e => {
-		dispatch(SpotifyUserError(e))
-	})
-	.then(json => {
-		dispatch(SpotifyUserSuccess(json.id));
-	});
-	};
-};
 
 
 
@@ -55,7 +27,6 @@ export function getUserId(options){
 
 
 // export const sliderChange = actionCreator(SLIDER_CHANGE, 'data');
-
 // export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
 // export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 

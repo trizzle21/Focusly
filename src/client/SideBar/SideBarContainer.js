@@ -18,6 +18,9 @@ class SideBarContainer extends React.Component {
 				<div> 
 					<SideBar 
 						uri={this.props.workPlaylistUri} 
+						getPlaylist={this.props.getPlaylist}
+						params={this.props.params}
+
 						UserPlaylists={ this.props.UserPlaylists }
 						WorkMusicType={ this.props.WorkMusicType }
 						RestMusicType={ this.props.RestMusicType }
@@ -30,6 +33,8 @@ class SideBarContainer extends React.Component {
 				<div> 
 					<SideBar uri={this.props.restPlaylistUri} 
 						UserPlaylists={ this.props.UserPlaylists }
+						getPlaylist={this.props.getPlaylist}
+						params={this.props.params}
 						WorkMusicType={ this.props.WorkMusicType }
 						RestMusicType={ this.props.RestMusicType }
 						dispatch= {this.props.dispatch }
@@ -37,7 +42,7 @@ class SideBarContainer extends React.Component {
 				</div>
 			);
 		} else {
-			return(<div>WAIT FOR IT</div>);
+			return(<div className>Loading...</div>);
 
 		}
 	}
@@ -69,10 +74,10 @@ function mapStateToProps(state) {
 		working:state.timer.working,
 		
 		UserPlaylists:state.spotify.UserPlaylists,
-		WorkMusicType:state.form.RestMusicType,
-		RestMusicType:state.form.WorkMusicType,
+		WorkMusicType:state.form.WorkMusicType,
+		RestMusicType:state.form.RestMusicType,
 
-		restPlaylistUri:state.spotify.workPlaylistUri,
+		restPlaylistUri:state.spotify.restPlaylistUri,
 		workPlaylistUri:state.spotify.workPlaylistUri,
 	}
 }

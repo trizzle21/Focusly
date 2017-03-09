@@ -29515,10 +29515,9 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	exports.closeDialog = exports.SPOTIFY_USER_ERROR = exports.SPOTIFY_USER_SUCCESS = exports.SPOTIFY_USER_BEGIN = exports.CLOSE_DIALOG = exports.SUBMIT_FORM = exports.REST_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = exports.SLIDER_CHANGE = undefined;
-	exports.getUserId = getUserId;
 
 	var _ActionCreator = __webpack_require__(285);
 
@@ -29542,39 +29541,12 @@
 	var SPOTIFY_USER_SUCCESS = exports.SPOTIFY_USER_SUCCESS = "SPOTIFY_USER_SUCCESS";
 	var SPOTIFY_USER_ERROR = exports.SPOTIFY_USER_ERROR = "SPOTIFY_USER_ERROR";
 
-	function SpotifyUserBegin() {
-		return { type: SPOTIFY_GENRE_SEED_BEGIN };
-	}
-	function SpotifyUserSuccess(data) {
-		return { type: SPOTIFY_USER_SUCCESS, id: data };
-	}
-	function SpotifyUserError(e) {
-		return { type: SPOTIFY_USER_ERROR, error: e };
-	}
-
-	function getUserId(options) {
-		return function (dispatch) {
-			dispatch(SpotifyUserBegin());
-			(0, _isomorphicFetch2.default)("https://api.spotify.com/v1/me", {
-				method: "GET",
-				headers: { 'Authorization': 'Bearer ' + options.accessToken }
-			}).then(function (data) {
-				return data.json();
-			}).catch(function (e) {
-				dispatch(SpotifyUserError(e));
-			}).then(function (json) {
-				dispatch(SpotifyUserSuccess(json.id));
-			});
-		};
-	};
-
 	// export function getRecommendations(options){
 	// 	return (dispatch) 
 	// }
 
 
 	// export const sliderChange = actionCreator(SLIDER_CHANGE, 'data');
-
 	// export const workMusicSelect = actionCreator(WORK_MUSIC_SELECT, 'newGenre');
 	// export const restMusicSelect = actionCreator(REST_MUSIC_SELECT, 'newGenre');
 
@@ -49079,6 +49051,9 @@
 						null,
 						_react2.default.createElement(_SideBar2.default, {
 							uri: this.props.workPlaylistUri,
+							getPlaylist: this.props.getPlaylist,
+							params: this.props.params,
+
 							UserPlaylists: this.props.UserPlaylists,
 							WorkMusicType: this.props.WorkMusicType,
 							RestMusicType: this.props.RestMusicType,
@@ -49091,6 +49066,8 @@
 						null,
 						_react2.default.createElement(_SideBar2.default, { uri: this.props.restPlaylistUri,
 							UserPlaylists: this.props.UserPlaylists,
+							getPlaylist: this.props.getPlaylist,
+							params: this.props.params,
 							WorkMusicType: this.props.WorkMusicType,
 							RestMusicType: this.props.RestMusicType,
 							dispatch: this.props.dispatch
@@ -49099,8 +49076,8 @@
 				} else {
 					return _react2.default.createElement(
 						'div',
-						null,
-						'WAIT FOR IT'
+						{ className: true },
+						'Loading...'
 					);
 				}
 			}
@@ -49133,10 +49110,10 @@
 			working: state.timer.working,
 
 			UserPlaylists: state.spotify.UserPlaylists,
-			WorkMusicType: state.form.RestMusicType,
-			RestMusicType: state.form.WorkMusicType,
+			WorkMusicType: state.form.WorkMusicType,
+			RestMusicType: state.form.RestMusicType,
 
-			restPlaylistUri: state.spotify.workPlaylistUri,
+			restPlaylistUri: state.spotify.restPlaylistUri,
 			workPlaylistUri: state.spotify.workPlaylistUri
 		};
 	}
@@ -49489,7 +49466,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            'Loading...'
+	            'Loading... If this lasts longer than 5 seconds, refresh auth token'
 	          )
 	        );
 	      } else {
@@ -54280,6 +54257,39 @@
 	  }
 
 	  _createClass(SideBar, [{
+	    key: 'handleRestChange',
+	    value: function handleRestChange(event, value, index) {
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: {
+	          name: index,
+	          owner: this.props.UserPlaylists[value].owner.id,
+	          id: this.props.UserPlaylists[value].id
+	        } });
+	    }
+	  }, {
+	    key: 'handleWorkChange',
+	    value: function handleWorkChange(event, value, index) {
+	      console.log(index);
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newPlaylist: {
+	          name: index,
+	          owner: this.props.UserPlaylists[value].owner.id,
+	          id: this.props.UserPlaylists[value].id
+	        } });
+	    }
+	  }, {
+	    key: 'changePlaylists',
+	    value: function changePlaylists() {
+	      this.props.getPlaylist({
+	        accessToken: this.props.params.accessToken,
+	        playlist: this.props.WorkMusicType,
+	        work: true
+	      });
+	      this.props.getPlaylist({
+	        accessToken: this.props.params.accessToken,
+	        playlist: this.props.RestMusicType,
+	        work: false
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -54300,9 +54310,9 @@
 	              _SelectField2.default,
 	              {
 	                floatingLabelText: 'Working Music',
-	                value: this.props.WorkMusicType.name
-	                ///onChange={this.handleWorkChange.bind(this)}
-	                , style: styles.select
+	                value: this.props.WorkMusicType.name,
+	                onChange: this.handleWorkChange.bind(this),
+	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
 	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
@@ -54312,15 +54322,15 @@
 	              _SelectField2.default,
 	              {
 	                floatingLabelText: 'Resting Music',
-	                value: this.props.RestMusicType.name
-	                //onChange={this.handleRestChange.bind(this)}
-	                , style: styles.select
+	                value: this.props.RestMusicType.name,
+	                onChange: this.handleRestChange.bind(this),
+	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
 	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'Change Playlists', style: styles.button }),
+	            _react2.default.createElement(_RaisedButton2.default, { label: 'Change Playlists', onClick: this.changePlaylists.bind(this), style: styles.button }),
 	            _react2.default.createElement(
 	              'a',
 	              { href: '/refresh_token' },
