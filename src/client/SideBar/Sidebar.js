@@ -8,10 +8,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 const styles = {
   button: {
-  	margin: 12,
+  	marginTop:10,
+  	marginLeft: 50,
+  },
+  select: {
+  	marginLeft:18,
   }
 
 }
@@ -24,7 +30,7 @@ class SideBar extends React.Component {
 			<MuiThemeProvider muiTheme={theme}>
 				<div>
 					<Drawer width={300}  open={true} >
-						
+						<h3 style={styles.select}>Focusly</h3>
 						<SelectField
               				floatingLabelText="Working Music"
               				value={this.props.WorkMusicType.name}
@@ -64,7 +70,7 @@ class SideBar extends React.Component {
               			})}
             			</SelectField>
 
-            			
+    					<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />
 
 
 						<PlayButton uri={this.props.uri}/>

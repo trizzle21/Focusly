@@ -54188,6 +54188,10 @@
 
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54198,7 +54202,11 @@
 
 	var styles = {
 	  button: {
-	    margin: 12
+	    marginTop: 10,
+	    marginLeft: 50
+	  },
+	  select: {
+	    marginLeft: 18
 	  }
 
 	};
@@ -54224,6 +54232,11 @@
 	          _react2.default.createElement(
 	            _Drawer2.default,
 	            { width: 300, open: true },
+	            _react2.default.createElement(
+	              'h3',
+	              { style: styles.select },
+	              'Focusly'
+	            ),
 	            _react2.default.createElement(
 	              _SelectField2.default,
 	              {
@@ -54256,6 +54269,7 @@
 	                  }, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
+	            _react2.default.createElement(_RaisedButton2.default, { label: 'Refresh Auth Token', primary: true, style: styles.button }),
 	            _react2.default.createElement(_PlayButton2.default, { uri: this.props.uri })
 	          )
 	        )
@@ -54322,7 +54336,7 @@
 	            className: 'SpotifyPlayer',
 	            src: source,
 	            width: size.width,
-	            height: 380,
+	            height: 350,
 	            frameBorder: '0',
 	            allowTransparency: 'true'
 	          })

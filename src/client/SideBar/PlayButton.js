@@ -17,7 +17,7 @@ export default class PlayButton extends React.Component {
        			className="SpotifyPlayer"
         		src={source}
             width={size.width}
-            height={380}
+            height={350}
             frameBorder="0"
             allowTransparency="true"
 			   />
