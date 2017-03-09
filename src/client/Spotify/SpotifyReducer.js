@@ -35,12 +35,12 @@ export default function Spotify (state=SpotifyState, action) {
       case SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
         if(action.work === true) {
           return Object.assign({}, state, {
-            workPlaylistUri: actions.playlisturi,
+            workPlaylistUri: action.playlisturi,
             playlistUriIsLoading:false,
           });
         } else {
           return Object.assign({}, state, {
-            restPlaylistUri: actions.playlisturi,
+            restPlaylistUri: action.playlisturi,
             playlistUriIsLoading:false,
           });
         }

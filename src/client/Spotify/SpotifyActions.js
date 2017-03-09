@@ -65,7 +65,7 @@ export function getPlaylist(options){
 	console.log("work");
 	return (dispatch) => {	
 		dispatch(SpotifySpecificPlaylistBegin());
-		fetch('https://api.spotify.com/v1/users/'+ options.userID +'/playlists/'+options.playlist_id, {
+		fetch('https://api.spotify.com/v1/users/'+ options.playlist.owner +'/playlists/'+options.playlist.id, {
 			method:"GET",
 			headers: {'Authorization' : 'Bearer ' + options.accessToken}
 			})

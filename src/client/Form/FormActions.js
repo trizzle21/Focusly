@@ -12,40 +12,6 @@ export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 
 
 
-export const SPOTIFY_USER_PLAYLISTS_BEGIN = "SPOTIFY_USER_PLAYLISTS_BEGIN";
-export const SPOTIFY_USER_PLAYLISTS_SUCCESS = "SPOTIFY_USER_PLAYLISTS_SUCCESS";
-export const SPOTIFY_USER_PLAYLISTS_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
-
-function SpotifyUserPlaylistsBegin(){ 
-    return { type: SPOTIFY_USER_PLAYLISTS_BEGIN };
-}
-function SpotifyUserPlaylistsSuccess(data)  { 
-    return { type: SPOTIFY_USER_PLAYLISTS_SUCCESS, data:data};
-}
-function SpotifyUserPlaylistsError(e) { 
-    return { type: SPOTIFY_USER_PLAYLISTS_ERROR, error:e };
-}
-
-
-
-
-
-export function getCategories(options){
-	return (dispatch) => {
-		dispatch(SpotifyUserPlaylistsBegin());
-		fetch("https://api.spotify.com/v1/me/playlists", {
-				method:"GET",
-				headers: {'Authorization' : 'Bearer ' + options.accessToken}
-		})
-		.then(data => data.json()).catch(e => {
-			dispatch(SpotifyUserPlaylistsError(e))
-		})
-		.then(json => {
-			dispatch(potifyUserPlaylistsSuccess(json));
-		});
-		
-	};
-};
 
 
 export const SPOTIFY_USER_BEGIN = "SPOTIFY_USER_BEGIN";

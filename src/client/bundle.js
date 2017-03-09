@@ -29510,48 +29510,47 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.default = Form;
 
 	var _FormActions = __webpack_require__(284);
 
 	var Form_State = {
-	  isLoading: false,
-	  UserLoading: false,
-	  openDialog: true,
-	  WorkMusicType: {},
-	  RestMusicType: {},
-	  SessionSlider: 1.0
+	    isLoading: false,
+	    UserLoading: false,
+	    openDialog: true,
+	    WorkMusicType: {},
+	    RestMusicType: {},
+	    SessionSlider: 1.0
 	};
 
 	function Form() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Form_State;
-	  var action = arguments[1];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Form_State;
+	    var action = arguments[1];
 
-	  switch (action.type) {
-	    case _FormActions.SLIDER_CHANGE:
-	      console.log(action);
-	      return Object.assign({}, state, {
-	        SessionSlider: action.value
-	      });
-	    case _FormActions.WORK_MUSIC_SELECT:
-	      //console.log(action.newGenre);
-	      return Object.assign({}, state, {
-	        WorkMusicType: action.newPlaylist
-	      });
-	    case _FormActions.REST_MUSIC_SELECT:
-	      return Object.assign({}, state, {
-	        RestMusicType: action.newPlaylist
-	      });
-	    case _FormActions.CLOSE_DIALOG:
-	      return Object.assign({}, state, {
-	        openDialog: !state.openDialog
-	      });
-	    default:
-	      return state;
+	    switch (action.type) {
+	        case _FormActions.SLIDER_CHANGE:
+	            console.log(action);
+	            return Object.assign({}, state, {
+	                SessionSlider: action.value
+	            });
+	        case _FormActions.WORK_MUSIC_SELECT:
+	            return Object.assign({}, state, {
+	                WorkMusicType: action.newPlaylist
+	            });
+	        case _FormActions.REST_MUSIC_SELECT:
+	            return Object.assign({}, state, {
+	                RestMusicType: action.newPlaylist
+	            });
+	        case _FormActions.CLOSE_DIALOG:
+	            return Object.assign({}, state, {
+	                openDialog: !state.openDialog
+	            });
+	        default:
+	            return state;
 
-	  }
+	    }
 	}
 
 /***/ },
@@ -29563,8 +29562,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.closeDialog = exports.SPOTIFY_USER_ERROR = exports.SPOTIFY_USER_SUCCESS = exports.SPOTIFY_USER_BEGIN = exports.SPOTIFY_USER_PLAYLISTS_ERROR = exports.SPOTIFY_USER_PLAYLISTS_SUCCESS = exports.SPOTIFY_USER_PLAYLISTS_BEGIN = exports.CLOSE_DIALOG = exports.SUBMIT_FORM = exports.REST_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = exports.SLIDER_CHANGE = undefined;
-	exports.getCategories = getCategories;
+	exports.closeDialog = exports.SPOTIFY_USER_ERROR = exports.SPOTIFY_USER_SUCCESS = exports.SPOTIFY_USER_BEGIN = exports.CLOSE_DIALOG = exports.SUBMIT_FORM = exports.REST_MUSIC_SELECT = exports.WORK_MUSIC_SELECT = exports.SLIDER_CHANGE = undefined;
 	exports.getUserId = getUserId;
 
 	var _ActionCreator = __webpack_require__(285);
@@ -29584,36 +29582,6 @@
 	var REST_MUSIC_SELECT = exports.REST_MUSIC_SELECT = 'REST_MUSIC_SELECT';
 	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
 	var CLOSE_DIALOG = exports.CLOSE_DIALOG = 'CLOSE_DIALOG';
-
-	var SPOTIFY_USER_PLAYLISTS_BEGIN = exports.SPOTIFY_USER_PLAYLISTS_BEGIN = "SPOTIFY_USER_PLAYLISTS_BEGIN";
-	var SPOTIFY_USER_PLAYLISTS_SUCCESS = exports.SPOTIFY_USER_PLAYLISTS_SUCCESS = "SPOTIFY_USER_PLAYLISTS_SUCCESS";
-	var SPOTIFY_USER_PLAYLISTS_ERROR = exports.SPOTIFY_USER_PLAYLISTS_ERROR = "SPOTIFY_GENRE_SEED_ERROR";
-
-	function SpotifyUserPlaylistsBegin() {
-		return { type: SPOTIFY_USER_PLAYLISTS_BEGIN };
-	}
-	function SpotifyUserPlaylistsSuccess(data) {
-		return { type: SPOTIFY_USER_PLAYLISTS_SUCCESS, data: data };
-	}
-	function SpotifyUserPlaylistsError(e) {
-		return { type: SPOTIFY_USER_PLAYLISTS_ERROR, error: e };
-	}
-
-	function getCategories(options) {
-		return function (dispatch) {
-			dispatch(SpotifyUserPlaylistsBegin());
-			(0, _isomorphicFetch2.default)("https://api.spotify.com/v1/me/playlists", {
-				method: "GET",
-				headers: { 'Authorization': 'Bearer ' + options.accessToken }
-			}).then(function (data) {
-				return data.json();
-			}).catch(function (e) {
-				dispatch(SpotifyUserPlaylistsError(e));
-			}).then(function (json) {
-				dispatch(potifyUserPlaylistsSuccess(json));
-			});
-		};
-	};
 
 	var SPOTIFY_USER_BEGIN = exports.SPOTIFY_USER_BEGIN = "SPOTIFY_USER_BEGIN";
 	var SPOTIFY_USER_SUCCESS = exports.SPOTIFY_USER_SUCCESS = "SPOTIFY_USER_SUCCESS";
@@ -30380,12 +30348,12 @@
 	    case _SpotifyActions.SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
 	      if (action.work === true) {
 	        return Object.assign({}, state, {
-	          workPlaylistUri: actions.playlisturi,
+	          workPlaylistUri: action.playlisturi,
 	          playlistUriIsLoading: false
 	        });
 	      } else {
 	        return Object.assign({}, state, {
-	          restPlaylistUri: actions.playlisturi,
+	          restPlaylistUri: action.playlisturi,
 	          playlistUriIsLoading: false
 	        });
 	      }
@@ -30465,7 +30433,7 @@
 		console.log("work");
 		return function (dispatch) {
 			dispatch(SpotifySpecificPlaylistBegin());
-			fetch('https://api.spotify.com/v1/users/' + options.userID + '/playlists/' + options.playlist_id, {
+			fetch('https://api.spotify.com/v1/users/' + options.playlist.owner + '/playlists/' + options.playlist.id, {
 				method: "GET",
 				headers: { 'Authorization': 'Bearer ' + options.accessToken }
 			}).then(function (data) {
@@ -49296,11 +49264,7 @@
 			value: function render() {
 
 				if (this.props.openDialog === true && this.props.isLoading === true) {
-					return _react2.default.createElement(
-						'div',
-						null,
-						'TRUE'
-					);
+					return _react2.default.createElement('div', null);
 				}
 				if (this.props.working === true && this.props.isLoading !== true) {
 					console.log(this.props);
@@ -49384,8 +49348,6 @@
 
 	var _TimerActions2 = _interopRequireDefault(_TimerActions);
 
-	var _SideBarActions = __webpack_require__(294);
-
 	var _RaisedButton = __webpack_require__(464);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
@@ -49437,7 +49399,6 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-				console.log(this.props);
 				this.props.getUserPlaylists({
 					accessToken: this.props.params.accessToken
 				});
@@ -49445,7 +49406,7 @@
 		}, {
 			key: 'submit',
 			value: function submit() {
-				if (Object.keys(this.props.RestMusicType) === 0 || Object.keys(this.props.this.props.WorkMusicType) === 0) {
+				if (Object.keys(this.props.RestMusicType) !== 0 || Object.keys(this.props.WorkMusicType) !== 0) {
 					this.props.dispatch({ type: 'SUBMIT_FORM',
 						cycles: this.props.SessionSlider,
 						rest: this.props.RestMusicType,
@@ -49454,15 +49415,13 @@
 					this.props.dispatch({ type: 'CLOSE_DIALOG' });
 					this.props.getPlaylist({
 						accessToken: this.props.params.accessToken,
-						userID: this.props.WorkMusicType.owner,
-						playlist_id: this.props.WorkMusicType.id,
+						playlist: this.props.WorkMusicType,
 						work: true
 					});
 					this.props.getPlaylist({
 						accessToken: this.props.params.accessToken,
-						userID: this.props.WorkMusicType.owner,
-						playlist_id: this.props.WorkMusicType.id,
-						work: true
+						playlist: this.props.RestMusicType,
+						work: false
 					});
 				}
 
@@ -49481,7 +49440,6 @@
 					containerElement: 'label',
 					onClick: this.submit.bind(this)
 				})];
-				console.log(this.props.UserPlaylists);
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
@@ -49542,7 +49500,8 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			dispatch: dispatch,
-			getUserPlaylists: (0, _redux.bindActionCreators)(_SpotifyActions.getUserPlaylists, dispatch)
+			getUserPlaylists: (0, _redux.bindActionCreators)(_SpotifyActions.getUserPlaylists, dispatch),
+			getPlaylist: (0, _redux.bindActionCreators)(_SpotifyActions.getPlaylist, dispatch)
 		};
 	}
 
@@ -49635,16 +49594,12 @@
 	  }, {
 	    key: 'handleRestChange',
 	    value: function handleRestChange(event, value, index) {
-	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newGenre: index });
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: index });
 	    }
 	  }, {
 	    key: 'handleWorkChange',
 	    value: function handleWorkChange(event, value, index, key) {
-	      console.log(value);
-	      console.log(index);
-	      console.log(key);
-
-	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newGenre: index });
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newPlaylist: index });
 	    }
 	  }, {
 	    key: 'render',
@@ -49678,12 +49633,13 @@
 	              _SelectField2.default,
 	              {
 	                floatingLabelText: 'Working Music',
-	                value: this.props.WorkMusicType,
+	                value: this.props.WorkMusicType.name,
 	                onChange: this.handleWorkChange.bind(this),
 	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
 	                return _react2.default.createElement(_MenuItem2.default, { value: {
+	                    name: seed.name,
 	                    owner: seed.owner.id,
 	                    id: seed.id
 	                  }, key: seed.id, primaryText: seed.name });
@@ -49693,12 +49649,16 @@
 	              _SelectField2.default,
 	              {
 	                floatingLabelText: 'Resting Music',
-	                value: this.props.RestMusicType,
+	                value: this.props.RestMusicType.name,
 	                onChange: this.handleRestChange.bind(this),
 	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: seed.id, key: seed.id, primaryText: seed.name });
+	                return _react2.default.createElement(_MenuItem2.default, { value: {
+	                    name: seed.name,
+	                    owner: seed.owner.id,
+	                    id: seed.id
+	                  }, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
 	            _react2.default.createElement('br', null)

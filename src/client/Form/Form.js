@@ -43,20 +43,16 @@ class EntryForm extends React.Component {
   }
 
   handleRestChange(event, value, index){
-    this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: index  })
+    this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: index  })
   }
 
   handleWorkChange(event, value, index, key){
-    console.log(value);
-    console.log(index);
-    console.log(key);
-
-    this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: index});
+    this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: index});
   }
 
     render() {
   		//render form here
-  		if (this.props.isLoading){
+      if (this.props.isLoading){
         return(
           <MuiThemeProvider muiTheme={theme}>
             <div>Loading...</div>
@@ -71,7 +67,7 @@ class EntryForm extends React.Component {
             
               <SelectField
               		floatingLabelText="Working Music"
-              		value={this.props.WorkMusicType}
+              		value={this.props.WorkMusicType.name}
               		onChange={this.handleWorkChange.bind(this)}
                   style={styles.select}
             	>
@@ -79,6 +75,7 @@ class EntryForm extends React.Component {
               {this.props.UserPlaylists.map(function(seed){
                   return <MenuItem value={
                       {
+                        name:seed.name,
                         owner:seed.owner.id,
                         id:seed.id,
                       }
@@ -90,13 +87,21 @@ class EntryForm extends React.Component {
           		
               <SelectField
               		floatingLabelText="Resting Music"
-              		value={this.props.RestMusicType}
+              		value={this.props.RestMusicType.name}
               		onChange={this.handleRestChange.bind(this)}
                   style={styles.select}
             	>
-            		{this.props.UserPlaylists.map(function(seed){
-                  return <MenuItem value={seed.id} key={seed.id} primaryText={seed.name} />
-                })}
+
+              {this.props.UserPlaylists.map(function(seed){
+                  return <MenuItem value={
+                      {
+                        name:seed.name,
+                        owner:seed.owner.id,
+                        id:seed.id,
+                      }
+                    } key={seed.id} primaryText={seed.name} />
+
+              })}
             	</SelectField>
 
               <br />

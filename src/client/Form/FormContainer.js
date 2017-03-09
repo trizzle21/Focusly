@@ -9,7 +9,6 @@ import {
 } from './FormActions';
 
 import submitSession from '../Timer/TimerActions';
-import { getPlaylist } from '../SideBar/SideBarActions';
 
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -20,7 +19,7 @@ import theme from '../Spotify/modules/CustomTheme.js';
 
 
 //import setTokens from '../Spotify/SpotifyActions';
-import { getUserPlaylists } from '../Spotify/SpotifyActions';
+import { getUserPlaylists, getPlaylist } from '../Spotify/SpotifyActions';
 
 
 const styles = {
@@ -35,7 +34,6 @@ class FormContainer extends React.Component {
 
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-		console.log(this.props);
 		this.props.getUserPlaylists({
 			accessToken:this.props.params.accessToken,
 		});
@@ -43,7 +41,7 @@ class FormContainer extends React.Component {
 	}
 
 	submit(){
-		if(Object.keys(this.props.RestMusicType) === 0 || Object.keys(this.props.this.props.WorkMusicType) === 0){
+		if(Object.keys(this.props.RestMusicType) !== 0 || Object.keys(this.props.WorkMusicType) !== 0){
 			this.props.dispatch({type:'SUBMIT_FORM', 
 				cycles: this.props.SessionSlider,
 				rest: this.props.RestMusicType,
@@ -52,15 +50,13 @@ class FormContainer extends React.Component {
 		this.props.dispatch({type:'CLOSE_DIALOG'});
 		this.props.getPlaylist({
 				accessToken:this.props.params.accessToken,
-				userID:this.props.WorkMusicType.owner,
-				playlist_id:this.props.WorkMusicType.id,
+				playlist:this.props.WorkMusicType,
 				work:true
 			});
 		this.props.getPlaylist({
 				accessToken:this.props.params.accessToken,
-				userID:this.props.WorkMusicType.owner,
-				playlist_id:this.props.WorkMusicType.id,
-				work:true
+				playlist:this.props.RestMusicType,
+				work:false,
 		});
 
 
@@ -82,7 +78,6 @@ class FormContainer extends React.Component {
 				onClick={this.submit.bind(this)}
 			/>
 		];
-		console.log(this.props.UserPlaylists);
 		return (
   		
   		<MuiThemeProvider muiTheme={theme}>
@@ -153,6 +148,7 @@ function mapDispatchToProps(dispatch){
 	return {
 		dispatch,
 		getUserPlaylists:bindActionCreators(getUserPlaylists, dispatch),
+		getPlaylist:bindActionCreators(getPlaylist, dispatch)
 	};
 }
 

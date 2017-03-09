@@ -22,7 +22,7 @@ class SideBarContainer extends React.Component {
 	render(){
 	
 		if(this.props.openDialog === true && this.props.isLoading === true){
-			return(<div>TRUE</div>);
+			return(<div></div>);
 		}
 		if(this.props.working === true && this.props.isLoading !== true){
 			console.log(this.props)

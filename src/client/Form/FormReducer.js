@@ -22,7 +22,6 @@ export default function Form(state=Form_State, action){
                 }
          	 )
 		case WORK_MUSIC_SELECT:
-			//console.log(action.newGenre);
             return Object.assign({}, state, {
             	WorkMusicType: action.newPlaylist
          	 })
