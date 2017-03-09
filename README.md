@@ -25,6 +25,6 @@ will initialize all the packages from package.json
 ```
 node src/server.js 
 ```
-will initialize and run the server.
+will initialize and run the server. I personally use nodemon (it makes everything waaay easier)
 
 Requires a spotify_secrets.json file in order work.
