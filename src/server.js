@@ -105,7 +105,7 @@ app.get('/callback', function(req, res) {
         res.redirect('/#/timer/' +
           access_token +'/'+refresh_token);
       } else {
-        res.redirect('/#' +
+        res.redirect('/#/' +
           querystring.stringify({
             error: 'invalid_token'
           }));

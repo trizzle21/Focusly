@@ -52,7 +52,6 @@ function SpotifySpecificPlaylistBegin(){
     return { type: SPOTIFY_SPECIFIC_PLAYLIST_BEGIN };
 }
 function SpotifySpecificPlaylistSuccess(data, work)  { 
-    console.log(data)
     return { type: SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS, playlist:data, work:work};
 }
 function SpotifySpecificPlaylistError(e) { 
