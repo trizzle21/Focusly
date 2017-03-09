@@ -43,11 +43,6 @@ export default class Timer extends React.Component {
 		return (
 			<MuiThemeProvider muiTheme={theme}>
 			   	<div>
-			   	<AppBar
-                  style={styles.appBar}
-                  title="Focusly"
-                  iconElementLeft={<Link to="/"><IconButton  ><ArrowBack color={"white"}/></IconButton></Link>}
-              	/>
 
 				<h4>Cycles Left: {this.props.cycles}</h4>
 

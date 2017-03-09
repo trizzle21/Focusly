@@ -62,7 +62,6 @@ function SpotifySpecificPlaylistError(e) {
 
 
 export function getPlaylist(options){
-	console.log("work");
 	return (dispatch) => {	
 		dispatch(SpotifySpecificPlaylistBegin());
 		fetch('https://api.spotify.com/v1/users/'+ options.playlist.owner +'/playlists/'+options.playlist.id, {

@@ -30,7 +30,6 @@ const NotFound = () => (
 
 const store = createStore(reducer, applyMiddleware(...middleware));
 
-console.log(store.getState());
 
 
 

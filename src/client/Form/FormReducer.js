@@ -16,7 +16,6 @@ var Form_State = {
 export default function Form(state=Form_State, action){
     switch(action.type){
 		case SLIDER_CHANGE:   
-            console.log(action);
             return Object.assign({}, state, {
                     SessionSlider: action.value,
                 }

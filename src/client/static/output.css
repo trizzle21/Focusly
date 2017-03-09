@@ -206,4 +206,11 @@ html {
 .time_count {
   padding-top: 150px; }
 
+.SpotifyDiv {
+  position: absolute;
+  bottom: 0; }
+
+.sidebar_text {
+  color: blue; }
+
 /*# sourceMappingURL=output.css.map */

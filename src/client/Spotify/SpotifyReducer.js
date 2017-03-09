@@ -34,7 +34,6 @@ export default function Spotify (state=SpotifyState, action) {
         });
       case SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
         if(action.work === true) {
-          console.log("action.playlist"+action.playlist);
           return Object.assign({}, state, {
             workPlaylistUri: action.playlist,
             playlistUriIsLoading:false,

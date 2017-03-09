@@ -20,8 +20,6 @@ const styles = {
 
 class TimerContainer extends React.Component {
 
-
-
 	componentWillMount(){
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
 		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );	
@@ -43,13 +41,11 @@ class TimerContainer extends React.Component {
 	}
 
 	componentWillUnmount() {
-
 		clearInterval(this.props.intervalID);
   	}
 
 	render() {
 		if(!this.props.openDialog){
-
 			return (<div>
 		 		<Timer 
 		 			pause={this.pause} 

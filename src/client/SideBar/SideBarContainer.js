@@ -11,14 +11,17 @@ import { getPlaylist } from '../Spotify/SpotifyActions';
 
 class SideBarContainer extends React.Component {
 	render(){
-		console.log("workPlaylistUri:" + this.props.workPlaylistUri);
 		if(this.props.openDialog === true && this.props.isLoading === true){
 			return(<div></div>);
 		}
 		if(this.props.working === true && this.props.isLoading !== true){
-			console.log("About to render worksidebar: "+this.props.workPlaylistUri)
 			return(
-					<SideBar uri={this.props.workPlaylistUri} />
+					<SideBar 
+						uri={this.props.workPlaylistUri} 
+						UserPlaylists={ this.props.UserPlaylists }
+						WorkMusicType={ this.props.WorkMusicType }
+						RestMusicType={ this.props.RestMusicType }
+					/>
 			);
 		} else if (this.props.working === false && this.props.isLoading !== true){
 			return(
@@ -41,6 +44,10 @@ SideBarContainer.propTypes = {
 	userID:React.PropTypes.string,
 	isLoading:React.PropTypes.bool,
 	
+	UserPlaylists:React.PropTypes.array,
+	WorkMusicType:React.PropTypes.object,
+	RestMusicType:React.PropTypes.object,
+
 	restPlaylistUri:React.PropTypes.string,
 	workPlaylistUri:React.PropTypes.string,
 
@@ -54,6 +61,10 @@ function mapStateToProps(state) {
 		openDialog: state.form.openDialog,
 		working:state.timer.working,
 		
+		UserPlaylists:state.spotify.UserPlaylists,
+		WorkMusicType:state.form.RestMusicType,
+		RestMusicType:state.form.WorkMusicType,
+
 		restPlaylistUri:state.spotify.workPlaylistUri,
 		workPlaylistUri:state.spotify.workPlaylistUri,
 	}
