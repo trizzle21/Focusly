@@ -46,7 +46,11 @@ class EntryForm extends React.Component {
     this.props.dispatch({type:"REST_MUSIC_SELECT", newGenre: index  })
   }
 
-  handleWorkChange(event, value, index){
+  handleWorkChange(event, value, index, key){
+    console.log(value);
+    console.log(index);
+    console.log(key);
+
     this.props.dispatch({type:'WORK_MUSIC_SELECT', newGenre: index});
   }
 
@@ -72,8 +76,13 @@ class EntryForm extends React.Component {
                   style={styles.select}
             	>
 
-              {this.props.recommendationSeed.map(function(seed){
-                  return <MenuItem value={seed.id} key={seed.id} primaryText={seed.name} />
+              {this.props.UserPlaylists.map(function(seed){
+                  return <MenuItem value={
+                      {
+                        owner:seed.owner.id,
+                        id:seed.id,
+                      }
+                    } key={seed.id} primaryText={seed.name} />
 
               })}
            	 	</SelectField>
@@ -85,7 +94,7 @@ class EntryForm extends React.Component {
               		onChange={this.handleRestChange.bind(this)}
                   style={styles.select}
             	>
-            		{this.props.recommendationSeed.map(function(seed){
+            		{this.props.UserPlaylists.map(function(seed){
                   return <MenuItem value={seed.id} key={seed.id} primaryText={seed.name} />
                 })}
             	</SelectField>

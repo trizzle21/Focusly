@@ -9,6 +9,8 @@ import {
 } from './FormActions';
 
 import submitSession from '../Timer/TimerActions';
+import { getPlaylist } from '../SideBar/SideBarActions';
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -18,7 +20,7 @@ import theme from '../Spotify/modules/CustomTheme.js';
 
 
 //import setTokens from '../Spotify/SpotifyActions';
-import {getCategories, closeDialog} from './FormActions';
+import { getUserPlaylists } from '../Spotify/SpotifyActions';
 
 
 const styles = {
@@ -33,21 +35,37 @@ class FormContainer extends React.Component {
 
 	componentWillMount(){
 		//this.props.setTokens(this.props.params.accessToken, this.props.refreshToken);
-		this.props.getCategories({
+		console.log(this.props);
+		this.props.getUserPlaylists({
 			accessToken:this.props.params.accessToken,
 		});
+
 	}
 
 	submit(){
-		if(this.props.RestMusicType !== '' || this.props.WorkMusicType !== '' ){
+		if(Object.keys(this.props.RestMusicType) === 0 || Object.keys(this.props.this.props.WorkMusicType) === 0){
 			this.props.dispatch({type:'SUBMIT_FORM', 
 				cycles: this.props.SessionSlider,
 				rest: this.props.RestMusicType,
 				work: this.props.WorkMusicType,
 			});
-			this.props.dispatch({type:'CLOSE_DIALOG'});
+		this.props.dispatch({type:'CLOSE_DIALOG'});
+		this.props.getPlaylist({
+				accessToken:this.props.params.accessToken,
+				userID:this.props.WorkMusicType.owner,
+				playlist_id:this.props.WorkMusicType.id,
+				work:true
+			});
+		this.props.getPlaylist({
+				accessToken:this.props.params.accessToken,
+				userID:this.props.WorkMusicType.owner,
+				playlist_id:this.props.WorkMusicType.id,
+				work:true
+		});
+
+
 		}
-		
+
 		// this.props.dispatch({ type: "START_STOP" })
 		// var intervalId = setInterval(() => {this.props.dispatch({ type: "TICK" })}, 1000);
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
@@ -64,7 +82,7 @@ class FormContainer extends React.Component {
 				onClick={this.submit.bind(this)}
 			/>
 		];
-
+		console.log(this.props.UserPlaylists);
 		return (
   		
   		<MuiThemeProvider muiTheme={theme}>
@@ -78,13 +96,13 @@ class FormContainer extends React.Component {
 	    			open={this.props.openDialog}
 				>
 				<EntryForm 
-					isLoading={this.props.isLoading}
+					isLoading={this.props.userPlaylistsIsLoading}
 					SessionSlider={this.props.SessionSlider}
 					WorkMusicType={this.props.WorkMusicType}
 					RestMusicType={this.props.RestMusicType}
 					sliderChange={this.props.sliderChange}
 					closeDialog={this.props.closeDialog}
-					recommendationSeed={this.props.recommendationSeed}
+					UserPlaylists={this.props.UserPlaylists}
 					dispatch={this.props.dispatch}
 				/>
 
@@ -98,16 +116,19 @@ class FormContainer extends React.Component {
 }
 
 FormContainer.propTypes ={
-	isLoading:React.PropTypes.bool,
+	userPlaylistsIsLoading:React.PropTypes.bool,
+	
 	openDialog:React.PropTypes.bool,
 	SessionSlider: React.PropTypes.number,
-	WorkMusicType: React.PropTypes.string,
-	RestMusicType: React.PropTypes.string,
+	WorkMusicType: React.PropTypes.object,
+	RestMusicType: React.PropTypes.object,
+
 	SessionSlider: React.PropTypes.number,
-	recommendationSeed:React.PropTypes.array,
-	getCategories:React.PropTypes.func,
+	UserPlaylists:React.PropTypes.array,
+	
+	getUserPlaylists:React.PropTypes.func,
 	closeDialog:React.PropTypes.func,
-	submitSession:React.PropTypes.func,
+	getPlaylist:React.PropTypes.func,
 }
 
 
@@ -117,19 +138,21 @@ FormContainer.propTypes ={
 
 function mapStateToProps(state){
 	return {
-		isLoading:state.form.isLoading,
-		recommendationSeed:state.form.recommendationSeed,
+		userPlaylistsIsLoading:state.spotify.userPlaylistsIsLoading,
+		UserPlaylists:state.spotify.UserPlaylists,
+		
 		openDialog: state.form.openDialog,
 		WorkMusicType: state.form.WorkMusicType,
 		RestMusicType: state.form.RestMusicType,
 		SessionSlider: state.form.SessionSlider,
+		userID:state.form.userID
 	}
 }
 
 function mapDispatchToProps(dispatch){
 	return {
 		dispatch,
-		getCategories:bindActionCreators(getCategories, dispatch),
+		getUserPlaylists:bindActionCreators(getUserPlaylists, dispatch),
 	};
 }
 

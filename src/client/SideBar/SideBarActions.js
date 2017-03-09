@@ -14,7 +14,7 @@ function SpotifyWorkPlaylistBegin(){
     return { type: SPOTIFY_WORK_PLAYLIST_BEGIN };
 }
 function SpotifyWorkPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_WORK_PLAYLIST_SUCCESS, data:data};
+    return { type: SPOTIFY_WORK_PLAYLIST_SUCCESS, playlisturi:data};
 }
 function SpotifyWorkPlaylistError(e) { 
     return { type: SPOTIFY_WORK_PLAYLIST_ERROR, error:e };
@@ -24,7 +24,7 @@ function SpotifyRestPlaylistBegin(){
     return { type: SPOTIFY_REST_PLAYLIST_BEGIN };
 }
 function SpotifyRestPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_REST_PLAYLIST_SUCCESS, data:data};
+    return { type: SPOTIFY_REST_PLAYLIST_SUCCESS, playlisturi:data};
 }
 function SpotifyRestPlaylistError(e) { 
     return { type: SPOTIFY_REST_PLAYLIST_ERROR, error:e };
@@ -33,10 +33,13 @@ function SpotifyRestPlaylistError(e) {
 
 
 export function getPlaylist(options, work){
+	console.log("work");
 	if (work === true){
+		console.log(options.userID);
 		return (dispatch) => {
+			
 			dispatch(SpotifyWorkPlaylistBegin());
-			fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
+			fetch('https://api.spotify.com/v1/users/'+ options.userID +'/playlists/'+options.playlist_id, {
 				method:"GET",
 				headers: {'Authorization' : 'Bearer ' + options.accessToken}
 				})
@@ -51,7 +54,7 @@ export function getPlaylist(options, work){
 	} else {
 		return (dispatch) => {
 			dispatch(SpotifyRestPlaylistBegin());
-			fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
+			fetch('https://api.spotify.com/v1/users/'+options.userID+'/playlists/'+options.playlist_id, {
 				method:"GET",
 				headers: {'Authorization' : 'Bearer ' + options.accessToken}
 				})

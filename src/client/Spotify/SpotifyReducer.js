@@ -1,40 +1,56 @@
 import {
-  SPOTIFY_TOKENS, SPOTIFY_REC_BEGIN, SPOTIFY_REC_SUCCESS, SPOTIFY_REC_FAILURE, 
-  SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_FAILURE, SPOTIFY_GENRE_SEED_SUCCESS, RECOMMENDATION_SET
+  SPOTIFY_USER_PLAYLISTS_BEGIN, SPOTIFY_USER_PLAYLISTS_SUCCESS, SPOTIFY_USER_PLAYLISTS_ERROR,
+  SPOTIFY_SPECIFIC_PLAYLIST_BEGIN, SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS,SPOTIFY_SPECIFIC_PLAYLIST_ERROR
 } from './SpotifyActions';
 
 
 //todo 
+const SpotifyState= {
+    UserPlaylists:[],
+    userPlaylistsIsLoading:true,
+    playlistUriIsLoading:true,
+    restPlaylistUri:{},
+    workPlaylistUri:{},
 
 
-export default function spotifyRecommendations(state, action) {
+}
+
+export default function Spotify (state=SpotifyState, action) {
 	switch(action.type){
-		  case SPOTIFY_TOKENS:
-    		const {accessToken, refreshToken} = action;
-    		return Object.assign({}, state, {accessToken, refreshToken});
-		
-		case SPOTIFY_REC_BEGIN:
-		  	return Object.assign({}, state, {
-   	 			
-  			});
-		case SPOTIFY_REC_SUCCESS:
-		  	return Object.assign({}, state, {
-   	 			
-  			});
-  		case SPOTIFY_GENRE_SEED_BEGIN:
-    		return Object.assign({}, state, {
-    			recommendationSeed: state.recommendationSeed,
-    			loading:true,
-    		});
-  		case SPOTIFY_GENRE_SEED_SUCCESS:
-    		return Object.assign({}, state, {
-    			recommendationSeed: action.data,
-          recomendationSet:true,
+      case SPOTIFY_USER_PLAYLISTS_BEGIN:
+            return Object.assign({}, state, {
+                userPlaylistsIsLoading:true,
+            });
+      case SPOTIFY_USER_PLAYLISTS_SUCCESS:
+            return Object.assign({}, state, {
+                UserPlaylists: action.data.items,
+                userPlaylistsIsLoading:false,
+            });
+      case SPOTIFY_USER_PLAYLISTS_ERROR:
+            return state;
+      case SPOTIFY_SPECIFIC_PLAYLIST_BEGIN:
+        return Object.assign({}, state, {
+          playlistUriIsLoading:true,
+        });
+      case SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
+        if(action.work === true) {
+          return Object.assign({}, state, {
+            workPlaylistUri: actions.playlisturi,
+            playlistUriIsLoading:false,
+          });
+        } else {
+          return Object.assign({}, state, {
+            restPlaylistUri: actions.playlisturi,
+            playlistUriIsLoading:false,
+          });
+        }
 
-    		});
-      case SPOTIFY_GENRE_SEED_FAILURE:
-          return state;
-
+    case SPOTIFY_SPECIFIC_PLAYLIST_ERROR:
+      return Object.assign({}, state, {
+        
+        });
+    default:
+      return state; 
 
   }
 }

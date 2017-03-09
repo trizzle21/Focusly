@@ -1,16 +1,15 @@
 import {
 	SLIDER_CHANGE, WORK_MUSIC_SELECT, REST_MUSIC_SELECT, CLOSE_DIALOG, 
-    SPOTIFY_GENRE_SEED_BEGIN, SPOTIFY_GENRE_SEED_SUCCESS, SPOTIFY_GENRE_SEED_ERROR
 } from './FormActions';
 
 
 var Form_State = {
     isLoading: false,
+    UserLoading:false,
     openDialog:true,
-    WorkMusicType: '',
-    RestMusicType: '',
+    WorkMusicType: {},
+    RestMusicType: {},
     SessionSlider: 1.0,
-    recommendationSeed:[],
 }
 
 
@@ -23,30 +22,18 @@ export default function Form(state=Form_State, action){
                 }
          	 )
 		case WORK_MUSIC_SELECT:
-			return Object.assign({}, state, {
-            	WorkMusicType: action.newGenre
+			//console.log(action.newGenre);
+            return Object.assign({}, state, {
+            	WorkMusicType: action.newPlaylist
          	 })
 		case REST_MUSIC_SELECT:
 			return Object.assign({}, state, {
-            	RestMusicType: action.newGenre
+            	RestMusicType: action.newPlaylist
          	 })
 		case CLOSE_DIALOG:
             return Object.assign({}, state, {
               openDialog: !state.openDialog,
            })
-        case SPOTIFY_GENRE_SEED_BEGIN:
-            return Object.assign({}, state, {
-                isLoading:true,
-            });
-        case SPOTIFY_GENRE_SEED_SUCCESS:
-            console.log(action.data.items);
-            return Object.assign({}, state, {
-                recommendationSeed: action.data.items,
-                isLoading:false,
-            });
-      case SPOTIFY_GENRE_SEED_ERROR:
-          console.log('error');
-          return state;
       default:
 			return state;
 

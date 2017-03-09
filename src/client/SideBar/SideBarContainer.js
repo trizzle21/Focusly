@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import Drawer from 'material-ui/Drawer';
 
 import SideBar from './SideBar';
-import { getPlaylist } from './SideBarActions';
+import { getPlaylist } from '../Spotify/SpotifyActions';
 
 
 
@@ -18,55 +18,48 @@ class SideBarContainer extends React.Component {
  //    	dispatch(getMyRecommendations());
 	// }
 
-	componentWillMount(){
-		if(this.props.openDialog !== true){
-			const { getPlaylist } = this.props;
-			getPlaylist({
-				accessToken:this.props.params.accessToken,
-			}, true);
-			getPlaylist({
-				accessToken:this.props.params.accessToken,
-			}, false);
-		}
-	}
 
 	render(){
-		if(this.props.openDialog === true){
+	
+		if(this.props.openDialog === true && this.props.isLoading === true){
 			return(<div>TRUE</div>);
 		}
-		if(this.props.working === true){
+		if(this.props.working === true && this.props.isLoading !== true){
+			console.log(this.props)
+			return(
+					<SideBar uri={this.props.workPlaylistUri} />
+			);
+		} else if (this.props.working === false && this.props.isLoading !== true){
 			return(
 				<div> 
-					<SideBar uri={this.props.workPlaylistUri}/>
+					<SideBar uri={this.props.restPlaylistUri} />
 				</div>
 			);
-		} else{
-			return(
-				<div> 
-					<SideBar uri={this.props.restPlaylistUri}/>
-				</div>
-			);
+		} else {
+			return(<div>WAIT FOR IT</div>);
+
 		}
 	}
 
 }
 
 SideBarContainer.propTypes = {
-	restPlaylistUri: React.PropTypes.number,
-	workPlaylistUri: React.PropTypes.number,
 	getPlaylist:React.PropTypes.func,
 	openDialog:React.PropTypes.bool,
 	working:React.PropTypes.bool,
+	userID:React.PropTypes.string,
+	isLoading:React.PropTypes.bool,
 }
 
 
 function mapStateToProps(state) {
 	return {
-		restPlaylistUri: state.sidebar.restPlaylistUri,
-		workPlaylistUri: state.sidebar.workPlaylistUri,
+		isLoading:state.spotify.playlistUriIsLoading,
+		userID:state.form.userID,
 		openDialog: state.form.openDialog,
 		working:state.timer.working,
-
+		restPlaylistUri:state.spotify.workPlayListUri,
+		workPlaylistUri:state.spotify.restPlayListUri,
 	}
 }
 

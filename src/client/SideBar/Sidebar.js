@@ -10,14 +10,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class SideBar extends React.Component {
 
 	render(){
+		console.log(this.props);
 		return(
 			<MuiThemeProvider muiTheme={theme}>
 				<div>
 					<Drawer width={250}  open={true} >
-						
+						<PlayButton uri={this.props.uri}/>
 					</Drawer>
 				</div>
-		</MuiThemeProvider>
+			</MuiThemeProvider>
 		);
 	}
 }

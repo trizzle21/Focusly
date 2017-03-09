@@ -4,7 +4,7 @@ import form from './Form/FormReducer';
 import timer from './Timer/TimerReducer';
 import spotifyAuth from './Spotify/SpotifyReducer';
 import sidebar from './SideBar/SidebarReducer';
-
+import spotify from './Spotify/SpotifyReducer'
 //cycles are 25+5minute intervals
 
 //TODO sessions and Tabata Count are different
@@ -45,7 +45,7 @@ export default combineReducers({
   form,
   timer,
   sidebar,
-  // spotifyAuth,
+  spotify,
 });
 
 
