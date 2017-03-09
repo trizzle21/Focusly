@@ -11,7 +11,7 @@ const SpotifyState= {
     playlistUriIsLoading:true,
     restPlaylistUri:"",
     workPlaylistUri:"",
-
+    error:"",
 
 }
 
@@ -27,7 +27,9 @@ export default function Spotify (state=SpotifyState, action) {
                 userPlaylistsIsLoading:false,
             });
       case SPOTIFY_USER_PLAYLISTS_ERROR:
-            return state;
+          return Object.assign({}, state, {
+              error:"playlists are unable to load"
+          });
       case SPOTIFY_SPECIFIC_PLAYLIST_BEGIN:
         return Object.assign({}, state, {
           playlistUriIsLoading:true,
@@ -47,7 +49,7 @@ export default function Spotify (state=SpotifyState, action) {
 
     case SPOTIFY_SPECIFIC_PLAYLIST_ERROR:
       return Object.assign({}, state, {
-        
+          error:"playlist is unable to load"
         });
     default:
       return state; 

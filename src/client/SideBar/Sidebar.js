@@ -15,6 +15,7 @@ const styles = {
   button: {
   	marginTop:10,
   	marginLeft: 50,
+  	width:200,
   },
   select: {
   	marginLeft:18,
@@ -69,9 +70,11 @@ class SideBar extends React.Component {
 
               			})}
             			</SelectField>
-
-    					<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />
-
+    					
+    					<RaisedButton label="Change Playlists"  style={styles.button} />
+    					<a href='/refresh_token'>
+    						<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />
+    					</a>
 
 						<PlayButton uri={this.props.uri}/>
 					</Drawer>

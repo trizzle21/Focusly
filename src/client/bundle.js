@@ -30276,7 +30276,8 @@
 	  userPlaylistsIsLoading: true,
 	  playlistUriIsLoading: true,
 	  restPlaylistUri: "",
-	  workPlaylistUri: ""
+	  workPlaylistUri: "",
+	  error: ""
 
 	};
 
@@ -30295,7 +30296,9 @@
 	        userPlaylistsIsLoading: false
 	      });
 	    case _SpotifyActions.SPOTIFY_USER_PLAYLISTS_ERROR:
-	      return state;
+	      return Object.assign({}, state, {
+	        error: "playlists are unable to load"
+	      });
 	    case _SpotifyActions.SPOTIFY_SPECIFIC_PLAYLIST_BEGIN:
 	      return Object.assign({}, state, {
 	        playlistUriIsLoading: true
@@ -30314,7 +30317,9 @@
 	      }
 
 	    case _SpotifyActions.SPOTIFY_SPECIFIC_PLAYLIST_ERROR:
-	      return Object.assign({}, state, {});
+	      return Object.assign({}, state, {
+	        error: "playlist is unable to load"
+	      });
 	    default:
 	      return state;
 
@@ -49251,6 +49256,8 @@
 		}, {
 			key: 'render',
 			value: function render() {
+
+				// if(this.props.error === ""){
 				var actions = [_react2.default.createElement(_RaisedButton2.default, {
 					label: 'Submit',
 					labelPosition: 'after',
@@ -49259,6 +49266,19 @@
 					containerElement: 'label',
 					onClick: this.submit.bind(this)
 				})];
+				// } else {
+				// 	const actions = [
+				// 				<RaisedButton
+				// 					label="Refresh Token"
+				// 			labelPosition="after"
+				// 			primary={true}
+				// 			style={styles.button}
+				// 			containerElement="label"
+				// 		/>
+				// ];
+
+				// }
+				console.log(actions);
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
@@ -49282,7 +49302,8 @@
 								sliderChange: this.props.sliderChange,
 								closeDialog: this.props.closeDialog,
 								UserPlaylists: this.props.UserPlaylists,
-								dispatch: this.props.dispatch
+								dispatch: this.props.dispatch,
+								error: this.props.error
 							})
 						)
 					)
@@ -49301,12 +49322,13 @@
 		WorkMusicType: _react2.default.PropTypes.object,
 		RestMusicType: _react2.default.PropTypes.object
 
-	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'UserPlaylists', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'getUserPlaylists', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'closeDialog', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'getPlaylist', _react2.default.PropTypes.func), _FormContainer$propTy);
+	}, _defineProperty(_FormContainer$propTy, 'SessionSlider', _react2.default.PropTypes.number), _defineProperty(_FormContainer$propTy, 'UserPlaylists', _react2.default.PropTypes.array), _defineProperty(_FormContainer$propTy, 'error', _react2.default.PropTypes.string), _defineProperty(_FormContainer$propTy, 'getUserPlaylists', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'closeDialog', _react2.default.PropTypes.func), _defineProperty(_FormContainer$propTy, 'getPlaylist', _react2.default.PropTypes.func), _FormContainer$propTy);
 
 	function mapStateToProps(state) {
 		return {
 			userPlaylistsIsLoading: state.spotify.userPlaylistsIsLoading,
 			UserPlaylists: state.spotify.UserPlaylists,
+			error: state.spotify.error,
 
 			openDialog: state.form.openDialog,
 			WorkMusicType: state.form.WorkMusicType,
@@ -49433,6 +49455,12 @@
 	            null,
 	            'Loading...'
 	          )
+	        );
+	      } else if (this.props.error !== "") {
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Please refresh your token'
 	        );
 	      } else {
 	        return _react2.default.createElement(
@@ -54203,7 +54231,8 @@
 	var styles = {
 	  button: {
 	    marginTop: 10,
-	    marginLeft: 50
+	    marginLeft: 50,
+	    width: 200
 	  },
 	  select: {
 	    marginLeft: 18
@@ -54269,7 +54298,12 @@
 	                  }, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'Refresh Auth Token', primary: true, style: styles.button }),
+	            _react2.default.createElement(_RaisedButton2.default, { label: 'Change Playlists', style: styles.button }),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/refresh_token' },
+	              _react2.default.createElement(_RaisedButton2.default, { label: 'Refresh Auth Token', primary: true, style: styles.button })
+	            ),
 	            _react2.default.createElement(_PlayButton2.default, { uri: this.props.uri })
 	          )
 	        )
@@ -54336,7 +54370,7 @@
 	            className: 'SpotifyPlayer',
 	            src: source,
 	            width: size.width,
-	            height: 350,
+	            height: 300,
 	            frameBorder: '0',
 	            allowTransparency: 'true'
 	          })

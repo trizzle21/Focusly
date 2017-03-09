@@ -68,16 +68,31 @@ class FormContainer extends React.Component {
 
 	}
 	render(){
-		const actions = [
-  			<RaisedButton
-  				label="Submit"
-				labelPosition="after"
-				primary={true}
-				style={styles.button}
-				containerElement="label"
-				onClick={this.submit.bind(this)}
-			/>
+		
+		// if(this.props.error === ""){
+			const actions = [
+  				<RaisedButton
+  					label="Submit"
+					labelPosition="after"
+					primary={true}
+					style={styles.button}
+					containerElement="label"
+					onClick={this.submit.bind(this)}
+				/>
 		];
+		// } else {
+		// 	const actions = [
+  // 				<RaisedButton
+  // 					label="Refresh Token"
+		// 			labelPosition="after"
+		// 			primary={true}
+		// 			style={styles.button}
+		// 			containerElement="label"
+		// 		/>
+		// ];
+
+		// }
+		console.log(actions);
 		return (
   		
   		<MuiThemeProvider muiTheme={theme}>
@@ -99,6 +114,7 @@ class FormContainer extends React.Component {
 					closeDialog={this.props.closeDialog}
 					UserPlaylists={this.props.UserPlaylists}
 					dispatch={this.props.dispatch}
+					error={this.props.error}
 				/>
 
 				</Dialog>
@@ -120,7 +136,8 @@ FormContainer.propTypes ={
 
 	SessionSlider: React.PropTypes.number,
 	UserPlaylists:React.PropTypes.array,
-	
+	error:React.PropTypes.string,
+
 	getUserPlaylists:React.PropTypes.func,
 	closeDialog:React.PropTypes.func,
 	getPlaylist:React.PropTypes.func,
@@ -135,7 +152,8 @@ function mapStateToProps(state){
 	return {
 		userPlaylistsIsLoading:state.spotify.userPlaylistsIsLoading,
 		UserPlaylists:state.spotify.UserPlaylists,
-		
+		error:state.spotify.error,
+
 		openDialog: state.form.openDialog,
 		WorkMusicType: state.form.WorkMusicType,
 		RestMusicType: state.form.RestMusicType,
