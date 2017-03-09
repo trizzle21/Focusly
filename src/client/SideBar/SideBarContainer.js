@@ -13,20 +13,27 @@ class SideBarContainer extends React.Component {
 	render(){
 		if(this.props.openDialog === true && this.props.isLoading === true){
 			return(<div></div>);
-		}
-		if(this.props.working === true && this.props.isLoading !== true){
+		} else if(this.props.working === true && this.props.isLoading !== true){
 			return(
+				<div> 
 					<SideBar 
 						uri={this.props.workPlaylistUri} 
 						UserPlaylists={ this.props.UserPlaylists }
 						WorkMusicType={ this.props.WorkMusicType }
 						RestMusicType={ this.props.RestMusicType }
+						dispatch= {this.props.dispatch }
 					/>
+				</div>
 			);
 		} else if (this.props.working === false && this.props.isLoading !== true){
 			return(
 				<div> 
-					<SideBar uri={this.props.restPlaylistUri} />
+					<SideBar uri={this.props.restPlaylistUri} 
+						UserPlaylists={ this.props.UserPlaylists }
+						WorkMusicType={ this.props.WorkMusicType }
+						RestMusicType={ this.props.RestMusicType }
+						dispatch= {this.props.dispatch }
+/>
 				</div>
 			);
 		} else {

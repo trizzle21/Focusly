@@ -43,7 +43,6 @@ class EntryForm extends React.Component {
   }
 
   handleRestChange(event, value, index){
-    console.log('change');
     this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: {
       name: index,
       owner: this.props.UserPlaylists[value].owner.id,

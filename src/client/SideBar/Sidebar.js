@@ -25,7 +25,6 @@ const styles = {
 
 
 class SideBar extends React.Component {
-
 	render(){
 		return(
 			<MuiThemeProvider muiTheme={theme}>
@@ -35,18 +34,12 @@ class SideBar extends React.Component {
 						<SelectField
               				floatingLabelText="Working Music"
               				value={this.props.WorkMusicType.name}
-              				//onChange={this.handleWorkChange.bind(this)}
+              				///onChange={this.handleWorkChange.bind(this)}
                   			style={styles.select}
             			>
 
               			{this.props.UserPlaylists.map(function(seed){
-                  			return <MenuItem value={
-                      			{		
-                        			name:seed.name,
-                        			owner:seed.owner.id,
-                        			id:seed.id,
-                      			}
-                    	} key={seed.id} primaryText={seed.name} />
+                  			return <MenuItem value={seed.name} key={seed.id} primaryText={seed.name} />
 
              	 		})}
            	 			</SelectField>
@@ -60,16 +53,10 @@ class SideBar extends React.Component {
             			>
 
               			{this.props.UserPlaylists.map(function(seed){
-                  			return <MenuItem value={
-                      		{
-                        		name:seed.name,
-                        		owner:seed.owner.id,
-                        		id:seed.id,
-                      		}
-                    	} key={seed.id} primaryText={seed.name} />
+                  			return <MenuItem value={seed.name} key={seed.id} primaryText={seed.name} />
 
               			})}
-            			</SelectField>
+            	</SelectField>
     					
     					<RaisedButton label="Change Playlists"  style={styles.button} />
     					

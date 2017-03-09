@@ -49073,19 +49073,28 @@
 			value: function render() {
 				if (this.props.openDialog === true && this.props.isLoading === true) {
 					return _react2.default.createElement('div', null);
-				}
-				if (this.props.working === true && this.props.isLoading !== true) {
-					return _react2.default.createElement(_SideBar2.default, {
-						uri: this.props.workPlaylistUri,
-						UserPlaylists: this.props.UserPlaylists,
-						WorkMusicType: this.props.WorkMusicType,
-						RestMusicType: this.props.RestMusicType
-					});
+				} else if (this.props.working === true && this.props.isLoading !== true) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(_SideBar2.default, {
+							uri: this.props.workPlaylistUri,
+							UserPlaylists: this.props.UserPlaylists,
+							WorkMusicType: this.props.WorkMusicType,
+							RestMusicType: this.props.RestMusicType,
+							dispatch: this.props.dispatch
+						})
+					);
 				} else if (this.props.working === false && this.props.isLoading !== true) {
 					return _react2.default.createElement(
 						'div',
 						null,
-						_react2.default.createElement(_SideBar2.default, { uri: this.props.restPlaylistUri })
+						_react2.default.createElement(_SideBar2.default, { uri: this.props.restPlaylistUri,
+							UserPlaylists: this.props.UserPlaylists,
+							WorkMusicType: this.props.WorkMusicType,
+							RestMusicType: this.props.RestMusicType,
+							dispatch: this.props.dispatch
+						})
 					);
 				} else {
 					return _react2.default.createElement(
@@ -49289,7 +49298,6 @@
 				// ];
 
 				// }
-				console.log(actions);
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
@@ -49445,7 +49453,6 @@
 	  }, {
 	    key: 'handleRestChange',
 	    value: function handleRestChange(event, value, index) {
-	      console.log('change');
 	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: {
 	          name: index,
 	          owner: this.props.UserPlaylists[value].owner.id,
@@ -54294,15 +54301,11 @@
 	              {
 	                floatingLabelText: 'Working Music',
 	                value: this.props.WorkMusicType.name
-	                //onChange={this.handleWorkChange.bind(this)}
+	                ///onChange={this.handleWorkChange.bind(this)}
 	                , style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: {
-	                    name: seed.name,
-	                    owner: seed.owner.id,
-	                    id: seed.id
-	                  }, key: seed.id, primaryText: seed.name });
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
 	            _react2.default.createElement(
@@ -54314,11 +54317,7 @@
 	                , style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: {
-	                    name: seed.name,
-	                    owner: seed.owner.id,
-	                    id: seed.id
-	                  }, key: seed.id, primaryText: seed.name });
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'Change Playlists', style: styles.button }),

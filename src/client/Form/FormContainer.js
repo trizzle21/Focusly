@@ -105,7 +105,6 @@ class FormContainer extends React.Component {
 		// ];
 
 		// }
-		console.log(actions);
 		return (
   		
   		<MuiThemeProvider muiTheme={theme}>
