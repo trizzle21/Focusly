@@ -9,16 +9,17 @@ const size = {
 
 export default class PlayButton extends React.Component {
 	render(){
-		return(
-			<div> 
+		var source= 'https://embed.spotify.com/?uri='+ this.props.uri;
+    console.log(this.props.uri)
+    return(
+			<div> Hel
 			<iFrame
        			className="SpotifyPlayer"
-        		src={'https://embed.spotify.com/?uri=${this.props.uri}&view=coverartthis.props.view&theme=blakc'}
-        		width={size.large.width}
-        		height={size.large.height}
-        		frameBorder="0"
-        		allowTransparency="true"
-
+        		src={source}
+            width={size.width}
+            height={size.height}
+            frameBorder="0"
+            allowTransparency="true"
 			/>
 			</div>
 		);

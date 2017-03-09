@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import form from './Form/FormReducer';
 import timer from './Timer/TimerReducer';
 import spotifyAuth from './Spotify/SpotifyReducer';
-import sidebar from './SideBar/SidebarReducer';
+//import sidebar from './SideBar/SidebarReducer';
 import spotify from './Spotify/SpotifyReducer'
 //cycles are 25+5minute intervals
 
@@ -44,7 +44,7 @@ export const initialState = {
 export default combineReducers({
   form,
   timer,
-  sidebar,
+  //sidebar,
   spotify,
 });
 

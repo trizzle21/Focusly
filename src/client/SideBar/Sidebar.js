@@ -10,7 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class SideBar extends React.Component {
 
 	render(){
-		console.log(this.props);
+		console.log("URI:" +this.props.uri);
 		return(
 			<MuiThemeProvider muiTheme={theme}>
 				<div>

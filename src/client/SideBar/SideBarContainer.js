@@ -20,12 +20,12 @@ class SideBarContainer extends React.Component {
 
 
 	render(){
-	
+		console.log("workPlaylistUri:" + this.props.workPlaylistUri);
 		if(this.props.openDialog === true && this.props.isLoading === true){
 			return(<div></div>);
 		}
 		if(this.props.working === true && this.props.isLoading !== true){
-			console.log(this.props)
+			console.log("About to render worksidebar: "+this.props.workPlaylistUri)
 			return(
 					<SideBar uri={this.props.workPlaylistUri} />
 			);
@@ -49,6 +49,10 @@ SideBarContainer.propTypes = {
 	working:React.PropTypes.bool,
 	userID:React.PropTypes.string,
 	isLoading:React.PropTypes.bool,
+	
+	restPlaylistUri:React.PropTypes.string,
+	workPlaylistUri:React.PropTypes.string,
+
 }
 
 
@@ -58,8 +62,9 @@ function mapStateToProps(state) {
 		userID:state.form.userID,
 		openDialog: state.form.openDialog,
 		working:state.timer.working,
-		restPlaylistUri:state.spotify.workPlayListUri,
-		workPlaylistUri:state.spotify.restPlayListUri,
+		
+		restPlaylistUri:state.spotify.workPlaylistUri,
+		workPlaylistUri:state.spotify.workPlaylistUri,
 	}
 }
 

@@ -29450,10 +29450,6 @@
 
 	var _SpotifyReducer2 = _interopRequireDefault(_SpotifyReducer);
 
-	var _SidebarReducer = __webpack_require__(293);
-
-	var _SidebarReducer2 = _interopRequireDefault(_SidebarReducer);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//cycles are 25+5minute intervals
@@ -29487,11 +29483,11 @@
 	  }
 
 	};
-
+	//import sidebar from './SideBar/SidebarReducer';
 	exports.default = (0, _redux.combineReducers)({
 	  form: _FormReducer2.default,
 	  timer: _TimerReducer2.default,
-	  sidebar: _SidebarReducer2.default,
+	  //sidebar,
 	  spotify: _SpotifyReducer2.default
 	});
 
@@ -30306,7 +30302,7 @@
 /* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30320,8 +30316,8 @@
 	  UserPlaylists: [],
 	  userPlaylistsIsLoading: true,
 	  playlistUriIsLoading: true,
-	  restPlaylistUri: {},
-	  workPlaylistUri: {}
+	  restPlaylistUri: "",
+	  workPlaylistUri: ""
 
 	};
 
@@ -30347,13 +30343,14 @@
 	      });
 	    case _SpotifyActions.SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
 	      if (action.work === true) {
+	        console.log("action.playlist" + action.playlist);
 	        return Object.assign({}, state, {
-	          workPlaylistUri: action.playlisturi,
+	          workPlaylistUri: action.playlist,
 	          playlistUriIsLoading: false
 	        });
 	      } else {
 	        return Object.assign({}, state, {
-	          restPlaylistUri: action.playlisturi,
+	          restPlaylistUri: action.playlist,
 	          playlistUriIsLoading: false
 	        });
 	      }
@@ -30423,7 +30420,8 @@
 		return { type: SPOTIFY_SPECIFIC_PLAYLIST_BEGIN };
 	}
 	function SpotifySpecificPlaylistSuccess(data, work) {
-		return { type: SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS, playlisturi: data, work: work };
+		console.log(data);
+		return { type: SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS, playlist: data, work: work };
 	}
 	function SpotifySpecificPlaylistError(e) {
 		return { type: SPOTIFY_SPECIFIC_PLAYLIST_ERROR, error: e };
@@ -30441,138 +30439,15 @@
 			}).catch(function (e) {
 				dispatch(SpotifySpecificPlaylistError(e));
 			}).then(function (json) {
-				dispatch(SpotifySpecificPlaylistSuccess(json, options.work));
+				dispatch(SpotifySpecificPlaylistSuccess(json.uri, options.work));
 			});
 		};
 	}
 
 /***/ },
 /* 292 */,
-/* 293 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = SidebarReducer;
-
-	var _SideBarActions = __webpack_require__(294);
-
-	var SideBarState = {
-		isLoading: true,
-		restPlaylistUri: null,
-		workPlayListUri: null
-	};
-
-	function SidebarReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : SideBarState;
-		var actions = arguments[1];
-
-		switch (actions.type) {
-			case _SideBarActions.SPOTIFY_WORK_PLAYLIST_BEGIN:
-				return Object.assign({}, state, {
-					isLoading: true
-				});
-			case _SideBarActions.SPOTIFY_WORK_PLAYLIST_SUCCESS:
-				return Object.assign({}, state, {
-					wokrPlaylistUri: actions.playlisturi.href
-				});
-
-			case _SideBarActions.SPOTIFY_WORK_PLAYLIST_ERROR:
-				return Object.assign({}, state, {});
-			case _SideBarActions.SPOTIFY_REST_PLAYLIST_BEGIN:
-				return Object.assign({}, state, {});
-			case _SideBarActions.SPOTIFY_REST_PLAYLIST_SUCCESS:
-				console.log(actions.playlisturi);
-				return Object.assign({}, state, {
-					isLoading: false,
-					restPlaylistUri: actions.playlisturi.href
-				});
-
-			case _SideBarActions.SPOTIFY_REST_PLAYLIST_ERROR:
-				return state;
-			default:
-				return state;
-
-		}
-	}
-
-/***/ },
-/* 294 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.getPlaylist = getPlaylist;
-	var SPOTIFY_WORK_PLAYLIST_BEGIN = exports.SPOTIFY_WORK_PLAYLIST_BEGIN = "SPOTIFY_WORK_PLAYLIST_BEGIN";
-	var SPOTIFY_WORK_PLAYLIST_SUCCESS = exports.SPOTIFY_WORK_PLAYLIST_SUCCESS = "SPOTIFY_WORK_PLAYLIST_SUCCESS";
-	var SPOTIFY_WORK_PLAYLIST_ERROR = exports.SPOTIFY_WORK_PLAYLIST_ERROR = "SPOTIFY_WORK_PLAYLIST_ERROR";
-
-	var SPOTIFY_REST_PLAYLIST_BEGIN = exports.SPOTIFY_REST_PLAYLIST_BEGIN = "SPOTIFY_REST_PLAYLIST_BEGIN";
-	var SPOTIFY_REST_PLAYLIST_SUCCESS = exports.SPOTIFY_REST_PLAYLIST_SUCCESS = "SPOTIFY_REST_PLAYLIST_SUCCESS";
-	var SPOTIFY_REST_PLAYLIST_ERROR = exports.SPOTIFY_REST_PLAYLIST_ERROR = "SPOTIFY_REST_PLAYLIST_ERROR";
-
-	function SpotifyWorkPlaylistBegin() {
-		return { type: SPOTIFY_WORK_PLAYLIST_BEGIN };
-	}
-	function SpotifyWorkPlaylistSuccess(data) {
-		return { type: SPOTIFY_WORK_PLAYLIST_SUCCESS, playlisturi: data };
-	}
-	function SpotifyWorkPlaylistError(e) {
-		return { type: SPOTIFY_WORK_PLAYLIST_ERROR, error: e };
-	}
-
-	function SpotifyRestPlaylistBegin() {
-		return { type: SPOTIFY_REST_PLAYLIST_BEGIN };
-	}
-	function SpotifyRestPlaylistSuccess(data) {
-		return { type: SPOTIFY_REST_PLAYLIST_SUCCESS, playlisturi: data };
-	}
-	function SpotifyRestPlaylistError(e) {
-		return { type: SPOTIFY_REST_PLAYLIST_ERROR, error: e };
-	}
-
-	function getPlaylist(options, work) {
-		console.log("work");
-		if (work === true) {
-			console.log(options.userID);
-			return function (dispatch) {
-
-				dispatch(SpotifyWorkPlaylistBegin());
-				fetch('https://api.spotify.com/v1/users/' + options.userID + '/playlists/' + options.playlist_id, {
-					method: "GET",
-					headers: { 'Authorization': 'Bearer ' + options.accessToken }
-				}).then(function (data) {
-					return data.json();
-				}).catch(function (e) {
-					dispatch(SpotifyWorkPlaylistError(e));
-				}).then(function (json) {
-					dispatch(SpotifyWorkPlaylistSuccess(json));
-				});
-			};
-		} else {
-			return function (dispatch) {
-				dispatch(SpotifyRestPlaylistBegin());
-				fetch('https://api.spotify.com/v1/users/' + options.userID + '/playlists/' + options.playlist_id, {
-					method: "GET",
-					headers: { 'Authorization': 'Bearer ' + options.accessToken }
-				}).then(function (data) {
-					return data.json();
-				}).catch(function (e) {
-					dispatch(SpotifyRestPlaylistError(e));
-				}).then(function (json) {
-					dispatch(SpotifyRestPlaylistSuccess(json));
-				});
-			};
-		}
-	}
-
-/***/ },
+/* 293 */,
+/* 294 */,
 /* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -49262,12 +49137,12 @@
 
 
 			value: function render() {
-
+				console.log("workPlaylistUri:" + this.props.workPlaylistUri);
 				if (this.props.openDialog === true && this.props.isLoading === true) {
 					return _react2.default.createElement('div', null);
 				}
 				if (this.props.working === true && this.props.isLoading !== true) {
-					console.log(this.props);
+					console.log("About to render worksidebar: " + this.props.workPlaylistUri);
 					return _react2.default.createElement(_SideBar2.default, { uri: this.props.workPlaylistUri });
 				} else if (this.props.working === false && this.props.isLoading !== true) {
 					return _react2.default.createElement(
@@ -49293,7 +49168,11 @@
 		openDialog: _react2.default.PropTypes.bool,
 		working: _react2.default.PropTypes.bool,
 		userID: _react2.default.PropTypes.string,
-		isLoading: _react2.default.PropTypes.bool
+		isLoading: _react2.default.PropTypes.bool,
+
+		restPlaylistUri: _react2.default.PropTypes.string,
+		workPlaylistUri: _react2.default.PropTypes.string
+
 	};
 
 	function mapStateToProps(state) {
@@ -49302,8 +49181,9 @@
 			userID: state.form.userID,
 			openDialog: state.form.openDialog,
 			working: state.timer.working,
-			restPlaylistUri: state.spotify.workPlayListUri,
-			workPlaylistUri: state.spotify.restPlayListUri
+
+			restPlaylistUri: state.spotify.workPlaylistUri,
+			workPlaylistUri: state.spotify.workPlaylistUri
 		};
 	}
 
@@ -54381,7 +54261,7 @@
 		_createClass(SideBar, [{
 			key: 'render',
 			value: function render() {
-				console.log(this.props);
+				console.log("URI:" + this.props.uri);
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: _CustomTheme2.default },
@@ -54446,17 +54326,19 @@
 	  _createClass(PlayButton, [{
 	    key: 'render',
 	    value: function render() {
+	      var source = 'https://embed.spotify.com/?uri=' + this.props.uri;
+	      console.log(this.props.uri);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        ' Hel',
 	        _react2.default.createElement('iFrame', {
 	          className: 'SpotifyPlayer',
-	          src: 'https://embed.spotify.com/?uri=${this.props.uri}&view=coverartthis.props.view&theme=blakc',
-	          width: size.large.width,
-	          height: size.large.height,
+	          src: source,
+	          width: size.width,
+	          height: size.height,
 	          frameBorder: '0',
 	          allowTransparency: 'true'
-
 	        })
 	      );
 	    }

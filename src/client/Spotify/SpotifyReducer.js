@@ -9,8 +9,8 @@ const SpotifyState= {
     UserPlaylists:[],
     userPlaylistsIsLoading:true,
     playlistUriIsLoading:true,
-    restPlaylistUri:{},
-    workPlaylistUri:{},
+    restPlaylistUri:"",
+    workPlaylistUri:"",
 
 
 }
@@ -34,13 +34,14 @@ export default function Spotify (state=SpotifyState, action) {
         });
       case SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS:
         if(action.work === true) {
+          console.log("action.playlist"+action.playlist);
           return Object.assign({}, state, {
-            workPlaylistUri: action.playlisturi,
+            workPlaylistUri: action.playlist,
             playlistUriIsLoading:false,
           });
         } else {
           return Object.assign({}, state, {
-            restPlaylistUri: action.playlisturi,
+            restPlaylistUri: action.playlist,
             playlistUriIsLoading:false,
           });
         }

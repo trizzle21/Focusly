@@ -52,7 +52,8 @@ function SpotifySpecificPlaylistBegin(){
     return { type: SPOTIFY_SPECIFIC_PLAYLIST_BEGIN };
 }
 function SpotifySpecificPlaylistSuccess(data, work)  { 
-    return { type: SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS, playlisturi:data, work:work};
+    console.log(data)
+    return { type: SPOTIFY_SPECIFIC_PLAYLIST_SUCCESS, playlist:data, work:work};
 }
 function SpotifySpecificPlaylistError(e) { 
     return { type: SPOTIFY_SPECIFIC_PLAYLIST_ERROR, error:e };
@@ -74,7 +75,7 @@ export function getPlaylist(options){
 			dispatch(SpotifySpecificPlaylistError(e))
 		})
 		.then(json => {
-			dispatch(SpotifySpecificPlaylistSuccess(json, options.work))
+			dispatch(SpotifySpecificPlaylistSuccess(json.uri, options.work))
 		});
 	}
 }
