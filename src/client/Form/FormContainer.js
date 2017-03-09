@@ -67,18 +67,33 @@ class FormContainer extends React.Component {
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 
 	}
+	Refresh(){}
+
 	render(){
 		
 		// if(this.props.error === ""){
 			const actions = [
+  				<a href="/refresh_token">
+  				<RaisedButton
+  					label="Refresh Auth"
+					labelPosition="after"
+					primary={true}
+					style={styles.button}
+					containerElement="label"
+					//onClick={this.submit.bind(this)}
+				/>
+				</a>,
   				<RaisedButton
   					label="Submit"
 					labelPosition="after"
 					primary={true}
 					style={styles.button}
 					containerElement="label"
-					onClick={this.submit.bind(this)}
-				/>
+					onClick={this.Refresh.bind(this)}
+				/>, 
+
+
+
 		];
 		// } else {
 		// 	const actions = [

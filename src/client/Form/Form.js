@@ -38,16 +38,27 @@ const styles = {
 class EntryForm extends React.Component {
   	
   handleSliderChange(event, value){
-    console.log(this.props);
     this.props.dispatch({type:'SLIDER_CHANGE', value: value});
   }
 
   handleRestChange(event, value, index){
-    this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: index  })
+    this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: {
+      name: index,
+      owner: this.props.UserPlaylists[value].owner.id,
+      id:this.props.UserPlaylists[value].id
+    }  })
   }
 
-  handleWorkChange(event, value, index, key){
-    this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: index});
+  handleWorkChange(event, value, index){
+    console.log("value: " + value);
+    console.log(index);
+    console.log(this.props.UserPlaylists[value])
+    this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: {
+      name: index,
+      owner: this.props.UserPlaylists[value].owner.id,
+      id:this.props.UserPlaylists[value].id
+    }});
+
   }
 
     render() {
@@ -75,13 +86,7 @@ class EntryForm extends React.Component {
             	>
 
               {this.props.UserPlaylists.map(function(seed){
-                  return <MenuItem value={
-                      {
-                        name:seed.name,
-                        owner:seed.owner.id,
-                        id:seed.id,
-                      }
-                    } key={seed.id} primaryText={seed.name} />
+                  return <MenuItem value={seed.name} key={seed.id} primaryText={seed.name} />
 
               })}
            	 	</SelectField>
@@ -96,11 +101,7 @@ class EntryForm extends React.Component {
 
               {this.props.UserPlaylists.map(function(seed){
                   return <MenuItem value={
-                      {
-                        name:seed.name,
-                        owner:seed.owner.id,
-                        id:seed.id,
-                      }
+                      seed.name
                     } key={seed.id} primaryText={seed.name} />
 
               })}

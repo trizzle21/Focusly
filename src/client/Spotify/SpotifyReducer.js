@@ -48,6 +48,7 @@ export default function Spotify (state=SpotifyState, action) {
         }
 
     case SPOTIFY_SPECIFIC_PLAYLIST_ERROR:
+      console.log(e);
       return Object.assign({}, state, {
           error:"playlist is unable to load"
         });

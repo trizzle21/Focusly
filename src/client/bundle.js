@@ -30317,6 +30317,7 @@
 	      }
 
 	    case _SpotifyActions.SPOTIFY_SPECIFIC_PLAYLIST_ERROR:
+	      console.log(e);
 	      return Object.assign({}, state, {
 	        error: "playlist is unable to load"
 	      });
@@ -49254,17 +49255,31 @@
 				// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 			}
 		}, {
+			key: 'Refresh',
+			value: function Refresh() {}
+		}, {
 			key: 'render',
 			value: function render() {
 
 				// if(this.props.error === ""){
-				var actions = [_react2.default.createElement(_RaisedButton2.default, {
+				var actions = [_react2.default.createElement(
+					'a',
+					{ href: '/refresh_token' },
+					_react2.default.createElement(_RaisedButton2.default, {
+						label: 'Refresh Auth',
+						labelPosition: 'after',
+						primary: true,
+						style: styles.button,
+						containerElement: 'label'
+						//onClick={this.submit.bind(this)}
+					})
+				), _react2.default.createElement(_RaisedButton2.default, {
 					label: 'Submit',
 					labelPosition: 'after',
 					primary: true,
 					style: styles.button,
 					containerElement: 'label',
-					onClick: this.submit.bind(this)
+					onClick: this.Refresh.bind(this)
 				})];
 				// } else {
 				// 	const actions = [
@@ -49429,18 +49444,28 @@
 	  _createClass(EntryForm, [{
 	    key: 'handleSliderChange',
 	    value: function handleSliderChange(event, value) {
-	      console.log(this.props);
 	      this.props.dispatch({ type: 'SLIDER_CHANGE', value: value });
 	    }
 	  }, {
 	    key: 'handleRestChange',
 	    value: function handleRestChange(event, value, index) {
-	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: index });
+	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: {
+	          name: index,
+	          owner: this.props.UserPlaylists[value].owner.id,
+	          id: this.props.UserPlaylists[value].id
+	        } });
 	    }
 	  }, {
 	    key: 'handleWorkChange',
-	    value: function handleWorkChange(event, value, index, key) {
-	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newPlaylist: index });
+	    value: function handleWorkChange(event, value, index) {
+	      console.log("value: " + value);
+	      console.log(index);
+	      console.log(this.props.UserPlaylists[value]);
+	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newPlaylist: {
+	          name: index,
+	          owner: this.props.UserPlaylists[value].owner.id,
+	          id: this.props.UserPlaylists[value].id
+	        } });
 	    }
 	  }, {
 	    key: 'render',
@@ -49485,11 +49510,7 @@
 	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: {
-	                    name: seed.name,
-	                    owner: seed.owner.id,
-	                    id: seed.id
-	                  }, key: seed.id, primaryText: seed.name });
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
 	            _react2.default.createElement(
@@ -49501,11 +49522,7 @@
 	                style: styles.select
 	              },
 	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: {
-	                    name: seed.name,
-	                    owner: seed.owner.id,
-	                    id: seed.id
-	                  }, key: seed.id, primaryText: seed.name });
+	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
 	              })
 	            ),
 	            _react2.default.createElement('br', null)
