@@ -16,12 +16,12 @@ This section includes crucial information on how to set up the web application o
 
 ### Developer Setup
 
-```npm install 
+~~~~npm install 
 
 will initialize all the packages from package.json
 
-```node src/server.js 
+~~~~node src/server.js 
 
 will initialize and run the server.
 
-Requires a spotify_secrets.json file in order work
+Requires a spotify_secrets.json file in order work.
