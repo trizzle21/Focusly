@@ -49126,16 +49126,6 @@
 
 		_createClass(SideBarContainer, [{
 			key: 'render',
-
-
-			// componentChange(){
-			// 	const {dispatch, params} = this.props;
-			//    	const {accessToken, refreshToken} = params;
-			//   	 	dispatch(setTokens({accessToken, refreshToken}));
-			//    	dispatch(getMyRecommendations());
-			// }
-
-
 			value: function render() {
 				console.log("workPlaylistUri:" + this.props.workPlaylistUri);
 				if (this.props.openDialog === true && this.props.isLoading === true) {
