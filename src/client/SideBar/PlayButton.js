@@ -9,7 +9,7 @@ const size = {
 
 export default class PlayButton extends React.Component {
 	render(){
-		var source= 'https://embed.spotify.com/?uri='+ this.props.uri;
+		var source= 'https://embed.spotify.com/?uri='+ this.props.uri + '&theme=white';
     return(
 			<div>
 			   <div className="SpotifyDiv">

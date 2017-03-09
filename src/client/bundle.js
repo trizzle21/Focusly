@@ -54382,7 +54382,7 @@
 	  _createClass(PlayButton, [{
 	    key: 'render',
 	    value: function render() {
-	      var source = 'https://embed.spotify.com/?uri=' + this.props.uri;
+	      var source = 'https://embed.spotify.com/?uri=' + this.props.uri + '&theme=white';
 	      return _react2.default.createElement(
 	        'div',
 	        null,

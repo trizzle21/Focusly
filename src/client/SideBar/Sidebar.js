@@ -72,6 +72,7 @@ class SideBar extends React.Component {
             			</SelectField>
     					
     					<RaisedButton label="Change Playlists"  style={styles.button} />
+    					
     					<a href='/refresh_token'>
     						<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />
     					</a>
