@@ -28,7 +28,8 @@ const styles = {
     fontSize:16,
   },
   select: {
-    marginLeft:15,
+    marginLeft:30,
+    //position:"absolute",
   },
   submit: {
   }
@@ -42,6 +43,7 @@ class EntryForm extends React.Component {
   }
 
   handleRestChange(event, value, index){
+    console.log('change');
     this.props.dispatch({type:"REST_MUSIC_SELECT", newPlaylist: {
       name: index,
       owner: this.props.UserPlaylists[value].owner.id,
@@ -50,9 +52,6 @@ class EntryForm extends React.Component {
   }
 
   handleWorkChange(event, value, index){
-    console.log("value: " + value);
-    console.log(index);
-    console.log(this.props.UserPlaylists[value])
     this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: {
       name: index,
       owner: this.props.UserPlaylists[value].owner.id,
@@ -63,21 +62,23 @@ class EntryForm extends React.Component {
 
     render() {
   		//render form here
-      if (this.props.isLoading){
+      if(this.props.error !== ""){
+        <MuiThemeProvider muiTheme={theme}>
+          <div>Please refresh your token</div>
+        </MuiThemeProvider>
+      } else if (this.props.isLoading){
         return(
           <MuiThemeProvider muiTheme={theme}>
             <div>Loading...</div>
           </MuiThemeProvider>
         );
-      }else if(this.props.error !== ""){
-        <div>Please refresh your token</div>
       } else {
        return (
         <MuiThemeProvider muiTheme={theme}>
  		       <form style={styles.main} className="spotify_login" >
       			<Slider step={1.0} value={this.props.SessionSlider} onChange={this.handleSliderChange.bind(this)} min={1} max={10} style={styles.slider}/>
       			<p className="secondaryText" style={styles.counter}>{this.props.SessionSlider} Cycles</p>
-            
+            <div style={{display: 'inline-block', verticalAlign: 'bottom'}}>
               <SelectField
               		floatingLabelText="Working Music"
               		value={this.props.WorkMusicType.name}
@@ -90,6 +91,8 @@ class EntryForm extends React.Component {
 
               })}
            	 	</SelectField>
+            </div>
+            <div style={{display: 'inline-block', verticalAlign: 'bottom'}}>
 
           		
               <SelectField
@@ -100,13 +103,11 @@ class EntryForm extends React.Component {
             	>
 
               {this.props.UserPlaylists.map(function(seed){
-                  return <MenuItem value={
-                      seed.name
-                    } key={seed.id} primaryText={seed.name} />
+                  return <MenuItem value={seed.name} key={seed.id} primaryText={seed.name} />
 
               })}
             	</SelectField>
-
+            </div>
               <br />
 
          

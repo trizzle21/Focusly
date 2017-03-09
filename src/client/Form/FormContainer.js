@@ -67,7 +67,6 @@ class FormContainer extends React.Component {
 		// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 
 	}
-	Refresh(){}
 
 	render(){
 		
@@ -80,7 +79,6 @@ class FormContainer extends React.Component {
 					primary={true}
 					style={styles.button}
 					containerElement="label"
-					//onClick={this.submit.bind(this)}
 				/>
 				</a>,
   				<RaisedButton
@@ -89,7 +87,7 @@ class FormContainer extends React.Component {
 					primary={true}
 					style={styles.button}
 					containerElement="label"
-					onClick={this.Refresh.bind(this)}
+					onClick={this.submit.bind(this)}
 				/>, 
 
 

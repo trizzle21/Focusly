@@ -49255,9 +49255,6 @@
 				// this.props.dispatch({ type: "SET_INTERVAL", intervalID: intervalId });
 			}
 		}, {
-			key: 'Refresh',
-			value: function Refresh() {}
-		}, {
 			key: 'render',
 			value: function render() {
 
@@ -49271,7 +49268,6 @@
 						primary: true,
 						style: styles.button,
 						containerElement: 'label'
-						//onClick={this.submit.bind(this)}
 					})
 				), _react2.default.createElement(_RaisedButton2.default, {
 					label: 'Submit',
@@ -49279,7 +49275,7 @@
 					primary: true,
 					style: styles.button,
 					containerElement: 'label',
-					onClick: this.Refresh.bind(this)
+					onClick: this.submit.bind(this)
 				})];
 				// } else {
 				// 	const actions = [
@@ -49427,7 +49423,7 @@
 	    fontSize: 16
 	  },
 	  select: {
-	    marginLeft: 15
+	    marginLeft: 30
 	  },
 	  submit: {}
 	};
@@ -49449,6 +49445,7 @@
 	  }, {
 	    key: 'handleRestChange',
 	    value: function handleRestChange(event, value, index) {
+	      console.log('change');
 	      this.props.dispatch({ type: "REST_MUSIC_SELECT", newPlaylist: {
 	          name: index,
 	          owner: this.props.UserPlaylists[value].owner.id,
@@ -49458,9 +49455,6 @@
 	  }, {
 	    key: 'handleWorkChange',
 	    value: function handleWorkChange(event, value, index) {
-	      console.log("value: " + value);
-	      console.log(index);
-	      console.log(this.props.UserPlaylists[value]);
 	      this.props.dispatch({ type: 'WORK_MUSIC_SELECT', newPlaylist: {
 	          name: index,
 	          owner: this.props.UserPlaylists[value].owner.id,
@@ -49471,7 +49465,17 @@
 	    key: 'render',
 	    value: function render() {
 	      //render form here
-	      if (this.props.isLoading) {
+	      if (this.props.error !== "") {
+	        _react2.default.createElement(
+	          _MuiThemeProvider2.default,
+	          { muiTheme: _CustomTheme2.default },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Please refresh your token'
+	          )
+	        );
+	      } else if (this.props.isLoading) {
 	        return _react2.default.createElement(
 	          _MuiThemeProvider2.default,
 	          { muiTheme: _CustomTheme2.default },
@@ -49480,12 +49484,6 @@
 	            null,
 	            'Loading...'
 	          )
-	        );
-	      } else if (this.props.error !== "") {
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'Please refresh your token'
 	        );
 	      } else {
 	        return _react2.default.createElement(
@@ -49502,28 +49500,36 @@
 	              ' Cycles'
 	            ),
 	            _react2.default.createElement(
-	              _SelectField2.default,
-	              {
-	                floatingLabelText: 'Working Music',
-	                value: this.props.WorkMusicType.name,
-	                onChange: this.handleWorkChange.bind(this),
-	                style: styles.select
-	              },
-	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
-	              })
+	              'div',
+	              { style: { display: 'inline-block', verticalAlign: 'bottom' } },
+	              _react2.default.createElement(
+	                _SelectField2.default,
+	                {
+	                  floatingLabelText: 'Working Music',
+	                  value: this.props.WorkMusicType.name,
+	                  onChange: this.handleWorkChange.bind(this),
+	                  style: styles.select
+	                },
+	                this.props.UserPlaylists.map(function (seed) {
+	                  return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
+	                })
+	              )
 	            ),
 	            _react2.default.createElement(
-	              _SelectField2.default,
-	              {
-	                floatingLabelText: 'Resting Music',
-	                value: this.props.RestMusicType.name,
-	                onChange: this.handleRestChange.bind(this),
-	                style: styles.select
-	              },
-	              this.props.UserPlaylists.map(function (seed) {
-	                return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
-	              })
+	              'div',
+	              { style: { display: 'inline-block', verticalAlign: 'bottom' } },
+	              _react2.default.createElement(
+	                _SelectField2.default,
+	                {
+	                  floatingLabelText: 'Resting Music',
+	                  value: this.props.RestMusicType.name,
+	                  onChange: this.handleRestChange.bind(this),
+	                  style: styles.select
+	                },
+	                this.props.UserPlaylists.map(function (seed) {
+	                  return _react2.default.createElement(_MenuItem2.default, { value: seed.name, key: seed.id, primaryText: seed.name });
+	                })
+	              )
 	            ),
 	            _react2.default.createElement('br', null)
 	          )
