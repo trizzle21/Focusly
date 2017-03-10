@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
 import Timer from './Timer';
 
-import AlarmSound from './AlarmSound';
+import Alarm from './AlarmSound';
 
 import { tick, startStop, sessionTypeSet, cycleSet } from './TimerActions';
 
@@ -24,7 +24,7 @@ class TimerContainer extends React.Component {
 	componentWillMount(){
 		this.props.dispatch( { type:'SESSION_TYPE_SET', sessionType: 'working'} );
 		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );	
-		this.pause();	
+
 	}
 
 	
@@ -42,6 +42,7 @@ class TimerContainer extends React.Component {
 
 	}
 
+
 	componentWillUnmount() {
 		clearInterval(this.props.intervalID);
   	}
@@ -50,7 +51,7 @@ class TimerContainer extends React.Component {
 		if(!this.props.openDialog){
 			return (<div>
 		 		<Timer 
-		 			pause={this.pause} 
+		 			pause={this.pause.bind(this)} 
 					secondsRemaining={this.props.secondsRemaining}
 					isCounting={this.props.isCounting}
 					completed={this.props.completed}
@@ -59,8 +60,10 @@ class TimerContainer extends React.Component {
 					intervalID={this.props.intervalID}
 		 			tick={this.props.tick()}
 		 			/>
-		 		<AlarmSound 
+		 		<Alarm 
 					alarmSound={this.props.alarmSound}
+					dispatch={this.props.dispatch}
+
 		 		/>	
 				</div>
 			);} else {

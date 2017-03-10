@@ -1,7 +1,7 @@
 
 import {
 	CYCLE_SET, SESSION_TYPE_SET, TICK, START_STOP,SET_INTERVAL, CLEAR_INTERVAL, 
-	SPOTIFY_PLAYLIST_BEGIN, SPOTIFY_PLAYLIST_SUCCESS, SPOTIFY_PLAYLIST_ERROR, START_STOP_ALARM
+	SPOTIFY_PLAYLIST_BEGIN, SPOTIFY_PLAYLIST_SUCCESS, SPOTIFY_PLAYLIST_ERROR, STOP_ALARM
  } from './TimerActions';
 
 import { SUBMIT_FORM } from '../Form/FormActions';
@@ -53,13 +53,18 @@ export default function TimerReducer(state=time_state, actions){
 				});
 			}
 		case TICK:
+			console.log(state.secondsRemaining  >= 0);
 			if(state.secondsRemaining >= 0) { 
 				return Object.assign({}, state, {
 					secondsRemaining: state.secondsRemaining-1,
 					completed: (state.secondsRemaining/state.initialSeconds)*100,
 				});
 			} else if(state.cycles === 0){
-
+					return Object.assign({}, state, {
+						alarmSound:true,
+						secondsRemaining: 0,
+						initialSeconds:0,	
+					});
 			} else {
 				if(state.working){
 					return Object.assign({}, state, {
@@ -90,9 +95,9 @@ export default function TimerReducer(state=time_state, actions){
 				cycles: actions.cycles,
 				isCounting:true,
 			});
-		case START_STOP_ALARM:
+		case STOP_ALARM:
 			return Object.assign({}, state, {
-				alarmSound: !this.state.alarmSound,
+				alarmSound: false,
 			});
 
 		default:

@@ -9,6 +9,7 @@ export const START_STOP = 'START_STOP';
 export const SET_INTERVAL = 'SET_INTERVAL';
 export const CLEAR_INTERVAL = 'CLEAR_INTERVAL';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
+export const STOP_ALARM = 'STOP_ALARM';
 
 export function cycleSet(cycleCount) {
 	return { type: CYCLE_SET, cycleCount: cycleCount};
@@ -22,42 +23,11 @@ export const tick = actionCreator(TICK);
 export const startStop = actionCreator(START_STOP);
 
 
-export const SPOTIFY_PLAYLIST_BEGIN = "SPOTIFY_PLAYLIST_BEGIN";
-export const SPOTIFY_PLAYLIST_SUCCESS = "SPOTIFY_PLAYLIST_SUCCESS";
-export const SPOTIFY_PLAYLIST_ERROR = "SPOTIFY_PLAYLIST_ERROR";
-
-function SpotifyPlaylistBegin(){ 
-    return { type: SPOTIFY_PLAYLIST_BEGIN };
-}
-function SpotifyPlaylistSuccess(data)  { 
-    return { type: SPOTIFY_PLAYLIST_SUCCESS, data:data};
-}
-function SpotifyPlaylistError(e) { 
-    return { type: SPOTIFY_PLAYLIST_ERROR, error:e };
-}
 
 
-
-
-export function getPlaylist(options){
-	return (dispatch) => {
-		dispatch(SpotifyRecomendationPlaylistBegin());
-		fetch('https://api.spotify.com/v1/me/playlists/'+options.playlist_id, {
-			method:"GET",
-			headers: {'Authorization' : 'Bearer ' + options.accessToken}
-			})
-		.then(data => data.json())
-		.catch(e => {
-			dispatch(SpotifyRecomendationPlaylistError(e))
-		})
-		.then(json => {
-			dispatch(SpotifyRecomendationPlaylistSuccess(json))
-		});
 
 
 		
-	}
-}
 
 
 

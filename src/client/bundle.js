@@ -30123,12 +30123,19 @@
 					});
 				}
 			case _TimerActions.TICK:
+				console.log(state.secondsRemaining >= 0);
 				if (state.secondsRemaining >= 0) {
 					return Object.assign({}, state, {
 						secondsRemaining: state.secondsRemaining - 1,
 						completed: state.secondsRemaining / state.initialSeconds * 100
 					});
-				} else if (state.cycles === 0) {} else {
+				} else if (state.cycles === 0) {
+					return Object.assign({}, state, {
+						alarmSound: true,
+						secondsRemaining: 0,
+						initialSeconds: 0
+					});
+				} else {
 					if (state.working) {
 						return Object.assign({}, state, {
 							alarmSound: true,
@@ -30157,9 +30164,9 @@
 					cycles: actions.cycles,
 					isCounting: true
 				});
-			case _TimerActions.START_STOP_ALARM:
+			case _TimerActions.STOP_ALARM:
 				return Object.assign({}, state, {
-					alarmSound: !this.state.alarmSound
+					alarmSound: false
 				});
 
 			default:
@@ -30176,10 +30183,9 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.SPOTIFY_PLAYLIST_ERROR = exports.SPOTIFY_PLAYLIST_SUCCESS = exports.SPOTIFY_PLAYLIST_BEGIN = exports.startStop = exports.tick = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
+	exports.startStop = exports.tick = exports.STOP_ALARM = exports.SUBMIT_FORM = exports.CLEAR_INTERVAL = exports.SET_INTERVAL = exports.START_STOP = exports.TICK = exports.SESSION_TYPE_SET = exports.CYCLE_SET = undefined;
 	exports.cycleSet = cycleSet;
 	exports.sessionTypeSet = sessionTypeSet;
-	exports.getPlaylist = getPlaylist;
 
 	var _ActionCreator = __webpack_require__(285);
 
@@ -30195,6 +30201,7 @@
 	var SET_INTERVAL = exports.SET_INTERVAL = 'SET_INTERVAL';
 	var CLEAR_INTERVAL = exports.CLEAR_INTERVAL = 'CLEAR_INTERVAL';
 	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
+	var STOP_ALARM = exports.STOP_ALARM = 'STOP_ALARM';
 
 	function cycleSet(cycleCount) {
 		return { type: CYCLE_SET, cycleCount: cycleCount };
@@ -30206,36 +30213,6 @@
 
 	var tick = exports.tick = (0, _ActionCreator2.default)(TICK);
 	var startStop = exports.startStop = (0, _ActionCreator2.default)(START_STOP);
-
-	var SPOTIFY_PLAYLIST_BEGIN = exports.SPOTIFY_PLAYLIST_BEGIN = "SPOTIFY_PLAYLIST_BEGIN";
-	var SPOTIFY_PLAYLIST_SUCCESS = exports.SPOTIFY_PLAYLIST_SUCCESS = "SPOTIFY_PLAYLIST_SUCCESS";
-	var SPOTIFY_PLAYLIST_ERROR = exports.SPOTIFY_PLAYLIST_ERROR = "SPOTIFY_PLAYLIST_ERROR";
-
-	function SpotifyPlaylistBegin() {
-		return { type: SPOTIFY_PLAYLIST_BEGIN };
-	}
-	function SpotifyPlaylistSuccess(data) {
-		return { type: SPOTIFY_PLAYLIST_SUCCESS, data: data };
-	}
-	function SpotifyPlaylistError(e) {
-		return { type: SPOTIFY_PLAYLIST_ERROR, error: e };
-	}
-
-	function getPlaylist(options) {
-		return function (dispatch) {
-			dispatch(SpotifyRecomendationPlaylistBegin());
-			fetch('https://api.spotify.com/v1/me/playlists/' + options.playlist_id, {
-				method: "GET",
-				headers: { 'Authorization': 'Bearer ' + options.accessToken }
-			}).then(function (data) {
-				return data.json();
-			}).catch(function (e) {
-				dispatch(SpotifyRecomendationPlaylistError(e));
-			}).then(function (json) {
-				dispatch(SpotifyRecomendationPlaylistSuccess(json));
-			});
-		};
-	}
 
 /***/ },
 /* 290 */
@@ -43970,20 +43947,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-9' },
-	              _react2.default.createElement(_TimerContainer2.default, null),
-	              _react2.default.createElement(
-	                'audio',
-	                {
-	                  src: 'http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg',
-	                  autoplay: true },
-	                'Your browser does not support the ',
-	                _react2.default.createElement(
-	                  'code',
-	                  null,
-	                  'audio'
-	                ),
-	                ' element.'
-	              )
+	              _react2.default.createElement(_TimerContainer2.default, null)
 	            )
 	          )
 	        )
@@ -44078,7 +44042,6 @@
 			value: function componentWillMount() {
 				this.props.dispatch({ type: 'SESSION_TYPE_SET', sessionType: 'working' });
 				this.props.dispatch({ type: 'CYCLE_SET', cycleCount: 4 });
-				this.pause();
 			}
 		}, {
 			key: 'pause',
@@ -44110,7 +44073,7 @@
 						'div',
 						null,
 						_react2.default.createElement(_Timer2.default, {
-							pause: this.pause,
+							pause: this.pause.bind(this),
 							secondsRemaining: this.props.secondsRemaining,
 							isCounting: this.props.isCounting,
 							completed: this.props.completed,
@@ -44120,7 +44083,9 @@
 							tick: this.props.tick()
 						}),
 						_react2.default.createElement(_AlarmSound2.default, {
-							alarmSound: this.props.alarmSound
+							alarmSound: this.props.alarmSound,
+							dispatch: this.props.dispatch
+
 						})
 					);
 				} else {
@@ -44257,6 +44222,11 @@
 		}
 
 		_createClass(Timer, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				this.props.pause();
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var minutes = Math.floor(this.props.secondsRemaining / 60);
@@ -54464,6 +54434,8 @@
 
 	var _reactSound = __webpack_require__(563);
 
+	var _reactSound2 = _interopRequireDefault(_reactSound);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54484,16 +54456,22 @@
 		_createClass(Alarm, [{
 			key: 'handleSongFinishedPlaying',
 			value: function handleSongFinishedPlaying() {
-				this.props.dispatch({ type: "START_STOP_ALARM" });
+				console.log("song Finished");
+				this.props.dispatch({ type: "STOP_ALARM" });
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				if (this.props.AlarmSound) {
-					return _react2.default.createElement(_reactSound.Sound, {
+				var _this2 = this;
+
+				console.log(this.props.alarmSound);
+				if (this.props.alarmSound) {
+					return _react2.default.createElement(_reactSound2.default, {
 						url: '../static/TempleBell.mp3',
-						playStatus: _reactSound.Sound.status.PLAYING,
-						onFinishedPlaying: this.handleSongFinishedPlaying
+						playStatus: _reactSound2.default.status.PLAYING,
+						onFinishedPlaying: function onFinishedPlaying() {
+							return _this2.props.dispatch({ type: "STOP_ALARM" });
+						}
 					});
 				} else {
 					return _react2.default.createElement('div', null);

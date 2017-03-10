@@ -34,6 +34,11 @@ const styles ={
 
 
 export default class Timer extends React.Component {
+	componentWillMount(){
+		this.props.pause();
+	}
+	
+
 	render() {
 		var minutes = Math.floor(this.props.secondsRemaining/60);
 		var seconds = this.props.secondsRemaining % 60;
