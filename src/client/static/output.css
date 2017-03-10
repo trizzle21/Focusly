@@ -201,7 +201,9 @@ html {
   left: 50%; }
 
 .timer_button {
-  text-align: center; }
+  width: 70%;
+  text-align: center;
+  position: absolute; }
 
 .time_count {
   padding-top: 150px; }

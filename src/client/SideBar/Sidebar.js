@@ -34,7 +34,6 @@ class SideBar extends React.Component {
   	}
 
  	handleWorkChange(event, value, index){
-    	console.log(index);
     	this.props.dispatch({type:'WORK_MUSIC_SELECT', newPlaylist: {
       		name: index,
       		owner: this.props.UserPlaylists[value].owner.id,
