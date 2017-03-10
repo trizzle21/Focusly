@@ -19,6 +19,7 @@ const time_state={
     completed:100,
     isCounting:false,
     sideBarLoad:false,
+    alarmSound: true,
 };
 
 
@@ -41,8 +42,8 @@ export default function TimerReducer(state=time_state, actions){
 			if(actions.sessionType === 'working'){
 				return Object.assign({}, state, {
 					working:true,
-					secondsRemaining: 1500,
-					initialSeconds:1500
+					secondsRemaining: 20,
+					initialSeconds:20
 				});
 			} else {
 				return Object.assign({}, state, {
@@ -57,6 +58,8 @@ export default function TimerReducer(state=time_state, actions){
 					secondsRemaining: state.secondsRemaining-1,
 					completed: (state.secondsRemaining/state.initialSeconds)*100,
 				});
+			} else if(state.cycles === 0){
+
 			} else {
 				if(state.working){
 					return Object.assign({}, state, {

@@ -30087,7 +30087,8 @@
 		secondsRemaining: 1500,
 		completed: 100,
 		isCounting: false,
-		sideBarLoad: false
+		sideBarLoad: false,
+		alarmSound: true
 	};
 
 	function TimerReducer() {
@@ -30111,8 +30112,8 @@
 				if (actions.sessionType === 'working') {
 					return Object.assign({}, state, {
 						working: true,
-						secondsRemaining: 1500,
-						initialSeconds: 1500
+						secondsRemaining: 20,
+						initialSeconds: 20
 					});
 				} else {
 					return Object.assign({}, state, {
@@ -30127,7 +30128,7 @@
 						secondsRemaining: state.secondsRemaining - 1,
 						completed: state.secondsRemaining / state.initialSeconds * 100
 					});
-				} else {
+				} else if (state.cycles === 0) {} else {
 					if (state.working) {
 						return Object.assign({}, state, {
 							working: false,
