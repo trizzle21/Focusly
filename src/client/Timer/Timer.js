@@ -35,6 +35,7 @@ const styles ={
 
 export default class Timer extends React.Component {
 	componentWillMount(){
+		//console.log("mounted");
 		this.props.pause();
 	}
 	

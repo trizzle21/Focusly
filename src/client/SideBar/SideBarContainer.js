@@ -42,7 +42,7 @@ class SideBarContainer extends React.Component {
 				</div>
 			);
 		} else {
-			return(<div className>Loading...</div>);
+			return(<div className="sidebar_loading">Loading...</div>);
 
 		}
 	}

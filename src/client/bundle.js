@@ -30112,8 +30112,8 @@
 				if (actions.sessionType === 'working') {
 					return Object.assign({}, state, {
 						working: true,
-						secondsRemaining: 20,
-						initialSeconds: 20
+						secondsRemaining: 1500,
+						initialSeconds: 1500
 					});
 				} else {
 					return Object.assign({}, state, {
@@ -30123,7 +30123,6 @@
 					});
 				}
 			case _TimerActions.TICK:
-				console.log(state.secondsRemaining >= 0);
 				if (state.secondsRemaining >= 0) {
 					return Object.assign({}, state, {
 						secondsRemaining: state.secondsRemaining - 1,
@@ -44224,6 +44223,7 @@
 		_createClass(Timer, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
+				//console.log("mounted");
 				this.props.pause();
 			}
 		}, {
@@ -49076,7 +49076,7 @@
 				} else {
 					return _react2.default.createElement(
 						'div',
-						{ className: true },
+						{ className: 'sidebar_loading' },
 						'Loading...'
 					);
 				}
@@ -54454,17 +54454,10 @@
 		}
 
 		_createClass(Alarm, [{
-			key: 'handleSongFinishedPlaying',
-			value: function handleSongFinishedPlaying() {
-				console.log("song Finished");
-				this.props.dispatch({ type: "STOP_ALARM" });
-			}
-		}, {
 			key: 'render',
 			value: function render() {
 				var _this2 = this;
 
-				console.log(this.props.alarmSound);
 				if (this.props.alarmSound) {
 					return _react2.default.createElement(_reactSound2.default, {
 						url: '../static/TempleBell.mp3',

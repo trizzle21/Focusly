@@ -42,8 +42,8 @@ export default function TimerReducer(state=time_state, actions){
 			if(actions.sessionType === 'working'){
 				return Object.assign({}, state, {
 					working:true,
-					secondsRemaining: 20,
-					initialSeconds:20
+					secondsRemaining: 1500,
+					initialSeconds:1500
 				});
 			} else {
 				return Object.assign({}, state, {
@@ -53,7 +53,6 @@ export default function TimerReducer(state=time_state, actions){
 				});
 			}
 		case TICK:
-			console.log(state.secondsRemaining  >= 0);
 			if(state.secondsRemaining >= 0) { 
 				return Object.assign({}, state, {
 					secondsRemaining: state.secondsRemaining-1,

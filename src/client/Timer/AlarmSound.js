@@ -5,13 +5,8 @@ import Sound from 'react-sound';
 
 export default class Alarm extends React.Component {
 
-	handleSongFinishedPlaying(){
-		console.log("song Finished");
-		this.props.dispatch({type:"STOP_ALARM"});
-	}
 
 	render(){
-		console.log(this.props.alarmSound);
 		if(this.props.alarmSound){
 			return (
 				<Sound
