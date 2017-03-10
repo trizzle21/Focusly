@@ -29,6 +29,12 @@ export default class App extends React.Component {
               </div>
             <div className="col-9">
               <Timer />
+                  <audio
+        src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg"
+        autoplay>
+          Your browser does not support the <code>audio</code> element.
+    </audio>
+
             </div>
           </div>
           </div>

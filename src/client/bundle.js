@@ -43962,7 +43962,20 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-9' },
-	              _react2.default.createElement(_TimerContainer2.default, null)
+	              _react2.default.createElement(_TimerContainer2.default, null),
+	              _react2.default.createElement(
+	                'audio',
+	                {
+	                  src: 'http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg',
+	                  autoplay: true },
+	                'Your browser does not support the ',
+	                _react2.default.createElement(
+	                  'code',
+	                  null,
+	                  'audio'
+	                ),
+	                ' element.'
+	              )
 	            )
 	          )
 	        )

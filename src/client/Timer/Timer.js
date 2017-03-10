@@ -65,7 +65,12 @@ export default class Timer extends React.Component {
 							<RaisedButton label="Start/Start" primary={true} style={styles.buttons} onClick={this.props.pause.bind(this)}/>
 						</div>
 					</div>
+
 				</div>
+
+
+
+
 				</div>
 			</MuiThemeProvider>
 		)
