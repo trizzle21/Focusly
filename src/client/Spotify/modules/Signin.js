@@ -63,7 +63,6 @@ const sheet =
 			primary={true}
 			style={styles.button}
 			containerElement="label"
-			icon={<ActionAndroid />}
 
 	/>
 	</a>

@@ -30495,8 +30495,7 @@
 						labelPosition: 'after',
 						primary: true,
 						style: styles.button,
-						containerElement: 'label',
-						icon: _react2.default.createElement(_android2.default, null)
+						containerElement: 'label'
 
 					})
 				)
