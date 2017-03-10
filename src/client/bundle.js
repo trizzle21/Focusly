@@ -30420,10 +30420,6 @@
 			marginRight: 80,
 			marginLeft: 80
 		},
-		header_title: {
-			marginLeft: 20
-
-		},
 		header_image: {
 			display: "inline-block",
 			height: 60,
@@ -30463,8 +30459,13 @@
 						{ className: 'header_title' },
 						_react2.default.createElement(
 							'h1',
-							{ style: styles.header_title },
+							{ id: 'title' },
 							'Focusly'
+						),
+						_react2.default.createElement(
+							'h7',
+							{ id: 'beta' },
+							'beta'
 						)
 					)
 				)
@@ -30475,7 +30476,7 @@
 				_react2.default.createElement(
 					'p',
 					{ className: 'secondaryText' },
-					'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting time, and converts it into a playlist that changes when each session changes.'
+					'What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working and resting time, and converts it into a playlist that allows you to change it when each session changes.'
 				),
 				_react2.default.createElement(
 					'p',
@@ -56657,11 +56658,6 @@
 	              })
 	            ),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'Change Playlists', onClick: this.changePlaylists.bind(this), style: styles.button }),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '/refresh_token' },
-	              _react2.default.createElement(_RaisedButton2.default, { label: 'Refresh Auth Token', primary: true, style: styles.button })
-	            ),
 	            _react2.default.createElement(_PlayButton2.default, { uri: this.props.uri })
 	          )
 	        )
@@ -59208,17 +59204,17 @@
 			value: function render() {
 
 				// if(this.props.error === ""){
-				var actions = [_react2.default.createElement(
-					'a',
-					{ href: '/refresh_token' },
-					_react2.default.createElement(_RaisedButton2.default, {
-						label: 'Refresh Auth',
-						labelPosition: 'after',
-						primary: true,
-						style: styles.button,
-						containerElement: 'label'
-					})
-				), _react2.default.createElement(_RaisedButton2.default, {
+				var actions = [
+				// 				<a href="/refresh_token">
+				//  				<RaisedButton
+				//  					label="Refresh Auth"
+				// 				labelPosition="after"
+				// 				primary={true}
+				// 				style={styles.button}
+				// 				containerElement="label"
+				// 			/>
+				// 			</a>,
+				_react2.default.createElement(_RaisedButton2.default, {
 					label: 'Submit',
 					labelPosition: 'after',
 					primary: true,

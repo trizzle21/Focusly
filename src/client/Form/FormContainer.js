@@ -72,15 +72,15 @@ class FormContainer extends React.Component {
 		
 		// if(this.props.error === ""){
 			const actions = [
-  				<a href="/refresh_token">
-  				<RaisedButton
-  					label="Refresh Auth"
-					labelPosition="after"
-					primary={true}
-					style={styles.button}
-					containerElement="label"
-				/>
-				</a>,
+ // 				<a href="/refresh_token">
+ //  				<RaisedButton
+ //  					label="Refresh Auth"
+	// 				labelPosition="after"
+	// 				primary={true}
+	// 				style={styles.button}
+	// 				containerElement="label"
+	// 			/>
+	// 			</a>,
   				<RaisedButton
   					label="Submit"
 					labelPosition="after"

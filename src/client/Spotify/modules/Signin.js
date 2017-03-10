@@ -17,10 +17,6 @@ const styles = {
   	marginRight: 80,
   	marginLeft:80,
   },
-  header_title: {
-	marginLeft:20,
-	
-  },
   header_image:{
   	display:"inline-block",
   	height:60,
@@ -48,13 +44,15 @@ const sheet =
 				/>
 				</div>
 				<div className="header_title">
-				<h1 style={styles.header_title}>Focusly</h1>
+					<h1 id="title">Focusly</h1><h7 id="beta">beta</h7>
+
 				</div>
+
 			</div>
 		</div>
 		<div className="description">
 			<p className="secondaryText">What is Focusly? Focusly is a Spotify powered Tabata Timer that allows you to choose the genre of music you want for both your working 
-			and resting time, and converts it into a playlist that changes when each session changes.</p>
+			and resting time, and converts it into a playlist that allows you to change it when each session changes.</p>
 			<p className="secondaryText">It requires a Spotify Premium account.</p>
 		</div>
 	<div className="mainButton">

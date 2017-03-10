@@ -92,9 +92,6 @@ class SideBar extends React.Component {
     					
     					<RaisedButton label="Change Playlists" onClick={this.changePlaylists.bind(this)}  style={styles.button} />
     					
-    					<a href='/refresh_token'>
-    						<RaisedButton label="Refresh Auth Token" primary={true} style={styles.button} />
-    					</a>
 
 						<PlayButton uri={this.props.uri}/>
 					</Drawer>
