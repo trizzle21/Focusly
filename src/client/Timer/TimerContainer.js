@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 //Import specific uncreated actions
 import Timer from './Timer';
 
+import AlarmSound from './AlarmSound';
 
 import { tick, startStop, sessionTypeSet, cycleSet } from './TimerActions';
 
@@ -25,6 +26,7 @@ class TimerContainer extends React.Component {
 		this.props.dispatch( { type:'CYCLE_SET', cycleCount: 4} );	
 		this.pause();	
 	}
+
 	
 	pause(){
 		if(this.props.isCounting){
@@ -57,6 +59,9 @@ class TimerContainer extends React.Component {
 					intervalID={this.props.intervalID}
 		 			tick={this.props.tick()}
 		 			/>
+		 		<AlarmSound 
+					alarmSound={this.props.alarmSound}
+		 		/>	
 				</div>
 			);} else {
 				return (
@@ -75,6 +80,7 @@ TimerContainer.propTypes = {
 	cycles:React.PropTypes.number,
 	completed:React.PropTypes.number,
 	openDialog:React.PropTypes.bool,
+	alarmSound:React.PropTypes.bool,
 	//dispatch:React.PropTypes.func.isRequired
 	tick:React.PropTypes.func,
 }
@@ -90,6 +96,7 @@ function mapStateToProps(state) {
 		isCounting:state.timer.isCounting,
 		completed:state.timer.completed,
 		openDialog:state.form.openDialog,
+		alarmSound:state.timer.alarmSound,
 	}
 }
 
