@@ -14,3 +14,5 @@ static/.sass-cache
 src/static/.sass-cache
 
 /src/ClientSecrets.js
+
+.DS_STORE

@@ -15,9 +15,9 @@ class SideBarContainer extends React.Component {
 			return(<div></div>);
 		} else if(this.props.working === true && this.props.isLoading !== true){
 			return(
-				<div> 
-					<SideBar 
-						uri={this.props.workPlaylistUri} 
+				<div>
+					<SideBar
+						uri={this.props.workPlaylistUri}
 						getPlaylist={this.props.getPlaylist}
 						params={this.props.params}
 
@@ -30,8 +30,8 @@ class SideBarContainer extends React.Component {
 			);
 		} else if (this.props.working === false && this.props.isLoading !== true){
 			return(
-				<div> 
-					<SideBar uri={this.props.restPlaylistUri} 
+				<div>
+					<SideBar uri={this.props.restPlaylistUri}
 						UserPlaylists={ this.props.UserPlaylists }
 						getPlaylist={this.props.getPlaylist}
 						params={this.props.params}
@@ -42,7 +42,7 @@ class SideBarContainer extends React.Component {
 				</div>
 			);
 		} else {
-			return(<div className="sidebar_loading">Loading...</div>);
+			return(<div className="sidebar-loading">Loading...</div>);
 
 		}
 	}
@@ -55,7 +55,7 @@ SideBarContainer.propTypes = {
 	working:React.PropTypes.bool,
 	userID:React.PropTypes.string,
 	isLoading:React.PropTypes.bool,
-	
+
 	UserPlaylists:React.PropTypes.array,
 	WorkMusicType:React.PropTypes.object,
 	RestMusicType:React.PropTypes.object,
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
 		userID:state.form.userID,
 		openDialog: state.form.openDialog,
 		working:state.timer.working,
-		
+
 		UserPlaylists:state.spotify.UserPlaylists,
 		WorkMusicType:state.form.WorkMusicType,
 		RestMusicType:state.form.RestMusicType,
@@ -90,6 +90,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBarContainer);
-
-
-
