@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
- 
+
 
 import { connect } from 'react-redux';
 
@@ -13,12 +13,11 @@ import theme from './Spotify/modules/CustomTheme';
 import setTokens from './Spotify/SpotifyActions';
 
 
-
 export default class App extends React.Component {  	
 
     render() {
       return (
-  			<MuiThemeProvider muiTheme={theme}>
+        <MuiThemeProvider muiTheme={theme}>
           <div className="grid-container">
             <Form params={this.props.params}/>
 
@@ -34,9 +33,7 @@ export default class App extends React.Component {
           </div>
           </div>
         </MuiThemeProvider>
-
-
-  		);
+      );
 	}
 }
 

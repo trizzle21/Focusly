@@ -17,9 +17,7 @@ import app from "./App";
 import setTokens from './Spotify/SpotifyActions';
 
 
-
 injectTapEventPlugin();
-
 
 
 const middleware = [ thunk ]
@@ -31,15 +29,11 @@ const NotFound = () => (
 const store = createStore(reducer, applyMiddleware(...middleware));
 
 
-
-
-
-
 class Root extends React.Component {
 	render(){
 		return(
-			<Provider store={store}>
-  				<Router history={hashHistory}>
+        <Provider store={store}>
+          <Router history={hashHistory}>
    					<Route path='/' component={signin}/>
     				<Route name='/timer' path='timer' component={app}/>
             <Route name='/timer' path='timer/:accessToken/:refreshToken' component={app}/>

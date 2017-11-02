@@ -22,15 +22,15 @@ module.exports = {
     
     module: {
         loaders: [
-            { test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel-loader', query: {presets: ['es2015', 'react'] }}
+            { test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel-loader', query: {presets: ['es2016', 'react'] }}
 
         ]
     },
-
 
 	resolve: {
 		modulesDirectories: ['node_modules', 'bower_component'],
 		extension: ['', '.js', 'jsx']
 	},
+
 
 };

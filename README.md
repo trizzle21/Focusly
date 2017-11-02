@@ -27,4 +27,12 @@ node src/server.js
 ```
 will initialize and run the server. I personally use nodemon (it makes everything waaay easier)
 
-Requires a spotify_secrets.json file in order work.
+Requires a ClientSecret.js or ClientSecretLocal.js file in order work.
+
+ClientSecret.js looks like the following:
+
+
+module.exports = { client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            client_secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            redirect_uri : "http://localhost:8081/callback/"
+    };
