@@ -27,9 +27,9 @@ node src/server.js
 ```
 will initialize and run the server. I personally use nodemon (it makes everything waaay easier)
 
-Requires a ClientSecret.js or ClientSecretLocal.js file in order work.
+Requires a ClientSecret.js or ClientSecretsLocal.js file in order work.
 
-ClientSecret.js looks like the following:
+ClientSecret.js looks like the following where client_id and client_secret is generated from https://developer.spotify.com/
 
 
 module.exports = { client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
